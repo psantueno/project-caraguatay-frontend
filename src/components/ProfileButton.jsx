@@ -1,7 +1,13 @@
 import React from 'react'
+import './profileButton.css'
+import jaguar from '../assets/jaguarete-ico.png'
+
+
 
 export const ProfileButton = () => {
   return (
-    <p>ProfileButton</p>
+    <>
+      <img src={jaguar} />
+    </>
   )
 }

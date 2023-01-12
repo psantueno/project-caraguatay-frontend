@@ -5,6 +5,7 @@ export const Home = () => {
   return (
     <>
         <Header/>
+        <br/>
         <div>Home</div>
         <h1 className="App">Welcome team!</h1>
         <small><h1 className="App">Magic Time!</h1></small>
