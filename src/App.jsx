@@ -12,6 +12,7 @@ export const App = () => {
       <Routes>
         <Route exact path="/" element={<Home/>} ></Route>
         <Route exact path="/formulario" element={<Formulario />} ></Route>
+        
       </Routes>      
     </div>
   )
