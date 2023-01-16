@@ -5,7 +5,7 @@ import photo from '../assets/news.jpg'
 import '../index.css';
 
 
-export const News = () => {
+export const NewsItem = () => {
 
 
     return (
