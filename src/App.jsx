@@ -1,14 +1,17 @@
 import { Routes, Route } from 'react-router-dom';  
+import { Header } from './components/Header';
+import { Footer } from './Footer';
 import { Home } from './Home';
+import { AppRouter } from './routes/AppRouter'
 
 
 export const App = () => {
 
   return (
     <div>
-      <Routes>
-        <Route exact path="/" element={<Home/>} ></Route>
-      </Routes>      
+      <Header/>
+        <AppRouter/>     
+      <Footer/>
     </div>
   )
 }
