@@ -2,6 +2,6 @@ import React from 'react'
 
 export const PuntoDigital = () => {
   return (
-    <div>PuntoDigital</div>
+    <div className='main-div'>PuntoDigital</div>
   )
 }

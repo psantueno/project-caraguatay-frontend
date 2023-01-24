@@ -2,6 +2,6 @@ import React from 'react'
 
 export const Comunicados = () => {
   return (
-    <div>Comunicados</div>
+    <div className='main-div'>Comunicados</div>
   )
 }

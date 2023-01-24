@@ -68,6 +68,7 @@ body {
       height: 5%;
       width: 100%;
       min-width: 0;
+      top:62px;
       z-index: 0;
       justify-content: space-around;
       transition: none;

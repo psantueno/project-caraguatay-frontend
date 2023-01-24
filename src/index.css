@@ -99,6 +99,10 @@ a.link-phones:hover {
     justify-content: center;
 }
 
+.main-div{
+    margin-top: 70px;
+    margin-bottom: 30px;
+}
 
 /* START MEDIA QUERIES */
 
