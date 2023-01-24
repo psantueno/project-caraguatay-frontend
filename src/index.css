@@ -1,27 +1,15 @@
-:root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+* {
+    font-family: 'Inter', sans-serif;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+/* footer */
+
+.footer {
+  background-color: #C1CDD6;
+  border-color: #315C94;
+  border-top-style: solid;
+  border-width: thick;
+  color: #315C94;
 }
 
 body {
@@ -32,39 +20,89 @@ body {
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.phones {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 5px;
+    margin-bottom: 8px;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.phone-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+    margin: 2px;
+    transition: color 500ms;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.icon-circle {
+    background: #FFFFFF;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-icon {
+    width: 28px;
+    height: 28px;
+}
+
+a.link-phones {
+    text-decoration: none;
+    color: #315C94;
+    flex: 30%;
+    transition: color 100ms;
+}
+
+a.link-phones:hover {
+    color: #859499; 
+}
+
+.number-phone, .menu-subtitle {
+    font-weight: 500;
+    font-size: 13px;
+    margin-bottom: 0px;
+    font-family: fantasy;
+}
+
+.title-phone {
+    font-size: 11px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.list-section {
+    list-style: none;
+    font-size: 12px;
+    padding-left: 5px;
+}
+
+.section-contact-follow {
+    display: flex;
+    justify-content: space-around;
+}
+
+.copyright {
+    display: flex;
+    justify-content: center;
+    font-size: 2.5vw;
+}
+
+.powered-by {
+    display: flex;
+    justify-content: center;
+}
+
+
+/* START MEDIA QUERIES */
+
+@media screen and (min-width:576px) {
+    
+
 }
