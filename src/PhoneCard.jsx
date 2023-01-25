@@ -3,7 +3,8 @@
 export const PhoneCard = ({ src, phone, title }) => {
 
     return (
-        <a className="link-phones" href="tel:+54">
+       
+        <a className="link-phones" href={`tel:+54${phone}`}>
             <div className="phone-card">
                 <div className="icon-circle">
                     <img className="img-icon" src={src} />

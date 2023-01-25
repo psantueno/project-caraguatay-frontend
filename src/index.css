@@ -12,6 +12,7 @@
   color: #315C94;
 }
 
+
 body {
   margin: 0;
   display: flex;
@@ -99,10 +100,6 @@ a.link-phones:hover {
     justify-content: center;
 }
 
-.main-div{
-    margin-top: 70px;
-    margin-bottom: 30px;
-}
 
 /* START MEDIA QUERIES */
 

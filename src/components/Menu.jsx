@@ -19,7 +19,7 @@ export const Menu = () => {
   return (
     <>
         <div id="mySidenav" className={`sidenav ${menu?'is-active':''}`} onClick={toggleMenu}>
-            <a href="/comunicados">Comunicados<hr/></a>
+            <a href="/comunicados" >Comunicados<hr/></a>
             <a href="/deportes">Deportes<hr/></a>
             <a href="/culturaTurismo">Cultura y Turismo<hr/></a>
             <a href="/historia">Historia<hr/></a>

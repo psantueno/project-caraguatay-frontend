@@ -5,10 +5,10 @@ export const Follow = () => {
         <section>
             <h6 className="menu-subtitle" ><b>¡Seguinos!</b></h6>
             <ul className="list-section">
-                <a href="https://www.facebook.com/caraguatay.misiones" className="link-phones">
+                <a href="https://www.facebook.com/caraguatay.misiones" className="link-phones" target={"_blank"}>
                     <li><i className="fab fa-facebook-square"></i> /caraguatay.misiones</li>
                 </a>
-                <a href="https://instagram.com/caraguatay.misiones" className="link-phones">
+                <a href="https://instagram.com/caraguatay.misiones" className="link-phones" target={"_blank"}>
                     <li><i className="fab fa-instagram-square"></i> /caraguatay.misiones</li>
                 </a>
             </ul>
