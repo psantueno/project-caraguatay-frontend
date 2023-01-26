@@ -1,19 +1,20 @@
-import './App.css'
 import { Routes, Route } from 'react-router-dom';  
+import { Header } from './components/Header';
+import { Footer } from './Footer';
 import { Home } from './Home';
+import { AppRouter } from './routes/AppRouter'
 import Formulario  from './Formulario';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { NewsDetail } from './components/news/NewsDetail';
 
 
 export const App = () => {
 
   return (
     <div>
-      
-      <Routes>
-        <Route exact path="/" element={<Home/>} ></Route>
-        <Route exact path="/formulario" element={<Formulario />} ></Route>
-      </Routes>      
+      <Header/>
+        <AppRouter/>     
+      <Footer/>
     </div>
   )
 }
