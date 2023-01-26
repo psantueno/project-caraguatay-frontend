@@ -7,6 +7,37 @@ export const useForm = (initialForm, validateForm) => {
   const [ loading, setLoading ] = useState(false); 
   const [ response, setResponse ] = useState(null); 
 
+  // const para Upload File
+    const MAX_COUNT = 5;
+    const [uploadedFiles, setUploadedFiles] = useState([])
+    const [fileLimit, setFileLimit] = useState(false);
+
+  //Funciones para Upload File
+
+  const handleUploadFiles = files => {
+    const uploaded = [...uploadedFiles];
+    let limitExceeded = false;
+    files.some((file) => {
+        if (uploaded.findIndex((f) => f.name === file.name) === -1) {
+            uploaded.push(file);
+            if (uploaded.length === MAX_COUNT) setFileLimit(true);
+            if (uploaded.length > MAX_COUNT) {
+                alert(`You can only add a maximum of ${MAX_COUNT} files`);
+                setFileLimit(false);
+                limitExceeded = true;
+                return true;
+            }
+        }
+    })
+    if (!limitExceeded) setUploadedFiles(uploaded)
+
+}
+
+const handleFileEvent =  (e) => {
+    const chosenFiles = Array.prototype.slice.call(e.target.files)
+    handleUploadFiles(chosenFiles);
+}
+
 
   //Funciones que se ejecutan en el form
 
@@ -31,6 +62,7 @@ export const useForm = (initialForm, validateForm) => {
       alert("Procesando envío de la publicación");
       setLoading(true); //para poner un loader y usar un fetch
       console.log(form)
+      setForm(initialForm);
     }else {
       return;
     }
@@ -49,7 +81,12 @@ export const useForm = (initialForm, validateForm) => {
     handleChange,
     handleBlur,
     handleSubmit,
-    handleCancel
+    handleCancel,
+    uploadedFiles,
+    fileLimit,
+    handleUploadFiles,
+    handleFileEvent,
+
  }
 
 

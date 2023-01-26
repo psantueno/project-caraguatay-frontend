@@ -12,7 +12,7 @@ const initialForm = {
 
 const validationsForm = (form) => {
   let errors = {};
-
+//CAMBIAR IF POR SWITCH CASE (VER CHEC)
   if(!form.category.trim() || form.category === "Seleccione la categoría") {
     errors.category = "Seleccione una categoría"
   }
