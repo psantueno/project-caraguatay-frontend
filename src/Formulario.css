@@ -1,0 +1,16 @@
+.form-images-row {
+    width: 39% !important;
+    flex-wrap: nowrap !important;
+    margin: 2px !important;
+    align-items: baseline
+}
+
+.form-image {
+    width: 60px !important;
+    margin: 2px;
+}
+
+.form-field-name {
+    font-weight: bold;
+}
+

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import './Formulario.css'
 
 // recibe por parámetro los valores iniciales del form y se setea en la variable de estado form + función validateForm
 export const useForm = (initialForm, validateForm) => {
@@ -6,62 +7,60 @@ export const useForm = (initialForm, validateForm) => {
   const [ errors, setErrors ] = useState({}); // almacena los errores
   const [ loading, setLoading ] = useState(false); 
   const [ response, setResponse ] = useState(null); 
-
-  // const para Upload File
-    const MAX_COUNT = 5;
-    const [uploadedFiles, setUploadedFiles] = useState([])
-    const [fileLimit, setFileLimit] = useState(false);
-
-  //Funciones para Upload File
-
-  const handleUploadFiles = files => {
-    const uploaded = [...uploadedFiles];
-    let limitExceeded = false;
-    files.some((file) => {
-        if (uploaded.findIndex((f) => f.name === file.name) === -1) {
-            uploaded.push(file);
-            if (uploaded.length === MAX_COUNT) setFileLimit(true);
-            if (uploaded.length > MAX_COUNT) {
-                alert(`You can only add a maximum of ${MAX_COUNT} files`);
-                setFileLimit(false);
-                limitExceeded = true;
-                return true;
-            }
-        }
-    })
-    if (!limitExceeded) setUploadedFiles(uploaded)
-
-}
-
-const handleFileEvent =  (e) => {
-    const chosenFiles = Array.prototype.slice.call(e.target.files)
-    handleUploadFiles(chosenFiles);
-}
-
-
+  const [validated, setValidated] = useState(false);
+  const [selectedImages, setSelectedImages] = useState([]);
   //Funciones que se ejecutan en el form
 
   const handleChange = (e) => {
-    const {name, value} = e.target
+  //  const {name, value} = e.target
     setForm({
         ...form,
-        [name]:value
+        [e.target.name]:e.target.value,
+        [e.target.files]:e.target.value
     })
   };
 
-  const handleBlur = (e) => {
+  const handleOnKeyUp = (e) => {
     handleChange(e);
     setErrors(validateForm(form));
+    setValidated(true);
   };
+
+  const handleOnblur = (e) => {
+    handleChange(e);
+    setErrors(validateForm(form));
+    setValidated(true);
+  };
+  //Funciones para subir imágenes
+
+  const onSelectFile = (e) => {
+    const selectedFiles = e.target.files;
+    const selectedFilesArray = Array.from(selectedFiles);
+
+    const imagesArray = selectedFilesArray.map((file) => {
+      return URL.createObjectURL(file);
+    });
+
+    setSelectedImages((previousImages) => previousImages.concat(imagesArray));
+  };
+
+  function deleteHandler(image) {
+    setSelectedImages(selectedImages.filter((e) => e !== image));
+    URL.revokeObjectURL(image);
+  }
+//fin funciones para manejo de imágenes
    
   const handleSubmit = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     setErrors(validateForm(form));
 
     if(Object.keys(errors).length === 0) {
       alert("Procesando envío de la publicación");
       setLoading(true); //para poner un loader y usar un fetch
       console.log(form)
+      console.log(selectedImages);
+      setSelectedImages([]);
       setForm(initialForm);
     }else {
       return;
@@ -79,14 +78,15 @@ const handleFileEvent =  (e) => {
     loading,
     response,
     handleChange,
-    handleBlur,
+    handleOnKeyUp,
+    handleOnblur,
     handleSubmit,
     handleCancel,
-    uploadedFiles,
-    fileLimit,
-    handleUploadFiles,
-    handleFileEvent,
-
+    validated,
+    selectedImages,
+    onSelectFile,
+    deleteHandler
+    
  }
 
 
