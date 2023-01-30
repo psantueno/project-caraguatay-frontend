@@ -7,30 +7,35 @@ body {
     padding: 0;
   }
   .sidenav {
-    height: 20%;
+    height: 25%;
     width: 0;
+    background-color: #c1cdd6;
+    border-bottom: #315c94;
+    border-width: thick;
+    border-bottom-style: solid;
     position: fixed;
     z-index: 1;
-    top: 0;
+    top: 95px;
     right: 0;
-    background-color: #111;
     overflow-x: hidden;
-    transition: 0.5s;
+    text-align: left;
     padding-top: 20px;
     opacity: 0.90;
+    transition: 0.5s;
   }
   
   .sidenav a {
+    min-width: 200px;
     padding: 8px 8px 8px 32px;
     text-decoration: none;
-    font-size: 25px;
-    color: #c2bfbf;
+    font-size: 18px;
+    color: #315c94;
     display: block;
-    transition: 0.3s;
+    transition: color 250ms;
   }
   
   .sidenav a:hover {
-    color: #ffffff;
+    color: #2382ff;
   }
   
   
@@ -43,9 +48,42 @@ body {
         font-size:30px;
         cursor:pointer}
 
-  .is-active {width: 250px}
+  .is-active {
+     width: 250px;
+    }
 
   @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
+  }
+
+  @media (min-width: 768px) {
+
+    .sidenav hr{display: none;}
+
+    .sidenav {
+      display: flex;
+      padding-top: 2px;
+      padding-bottom: 6px;
+      height: 5%;
+      width: 100%;
+      min-width: 0;
+      top:62px;
+      z-index: 0;
+      justify-content: space-around;
+      transition: none;
+    }
+
+    .sidenav a{
+      min-width:fit-content;
+      margin: auto;
+      padding: 0px;
+      padding-top: 2px;
+      padding-left: 2px;
+      transition: color 250ms;
+
+    }
+    .sidenav-button{
+      display: none;
+    }
   }

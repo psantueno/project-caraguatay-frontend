@@ -1,0 +1,5 @@
+export * from './Comunicados'
+export * from './CulturaTurismo'
+export * from './Deporte'
+export * from './Historia'
+export * from './PuntoDigital'
