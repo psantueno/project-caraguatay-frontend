@@ -100,6 +100,13 @@ a.link-phones:hover {
     justify-content: center;
 }
 
+.title-copyright {
+  margin: 0;
+  font-weight: 600;
+}
+
+/* END FOOTER */
+
 .card-lg{
   margin-left:0 !important;
   padding:0 !important;
