@@ -13,8 +13,6 @@ export const NewsDetail = () => {
     return (
 
         <>
-        <Header/>
-
         <Row >
         <Col xs={12}  lg={9}>
              
