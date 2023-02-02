@@ -1,9 +1,21 @@
 * {
     font-family: 'Inter', sans-serif;
 }
+a { 
+    text-decoration: none !important;
+}
+
+.main-title {
+    font-size: 25px;
+    margin-top: 5px;
+   
+}
+.text-indent p {
+    text-indent: 1cm;
+}
+
 
 /* footer */
-
 .footer {
   background-color: #C1CDD6;
   border-color: #315C94;
@@ -100,10 +112,64 @@ a.link-phones:hover {
     justify-content: center;
 }
 
+/*Buttons*/
 
-/* START MEDIA QUERIES */
-
-@media screen and (min-width:576px) {
+.btn-square{
+    -webkit-user-select: none !important;
+    background-color: #C4D6DE;
+    color:#315C94;
+    width: 90px;
+    height: 80px;
+    padding: 5px;
+    border-radius: 3px;
+    margin:3px;
+    text-shadow: 1px 1px 5px rgba(49, 92, 148,0.4) !important;
+    box-shadow: 1px  5px 5px rgb(133, 148, 153) !important;
+    text-decoration: none !important;
+    transition: 0.7s;
     
+}
+.btn-square:hover{
+    background-color:#9DB1C6;
+    box-shadow: 1px  5px 5px rgba(49, 92, 148,0.8) !important;
+    transform: scale(1.03);
+    color: #2d5a94;
 
 }
+
+.btn-square-icon{
+    width:100%;
+    font-size: 22px;
+    text-align: center;
+    align-self: auto;
+   
+}
+
+h6.btn-square-text {
+    margin: auto;
+    text-align: center;
+    font-size: 14px;
+    text-decoration: none !important;
+}
+
+
+
+
+
+
+/* START MEDIA QUERIES */
+@media screen and (min-width:300px) and (max-width:576px){
+    .btn-square {
+       height: min-content!important;
+       width: 68px;
+
+    }
+    h6.btn-square-text{
+       font-size: 11px !important;
+        
+    }
+
+   
+}
+
+
