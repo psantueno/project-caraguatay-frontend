@@ -1,5 +1,6 @@
 import React from 'react'
 import { Container, Row } from 'react-bootstrap'
+import mapPhoto  from '../../../src/assets/mapaCaraguatay.png'
 
 export const References = () => {
   return (
@@ -8,7 +9,8 @@ export const References = () => {
 
     <Row className='text-indent'>
 
-        <h3 id="#references"> Referencias del lugar </h3> 
+        <h3 > <b>  Referencias del lugar </b></h3> 
+        <img src={mapPhoto} alt={'map'}/>
          <p >
            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum error ab, autem corporis id amet esse fuga illum ea rerum soluta atque nobis sapiente quisquam rem, ullam, sint sed harum? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Expedita, laudantium eos! Porro provident odit facilis? Quisquam assumenda velit maiores quo, minima, distinctio id nostrum quas natus molestiae officia. Aut, earum.
            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum illum expedita accusantium adipisci debitis voluptas optio sapiente ratione temporibus modi eius itaque, iure repellat nisi repudiandae eaque officiis sunt pariatur.

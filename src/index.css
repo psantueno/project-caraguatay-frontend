@@ -10,9 +10,8 @@ a {
     margin-top: 5px;
    
 }
-.text-indent p {
-    text-indent: 1cm;
-}
+
+
 
 
 /* footer */
@@ -152,7 +151,36 @@ h6.btn-square-text {
     text-decoration: none !important;
 }
 
+/** Historia **/
+.text-indent  {
+    margin-top: 35px !important;
+    text-align: justify;
+}
 
+.text-indenth3{
+     text-shadow: 5px 5px 10px 5px red ;  
+}
+    
+.text-indent img {
+    width: 290px !important;
+    height: 60% !important;
+    text-align: center;
+    margin: auto;
+    margin-top:15px;
+    margin-bottom: 20px;
+    /* box-shadow: 5px 5px 10px 5px #859499 ;  */
+
+}
+
+.text-indent p {
+    text-indent: 1cm;
+}
+
+.buttonToolBar{
+    text-align: center !important;
+
+
+}
 
 
 
