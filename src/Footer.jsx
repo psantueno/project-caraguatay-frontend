@@ -3,7 +3,7 @@ import { Contact } from './Contact';
 import { Follow } from './Follow';
 import { PoweredBy } from './PoweredBy';
 import { CopyRight } from './CopyRight';
-import usefulPhones from './assets/data/usefulPhones.json'  // JSON con los teléfonos importantes del footer.
+import {usefulPhones} from './assets/data/usefulPhones';
 
 export const Footer = () => {
 
