@@ -6,6 +6,13 @@ body {
     margin: 0;
     padding: 0;
   }
+
+  .main-div-header{
+    border-bottom: #315c94;
+    border-width: thick;
+    border-bottom-style: solid;
+  }
+
   .sidenav {
     height: 25%;
     width: 0;
@@ -59,6 +66,12 @@ body {
 
   @media (min-width: 768px) {
 
+    .main-div-header{
+
+      border-bottom-style: none;
+    }
+
+
     .sidenav hr{display: none;}
 
     .sidenav {
@@ -68,10 +81,12 @@ body {
       height: 5%;
       width: 100%;
       min-width: 0;
-      top:62px;
+      top:60px;
       z-index: 0;
       justify-content: space-around;
       transition: none;
+      opacity: 1;
+      position: absolute;
     }
 
     .sidenav a{
