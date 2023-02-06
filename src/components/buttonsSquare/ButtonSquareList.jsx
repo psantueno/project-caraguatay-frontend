@@ -9,9 +9,9 @@ export const ButtonSquareList = () => {
 
         <Container>
             <ButtonGroup>
-                <ButtonToolbar id="controlled-div" >
+                <ButtonToolbar>
 
-                    <nav className='btn-toolbar'>
+                    <nav className='btn-toolbar ' style={{flexWrap:'nowrap',  textAlign:'center'}}>
 
                         {
                             CultureBtns.map((btn) => (

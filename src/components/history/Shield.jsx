@@ -9,7 +9,7 @@ export const Shield = () => {
     <Container>
 
      <Row className='text-indent'>
-             <h3 className='text-indenth3'><b> Escudo </b> </h3> 
+             <h3 ><b> Escudo </b> </h3> 
              <img src={ShieldPhoto} alt={'Shield'}/>
           <p >
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum error ab, autem corporis id amet esse fuga illum ea rerum soluta atque nobis sapiente quisquam rem, ullam, sint sed harum? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Expedita, laudantium eos! Porro provident odit facilis? Quisquam assumenda velit maiores quo, minima, distinctio id nostrum quas natus molestiae officia. Aut, earum.

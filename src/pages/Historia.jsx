@@ -6,9 +6,9 @@ import {Flag, History, References, Shield } from '../components/history'
 export const Historia = () => {
   return (
     <>
-    <Container style={{textAlign:'center'}}>
+ 
 
-    <div className='body-culturayturismo'>
+    <div className='body-culturayturismo' style={{textAlign:'center', padding:'0px'}}>
       <h1 className="titles-subtitles">Historia</h1>
 
       <Container style={{ textAlign: 'center' }}>
@@ -29,7 +29,7 @@ export const Historia = () => {
         </div>
 
     </div>
-    </Container>
+    
 
 
     

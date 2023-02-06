@@ -4,7 +4,7 @@ export const Location = () => {
 
     return (
         <>
-            <h6 className='titles-subtitles'><b>¿Cómo llegar?</b></h6>
+            <h6 className='titles-subtitles text-indent'><b>¿Cómo llegar?</b></h6>
 
             <div className='paragraphs'>
                 <p className='text-paragraphs'>

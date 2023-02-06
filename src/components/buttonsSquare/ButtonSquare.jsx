@@ -4,7 +4,7 @@ const ButtonSquare = ({ icon, title, url }) => {
   return (
 
     <NavLink className={({ isActive }) => `${isActive ? 'link-activated' : 'link-btn-square'}`} to={url}>
-      <div className="btn-square">
+      <div >
         <div className="btn-square-icon">
           {icon}
         </div>

@@ -7,11 +7,11 @@ export const HistoryButtonSquareList = () => {
     
     return (
 
-    <Container  className='buttonToolBar'>
+    <Container>
             <ButtonGroup>
-                <ButtonToolbar id="controlled-div" >
+                <ButtonToolbar  >
 
-                    <nav className='btn-toolbar' style={{flexWrap:'nowrap', margin:'auto', textAlign:'center'}}>
+                    <nav className='btn-toolbar ' style={{flexWrap:'nowrap',  textAlign:'center'}}>
 
                         {
                             HistoryBtns.map((btn) => (

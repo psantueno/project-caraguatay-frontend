@@ -1,4 +1,3 @@
-import React from 'react'
 import { Container, Row } from 'react-bootstrap'
 
 export const History = () => {
@@ -8,7 +7,7 @@ export const History = () => {
 
     <Row className='text-indent'>
 
-        <h3 > <b> Historia de Caraguatay</b> </h3> 
+        <h3 > <b > Historia de Caraguatay</b> </h3> 
         
          <p >
            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum error ab, autem corporis id amet esse fuga illum ea rerum soluta atque nobis sapiente quisquam rem, ullam, sint sed harum? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Expedita, laudantium eos! Porro provident odit facilis? Quisquam assumenda velit maiores quo, minima, distinctio id nostrum quas natus molestiae officia. Aut, earum.
