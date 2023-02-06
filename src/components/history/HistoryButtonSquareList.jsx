@@ -8,7 +8,7 @@ export const HistoryButtonSquareList = () => {
     return (
 
     <Container>
-            <ButtonGroup>
+           
                 <ButtonToolbar  >
 
                     <nav className='btn-toolbar ' style={{flexWrap:'nowrap',  textAlign:'center'}}>
@@ -29,7 +29,7 @@ export const HistoryButtonSquareList = () => {
                     </nav>
 
                 </ButtonToolbar>
-            </ButtonGroup>
+            
 
         </Container>
 

@@ -8,7 +8,7 @@ export const ButtonSquareList = () => {
     return (
 
         <Container>
-            <ButtonGroup>
+           
                 <ButtonToolbar>
 
                     <nav className='btn-toolbar ' style={{flexWrap:'nowrap',  textAlign:'center'}}>
@@ -29,8 +29,7 @@ export const ButtonSquareList = () => {
                     </nav>
 
                 </ButtonToolbar>
-            </ButtonGroup>
-
+            
         </Container>
 
 

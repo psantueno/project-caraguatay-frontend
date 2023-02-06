@@ -12,8 +12,6 @@ a {
 }
 
 
-
-
 /* footer */
 .footer {
   background-color: #C1CDD6;
@@ -254,17 +252,22 @@ a.link-phones:hover {
 
 
 /* CULTURA Y TURISMO */
+
+
 .body-culturayturismo {
   display: flex;
   flex-direction: column;
-  margin-top: 70px !important;
+  
+  /* margin-top: 70px !important; */
+ 
 
 }
-
+/* 
 .titles-subtitles {
   margin-left: 5px;
-  margin-bottom: 10px;
-}
+  margin-bottom: 25px;
+ 
+} */
 
 .text-paragraphs {
   margin: 0;
@@ -275,6 +278,7 @@ a.link-phones:hover {
   margin-left: 5px;
   margin-right: 5px;
   margin-bottom: 10px;
+  text-indent: 1cm;
 }
 
 .map-box {
@@ -378,9 +382,12 @@ a.link-activated:hover {
 }
 
 .btn-toolbar {
-  justify-content: space-between !important;
+  justify-content: center !important;
+  width:95% !important;
 }
-
+.row{
+  --bs-gutter-x: auto !important
+}
 
 
 /* END BUTTONS */

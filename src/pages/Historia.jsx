@@ -8,8 +8,11 @@ export const Historia = () => {
     <>
  
 
-    <div className='body-culturayturismo' style={{textAlign:'center', padding:'0px'}}>
-      <h1 className="titles-subtitles">Historia</h1>
+    <div className='body-culturayturismo' >
+      <Container>
+      <h1>Historia</h1>
+      </Container>
+        
 
       <Container style={{ textAlign: 'center' }}>
         <Row className='mb-5'>

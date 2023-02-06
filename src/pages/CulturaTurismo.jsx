@@ -8,16 +8,15 @@ export const CulturaTurismo = () => {
 
   return (
 
-    <div className='body-culturayturismo'>
-      <h1 className="titles-subtitles">Cultura y Turismo</h1>
+   <>
+  
 
-      <Container style={{ textAlign: 'center' }}>
+      <Container className='body-cultrayturismo' >
+        <h1  >Cultura y Turismo</h1>
         <Row className='mb-5'>
           <ButtonSquareList />
         </Row>
-      </Container>
-
-      <div className="container-router">
+      
             <Routes>
                 <Route path="location" element={<Location />} />
                 <Route path="places" element={<PlacesToVisit />} />
@@ -26,9 +25,10 @@ export const CulturaTurismo = () => {
                                 
                 <Route path="/" element={<Navigate to="/culturaTurismo/location" />} />
             </Routes>
-        </div>
+        </Container>
+   </>
 
-    </div>
+   
 
   )
 
