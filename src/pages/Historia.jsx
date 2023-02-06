@@ -1,26 +1,34 @@
-import React from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import {Row, Container} from 'react-bootstrap';
-import { ButtonSquareList } from '../components/buttonsSquare/ButtonSquareList';
-
+import { HistoryButtonSquareList } from '../components/history/HistoryButtonSquareList';
+import {Flag, History, References, Shield } from '../components/history'
 
 export const Historia = () => {
   return (
     <>
-    <Container style={{textAlign:'cente'}}>
+    <Container style={{textAlign:'center'}}>
 
-        <h3 className='main-div'> Historia </h3>
-      
+    <div className='body-culturayturismo'>
+      <h1 className="titles-subtitles">Historia</h1>
+
+      <Container style={{ textAlign: 'center' }}>
         <Row className='mb-5'>
-
-          
-            <ButtonSquareList/>
-        
+          <HistoryButtonSquareList />
         </Row>
+      </Container>
 
-       
+      <div className="container-router">
+            <Routes>
+                <Route path="escudo" element={<Shield />} />
+                <Route path="Bandera" element={<Flag />} />
+                <Route path="Referencias" element={<References />} />
+                <Route path="historia" element={<History />} />
+                                
+                <Route path="/" element={<Navigate to="/historia/escudo" />} />
+            </Routes>
+        </div>
 
-     
-    
+    </div>
     </Container>
 
 

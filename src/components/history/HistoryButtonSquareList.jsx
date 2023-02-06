@@ -1,20 +1,20 @@
-import { ButtonGroup, ButtonToolbar, Container } from 'react-bootstrap';
-import ButtonSquare from './ButtonSquare';
-import { CultureBtns } from '../../assets/data/CultureBtns';
+import { ButtonGroup, ButtonToolbar, Container, Button } from 'react-bootstrap';
+import ButtonSquare from '../buttonsSquare/ButtonSquare';
+import { HistoryBtns } from '../../assets/data/HistoryBtns';
 
 
-export const ButtonSquareList = () => {
-
+export const HistoryButtonSquareList = () => {
+    
     return (
 
-        <Container>
+    <Container  className='buttonToolBar'>
             <ButtonGroup>
                 <ButtonToolbar id="controlled-div" >
 
-                    <nav className='btn-toolbar'>
+                    <nav className='btn-toolbar' style={{flexWrap:'nowrap', margin:'auto', textAlign:'center'}}>
 
                         {
-                            CultureBtns.map((btn) => (
+                            HistoryBtns.map((btn) => (
 
                                 <ButtonSquare
                                     className="button-square"
@@ -32,9 +32,6 @@ export const ButtonSquareList = () => {
             </ButtonGroup>
 
         </Container>
-
-
-
 
     )
 }
