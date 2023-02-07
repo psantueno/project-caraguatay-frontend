@@ -1,6 +1,6 @@
 import { Container, Row } from 'react-bootstrap'
 
-export const History = () => {
+export const Origin = () => {
   return (
     <>
     <Container>

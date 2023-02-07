@@ -1,20 +1,19 @@
-import { ButtonGroup, ButtonToolbar, Container } from 'react-bootstrap';
+/* componente encargador de moostrar la cuadricula de botones*/
+
+import { ButtonToolbar, Container } from 'react-bootstrap';
 import ButtonSquare from './ButtonSquare';
-import { CultureBtns } from '../../assets/data/CultureBtns';
 
-
-export const ButtonSquareList = () => {
+export const ButtonSquareList = ({ buttons }) => {
 
     return (
 
         <Container>
-           
                 <ButtonToolbar>
 
-                    <nav className='btn-toolbar ' style={{flexWrap:'nowrap',  textAlign:'center'}}>
+                    <nav className='btn-toolbar'>
 
                         {
-                            CultureBtns.map((btn) => (
+                            buttons.map((btn) => (
 
                                 <ButtonSquare
                                     className="button-square"
@@ -29,7 +28,6 @@ export const ButtonSquareList = () => {
                     </nav>
 
                 </ButtonToolbar>
-            
         </Container>
 
 

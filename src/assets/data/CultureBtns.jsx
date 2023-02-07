@@ -2,17 +2,17 @@ export const CultureBtns = [
     {
         title: "¿Cómo llegar?",
         icon: <i className="fas fa-map-marked-alt"></i>,
-        url: "/culturaTurismo/location"
+        url: "/culturaTurismo/ubicacion"
     },
     {
         title: "Sitios para visitar",
         icon: <i className="fas fa-camera"></i>,
-        url: "/culturaTurismo/places"
+        url: "/culturaTurismo/turismo"
     },
     {
         title: "Emprendimientos",
         icon: <i className="fas fa-lightbulb"></i>,
-        url: "/culturaTurismo/entrepreneurship"
+        url: "/culturaTurismo/emprendimientos"
     },
     {
         title: "Campings",
