@@ -21,7 +21,7 @@ export const NewsItem = ({
         <>
            
                 <Card className='cardNews' >
-                    <Card.Img variant="top" src={photo} className='cardImg' />
+                    <Card.Img variant="top" src={photo1} className='cardImg' />
                         <Card.Subtitle className="cardSubtitle"> 
                                 <Card.Text className="cardCategory">
                                     <small> <Link to="#"className="cardLink" > {category} </Link></small>

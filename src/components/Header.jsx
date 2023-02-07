@@ -8,13 +8,12 @@ import './Header.css'
     return (
         <>
           <div className='main-div-header'>
-          <div>
-              <ProfileButton/>
-              <img src={escudo} className="escudo"/>
-          </div>
+            <div>
+                <ProfileButton/>
+                <img src={escudo} className="escudo"/>
+            </div>
               <Menu/>            
-          </div>
-          <hr/>
+            </div>
         </>
     )
   }

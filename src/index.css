@@ -1,9 +1,18 @@
 * {
-    font-family: 'Inter', sans-serif;
+  font-family: 'Inter', sans-serif;
+}
+a { 
+    text-decoration: none !important;
 }
 
-/* footer */
+.main-title {
+    font-size: 25px;
+    margin-top: 5px;
+   
+}
 
+
+/* footer */
 .footer {
   background-color: #C1CDD6;
   border-color: #315C94;
@@ -19,91 +28,472 @@ body {
   align-items: flex-start;
   min-width: 320px;
   min-height: 100vh;
+  
 }
 
 .phones {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin-top: 5px;
-    margin-bottom: 8px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 5px;
+  margin-bottom: 8px;
 }
 
 .phone-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 5px;
-    margin: 2px;
-    transition: color 500ms;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+  margin: 2px;
+  transition: color 500ms;
 }
 
 .icon-circle {
-    background: #FFFFFF;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+  background: #FFFFFF;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .img-icon {
-    width: 28px;
-    height: 28px;
+  width: 28px;
+  height: 28px;
 }
 
 a.link-phones {
-    text-decoration: none;
-    color: #315C94;
-    flex: 30%;
-    transition: color 100ms;
+  text-decoration: none;
+  color: #315C94;
+  flex: 30%;
+  transition: color 100ms;
 }
 
 a.link-phones:hover {
-    color: #859499; 
+  color: #859499;
 }
 
-.number-phone, .menu-subtitle {
-    font-weight: 500;
-    font-size: 13px;
-    margin-bottom: 0px;
-    font-family: fantasy;
+.number-phone,
+.menu-subtitle {
+  font-weight: 500;
+  font-size: 13px;
+  margin-bottom: 0px;
+  font-family: fantasy;
 }
 
 .title-phone {
-    font-size: 11px;
-    font-weight: bold;
-    text-align: center;
+  font-size: 11px;
+  font-weight: bold;
+  text-align: center;
 }
 
 .list-section {
-    list-style: none;
-    font-size: 12px;
-    padding-left: 5px;
+  list-style: none;
+  font-size: 12px;
+  padding-left: 5px;
 }
 
 .section-contact-follow {
-    display: flex;
-    justify-content: space-around;
+  display: flex;
+  justify-content: space-around;
 }
 
 .copyright {
-    display: flex;
-    justify-content: center;
-    font-size: 2.5vw;
+  display: flex;
+  justify-content: center;
+  font-size: 2.5vw;
 }
 
 .powered-by {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
+
+/*Buttons*/
+
+.btn-square{
+    -webkit-user-select: none !important;
+    background-color: #C4D6DE;
+    color:#315C94;
+    width: 90px;
+    height: 80px;
+    padding: 5px;
+    border-radius: 3px;
+    margin:3px;
+    text-shadow: 1px 1px 5px rgba(49, 92, 148,0.4) !important;
+    box-shadow: 1px  5px 5px rgb(133, 148, 153) !important;
+    text-decoration: none !important;
+    transition: 0.7s;
+    
+}
+.btn-square:hover{
+    background-color:#9DB1C6;
+    box-shadow: 1px  5px 5px rgba(49, 92, 148,0.8) !important;
+    transform: scale(1.03);
+    color: #2d5a94;
+}
+
+.title-copyright {
+  margin: 0;
+  font-weight: 600;
+}
+
+/* END FOOTER */
+
+.card-lg {
+  margin-left: 0 !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  border: none !important;
+}
+
+.cardNews {
+  width: 260px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-shadow: 0px 10px 5px rgb(136, 136, 136, 0.4);
+
+
+}
+
+.cardNews-lg {
+  min-width: 260px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-shadow: 0px 10px 5px rgb(136, 136, 136, 0.4);
+
+
+}
+
+.cardSubtitle {
+  display: flex;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  justify-content: space-between !important;
+  padding: 5px;
+  margin: 2px !important;
+  align-items: baseline;
+}
+
+.cardCategory {
+  text-align: start !important;
+  font-style: italic;
+
+  ;
+}
+
+.cardDate {
+  text-align: end;
+  color: #315C94;
+
+}
+
+.cardImg {
+
+  max-width: 260px !important;
+  height: 180px;
+}
+
+.slide {
+  display: grid;
+  min-width: 260px !important;
+  max-width: 1200px !important;
+  min-height: 280px;
+  max-height: 360px !important;
+
+}
+
+.cardTitle {
+  text-align: start !important;
+}
+
+.cardText {
+  font-size: 12px !important;
+  text-align: justify !important;
+  text-indent: 20px;
+}
+
+.cardLink {
+  text-align: end;
+  font-size: 11px !important;
+  text-decoration: none !important;
+  background-color: #fff !important;
+  color: #315C94;
+
+}
+
+.cardLink-lg {
+  text-align: end;
+  font-size: 16px !important;
+  text-decoration: none !important;
+  background-color: #fff !important;
+  color: #315C94;
+
+
+
+}
+
+.cards-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  margin: 0 .5em;
+}
+
+.slide-moreNews {
+
+  height: 460px !important;
+
+}
+
+
+/* CULTURA Y TURISMO */
+
+
+.body-culturayturismo {
+  display: flex;
+  flex-direction: column;
+  
+  /* margin-top: 70px !important; */
+ 
+
+}
+/* 
+.titles-subtitles {
+  margin-left: 5px;
+  margin-bottom: 25px;
+ 
+} */
+
+.text-paragraphs {
+  margin: 0;
+}
+
+.paragraphs {
+  text-align: justify;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 10px;
+  text-indent: 1cm;
+}
+
+.map-box {
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.maps-google {
+  border: solid 2px;
+}
+
+.box-img {
+  display: flex;
+  justify-content: center;
+}
+
+.img-place {
+  width: 90%;
+  height: auto;
+  margin-top: 3px;
+  margin-bottom: 8px;
+}
+
+
+
+
+/* END CULTURA Y TURISMO */
+
+/*Buttons*/
+
+.btn-square-icon {
+  width: 100%;
+  font-size: 22px;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+}
+
+h6.btn-square-text {
+  margin: 3px;
+  text-align: center;
+  font-size: 0.8em;
+  overflow-wrap: anywhere;
+}
+
+a.link-btn-square {
+  -webkit-user-select: none !important;
+  user-select: none;
+  background-color: #C4D6DE;
+  color: #315C94;
+  width: 90px;
+  height: 80px;
+  padding: 4px;
+  border-radius: 3px;
+  margin: 3px 3px 5px 3px;
+  text-shadow: 1px 1px 5px rgba(49, 92, 148, 0.4) !important;
+  box-shadow: 1px 5px 5px rgb(133, 148, 153);
+  transition: 0.7s;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-decoration: none !important;
+}
+
+a.link-btn-square:hover {
+  background-color: #9DB1C6;
+  box-shadow: 1px 5px 5px rgba(49, 92, 148, 0.8) !important;
+  transform: scale(1.03);
+  color: #2d5a94;
+}
+
+a.link-activated {
+
+  text-decoration: none !important;
+
+  -webkit-user-select: none !important;
+  user-select: none;
+  background-color: #d2d5d8;
+  color: #626b76;
+  width: 90px;
+  height: 80px;
+  padding: 3px;
+  border-radius: 3px;
+  margin: 3px 3px 5px 3px;
+  text-shadow: 1px 1px 5px rgba(49, 92, 148, 0.4) !important;
+  box-shadow: 1px 5px 5px rgb(133, 148, 153);
+  transition: 0.7s;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+}
+
+a.link-activated:hover {
+  color: #626b76;
+}
+
+.btn-toolbar {
+  justify-content: center !important;
+  width:95% !important;
+}
+.row{
+  --bs-gutter-x: auto !important
+}
+
+
+/* END BUTTONS */
+
+
 
 
 /* START MEDIA QUERIES */
 
-@media screen and (min-width:576px) {
+@media screen and (min-width: 320px) and(max-width: 760px) {
+  .cards-wrapper {
+    display: inline-block;
+    width: calc(100%/2);
+    align-items: center;
+    justify-content: center;
+
+  }
+
+  .carousel.inner {
+    overflow: scroll;
+
+  }
+
+  .carousel.slide {
+    text-align: center;
+  }
+}
+
+.btn-square-icon{
+    width:100%;
+    font-size: 22px;
+    text-align: center;
+    align-self: auto;
+   
+}
+
+h6.btn-square-text {
+    margin: auto;
+    text-align: center;
+    font-size: 14px;
+    text-decoration: none !important;
+}
+
+/** Historia **/
+
+.text-indent  {
+    padding-right: 5px;
+    margin-top: 35px !important;
+    text-align: justify;
+}
+
+/* .text-indenth3{
+     text-shadow: 5px 5px 10px 5px red ;  
+} */
     
+.text-indent img {
+    width: 290px !important;
+    height: 60% !important;
+    text-align: center;
+    margin: auto;
+    margin-top:15px;
+    margin-bottom: 20px;
+    /* box-shadow: 5px 5px 10px 5px #859499 ;  */
 
 }
+
+.text-indent p {
+    text-indent: 1cm;
+}
+
+.buttonToolBar{
+    text-align: center !important;
+ 
+
+}
+
+
+
+
+/* START MEDIA QUERIES */
+@media screen and (min-width:300px) and (max-width:576px){
+
+  /* .btn-toolbar{
+    width: 87%;
+  
+    
+  } */
+
+  /* .btn-square {
+    height: min-content!important;
+    width: 50px;
+
+    } */
+  h6.btn-square-text{
+    font-size: 10px !important;
+        
+    }
+
+  .body-culturayturismo {
+    padding-right: 5px;
+    max-width: 576px;
+   
+    
+      
+    }
+}
+
+
+@media screen and (min-width:576px) {}

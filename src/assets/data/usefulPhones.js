@@ -1,4 +1,4 @@
-[
+export const usefulPhones = [
     {
         "src": "https://img.icons8.com/sf-black-filled/64/315c94/policeman-male.png",
         "phone": "101",
@@ -30,4 +30,4 @@
         "title": "Violencia de Género"
     }
      
-]
+];
