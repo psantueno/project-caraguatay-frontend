@@ -26,8 +26,8 @@ body {
   margin: 0;
   display: flex;
   align-items: flex-start;
-  min-width: 320px;
-  min-height: 100vh;
+  /* min-width: 320px;
+  min-height: 100vh; */
   
 }
 
@@ -115,6 +115,7 @@ a.link-phones:hover {
 
 .btn-square{
     -webkit-user-select: none !important;
+    user-select: none;
     background-color: #C4D6DE;
     color:#315C94;
     width: 90px;
@@ -283,8 +284,8 @@ a.link-phones:hover {
 
 .map-box {
   text-align: center;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 20px !important;
+  margin-bottom: 20px;
 }
 
 .maps-google {
@@ -303,12 +304,43 @@ a.link-phones:hover {
   margin-bottom: 8px;
 }
 
-
-
-
 /* END CULTURA Y TURISMO */
 
-/*Buttons*/
+/* START HISTORIA */
+
+ .text-indent  {
+    padding-right: 5px;
+    margin-top: 35px !important;
+    text-align: justify;
+}
+
+.text-indenth3 {
+     text-shadow: 5px 5px 10px 5px red ;  
+} 
+    
+.text-indent img {
+    width: 290px !important;
+    height: 60% !important;
+    text-align: center;
+    margin: auto;
+    margin-top:15px;
+    margin-bottom: 20px;
+    /* box-shadow: 5px 5px 10px 5px #859499 ;  */
+} 
+
+
+.text-indent p {
+    text-indent: 1cm;
+}
+
+.buttonToolBar{
+    text-align: center !important;
+}  
+
+/* END HISTORIA */
+
+
+/* START Buttons*/
 
 .btn-square-icon {
   width: 100%;
@@ -332,7 +364,8 @@ a.link-btn-square {
   user-select: none;
   background-color: #C4D6DE;
   color: #315C94;
-  width: 90px;
+  /* width: 47%;  option traditional */
+  flex: 47%;
   height: 80px;
   padding: 4px;
   border-radius: 3px;
@@ -362,7 +395,8 @@ a.link-activated {
   user-select: none;
   background-color: #d2d5d8;
   color: #626b76;
-  width: 90px;
+   /* width: 47%;  option traditional */
+  flex: 10%;
   height: 80px;
   padding: 3px;
   border-radius: 3px;
@@ -383,11 +417,11 @@ a.link-activated:hover {
 
 .btn-toolbar {
   justify-content: center !important;
-  width:95% !important;
 }
-.row{
+
+/* .row{
   --bs-gutter-x: auto !important
-}
+} */
 
 
 /* END BUTTONS */
@@ -396,8 +430,14 @@ a.link-activated:hover {
 
 
 /* START MEDIA QUERIES */
+@media screen and (min-width:568px) {}
 
-@media screen and (min-width: 320px) and(max-width: 760px) {
+
+
+@media screen and (min-width:768px) {}
+
+
+/* @media screen and (min-width: 760px) {
   .cards-wrapper {
     display: inline-block;
     width: calc(100%/2);
@@ -431,44 +471,10 @@ h6.btn-square-text {
     text-decoration: none !important;
 }
 
-/** Historia **/
-
-.text-indent  {
-    padding-right: 5px;
-    margin-top: 35px !important;
-    text-align: justify;
-}
-
-/* .text-indenth3{
-     text-shadow: 5px 5px 10px 5px red ;  
-} */
-    
-.text-indent img {
-    width: 290px !important;
-    height: 60% !important;
-    text-align: center;
-    margin: auto;
-    margin-top:15px;
-    margin-bottom: 20px;
-    /* box-shadow: 5px 5px 10px 5px #859499 ;  */
-
-}
-
-.text-indent p {
-    text-indent: 1cm;
-}
-
-.buttonToolBar{
-    text-align: center !important;
- 
-
-}
-
-
 
 
 /* START MEDIA QUERIES */
-@media screen and (min-width:300px) and (max-width:576px){
+/* @media screen and (min-width:300px) and (max-width:576px){ */
 
   /* .btn-toolbar{
     width: 87%;
@@ -481,19 +487,17 @@ h6.btn-square-text {
     width: 50px;
 
     } */
-  h6.btn-square-text{
+  /* h6.btn-square-text{
     font-size: 10px !important;
         
     }
 
-  .body-culturayturismo {
+  /* .body-culturayturismo {
     padding-right: 5px;
     max-width: 576px;
-   
-    
-      
-    }
-}
+  
+    } */
 
 
-@media screen and (min-width:576px) {}
+
+/* @media screen and (min-width:576px) {} */

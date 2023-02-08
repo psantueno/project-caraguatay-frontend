@@ -1,3 +1,5 @@
+/* componente encargado de mostrar cada botón*/
+
 import { NavLink} from 'react-router-dom';
 
 const ButtonSquare = ({ icon, title, url }) => {

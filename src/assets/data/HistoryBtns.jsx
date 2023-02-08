@@ -5,9 +5,9 @@ export const HistoryBtns= [
     url: '/historia/escudo'
 },
 {
-    title: "Historia",
+    title: "Orígen y Fundación",
     icon: <i className="fas fa-book my-2"></i> ,
-    url: '/historia/historia'
+    url: '/historia/origen'
 },
 {
     title:"Bandera" ,
