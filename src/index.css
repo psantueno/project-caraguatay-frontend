@@ -396,7 +396,7 @@ a.link-activated {
   background-color: #d2d5d8;
   color: #626b76;
    /* width: 47%;  option traditional */
-   flex: 10%;
+  flex: 10%;
   height: 80px;
   padding: 3px;
   border-radius: 3px;
@@ -430,6 +430,12 @@ a.link-activated:hover {
 
 
 /* START MEDIA QUERIES */
+@media screen and (min-width:568px) {}
+
+
+
+@media screen and (min-width:768px) {}
+
 
 /* @media screen and (min-width: 760px) {
   .cards-wrapper {
