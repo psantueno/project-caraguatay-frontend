@@ -13,13 +13,15 @@ export const useForm = (initialForm, validateForm) => {
 
   const handleChange = (e) => {
   //  const {name, value} = e.target
+  console.log(e.target);
     setForm({
         ...form,
         [e.target.name]:e.target.value,
-        [e.target.files]:e.target.value
+        [e.target.files]:e.target.file
     })
   };
 
+  
   const handleOnKeyUp = (e) => {
     handleChange(e);
     setErrors(validateForm(form));

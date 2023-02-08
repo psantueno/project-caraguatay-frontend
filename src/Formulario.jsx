@@ -10,24 +10,13 @@ const initialForm = {
   images: [],
 };
 
-
+                    // (form, target)
 const validationsForm = (form) => {
   let errors = {};
-
-  if (!form.category.trim() || form.category === "Seleccione la categoría") {
-    errors.category = "Seleccione una categoría"
-  }
-  if (!form.eventDate || form.eventDate === "dd/mm/aaaa") {
-    errors.eventDate = "Seleccione la fecha del evento"
-  }
-
-  if (!form.title) {
-    errors.title = "Escriba el título de la publicación"
-  }
-
-  if (!form.mainText) {
-    errors.mainText = "Escriba el texto de la publicación"
-  }
+   (!form.category.trim()) && (errors.category = "Seleccione una categoría")
+   (!form.eventDate || form.eventDate === "dd/mm/aaaa") && (errors.eventDate = "Seleccione la fecha del evento")
+   (!form.title) && (errors.title = "Escriba el título de la publicación")
+   (!form.mainText) && (errors.mainText = "Escriba el texto de la publicación")
 
   return errors
 };
@@ -67,9 +56,8 @@ const Formulario = () => {
               onChange={handleChange}
               onBlur={handleOnblur}
               required
-
             >
-              <option>Seleccione la categoría</option>
+              <option> </option>
               <option >Deportes</option>
               <option >Comunicados</option>
               <option >Cultura y turismo</option>
@@ -104,7 +92,7 @@ const Formulario = () => {
               onChange={handleChange}
               onKeyUp={handleOnKeyUp}
               required />
-            <Form.Control.Feedback type="invalid">
+            <Form.Control.Feedback type="invalid" >
               {errors.title}
             </Form.Control.Feedback>
           </Form.Group>
@@ -131,7 +119,7 @@ const Formulario = () => {
               multiple
               name="images"
               value={form.selectedImages}
-              onChange={onSelectFile}
+              onInput={onSelectFile}
               isInvalid={!!errors.images}
               accept="image/png , image/jpeg, image/jpg"
             />
