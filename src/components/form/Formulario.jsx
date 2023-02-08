@@ -41,7 +41,7 @@ const Formulario = () => {
 
   return (
     <>
-      <Container>
+      <Container className='mt-4'>
         <h4>Crear noticia</h4>
       </Container>
 

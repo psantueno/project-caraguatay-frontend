@@ -1,4 +1,4 @@
-import { Header } from './components/Header';
+import { Header } from './components/header/Header';
 import { Footer } from './Footer';
 import { AppRouter } from './router/AppRouter'
 import 'bootstrap/dist/css/bootstrap.min.css';

@@ -1,9 +1,9 @@
 import React from 'react'
 import { Routes, Route, Link, Navigate } from 'react-router-dom';
 import { NewsDetail } from '../components/news/NewsDetail';
-import Formulario from '../Formulario';
-import { Home } from '../Home';
+import Formulario from '../components/form/Formulario';
 import { Comunicados, CulturaTurismo, Deporte, Historia, PuntoDigital } from '../pages';
+import { Home } from '../Home';
 export const AppRouter = () => {
   return (
     <>
