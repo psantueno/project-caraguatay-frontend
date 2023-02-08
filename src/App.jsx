@@ -1,7 +1,6 @@
 import { Header } from './components/Header';
 import { Footer } from './Footer';
 import { AppRouter } from './router/AppRouter'
-import Formulario  from './Formulario';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 

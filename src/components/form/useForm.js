@@ -12,12 +12,11 @@ export const useForm = (initialForm, validateForm) => {
   //Funciones que se ejecutan en el form
 
   const handleChange = (e) => {
-  //  const {name, value} = e.target
-  console.log(e.target);
+  // console.log(e.target);
     setForm({
         ...form,
         [e.target.name]:e.target.value,
-        [e.target.files]:e.target.file
+        [e.target.files]:e.target.file  //no funciona
     })
   };
 

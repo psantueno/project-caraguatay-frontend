@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom';  
+import Formulario from '../components/form/Formulario';
 import { NewsDetail } from '../components/news/NewsDetail';
-import Formulario from '../Formulario';
 import { Home } from '../Home';
 import { Comunicados,CulturaTurismo,Deporte, Historia, PuntoDigital } from '../pages';
 export const AppRouter = () => {
