@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Form, Container, Col, Row, Image } from 'react-bootstrap';
 import { useForm } from './useForm';
+import moment from 'moment/moment';
 
 const initialForm = {
   category: "",
@@ -73,6 +74,7 @@ const Formulario = () => {
             <Form.Control
               name="eventDate"
               type="date"
+              min={moment().format("YYYY-MM-DD")}
               required
               value={form.eventDate}
               onChange={handleChange}
