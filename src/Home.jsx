@@ -1,4 +1,4 @@
-import { Header } from './components/Header'
+import { Header } from './components/header/Header';
 import { NewsItem } from './components/news/NewsItem'
 
 export const Home = () => {

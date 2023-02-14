@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import {ButtonGeneric} from '../ButtonGeneric'
 import slide1 from '../../assets/slide1.jpg'
 import slide2 from '../../assets/slide2.jpg'
-import { Header } from '../Header'
+//import { Header } from '../header/Header'
 import '../../index.css';
 import { NewsItem } from './NewsItem'
 

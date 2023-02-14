@@ -1,6 +1,6 @@
 import React from 'react'
 import './profileButton.css'
-import jaguar from '../assets/jaguarete-ico.png'
+import jaguar from '../../assets/jaguarete-ico.png'
 
 
 
