@@ -1,10 +1,12 @@
-import React from 'react'
-import { Routes, Route, Link, Navigate } from 'react-router-dom';
+import { Routes, Route} from 'react-router-dom';
 import { NewsDetail } from '../components/news/NewsDetail';
-import Formulario from '../components/form/Formulario';
+import { Formulario } from '../components/form-news/Formulario';
 import { Comunicados, CulturaTurismo, Deporte, Historia, PuntoDigital } from '../pages';
 import { Home } from '../Home';
+
+
 export const AppRouter = () => {
+  
   return (
     <>
       <Routes>
