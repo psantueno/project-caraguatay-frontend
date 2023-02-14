@@ -24,7 +24,7 @@ export const CulturaTurismo = () => {
           <Route path="emprendimientos" element={<Entrepreneurship />} />
           <Route path="camping" element={<Camping />} />
 
-          <Route path="/" element={<Navigate to="/culturaTurismo/location" />} />
+          <Route path="/" element={<Navigate to="/culturaTurismo/ubicacion" />} />
         </Routes>
 
       </Container>
