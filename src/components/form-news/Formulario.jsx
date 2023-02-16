@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { Button, Form, Container, Col, Table } from 'react-bootstrap';
 import { useForm } from './useForm';
 import dayjs from "dayjs";
@@ -7,23 +7,19 @@ const initialForm = {
   date: dayjs().format("YYYY-MM-DD"),
   title: "",
   mainText: "",
-  files: [],
-  category: "default"
+  category: "default",
+  files: []
 };
 
 
 export const Formulario = () => {
 
+
   const inputTitle = useRef();
   const inputMainText = useRef();
   const inputDate = useRef();
   const inputCategory = useRef();
-  const inputImages = useRef(null);
-  const selectedImages = useRef();
-
-  useEffect(() => {
-    inputCategory.current.focus();
-  }, [])
+  const inputFiles = useRef();
 
 
   const validationsForm = (form, e) => {
@@ -78,23 +74,33 @@ export const Formulario = () => {
     return errors;
   }
 
+
   const {
     form,
+    setForm,
     handleChange,
     handleFiles,
     handleBlur,
     handleKeyUp,
     handleMouseup,
     handleDelete,
-    handleCancel,
     handleSubmit,
     files,
-    errors,
+    errors
   } = useForm(initialForm, validationsForm)
 
 
   const handleClick = () => {
-    inputImages.current.click();
+    inputFiles.current.click();
+  };
+
+  const handleCancel = () => {
+    setForm(initialForm);
+    inputCategory.current.className = "form-control";
+    inputDate.current.className = "form-control";
+    inputTitle.current.className = "form-control";
+    inputMainText.current.className = "form-control";
+    inputCategory.current.focus();
   };
 
 
@@ -115,7 +121,6 @@ export const Formulario = () => {
               onChange={handleChange}
               onMouseUp={handleMouseup}
               onBlur={handleBlur}
-              required
             >
               <option value="default" disabled>-Seleccione una categoría-</option>
               <option value="Deportes" >Deportes</option>
@@ -145,7 +150,6 @@ export const Formulario = () => {
               onChange={handleChange}
               onKeyUp={handleKeyUp}
               onBlur={handleBlur}
-              required
             />
 
             {
@@ -168,7 +172,7 @@ export const Formulario = () => {
               onChange={handleChange}
               onKeyUp={handleKeyUp}
               onBlur={handleBlur}
-              required />
+            />
 
             {
               errors && errors.title
@@ -190,7 +194,6 @@ export const Formulario = () => {
               onChange={handleChange}
               onKeyUp={handleKeyUp}
               onBlur={handleBlur}
-              required
             />
 
             {
@@ -211,7 +214,7 @@ export const Formulario = () => {
               name="images"
               style={{ display: 'none' }}
               multiple
-              ref={inputImages}
+              ref={inputFiles}
               onChange={handleFiles}
               onBlur={handleBlur}
               accept="image/png , image/jpeg, image/jpg"
@@ -226,7 +229,7 @@ export const Formulario = () => {
                     Imágenes seleccionadas:
                   </td>
 
-                  <td ref={selectedImages} name="files" style={{ backgroundColor: "#ffffff", padding: "5px", border: "1px solid", textAlign: "center" }}>
+                  <td name="files" style={{ backgroundColor: "#ffffff", padding: "5px", border: "1px solid", textAlign: "center" }}>
                     {files.length}
                   </td>
                 </tr>
@@ -236,26 +239,6 @@ export const Formulario = () => {
             {/* SIMULADOR DE INPUT FILES */}
 
             {/* ERRORS MANAGEMENT */}
-
-            {
-              files.length === 0
-                ? (
-                  <p className="images-msg-error">
-                    *Campo obligatorio.
-                  </p>
-                )
-                : null
-          }
-
-            {
-              files.length > 10
-                ? (
-                  <p className="images-msg-error">
-                    Errores encontrados <b><i className="fas fa-exclamation-circle"></i></b>.<br />
-                  </p>
-                )
-                : null
-            }
 
             {
               files.length > 0 && files.length <= 10
@@ -284,13 +267,12 @@ export const Formulario = () => {
                   {
                     files.map((file, index) => {
                       return (
-                        <div className='box-individual-preview' key={file.name}>
+                        <div className='box-individual-preview' key={index}>
                           <img src={URL.createObjectURL(file)} alt={file.name} className="image-individual" />
                           <Button onClick={() => handleDelete(index)} variant="outline-danger" size="sm">
                             <i className="fas fa-trash-alt"></i>
                           </Button>
                         </div>
-
                       )
                     })
                   }
@@ -300,12 +282,13 @@ export const Formulario = () => {
 
             {/* MAPEO DE LAS PREVIEW Y HANDLEDELETE */}
 
-            {/* DETALLE DE ERRORS IMAGES */}
+            {/* DETALLE DE ERRORS IMAGES > 10 */}
 
             {
               files.length > 0 && files.length > 10
                 ? (
                   <p className="images-msg-error">
+                    Errores encontrados <b><i className="fas fa-exclamation-circle"></i></b><br />
                     Seleccione un máximo de <b>10</b> imágenes. <br />
                     <span>
                       Por favor elimine <b> {files.length - 10} </b> de la lista actual.
@@ -322,8 +305,8 @@ export const Formulario = () => {
           <Button className='m-2' type="submit" variant='primary' disabled={files.length > 10} >
             Confirmar
           </Button>
-          <Button className='m-2' type="submit" variant='danger' onClick={handleCancel}>
-            Cancelar
+          <Button className='m-2' type="reset" variant='danger' onClick={handleCancel}>
+            Borrar
           </Button>
         </Form>
       </Container>

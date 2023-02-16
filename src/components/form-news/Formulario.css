@@ -67,6 +67,7 @@
 .images-msg-error {
     width: 100%;
     margin-top: 0.25rem;
+    margin-bottom: 0.45rem;
     font-size: .875em;
     color: #dc3545;
 }
