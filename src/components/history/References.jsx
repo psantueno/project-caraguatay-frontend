@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container, Row } from 'react-bootstrap'
-import mapPhoto from '../../../src/assets/mapaCaraguatay.png'
+import mapPhoto from '../../../src/assets/images/mapaCaraguatay.png'
 
 export const References = () => {
    return (

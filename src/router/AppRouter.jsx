@@ -1,8 +1,8 @@
 import { Routes, Route} from 'react-router-dom';
 import { NewsDetail } from '../components/news/NewsDetail';
 import { Formulario } from '../components/form-news/Formulario';
-import { Comunicados, CulturaTurismo, Deporte, Historia, PuntoDigital } from '../pages';
-import { Home } from '../Home';
+import { Comunicados, CulturaTurismo, Deporte, Historia, PuntoDigital, Home } from '../pages';
+import { Formalities } from '../components/Formalities';
 
 
 export const AppRouter = () => {
@@ -11,6 +11,7 @@ export const AppRouter = () => {
     <>
       <Routes>
         <Route exact path="/" element={<Home />} ></Route>
+        {/* <Route path="/" element={<Formalities />} ></Route> */}
         <Route exact path="/comunicados" element={<Comunicados />} ></Route>
         <Route exact path="/deportes" element={<Deporte />} ></Route>
         <Route exact path="culturaTurismo/*" element={<CulturaTurismo />}></Route>

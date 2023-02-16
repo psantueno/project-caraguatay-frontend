@@ -21,11 +21,13 @@ export const ButtonSquareList = ({ buttons }) => {
                                     title={btn.title}
                                     url={btn.url}
                                     key={btn.title}
+                                    id={btn.id}
                                 />
                             ))
                         }
 
                     </nav>
+                   
 
                 </ButtonToolbar>
         </Container>

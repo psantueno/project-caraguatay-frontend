@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container, Row } from 'react-bootstrap'
-import FlagPhoto  from '../../../src/assets/FlagCaraguatay.png'
+import FlagPhoto  from '../../../src/assets/images/FlagCaraguatay.png'
 
 
 

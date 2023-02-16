@@ -12,6 +12,21 @@ a {
 }
 
 
+/**START HOME**/
+
+.banner-home{
+  margin-top: 20px !important;
+  margin-bottom: 10px !important;
+  height:180px !important;
+  width: 100%;
+
+}
+
+
+/* EN HOME*/
+
+
+
 /* footer */
 .footer {
   background-color: #C1CDD6;
@@ -23,6 +38,7 @@ a {
 
 
 body {
+  margin-top: 90px !important;
   margin: 0;
   display: flex;
   align-items: flex-start;

@@ -1,0 +1,68 @@
+/* componente encargador de moostrar la cuadricula de botones*/
+
+import { useState } from 'react';
+import { ButtonToolbar, Container  } from 'react-bootstrap';
+import { MacroClick, DriveLicence, CommerceEnable, PrivateConstruction } from '../Formalities';
+import ButtonSquare from './ButtonSquare';
+// import { Routes, Route } from 'react-router-dom';
+
+export const FormalitiesButtonSquareList = ({ buttons }) => {
+
+
+    const [display, setDisplay] = useState(false)
+    // console.log(display + ' btnlist')
+
+    return (
+
+        <Container>
+            <ButtonToolbar>
+
+                <nav className='btn-toolbar'>
+
+                    {
+                        buttons.map((btn) => (
+
+                            <>
+                                <nav onClick={() => setDisplay(btn.id)}>
+
+                                    <ButtonSquare
+                                        className="button-square"
+                                        icon={btn.icon}
+                                        title={btn.title}
+                                        key={btn.title}
+                                        url={btn.id}
+
+                                    />
+
+                                </nav>
+
+                            </>
+
+                        ))
+                    }
+                    <Container>
+
+                        {(display === '#MacroClick') && <MacroClick />}
+                        {(display === "#Licencia_conducir") && <DriveLicence />}
+                        {(display === '#Habilitacion_comercial') && <CommerceEnable />}
+                        {(display === '#Obras_particulares') && <PrivateConstruction />}
+
+                    </Container>
+
+                </nav>
+            </ButtonToolbar>
+
+            {/* <Routes>
+                <Route path='/#MacroClick' element={<MacroClick />} />
+                <Route path="/#Licencia_conducir" element={<DriveLicence />} />
+                <Route path='/#Habilitacion_comercial' element={<CommerceEnable />} />
+                <Route path='/#Obras_particulares' element={<PrivateConstruction />} />
+            </Routes> */}
+
+        </Container>
+
+
+
+
+    )
+}
