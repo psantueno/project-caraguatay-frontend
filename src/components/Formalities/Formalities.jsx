@@ -1,15 +1,18 @@
 import {FormalitiesBtns} from '../../assets/data/FormalitiesBtns'
 import {HistoryBtns} from '../../assets/data/HistoryBtns'
 import { Container, Row } from 'react-bootstrap'
-import { FormalitiesButtonSquareList } from '../buttonsSquare/FormalitiesButtonSquareList'
 import {ButtonSquareList} from '../buttonsSquare/ButtonSquareList'
-import '../../../src/index.css'
+import { MacroClick, DriveLicence, CommerceEnable, PrivateConstruction } from '../Formalities';
 import { useState } from 'react'
 
 
-export function Formalities() {
+export const Formalities = () => {
 
-  const [display, setDisplay] = useState(false)
+  const [display, setDisplay] = useState()
+
+  const changeDisplay = ({target}) => {
+    setDisplay(target.id)
+  }
 
   return (
     <>
@@ -18,18 +21,18 @@ export function Formalities() {
         <h1>Guía de Trámites</h1>
 
 
-        <nav onClick={() => setDisplay('')}>      
-            <ButtonSquareList buttons={FormalitiesBtns} />
-        </nav>
+              
+            <ButtonSquareList changeDisplay={changeDisplay} buttons={FormalitiesBtns} />
+        
+        <Container>
 
         
 
-        <Container>
 
           {display === "#MacroClick" && <MacroClick />}
-          {/* {(display === "#Licencia_conducir") && <DriveLicence />}
+          {(display === "#Licencia_conducir") && <DriveLicence />}
           {(display === '#Habilitacion_comercial') && <CommerceEnable />}
-          {(display === '#Obras_particulares') && <PrivateConstruction />} */}
+          {(display === '#Obras_particulares') && <PrivateConstruction />}
 
           </Container>
 

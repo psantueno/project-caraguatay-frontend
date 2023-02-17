@@ -1,18 +1,16 @@
-import {CommerceEnable, DriveLicence, MacroClick, PrivateConstruction} from '../../components/Formalities'
-
 
 export const FormalitiesBtns= [
     {
         title: "MACRO CLICK",
-        icon: <i class="fas fa-map-marker-alt"></i>,
-        url: <MacroClick/>,
-        id:'#MacroClick'
+        icon: <i className="fas fa-map-marker-alt"></i>,
+        id:'#MacroClick',
+        url: "#MacroClick"
        
     },
     {
         title: "LICENCIA DE CONDUCIR",
         icon: <i className="fas fa-id-card"></i>,
-        url:<DriveLicence/>,
+        url: "#Licencia_conducir",
         id: '#Licencia_conducir',
       
     },
@@ -20,7 +18,7 @@ export const FormalitiesBtns= [
     {
         title: "HABILITACION COMERCIAL",
         icon: <i className="fas fa-store"></i>,
-        url:<CommerceEnable/> ,
+        url: "#Habilitacion_comercial",
         id: '#Habilitacion_comercial'
    
     },
@@ -28,7 +26,7 @@ export const FormalitiesBtns= [
     {
         title: "OBRAS PARTICULARES",
         icon:<i className="fas fa-building"></i>,
-        url: <PrivateConstruction/> ,
+        url: "#Obras_particulares",
         id: '#Obras_particulares'
    
     },

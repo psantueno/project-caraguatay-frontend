@@ -3,7 +3,7 @@
 import { ButtonToolbar, Container , Row} from 'react-bootstrap';
 import ButtonSquare from './ButtonSquare';
 
-export const ButtonSquareList = ({ buttons }) => {
+export const ButtonSquareList = ({ buttons, changeDisplay=null }) => {
 
     return (
 
@@ -12,7 +12,7 @@ export const ButtonSquareList = ({ buttons }) => {
 
                 <ButtonToolbar>
 
-                    <nav className='btn-toolbar'>
+                    <nav onClick={ (event) => changeDisplay(event) } className='btn-toolbar'>
 
                         {
                             buttons.map((btn) => (
@@ -21,9 +21,9 @@ export const ButtonSquareList = ({ buttons }) => {
                                 className="button-square"
                                 icon={btn.icon}
                                 title={btn.title}
-                                url={btn.url}
+                                url={btn.url ? btn.url : null}
                                 key={btn.title}
-                                id={btn.id}
+                                id={btn.id ? btn.id : null}
                                 />
                                 ))
                             }
