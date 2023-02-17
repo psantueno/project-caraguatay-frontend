@@ -3,32 +3,29 @@ export const FormalitiesBtns= [
     {
         title: "MACRO CLICK",
         icon: <i className="fas fa-map-marker-alt"></i>,
-        id:'#MacroClick',
-        url: "#MacroClick"
+        url: "/macroClick",
+        id: "macroClick"
        
     },
     {
         title: "LICENCIA DE CONDUCIR",
         icon: <i className="fas fa-id-card"></i>,
-        url: "#Licencia_conducir",
-        id: '#Licencia_conducir',
-      
+        url: "/licencia_conducir",
+        id: 'licencia_conducir'
     },
     
     {
         title: "HABILITACION COMERCIAL",
         icon: <i className="fas fa-store"></i>,
-        url: "#Habilitacion_comercial",
-        id: '#Habilitacion_comercial'
-   
+        url: "/habilitacion_comercial",
+        id: 'habilitacion_comercial'
     },
     
     {
         title: "OBRAS PARTICULARES",
         icon:<i className="fas fa-building"></i>,
-        url: "#Obras_particulares",
-        id: '#Obras_particulares'
-   
+        url: "/obras_particulares",
+        id: 'obras_particulares'
     },
     
 ];

@@ -12,6 +12,7 @@ export const Formalities = () => {
 
   const changeDisplay = ({target}) => {
     setDisplay(target.id)
+    console.log(target.id)
   }
 
   return (
@@ -29,10 +30,10 @@ export const Formalities = () => {
         
 
 
-          {display === "#MacroClick" && <MacroClick />}
-          {(display === "#Licencia_conducir") && <DriveLicence />}
-          {(display === '#Habilitacion_comercial') && <CommerceEnable />}
-          {(display === '#Obras_particulares') && <PrivateConstruction />}
+          {display === "macroClick" && <MacroClick />}
+          {(display === "licencia_conducir") && <DriveLicence />}
+          {(display === 'habilitacion_comercial') && <CommerceEnable />}
+          {(display === 'obras_particulares') && <PrivateConstruction />}
 
           </Container>
 

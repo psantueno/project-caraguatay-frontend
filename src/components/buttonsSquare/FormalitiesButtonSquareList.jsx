@@ -42,10 +42,10 @@ export const FormalitiesButtonSquareList = ({ buttons }) => {
                     }
                     <Container>
 
-                        {(display === '#MacroClick') && <MacroClick />}
-                        {(display === "#Licencia_conducir") && <DriveLicence />}
-                        {(display === '#Habilitacion_comercial') && <CommerceEnable />}
-                        {(display === '#Obras_particulares') && <PrivateConstruction />}
+                        {(display === 'macroClick') && <MacroClick />}
+                        {(display === "licencia_conducir") && <DriveLicence />}
+                        {(display === 'habilitacion_comercial') && <CommerceEnable />}
+                        {(display === 'obras_particulares') && <PrivateConstruction />}
 
                     </Container>
 
