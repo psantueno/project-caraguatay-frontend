@@ -14,9 +14,8 @@ export const Historia = () => {
 
         <h1>Historia</h1>
 
-        <Row className='mb-5'>
           <ButtonSquareList buttons={HistoryBtns} />
-        </Row>
+        
 
         <Routes>
           <Route path="escudo" element={<Shield />} />

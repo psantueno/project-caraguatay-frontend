@@ -2,7 +2,7 @@
 
 import { NavLink} from 'react-router-dom';
 
-const ButtonSquare = ({ icon, title, url, id }) => {
+const ButtonSquare = ({ icon, title, url, id=null }) => {
   return (
 
     <NavLink className={({ isActive }) => `${isActive ? 'link-activated' : 'link-btn-square'}`} to={url} >
