@@ -10,9 +10,9 @@ export const Formalities = () => {
 
   const [display, setDisplay] = useState()
 
-  const changeDisplay = ({target}) => {
-    setDisplay(target.id)
-    console.log(target.id)
+  const changeDisplay = (event) => {
+    setDisplay(event?.target.id)
+    console.log(event.target.id)
   }
 
   return (
@@ -30,7 +30,7 @@ export const Formalities = () => {
         
 
 
-          {display === "macroClick" && <MacroClick />}
+          {(display === "macroClick") && <MacroClick />}
           {(display === "licencia_conducir") && <DriveLicence />}
           {(display === 'habilitacion_comercial') && <CommerceEnable />}
           {(display === 'obras_particulares') && <PrivateConstruction />}

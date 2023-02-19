@@ -12,7 +12,7 @@ export const ButtonSquareList = ({ buttons, changeDisplay=null }) => {
 
                 <ButtonToolbar>
 
-                    <nav onClick={ (event) => changeDisplay(event) } className='btn-toolbar'>
+                    <nav onClick={  changeDisplay } className='btn-toolbar'>
 
                         {
                             buttons.map((btn) => (

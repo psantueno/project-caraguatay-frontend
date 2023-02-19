@@ -5,12 +5,14 @@ import { NavLink} from 'react-router-dom';
 const ButtonSquare = ({ icon, title, url, id=null }) => {
   return (
 
-    <NavLink className={({ isActive }) => `${isActive ? 'link-activated' : 'link-btn-square'}`} to={url} >
-      <div id={id}  >
-        <div className="btn-square-icon">
+    <NavLink className={({ isActive }) => `${isActive ? 'link-activated' : 'link-btn-square'}`} to={url} id={id}>
+      <div  >
+        <h6 className="btn-square-text"  id={id} >
+        <div className="btn-square-icon" id={id}>
           {icon}
         </div>
-        <h6 className="btn-square-text"  id={id} >{title}</h6>
+          {title}
+        </h6>
       </div>
     </NavLink>
   )

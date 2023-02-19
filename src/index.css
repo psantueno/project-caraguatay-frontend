@@ -359,13 +359,13 @@ a.link-phones:hover {
 /* START Buttons*/
 
 .btn-square-icon {
-  width: 100%;
-  font-size: 22px;
-  text-align: center;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-
+  width: 100% !important;
+  font-size: 20px !important;
+  text-align: center !important;
+  /* display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important; */
+    
 }
 
 h6.btn-square-text {
