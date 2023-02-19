@@ -17,8 +17,14 @@ a {
 .banner-home{
   margin-top: 20px !important;
   margin-bottom: 10px !important;
-  height:180px !important;
-  width: 100%;
+  height:330px !important;
+  width: 900px !important;
+  max-width: 90% !important;
+  max-height: 90% !important;
+  margin: auto !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  
 
 }
 

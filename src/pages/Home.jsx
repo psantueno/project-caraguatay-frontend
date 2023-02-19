@@ -22,7 +22,7 @@ export const Home = () => {
       <Container>
         <h1> Ultimas noticias </h1>
 
-        <Row>
+        <Row className='mb-5'>
           <NewsItem />
         </Row>
 
