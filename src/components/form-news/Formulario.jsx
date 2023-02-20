@@ -3,6 +3,7 @@ import { Button, Form, Container, Col, Table } from 'react-bootstrap';
 import { useForm } from './useForm';
 import dayjs from "dayjs";
 
+
 const initialForm = {
   date: dayjs().format("YYYY-MM-DD"),
   title: "",
@@ -269,7 +270,7 @@ export const Formulario = () => {
                       return (
                         <div className='box-individual-preview' key={index}>
                           <img src={URL.createObjectURL(file)} alt={file.name} className="image-individual" />
-                          <Button onClick={() => handleDelete(index)} variant="outline-danger" size="sm">
+                          <Button onClick={() => handleDelete(index)} size="sm">
                             <i className="fas fa-trash-alt"></i>
                           </Button>
                         </div>
@@ -302,10 +303,10 @@ export const Formulario = () => {
 
           </Form.Group>
 
-          <Button className='m-2' type="submit" variant='primary' disabled={files.length > 10} >
+          <Button className='m-2' type="submit"  disabled={files.length > 10} >
             Confirmar
           </Button>
-          <Button className='m-2' type="reset" variant='danger' onClick={handleCancel}>
+          <Button className='m-2' type="reset"  onClick={handleCancel}>
             Borrar
           </Button>
         </Form>
