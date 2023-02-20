@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { Button, Form, Container, Col, Table } from 'react-bootstrap';
 import { useForm } from './useForm';
 import dayjs from "dayjs";
-import {DeleteButton} from '../buttons/DeleteButton'
+import { DeleteButton } from '../buttons/DeleteButton'
 
 
 const initialForm = {
@@ -271,9 +271,13 @@ export const Formulario = () => {
                       return (
                         <div className='box-individual-preview' key={index}>
                           <img src={URL.createObjectURL(file)} alt={file.name} className="image-individual" />
+<<<<<<< HEAD
                           <DeleteButton onClick={() => handleDelete(index)} size="sm">
                             {/* <i className="fas fa-trash-alt"></i> */}
                           </DeleteButton>
+=======
+                          <DeleteButton fx={handleDelete} arg={index} size="sm" />
+>>>>>>> 5621bae086ed27ea94d7e02d76149494848a7722
                         </div>
                       )
                     })
