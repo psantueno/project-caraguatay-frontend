@@ -1,7 +1,7 @@
 import React from 'react';
 import './buttons.css';
 
-const EditButton = () => {
+export const EditButton = () => {
   return (
       <button className='admin-button'>
        <i className="fas fa-pen"></i>
@@ -9,6 +9,6 @@ const EditButton = () => {
   )
 }
 
-export default EditButton;
+
 
 

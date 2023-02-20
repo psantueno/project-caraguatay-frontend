@@ -2,14 +2,14 @@ import React from 'react';
 import './buttons.css';
 
 
-const DeleteButton = () => {
+export const DeleteButton = () => {
   return (
-      <button className='admin-button'>
+      <button className='admin-button' type="button">
         <i className="fas fa-trash-alt"></i>
       </button>  
   )
 }
 
-export default DeleteButton;
+ 
 
 

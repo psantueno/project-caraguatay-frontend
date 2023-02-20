@@ -81,6 +81,6 @@ export const useForm = (initialForm = {}, validateForm = {}) => {
     handleSubmit,
     loading,
     errors,
-    ...form,
+    ...form
   }
 }
