@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Button, Form, Container, Col, Table } from 'react-bootstrap';
+import { Button, Form, Container, Col, Row, Table, Alert } from 'react-bootstrap';
 import { useForm } from './useForm';
 import dayjs from "dayjs";
 import { DeleteButton } from '../buttons/DeleteButton'
@@ -87,8 +87,10 @@ export const Formulario = () => {
     handleMouseup,
     handleDelete,
     handleSubmit,
+    setShowMessage,
     files,
-    errors
+    errors,
+    showMessage,
   } = useForm(initialForm, validationsForm)
 
 
@@ -106,8 +108,23 @@ export const Formulario = () => {
   };
 
 
+
   return (
     <>
+      <Alert show={showMessage} variant="primary" className="mt-2">
+        <Row>
+          <Col>
+            <p>La publicación se ha creado correctamente.</p>
+          </Col>
+          <Col className="d-flex justify-content-end">
+            <Button 
+              onClick={() => setShowMessage(false)}>
+              Cerrar
+            </Button>  
+          </Col>
+        </Row>
+      </Alert>
+
       <Container className='mt-4'>
         <h4>Crear noticia</h4>
       </Container>
@@ -271,13 +288,7 @@ export const Formulario = () => {
                       return (
                         <div className='box-individual-preview' key={index}>
                           <img src={URL.createObjectURL(file)} alt={file.name} className="image-individual" />
-<<<<<<< HEAD
-                          <DeleteButton onClick={() => handleDelete(index)} size="sm">
-                            {/* <i className="fas fa-trash-alt"></i> */}
-                          </DeleteButton>
-=======
                           <DeleteButton fx={handleDelete} arg={index} size="sm" />
->>>>>>> 5621bae086ed27ea94d7e02d76149494848a7722
                         </div>
                       )
                     })

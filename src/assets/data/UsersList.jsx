@@ -6,21 +6,24 @@ export const UsersList= [
     email: "maria.gainza@gmail.com",
     name: "María" ,
     lastName: 'Gainza',
-    rol: 'Administrador/a',
+    role: 'Administrador/a',
+    id: 1,
 },
 {
     avatar: [Avatar],
     email: "ada.lovelace@gmail.com",
     name: "Ada" ,
     lastName: 'Lovelace',
-    rol: 'Administrador/a',
+    role: 'Administrador/a',
+    id: 2,
 },
 {
     avatar: [Avatar],
     email: "fito.paez@gmail.com",
     name: "Fito" ,
     lastName: 'Paez',
-    rol: 'Administrador/a',
+    role: 'Administrador/a',
+    id: 3,
 },
 
 

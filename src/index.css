@@ -10,6 +10,21 @@ a {
     margin-top: 5px;
    
 }
+/* Titles for forms */
+.form-title {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.form-link {
+  text-decoration: none;
+  color: #000;
+}
+
+.form-link:hover {
+  text-decoration: none;
+  color: #315C94;
+}
 
 
 /* footer */
