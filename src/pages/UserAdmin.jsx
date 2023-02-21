@@ -15,19 +15,19 @@ export const UserAdmin = () => {
 
     <>
     <Container className="mt-4">
-        <h4 className="mt-5">Administración de usuarios</h4>
+        <h4 className="mt-4 form-title" >Administración de usuarios</h4>
         <p className="mt-3">Cree, modifique o elimine usuarios administradores del sitio desde aquí.</p>
     </Container>
 
    
 
     <Container className="mt-4">
-        <Col className="justify-items-end">
+        <Col className="text-end">
             <Button onClick={handleShow}><i className="fas fa-user-plus" ></i> Crear usuario</Button>
         </Col>
 
         <Row className="mb-2 mt-2">
-            <h5 >Lista de usuarios</h5>
+            <h5 className="form-title">Lista de usuarios</h5>
         </Row>
     </Container>
 

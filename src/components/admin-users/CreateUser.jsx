@@ -23,7 +23,9 @@ export const CreateUser = ({ show, onClose }) => {
 
                 <Modal show={show} onHide={onClose}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Crear un nuevo usuario administrador</Modal.Title>
+                        <Modal.Title>
+                            <h3 className="form-title mt-4">Crear un nuevo usuario administrador</h3>
+                        </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <p>Complete los datos requeridos para crear un nuevo usuario administrador.</p>

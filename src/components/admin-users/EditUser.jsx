@@ -9,7 +9,9 @@ const EditUser = ({ show, onClose, userData }) => {
             <Form >
                 <Modal show={show} onHide={onClose}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Modificar usuario administrador</Modal.Title>
+                        <Modal.Title>
+                            <h4 className="form-title mt-4"> Modificar usuario administrador</h4>
+                        </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                     <Form.Group className="mb-3" controlId="email">
