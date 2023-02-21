@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import './Formulario.css';
 
-export const useForm = (initialForm = {}, validateForm = {}) => {
+export const useForm = (initialForm = {}, validateForm = {}, handleShow) => {
 
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
-
+  const [showMessage, setShowMessage] = useState(false);
 
   const handleChange = ({ target }) => {
 
@@ -51,19 +51,22 @@ export const useForm = (initialForm = {}, validateForm = {}) => {
     }));
   }
 
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors(validateForm(form));
 
     if (Object.keys(errors).length === 0) {
-      alert("Procesando envío de la publicación");
       setLoading(true);
-      console.log(form)
+      console.log(form);
+      setShowMessage(true);
       setForm({
         ...initialForm,
         files: []
       });
     } else {
+      setShowMessage(false);
       alert("Revise los errores del formulario.");
       return;
     }
@@ -79,8 +82,10 @@ export const useForm = (initialForm = {}, validateForm = {}) => {
     handleMouseup,
     handleDelete,
     handleSubmit,
+    setShowMessage,
     loading,
     errors,
-    ...form,
+    showMessage,
+    ...form
   }
 }

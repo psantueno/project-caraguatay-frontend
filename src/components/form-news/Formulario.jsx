@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Button, Form, Container, Col, Table } from 'react-bootstrap';
+import { Button, Form, Container, Col, Row, Table, Alert } from 'react-bootstrap';
 import { useForm } from './useForm';
 import dayjs from "dayjs";
 import { DeleteButton } from '../buttons/DeleteButton'
@@ -87,8 +87,10 @@ export const Formulario = () => {
     handleMouseup,
     handleDelete,
     handleSubmit,
+    setShowMessage,
     files,
-    errors
+    errors,
+    showMessage,
   } = useForm(initialForm, validationsForm)
 
 
@@ -106,8 +108,23 @@ export const Formulario = () => {
   };
 
 
+
   return (
     <>
+      <Alert show={showMessage} variant="primary" className="mt-2">
+        <Row>
+          <Col>
+            <p>La publicación se ha creado correctamente.</p>
+          </Col>
+          <Col className="d-flex justify-content-end">
+            <Button 
+              onClick={() => setShowMessage(false)}>
+              Cerrar
+            </Button>  
+          </Col>
+        </Row>
+      </Alert>
+
       <Container className='mt-4'>
         <h4>Crear noticia</h4>
       </Container>
