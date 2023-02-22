@@ -5,6 +5,11 @@ a {
     text-decoration: none !important;
 }
 
+.app {
+  display: flex;
+  flex-direction: column;
+}
+
 .main-title {
     font-size: 25px;
     margin-top: 5px;
@@ -34,16 +39,6 @@ a {
   border-top-style: solid;
   border-width: thick;
   color: #315C94;
-}
-
-
-body {
-  margin: 0;
-  display: flex;
-  align-items: flex-start;
-  /* min-width: 320px;
-  min-height: 100vh; */
-  
 }
 
 .phones {
@@ -158,6 +153,15 @@ a.link-phones:hover {
 
 /* END FOOTER */
 
+/* START NEWS */
+
+.container-news {
+  display: flex;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  justify-content: center;
+}
+
 .card-lg {
   margin-left: 0 !important;
   padding: 0 !important;
@@ -265,18 +269,14 @@ a.link-phones:hover {
   height: 460px !important;
 
 }
+/* END NEWS */
 
 
-/* CULTURA Y TURISMO */
+/* START CULTURA Y TURISMO */
 
 
-.body-culturayturismo {
-  display: flex;
-  flex-direction: column;
-  
-  /* margin-top: 70px !important; */
- 
-
+.container-pages {
+  margin-top: 80px;
 }
 /* 
 .titles-subtitles {

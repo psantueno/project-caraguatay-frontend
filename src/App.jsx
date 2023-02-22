@@ -1,16 +1,19 @@
-import { Header } from './components/header/Header';
-import { Footer } from './Footer';
-import { AppRouter } from './router/AppRouter'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container } from 'react-bootstrap';
+import { Header } from './components/header/Header';
+import { Footer } from './components/footer/Footer';
+import { AppRouter } from './router/AppRouter'
 
 
 export const App = () => {
 
   return (
-    <div>
-      <Header/>
-        <AppRouter/>     
-      <Footer/>
+    <div className="app">
+      <Header />
+      <Container className='container-pages'>
+        <AppRouter />
+      </Container>
+      <Footer />
     </div>
   )
 }
