@@ -381,7 +381,7 @@ h6.btn-square-text {
   overflow-wrap: anywhere;
 }
 
-a.link-btn-square {
+a.link-btn-square, .link-btn-square {
   -webkit-user-select: none !important;
   user-select: none;
   background-color: #C4D6DE;
@@ -402,14 +402,14 @@ a.link-btn-square {
   text-decoration: none !important;
 }
 
-a.link-btn-square:hover {
+a.link-btn-square:hover, .link-btn-square:hover {
   background-color: #9DB1C6;
   box-shadow: 1px 5px 5px rgba(49, 92, 148, 0.8) !important;
   transform: scale(1.03);
   color: #2d5a94;
 }
 
-a.link-activated {
+a.link-activated , .link-activated{
 
   text-decoration: none !important;
 
@@ -417,7 +417,7 @@ a.link-activated {
   user-select: none;
   background-color: #d2d5d8;
   color: #626b76;
-   /* width: 47%;  option traditional */
+   width: 47%;/* option traditional*/
   flex: 10%;
   height: 80px;
   padding: 3px;
@@ -433,12 +433,13 @@ a.link-activated {
 
 }
 
-a.link-activated:hover {
+a.link-activated:hover, .link-activated:hover {
   color: #626b76;
 }
 
 .btn-toolbar {
   justify-content: center !important;
+  cursor: pointer;
 }
 
 /* START CULTURA Y TURISMO - CAMPING */

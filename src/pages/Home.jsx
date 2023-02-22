@@ -13,11 +13,14 @@ export const Home = () => {
           <BannerHome />
         </Row>
 
-        
       </Container>
-          <Formalities />
-          
-       
+
+      <Container>
+        <Formalities />
+
+      </Container>
+
+
 
       <Container>
         <h1> Ultimas noticias </h1>

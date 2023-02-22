@@ -1,19 +1,22 @@
 import {FormalitiesBtns} from '../../assets/data/FormalitiesBtns'
-import {HistoryBtns} from '../../assets/data/HistoryBtns'
 import { Container, Row } from 'react-bootstrap'
-import {ButtonSquareList} from '../buttonsSquare/ButtonSquareList'
+import { ButtonNoUrlList } from '../buttonsWithoutURL/ButtonNoUrlList'
 import { MacroClick, DriveLicence, CommerceEnable, PrivateConstruction } from '../Formalities';
 import { useState } from 'react'
 
 
 export const Formalities = () => {
+  
 
   const [display, setDisplay] = useState()
+  const [isActive, setIsActive] = useState(false)
 
   const changeDisplay = (event) => {
-    setDisplay(event?.target.id)
-    console.log(event.target.id)
+   
+   setDisplay(event?.target.id)
+   console.log(event.target.id)
   }
+
 
   return (
     <>
@@ -21,22 +24,17 @@ export const Formalities = () => {
 
         <h1>Guía de Trámites</h1>
 
-
-              
-            <ButtonSquareList changeDisplay={changeDisplay} buttons={FormalitiesBtns} />
+            <ButtonNoUrlList changeDisplay={changeDisplay} buttons={FormalitiesBtns} isActive={()=>setIsActive(true)}/>
         
         <Container>
 
         
-
-
-          {(display === "macroClick") && <MacroClick />}
-          {(display === "licencia_conducir") && <DriveLicence />}
-          {(display === 'habilitacion_comercial') && <CommerceEnable />}
-          {(display === 'obras_particulares') && <PrivateConstruction />}
+          {( display === "macroClick") && <MacroClick />}
+          {( display === "licencia_conducir") && <DriveLicence />}
+          {( display === 'habilitacion_comercial') && <CommerceEnable />}
+          {( display === 'obras_particulares') && <PrivateConstruction />}
 
           </Container>
-
 
 
       </Container>

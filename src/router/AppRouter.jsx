@@ -10,8 +10,7 @@ export const AppRouter = () => {
   return (
     <>
       <Routes>
-        <Route exact path="/*" element={<Home />} ></Route>
-         {/* <Route path="/*" element={<Formalities />} ></Route>   */}
+        <Route exact path="/" element={<Home />} ></Route>
         <Route exact path="/comunicados" element={<Comunicados />} ></Route>
         <Route exact path="/deportes" element={<Deporte />} ></Route>
         <Route exact path="culturaTurismo/*" element={<CulturaTurismo />}></Route>
@@ -19,6 +18,8 @@ export const AppRouter = () => {
         <Route exact path="/puntoDigital" element={<PuntoDigital />} ></Route>
         <Route exact path="/formulario" element={<Formulario />} ></Route>
         <Route exact path="/noticias/1" element={<NewsDetail />} ></Route>
+   
+
       </Routes>
     </>
   )

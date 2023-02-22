@@ -4,13 +4,13 @@ import { useState } from 'react';
 import { ButtonToolbar, Container  } from 'react-bootstrap';
 import { MacroClick, DriveLicence, CommerceEnable, PrivateConstruction } from '../Formalities';
 import ButtonSquare from './ButtonSquare';
-// import { Routes, Route } from 'react-router-dom';
+
 
 export const FormalitiesButtonSquareList = ({ buttons }) => {
 
 
     const [display, setDisplay] = useState(false)
-    // console.log(display + ' btnlist')
+
 
     return (
 
@@ -31,13 +31,9 @@ export const FormalitiesButtonSquareList = ({ buttons }) => {
                                         title={btn.title}
                                         key={btn.title}
                                         url={btn.id}
-
                                     />
-
                                 </nav>
-
                             </>
-
                         ))
                     }
                     <Container>
@@ -51,13 +47,6 @@ export const FormalitiesButtonSquareList = ({ buttons }) => {
 
                 </nav>
             </ButtonToolbar>
-
-            {/* <Routes>
-                <Route path='/#MacroClick' element={<MacroClick />} />
-                <Route path="/#Licencia_conducir" element={<DriveLicence />} />
-                <Route path='/#Habilitacion_comercial' element={<CommerceEnable />} />
-                <Route path='/#Obras_particulares' element={<PrivateConstruction />} />
-            </Routes> */}
 
         </Container>
 
