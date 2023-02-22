@@ -1,39 +1,10 @@
-import React, { useState } from 'react';
-import './Menu.css';
-
-import { Navbar, Nav, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { useHamburguer } from './hooks/useHamburguer';
 
 
+export const MenuHamburguer = () => {
 
-
-export const Menu = () => {
-
-    const [open, setOpen] = useState(false);
-    const [shouldCloseMenu, setShouldCloseMenu] = useState(true);
-
-    const handleClick = () => {
-        setOpen(!open);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    }
-
-    const handleLinkClick = () => {
-        setOpen(!open);
-    }
-
-    const handleBlur = (e) => {
-        const { currentTarget, relatedTarget } = e;
-
-        if (currentTarget.contains(relatedTarget)) {
-            setShouldCloseMenu(false);
-        } else {
-            setShouldCloseMenu(true);
-            setOpen(false);
-        }
-    }
+    const { open, handleClick, handleLinkClick, handleBlur } = useHamburguer({})
 
     return (
         <>

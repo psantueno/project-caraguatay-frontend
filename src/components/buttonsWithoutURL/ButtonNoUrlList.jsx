@@ -5,6 +5,7 @@ import { ButtonToolbar, Container, Row } from 'react-bootstrap';
 import ButtonNoUrl from './ButtonNoUrl';
 
 export const ButtonNoUrlList = ({ buttons, changeDisplay = null }) => {
+    
     const [activeButton, setActiveButton] = useState(null);
 
     const handleClick = (id) => {

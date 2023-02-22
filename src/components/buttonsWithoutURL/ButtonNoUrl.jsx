@@ -1,9 +1,5 @@
 /* componente encargado de mostrar cada botón*/
 
-import { useEffect, useState } from 'react';
-import { Button } from 'react-bootstrap';
-import { NavLink, Link } from 'react-router-dom';
-
 const ButtonNoUrl = ({ icon, title, id = null, onClick, isActive }) => {
 
   const handleClick = () => {
@@ -12,14 +8,10 @@ const ButtonNoUrl = ({ icon, title, id = null, onClick, isActive }) => {
 
   const className = isActive ? 'link-activated' : 'link-btn-square';
 
-
-
   return (
 
     <div className={className} onClick={handleClick} id={id}>
-
-
-      <div  >
+      <div>
         <h6 className="btn-square-text" id={id} >
           <div className="btn-square-icon" id={id}>
             {icon}
