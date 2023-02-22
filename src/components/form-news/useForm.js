@@ -1,25 +1,32 @@
 import { useState } from 'react';
-import './Formulario.css'
+import './Formulario.css';
 
-export const useForm = (initialForm = {}, validateForm = {}) => {
+export const useForm = (initialForm = {}, validateForm = {}, handleShow) => {
 
   const [form, setForm] = useState(initialForm);
-  const [files, setFiles] = useState([]); // almacena los archivos seleccionados.
-  const [errors, setErrors] = useState({}); // almacena los errores
+  const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
-
+  const [showMessage, setShowMessage] = useState(false);
 
   const handleChange = ({ target }) => {
+
     const { name, value } = target;
-    setForm({
-      ...form,
+    setForm(prevState => ({
+      ...prevState,
       [name]: value
-    });
+    }));
   }
 
   const handleFiles = (e) => {
-    setFiles(Array.from(e.target.files));
-    setErrors(validateForm(form, e));
+
+    const { files } = e.target;
+    setForm(prevState => {
+      const newFiles = Array.from(files);
+      return {
+        ...prevState,
+        files: prevState.files.concat(newFiles)
+      };
+    });
   };
 
   const handleBlur = (e) => {
@@ -38,51 +45,47 @@ export const useForm = (initialForm = {}, validateForm = {}) => {
   }
 
   const handleDelete = (index) => {
-    setFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
+    setForm(prevForm => ({
+      ...prevForm,
+      files: prevForm.files.filter((_, i) => i !== index)
+    }));
   }
 
-  const handleCancel = () => {
-    setForm(initialForm);
-  };
+
 
   const handleSubmit = (e) => {
-    handleChange(e);
     e.preventDefault();
     setErrors(validateForm(form));
 
-
-    if (files.length === 0 || files.length > 10) {
-      alert(`Cantidad mínima de archivos: 1 (uno). Seleccionados: ${files.length}`);
-      return;
-
+    if (Object.keys(errors).length === 0) {
+      setLoading(true);
+      console.log(form);
+      setShowMessage(true);
+      setForm({
+        ...initialForm,
+        files: []
+      });
     } else {
-      if (Object.keys(errors).length === 0) {
-        alert("Procesando envío de la publicación");
-        setLoading(true); //para poner un loader y usar un fetch
-        console.log(form)
-        console.log(files);
-        setFiles([]);
-        setForm(initialForm);
-      } else {
-        alert("Revise los errores del formulario.");
-        return;
-      }
+      setShowMessage(false);
+      alert("Revise los errores del formulario.");
+      return;
     }
   }
 
   return {
-    ...form,
     form,
+    setForm,
     handleChange,
     handleFiles,
     handleBlur,
     handleKeyUp,
     handleMouseup,
     handleDelete,
-    handleCancel,
     handleSubmit,
-    files,
+    setShowMessage,
     loading,
-    errors
+    errors,
+    showMessage,
+    ...form
   }
 }
