@@ -14,9 +14,9 @@ export const CulturaTurismo = () => {
 
         <h1>Cultura y Turismo</h1>
 
-        <Row className='mb-5'>
+       
           <ButtonSquareList buttons={ CultureBtns }/>
-        </Row>
+        
 
         <Routes>
           <Route path="ubicacion" element={<Location />} />

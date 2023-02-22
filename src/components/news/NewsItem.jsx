@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card, Container } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import photo1 from '../../assets/news.jpg'
+import photo1 from '../../assets/images/news.jpg'
 import '../../index.css';
 
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container, Row } from 'react-bootstrap'
-import ShieldPhoto from '../../../src/assets/escudoCaraguatay.png'
+import ShieldPhoto from '../../../src/assets/images/escudoCaraguatay.png'
 
 
 export const Shield = () => {
