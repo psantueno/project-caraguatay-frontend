@@ -395,10 +395,9 @@ a.link-phones:hover {
 }
 
 .slide-moreNews {
-
   height: 460px !important;
-
 }
+
 /* END NEWS */
 
 
@@ -587,6 +586,138 @@ img {
 
 /* END CULTURA Y TURISMO - CAMPING */
 
+/* START NEWS FORM */
+
+.form-images-row {
+  width: 39% !important;
+  flex-wrap: nowrap !important;
+  margin: 2px !important;
+  align-items: baseline
+}
+
+.form-image {
+  width: 60px !important;
+  margin: 2px;
+}
+
+.form-field-name {
+  font-weight: bold;
+}
+
+.container-upload-image {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: #d2d5d8;
+  margin-bottom: 10px;
+}
+
+.box-upload {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 60px;
+  border-style: dotted;
+  cursor: pointer;
+}
+
+.icon-camera {
+  cursor: pointer;
+}
+
+.table {
+  border-collapse: collapse;
+  border: 1px solid;
+  border-color: black !important;
+}
+
+.row-table { 
+  border: 1px solid;
+}
+
+.images-preview {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.box-individual-preview {
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.image-individual {
+  margin-right: 5px;
+  width: 40px;
+  height: 40px;
+  border-radius: 0;
+}
+
+.images-msg-error {
+  width: 100%;
+  margin-top: 0.25rem;
+  margin-bottom: 0.45rem;
+  font-size: .875em;
+  color: #dc3545;
+}
+
+.images-msg-ok {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: .875em;
+  color: #198754;
+}
+
+.btn-primary {
+  transition: all 500ms ;
+  --bs-btn-color: #315C94 !important;
+  --bs-btn-bg: #fff !important;
+  --bs-btn-border-color: #315C94 !important;
+  --bs-btn-hover-color: #fff !important;
+  --bs-btn-hover-border-color: #fff !important;
+  --bs-btn-hover-bg: #315C94 !important;
+  --bs-btn-hover-border-color: #315C94 !important;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #fff !important;
+  --bs-btn-active-border-color: #315C94 !important;
+  --bs-btn-disabled-color: #a2a5a7  !important;
+  --bs-btn-disabled-bg: #ffffff   !important;
+  --bs-btn-disabled-border-color: #a2a5a7  !important;
+}
+
+
+.btn {
+  font-weight: bold !important;
+  border-radius: 50px !important;
+}
+
+.alert-file-not-image {
+  background-color: #ffffff !important;
+  border-style: none !important;
+}
+
+.btn-close-alert {
+  color: #dc3545;;
+  border-color: #dc3545;
+  /* width: 60px;
+    height: 50px; */
+  
+  transition: all 500ms;
+}
+
+.btn-close-alert:hover {
+  background-color: #dc3545;;
+  border-color: #ffffff;
+  color:  #ffffff;
+}
+  
+
+/* END NEWS FORM */
+
 /* Add rounded corners to the top left and the top right corner of the image */
 
 /* .row{
@@ -600,11 +731,11 @@ img {
 
 
 /* START MEDIA QUERIES */
-@media screen and (min-width:568px) {}
+/* @media screen and (min-width:568px) {}
 
 
 
-@media screen and (min-width:768px) {}
+@media screen and (min-width:768px) {} */
 
 
 /* @media screen and (min-width: 760px) {
@@ -667,7 +798,3 @@ h6.btn-square-text {
     max-width: 576px;
   
     } */
-
-
-
-/* @media screen and (min-width:576px) {} */

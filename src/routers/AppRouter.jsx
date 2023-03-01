@@ -1,6 +1,6 @@
 import { Routes, Route} from 'react-router-dom';
 import { NewsDetail } from '../components/news/NewsDetail';
-import { Formulario } from '../components/form-news/Formulario';
+import { NewsForm } from '../components/form-news/NewsForm';
 
 import { Comunicados, CulturaTurismo, Deporte, Historia, PuntoDigital, UserAdmin } from '../pages';
 import { Home } from '../pages/Home';
@@ -22,7 +22,7 @@ export const AppRouter = () => {
         <Route exact path="cultura-turismo/*" element={<CulturaTurismo />}></Route>
         <Route exact path="/historia/*" element={<Historia />} ></Route>
         <Route exact path="/punto-digital" element={<PuntoDigital />} ></Route>
-        <Route exact path="/formulario" element={<Formulario />} ></Route>
+        <Route exact path="/formulario" element={<NewsForm />} ></Route>
         <Route exact path="/noticias/1" element={<NewsDetail />} ></Route>
         <Route exact path="/admin/usuarios" element={<UserAdmin />} ></Route>
 
