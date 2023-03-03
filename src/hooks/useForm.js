@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { validations } from '../components/helpers/validations';
 
 /* 
 Este hook recibe: 
@@ -11,7 +12,7 @@ La funcion "FormValidation" recibe los datos del form, eventos, inputs y errores
 */
 
 
-export const useForm = (initialForm = {}, FormValidations = {}, inputs, handleShow) => {
+export const useForm = (initialForm = {}, FormValidations = {}, inputs={}, handleShow={}) => {
 
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
@@ -19,7 +20,6 @@ export const useForm = (initialForm = {}, FormValidations = {}, inputs, handleSh
   const [showMessage, setShowMessage] = useState(false);
 
   const handleChange = ({target}) => {
-
     const { name, value } = target;
     setForm(prevState => ({
       ...prevState,
