@@ -3,8 +3,8 @@ import React from 'react'
 import { Card, Container, Button, Carousel, Col , Row} from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import {ButtonGeneric} from '../ButtonGeneric'
-import slide1 from '../../assets/slide1.jpg'
-import slide2 from '../../assets/slide2.jpg'
+import slide1 from '../../assets/images/slide1.jpg'
+import slide2 from '../../assets/images/slide2.jpg'
 //import { Header } from '../header/Header'
 import '../../index.css';
 import { NewsItem } from './NewsItem'
@@ -25,6 +25,7 @@ export const NewsDetail = () => {
                             </div>
                             <div className="carousel-item  " interval={3000}>
                                 <Card.Img variant="" src={slide1} alt="..." className='slide  ' />
+
                             </div>
                         </Carousel>
                     </Card.Header>

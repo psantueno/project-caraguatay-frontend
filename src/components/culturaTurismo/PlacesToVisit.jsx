@@ -1,4 +1,5 @@
-
+import ParqueCheGuevara from '../../assets/images/solar-del-che-guevara.jpg';
+import IslaCaraguatay from '../../assets/images/parque-isla-caraguatay.jpg';
 
 export const PlacesToVisit = () => {
 
@@ -7,7 +8,7 @@ export const PlacesToVisit = () => {
       <h6 className='titles-subtitles'><b>Parque Ernesto Che Guevara</b></h6>
 
       <div className="box-img">
-        <img className="img-place" src="../src/assets/solar-del-che-guevara.jpg"></img>
+        <img className="img-place" src={ParqueCheGuevara} ></img>
       </div>
 
       <div className='paragraphs'>
@@ -26,7 +27,7 @@ export const PlacesToVisit = () => {
       <h6 className='titles-subtitles'><b>Isla Caraguatay</b></h6>
 
       <div className="box-img">
-        <img className="img-place" src="../src/assets/parque-isla-caraguatay.jpg"></img>
+        <img className="img-place" src={IslaCaraguatay} ></img>
       </div>
 
       <div className='paragraphs'>

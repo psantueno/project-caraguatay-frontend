@@ -1,18 +1,18 @@
-import { Header } from './components/header/Header';
-import { Footer } from './Footer';
-import { AppRouter } from './router/AppRouter'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import UserAdminContextProvider from './components/admin-users/UserAdminContext';
+import { Container } from 'react-bootstrap';
+import { Header } from './components/header/Header';
+import { Footer } from './components/footer/Footer';
+import { AppRouter } from './routers/AppRouter'
 
 
 export const App = () => {
 
   return (
-    <div>
+    <div className="app">
       <Header />
-      <UserAdminContextProvider>
+      <Container className='container-pages'>
         <AppRouter />
-      </UserAdminContextProvider>
+      </Container>
       <Footer />
     </div>
   )

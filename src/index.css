@@ -5,6 +5,11 @@ a {
     text-decoration: none !important;
 }
 
+.app {
+  display: flex;
+  flex-direction: column;
+}
+
 .main-title {
     font-size: 25px;
     margin-top: 5px;
@@ -26,24 +31,144 @@ a {
   color: #315C94;
 }
 
+/* START HEADER */
 
-/* footer */
+.main-div-header{
+  display:flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #c1cdd6;
+  border-color: #315C94;
+border-bottom-style: solid;
+border-width: thick;
+position: fixed;
+z-index: 10000;
+}
+
+.logo-header{
+  width: 140px;
+  height: 75px;
+}
+
+.main-div-header i.fa-user {
+  font-size: 1.5em;
+  color: #315c94;
+  text-shadow: 2px 2px 4px rgba(49, 92, 148, 0.4)
+}
+
+/* btn-hamburguer */
+
+.navbar-hamburguer {
+  position: relative;
+}
+
+.navbar-hamburguer-toggler {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  height: 19px;
+  justify-content: space-between;
+  outline: none;
+  padding: 0;
+  width: 25px;
+}
+
+.navbar-hamburguer-toggler-line {
+  background-color: #315C94;
+  height: 3px;
+  transition: all 0.2s ease-in-out;
+  width: 100%;
+  box-shadow: 2px 2px 4px rgba(49, 92, 148, 0.4);
+}
+
+.navbar-hamburguer-toggler.open .navbar-hamburguer-toggler-line:first-of-type {
+  transform: rotate(45deg) translate(5px, 5px);
+  box-shadow: 2px 2px 4px rgba(49, 92, 148, 0.4);
+}
+
+.navbar-hamburguer-toggler.open .navbar-hamburguer-toggler-line:nth-of-type(2) {
+  opacity: 0;
+}
+
+.navbar-hamburguer-toggler.open .navbar-hamburguer-toggler-line:last-of-type {
+  transform: rotate(-45deg) translate(6px, -6px);
+  box-shadow: 2px 2px 4px rgba(49, 92, 148, 0.4);
+}
+
+.container-links-header {
+  background-color: #C1CDD6;
+  display: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  top: 78px;
+  border: #315C94 solid 2px;
+  position: fixed;
+  right: 0;
+  z-index: 999;
+
+}
+
+.container-links-header.open {
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+  background-color: rgba(193, 205, 214, 0.8);
+}
+
+.container-links-header li {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  border-bottom: #315C94 solid 1px;
+}
+
+.container-links-header li a {
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  color: #315C94;
+  font-weight: 600;
+  transition: color 500ms;
+}
+
+.container-links-header li a:hover {
+  color: #859499;
+}
+
+.navbar-collapse-hamburguer.open {
+  display: block;
+}
+
+.nav-link-header.open {
+  display: block;
+}
+
+/* btn-hamburguer */
+
+/* END HEADER */
+
+/*START HOME*/
+
+.banner-home{
+  margin-top: 15px;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+}
+
+/* END HOME*/
+
+/* START FOOTER */
 .footer {
   background-color: #C1CDD6;
   border-color: #315C94;
   border-top-style: solid;
   border-width: thick;
   color: #315C94;
-}
-
-
-body {
-  margin: 0;
-  display: flex;
-  align-items: flex-start;
-  /* min-width: 320px;
-  min-height: 100vh; */
-  
 }
 
 .phones {
@@ -158,6 +283,15 @@ a.link-phones:hover {
 
 /* END FOOTER */
 
+/* START NEWS */
+
+.container-news {
+  display: flex;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  justify-content: center;
+}
+
 .card-lg {
   margin-left: 0 !important;
   padding: 0 !important;
@@ -265,18 +399,14 @@ a.link-phones:hover {
   height: 460px !important;
 
 }
+/* END NEWS */
 
 
-/* CULTURA Y TURISMO */
+/* START CULTURA Y TURISMO */
 
 
-.body-culturayturismo {
-  display: flex;
-  flex-direction: column;
-  
-  /* margin-top: 70px !important; */
- 
-
+.container-pages {
+  margin-top: 80px;
 }
 /* 
 .titles-subtitles {
@@ -358,13 +488,13 @@ a.link-phones:hover {
 /* START Buttons*/
 
 .btn-square-icon {
-  width: 100%;
-  font-size: 22px;
-  text-align: center;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-
+  width: 100% !important;
+  font-size: 20px !important;
+  text-align: center !important;
+  /* display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important; */
+    
 }
 
 h6.btn-square-text {
@@ -374,7 +504,7 @@ h6.btn-square-text {
   overflow-wrap: anywhere;
 }
 
-a.link-btn-square {
+a.link-btn-square, .link-btn-square {
   -webkit-user-select: none !important;
   user-select: none;
   background-color: #C4D6DE;
@@ -395,14 +525,14 @@ a.link-btn-square {
   text-decoration: none !important;
 }
 
-a.link-btn-square:hover {
+a.link-btn-square:hover, .link-btn-square:hover {
   background-color: #9DB1C6;
   box-shadow: 1px 5px 5px rgba(49, 92, 148, 0.8) !important;
   transform: scale(1.03);
   color: #2d5a94;
 }
 
-a.link-activated {
+a.link-activated , .link-activated{
 
   text-decoration: none !important;
 
@@ -410,7 +540,7 @@ a.link-activated {
   user-select: none;
   background-color: #d2d5d8;
   color: #626b76;
-   /* width: 47%;  option traditional */
+   width: 47%;/* option traditional*/
   flex: 10%;
   height: 80px;
   padding: 3px;
@@ -426,12 +556,13 @@ a.link-activated {
 
 }
 
-a.link-activated:hover {
+a.link-activated:hover, .link-activated:hover {
   color: #626b76;
 }
 
 .btn-toolbar {
   justify-content: center !important;
+  cursor: pointer;
 }
 
 /* START CULTURA Y TURISMO - CAMPING */
