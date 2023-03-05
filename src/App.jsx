@@ -2,15 +2,18 @@ import { Header } from './components/header/Header';
 import { Footer } from './Footer';
 import { AppRouter } from './router/AppRouter'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import UserAdminContextProvider from './components/admin-users/UserAdminContext';
 
 
 export const App = () => {
 
   return (
     <div>
-      <Header/>
-        <AppRouter/>     
-      <Footer/>
+      <Header />
+      <UserAdminContextProvider>
+        <AppRouter />
+      </UserAdminContextProvider>
+      <Footer />
     </div>
   )
 }

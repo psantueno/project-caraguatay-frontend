@@ -1,20 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import './admin-users.css';
+//import GenericAvatar from '../../assets/user-avatar.png';
+import { UserAdminContext } from './UserAdminContext';
 
 
 export const CreateUser = ({ show, onClose }) => {
 
-    const [email, setEmail] = useState("");
-    const [name, setName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [password, setPassword] = useState("");
-    const [role, setRole] = useState("");
-    const [avatar, setAvatar] = useState("");
+    const {addUser} = useContext(UserAdminContext);
+
+    const [newUser, setNewUser] = useState({
+        email:"", name:"", lastName:"", password:"", role:"", avatar:""
+    });
+
+    // const [email, setEmail] = useState("");
+    // const [name, setName] = useState("");
+    // const [lastName, setLastName] = useState("");
+    // const [password, setPassword] = useState("");
+    // const [role, setRole] = useState("");
+    // const [avatar, setAvatar] = useState("");
+
+    const onInputChange = (e) => {
+        setNewUser({...newUser,[e.target.name]: e.target.value})
+    }
+
+    const { email, name, lastName, password, role, avatar } = newUser;
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(`${email} ${name} ${lastName}`);
+        addUser(email, name, lastName, password, role, avatar);
     }
 
     return (
@@ -35,7 +49,7 @@ export const CreateUser = ({ show, onClose }) => {
                             <Form.Label>Dirección de e-mail:</Form.Label>
                             <Form.Control
                                 value={email}
-                                onChange={(e) => setEmail(e.target.email)}
+                                onChange = { (e) => onInputChange(e)}
                                 type="email"
                                 name="email"
                                 placeholder="Ingrese el email de la persona." />
@@ -46,7 +60,7 @@ export const CreateUser = ({ show, onClose }) => {
                             <Form.Control
                                 name="name"
                                 value={name}
-                                onChange={(e) => setName(e.target.name)}
+                                onChange = { (e) => onInputChange(e)}
                                 type="text"
                                 placeholder="Ingrese el nombre de la persona." />
                         </Form.Group>
@@ -56,7 +70,7 @@ export const CreateUser = ({ show, onClose }) => {
                             <Form.Control
                                 name="lastName"
                                 value={lastName}
-                                onChange={(e) => setLastName(e.target.lastName)}
+                                onChange = { (e) => onInputChange(e)}
                                 type="text"
                                 placeholder="Ingrese el apellido de la persona." />
                         </Form.Group>
@@ -66,15 +80,15 @@ export const CreateUser = ({ show, onClose }) => {
                             <Form.Control
                                 name="password"
                                 value={password}
-                                onChange={(e) => setPassword(e.target.password)}
+                                onChange = { (e) => onInputChange(e)}
                                 type="password"
                                 placeholder="Elija la contraseña original." />
                         </Form.Group>
 
                         <Form.Select
-                            name="rol"
+                            name="role"
                             value={role}
-                            onChange={(e) => setRole(e.target.role)}>
+                            onChange = { (e) => onInputChange(e)}>
                             <option>Rol</option>
                             <option value="Administrador">Administrador</option>
                         </Form.Select>
@@ -84,7 +98,10 @@ export const CreateUser = ({ show, onClose }) => {
                             <Form.Control
                                 type="file"
                                 name="avatar"
-                                accept="image/png , image/jpeg, image/jpg" />
+                                accept="image/png , image/jpeg, image/jpg" 
+                                file={avatar}
+                                onChange = { (e) => onInputChange(e)}                              
+                                />
                         </Form.Group>
 
 

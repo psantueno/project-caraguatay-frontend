@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {Table} from 'react-bootstrap';
-import { UsersList } from '../../assets/data/UsersList';
+
 import {DeleteButton, DisplayButton, EditButton} from '../buttons';
 import './admin-users.css';
 import EditUser from './EditUser';
+//import { UserAdminContext } from './UserAdminContext';
 
 
 
-export const UsersTable = () => {
-  const users = UsersList;
+export const UsersTable = ({users}) => {
+  
+  //const {users} = useContext(UserAdminContext);
   
   const [userData, setUserData] = useState({});
 

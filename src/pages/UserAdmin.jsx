@@ -1,19 +1,27 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {UsersTable} from '../components/admin-users/UsersTable';
 import {Container, Col, Row, Button} from 'react-bootstrap';
 import { CreateUser } from '../components/admin-users/CreateUser';
+import { UserAdminContext } from '../components/admin-users/UserAdminContext';
 
 export const UserAdmin = () => {
+
+    const {users} = useContext(UserAdminContext)
 
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    useEffect(() => {
+        handleClose()
+    }, [users])
+
   return (
     
 
     <>
+    
     <Container className="mt-4">
         <h4 className="mt-4 form-title" >Administración de usuarios</h4>
         <p className="mt-3">Cree, modifique o elimine usuarios administradores del sitio desde aquí.</p>
@@ -32,7 +40,7 @@ export const UserAdmin = () => {
     </Container>
 
     <Container>
-        <UsersTable />
+        <UsersTable users={users}/>
     </Container>
 
 
