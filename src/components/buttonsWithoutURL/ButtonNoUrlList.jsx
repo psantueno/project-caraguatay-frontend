@@ -4,23 +4,32 @@ import { useState } from 'react';
 import { ButtonToolbar, Container, Row } from 'react-bootstrap';
 import ButtonNoUrl from './ButtonNoUrl';
 
-export const ButtonNoUrlList = ({ buttons, changeDisplay = null }) => {
+export const ButtonNoUrlList = ({ buttons, changeDisplay = null , id}) => {
     
-    const [activeButton, setActiveButton] = useState(null);
+    const [activeButton, setActiveButton] = useState(id);
+    const [isSecondClick, setIsSecondClick] = useState(false);
 
+    const resetButtonClass = () => {
+        setActiveButton(null);
+        setIsSecondClick(false);
+    }
+    
     const handleClick = (id) => {
-        setActiveButton(id);
+        if (activeButton === id && isSecondClick) {
+            resetButtonClass()
+         
+        } else {
+            setActiveButton(id);
+            setIsSecondClick(true);
+        }
     };
 
-
     return (
-
         <Container>
             <Row className='mb-2'>
-
                 <ButtonToolbar>
 
-                    <nav onClick={changeDisplay} className='btn-toolbar' >
+                    <nav onClick={changeDisplay } className='btn-toolbar' >
 
                         {
                             buttons.map((btn) => (
@@ -32,7 +41,8 @@ export const ButtonNoUrlList = ({ buttons, changeDisplay = null }) => {
                                     key={btn.title}
                                     id={btn.id ? btn.id : ''}
                                     isActive={activeButton === btn.id}
-                                    onClick={handleClick}
+                                    isSecondClick={isSecondClick}
+                                    onClick={() => handleClick(btn.id)}
 
                                 />
                             ))
