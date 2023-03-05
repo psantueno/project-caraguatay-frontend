@@ -9,7 +9,7 @@ export const Historia = () => {
   return (
 
     <>
-      <Container>
+      <Container style={{maxWidth:'1200px'}}>
 
         <h1>Historia</h1>
         <ButtonSquareList buttons={HistoryBtns} />
