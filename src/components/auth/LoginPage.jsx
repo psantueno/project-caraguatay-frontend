@@ -11,7 +11,7 @@ const initialForm = {
 
 export const LoginPage = () => {
 
-    const {email,password,handleChange} = useForm(initialForm)
+    const {email,password,handleChange,handleSubmit} = useForm(initialForm)
 
     const onBlurEmail = ({target})=>{ 
         validations.validarEmail(target.value)?target.className = 'form-control':target.className = 'form-control is-invalid';
@@ -19,6 +19,11 @@ export const LoginPage = () => {
     const onBlurPassword = ({target})=>{ 
         validations.validarTamaño(target.value,1)?target.className = 'form-control':target.className = 'form-control is-invalid';
         console.log(target);
+    }
+
+    // ---------------- REVISAR EL SUBMIT Y AGREGAR EL RESTO DE LAS VALIDACIONES
+    const onSubmit = (event)=>{
+        handleSubmit(event)
     }
 
     return (
