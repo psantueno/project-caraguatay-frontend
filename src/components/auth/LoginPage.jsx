@@ -8,21 +8,35 @@ import { validations } from '../helpers/validations';
 const initialForm = {
     email:'',
     password:''}
-
+const errors = [false,false]
 export const LoginPage = () => {
 
     const {email,password,handleChange,handleSubmit} = useForm(initialForm)
 
     const onBlurEmail = ({target})=>{ 
-        validations.validarEmail(target.value)?target.className = 'form-control':target.className = 'form-control is-invalid';
+        if (validations.validarEmail(target.value)){
+            target.className = 'form-control is-valid'
+            errors[0] = true
+        }else{
+            target.className = 'form-control is-invalid';
+            errors[0] = false
+        }
     }
     const onBlurPassword = ({target})=>{ 
-        validations.validarTamaño(target.value,1)?target.className = 'form-control':target.className = 'form-control is-invalid';
-        console.log(target);
+        if(validations.validarTamaño(target.value,1)){
+            target.className = 'form-control is-valid'
+            errors[1] = true
+        }else{
+            target.className = 'form-control is-invalid';
+            errors[1] = false
+        }
     }
 
-    // ---------------- REVISAR EL SUBMIT Y AGREGAR EL RESTO DE LAS VALIDACIONES
     const onSubmit = (event)=>{
+        if (errors.filter((error)=>{return !error}).length>0){
+            console.log("hay errores")
+            return
+        }
         handleSubmit(event)
     }
 

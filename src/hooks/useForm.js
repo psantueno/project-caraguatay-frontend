@@ -21,6 +21,7 @@ export const useForm = (initialForm = {}, FormValidations = {}, inputs={}, handl
 
   const handleChange = ({target}) => {
     const { name, value } = target;
+    console.log(target);
     setForm(prevState => ({
       ...prevState,
       [name]: value
