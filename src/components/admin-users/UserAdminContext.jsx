@@ -7,9 +7,9 @@ const UserAdminContextProvider  = (props) => {
     const [alertMessage, setAlertMessage] = useState(null);
 
     const [users, setUsers] = useState([
-        { id: 1,  email: "maria.gainza@gmail.com", name: "María", lastName: 'Gainza', role: 'Administrador', password:123456},
-        { id: 2,  email: "ada.lovelace@gmail.com", name: "Ada", lastName: 'Lovelace', role: 'Administrador', password:123456},
-        { id: 3,  email: "fito.paez@gmail.com", name: "Fito", lastName: 'Paez', role: 'Administrador',password:123456 } 
+        { id: 1, avatar: [Avatar], email: "maria.gainza@gmail.com", name: "María", lastName: 'Gainza', role: 'Administrador', password:123456},
+        { id: 2, avatar: [Avatar], email: "ada.lovelace@gmail.com", name: "Ada", lastName: 'Lovelace', role: 'Administrador', password:123456},
+        { id: 3, avatar: [Avatar], email: "fito.paez@gmail.com", name: "Fito", lastName: 'Paez', role: 'Administrador',password:123456 } 
     ])
 
     
@@ -22,8 +22,8 @@ const UserAdminContextProvider  = (props) => {
         localStorage.setItem('users', JSON.stringify(users))
     })
 
-    const addUser = (email, name, lastName, password, role) => {
-        setUsers([...users , {id: Date.now(), email, name, lastName, password, role}])
+    const addUser = (email, name, lastName, password, role, avatar) => {
+        setUsers([...users , {id: Date.now(), email, name, lastName, password, role, avatar}])
         setAlertMessage(`El usuario fue creado correctamente con el email ${email}.`)
     }
 

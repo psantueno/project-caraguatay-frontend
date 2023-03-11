@@ -15,11 +15,11 @@ export const UserAdmin = () => {
         <p className="mt-3">Cree, modifique o elimine usuarios administradores del sitio desde aquí.</p>
     </Container>
 
-    <Container>
+ 
         <UserAdminContextProvider>
             <UsersTable />
         </UserAdminContextProvider>
-    </Container>
+
       
     </>
   )

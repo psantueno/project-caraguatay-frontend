@@ -8,19 +8,19 @@ export const CreateUserForm = () => {
     const { addUser } = useContext(UserAdminContext);
 
     const [newUser, setNewUser] = useState({
-        email: "", name: "", lastName: "", password: "", role: "",
+        email: "", name: "", lastName: "", password: "", role: "", avatar: []
     });
 
     const onInputChange = (e) => {
         setNewUser({ ...newUser, [e.target.name]: e.target.value })
     }
 
-   const { email, name, lastName, password, role } = newUser;
+    const { email, name, lastName, password, role, avatar } = newUser;
 
     const handleSubmit = (e) => {
         e.preventDefault();
         addUser(email, name, lastName, password, role);
-        
+
     }
 
     return (
@@ -75,16 +75,17 @@ export const CreateUserForm = () => {
                     <option value="Administrador">Administrador</option>
                 </Form.Select>
 
-                {/* <Form.Group controlId="formFile" className="mb-3">
-                            <Form.Label>Default file input example</Form.Label>
-                            <Form.Control
-                                type="file"
-                                name="avatar"
-                                accept="image/png , image/jpeg, image/jpg" 
-                                file={avatar}
-                                onChange = { (e) => onInputChange(e)}                              
-                                />
-                        </Form.Group> */}
+                <Form.Group controlId="formFile" className="mb-3">
+                    <Form.Label>Default file input example</Form.Label>
+                    <Form.Control
+                        type="file"
+                        name="avatar"
+                        accept="image/png , image/jpeg, image/jpg"
+                        file={avatar}
+                        value={avatar}
+                        onChange={(e) => onInputChange(e)}
+                    />
+                </Form.Group>
 
                 <Button type="submit" className="mt-3 buttonPosition" >
                     Crear
