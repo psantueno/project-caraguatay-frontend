@@ -1,8 +1,9 @@
-import React, { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { Button, Form, Container, Col, Row, Table, Alert } from 'react-bootstrap';
-import { useForm } from './useForm';
-import dayjs from "dayjs";
+import { useForm } from '../../hooks/useForm';
+import { NewsFormValidations } from './NewsFormValidations';
 import { DeleteButton } from '../buttons/DeleteButton'
+import dayjs from "dayjs";
 
 
 const initialForm = {
@@ -14,99 +15,80 @@ const initialForm = {
 };
 
 
-export const Formulario = () => {
+export const NewsForm = () => {
+
+  const [msgFileNotImage, setMsgFileNotImage] = useState(false);
 
 
-  const inputTitle = useRef();
-  const inputMainText = useRef();
-  const inputDate = useRef();
-  const inputCategory = useRef();
-  const inputFiles = useRef();
-
-
-  const validationsForm = (form, e) => {
-
-    if (e) {
-
-      if (e.target.name === "category") {
-        if (form.category === "default") {
-          errors.category = "La categoría es requerida.";
-          inputCategory.current.className = "form-control is-invalid";
-        } else {
-          delete errors.category;
-          inputCategory.current.className = "form-control is-valid";
-        }
-      }
-
-      if (e.target.name === "title") {
-        if (!form.title.trim()) {
-          errors.title = "El título es requerido.";
-          inputTitle.current.className = "form-control is-invalid";
-        } else if (form.title.trim().length < 3) {
-          errors.title = "El título debe tener al menos 3 caracteres.";
-          inputTitle.current.className = "form-control is-invalid";
-        } else {
-          delete errors.title;
-          inputTitle.current.className = "form-control is-valid";
-        }
-      }
-
-      if (e.target.name === "mainText") {
-        if (!form.mainText.trim()) {
-          errors.mainText = "El texto de la publicación es requerido.";
-          inputMainText.current.className = "form-control is-invalid";
-        } else if (form.mainText.trim().length < 100) {
-          errors.mainText = "El texto de la publicación debe tener al menos 100 caracteres.";
-          inputMainText.current.className = "form-control is-invalid";
-        } else {
-          delete errors.mainText;
-          inputMainText.current.className = "form-control is-valid";
-        }
-      }
-
-      if (e.target.name === "date") {
-        if ((form.date === dayjs().format("YYYY-MM-DD")) || (form.date > dayjs().format("YYYY-MM-DD"))) {
-          inputDate.current.className = "form-control is-valid";
-        } else {
-          inputDate.current.className = "form-control is-invalid";
-          errors.date = "Ingrese una fecha válida"
-        }
-      }
-    }
-    return errors;
+  const inputs = {
+    title: useRef(),
+    mainText: useRef(),
+    date: useRef(),
+    category: useRef(),
+    files: useRef()
   }
-
 
   const {
     form,
     setForm,
     handleChange,
-    handleFiles,
     handleBlur,
     handleKeyUp,
     handleMouseup,
-    handleDelete,
+    handleReset,
     handleSubmit,
     setShowMessage,
+    setErrors,
     files,
     errors,
     showMessage,
-  } = useForm(initialForm, validationsForm)
+  } = useForm(initialForm, NewsFormValidations, inputs)
 
+
+  /* Funciones específicas de news form */
+
+  const handleFiles = (e) => {
+
+    const { files } = e.target;
+
+    for (let i = 0; i < files.length; i++) {                // validación de que todos los elementos sean imagenes.
+      const fileName = files[i].name.toLowerCase();
+      if (!fileName.endsWith('.jpg') && !fileName.endsWith('.jpeg') && !fileName.endsWith('.png')) {
+        setMsgFileNotImage(true);
+        setErrors({
+          ...errors,
+          files: `El archivo "${fileName}" no es una imagen `
+        });
+        return;
+      }
+    }
+    delete errors.files;
+    setForm(prevState => {
+      const newFiles = Array.from(files);
+      return {
+        ...prevState,
+        files: prevState.files.concat(newFiles)
+      };
+    });
+  };
+  
 
   const handleClick = () => {
-    inputFiles.current.click();
+    inputs.files.current.click();
   };
 
-  const handleCancel = () => {
-    setForm(initialForm);
-    inputCategory.current.className = "form-control";
-    inputDate.current.className = "form-control";
-    inputTitle.current.className = "form-control";
-    inputMainText.current.className = "form-control";
-    inputCategory.current.focus();
-  };
 
+  const handleDelete = (index) => {
+    setForm(prevForm => ({
+      ...prevForm,
+      files: prevForm.files.filter((_, i) => i !== index)
+    }));
+  }
+
+  const showFileNotImage = () => {
+    delete errors.files;
+    setMsgFileNotImage(false)
+  }
 
 
   return (
@@ -117,10 +99,10 @@ export const Formulario = () => {
             <p>La publicación se ha creado correctamente.</p>
           </Col>
           <Col className="d-flex justify-content-end">
-            <Button 
+            <Button
               onClick={() => setShowMessage(false)}>
               Cerrar
-            </Button>  
+            </Button>
           </Col>
         </Row>
       </Alert>
@@ -136,12 +118,13 @@ export const Formulario = () => {
             <Form.Select
               name="category"
               value={form.category}
-              ref={inputCategory}
+              ref={inputs.category}
               onChange={handleChange}
               onMouseUp={handleMouseup}
               onBlur={handleBlur}
+              required
             >
-              <option value="default" disabled>-Seleccione una categoría-</option>
+              <option value="default">-Seleccione una categoría-</option>
               <option value="Deportes" >Deportes</option>
               <option value="Comunicados" >Comunicados</option>
               <option value="Cultura y turismo" >Cultura y turismo</option>
@@ -165,10 +148,11 @@ export const Formulario = () => {
               type="date"
               min={dayjs().format("YYYY-MM-DD")}
               value={form.date}
-              ref={inputDate}
+              ref={inputs.date}
               onChange={handleChange}
               onKeyUp={handleKeyUp}
               onBlur={handleBlur}
+              required
             />
 
             {
@@ -187,10 +171,11 @@ export const Formulario = () => {
               name="title"
               placeholder="Escriba el título de la publicación"
               value={form.title}
-              ref={inputTitle}
+              ref={inputs.title}
               onChange={handleChange}
               onKeyUp={handleKeyUp}
               onBlur={handleBlur}
+              required
             />
 
             {
@@ -209,10 +194,11 @@ export const Formulario = () => {
               name="mainText"
               placeholder="Escriba el texto de la publicación"
               value={form.mainText}
-              ref={inputMainText}
+              ref={inputs.mainText}
               onChange={handleChange}
               onKeyUp={handleKeyUp}
               onBlur={handleBlur}
+              required
             />
 
             {
@@ -233,7 +219,7 @@ export const Formulario = () => {
               name="images"
               style={{ display: 'none' }}
               multiple
-              ref={inputFiles}
+              ref={inputs.files}
               onChange={handleFiles}
               onBlur={handleBlur}
               accept="image/png , image/jpeg, image/jpg"
@@ -266,7 +252,8 @@ export const Formulario = () => {
                     Archivos cargados correctamente <b><i className="fas fa-check"></i></b>.<br />
                   </p>
                 )
-                : null}
+                : null
+            }
 
             {/* ERRORS MANAGEMENT */}
 
@@ -299,7 +286,22 @@ export const Formulario = () => {
 
             {/* MAPEO DE LAS PREVIEW Y HANDLEDELETE */}
 
-            {/* DETALLE DE ERRORS IMAGES > 10 */}
+            {/* DETALLE DE ERRORS IMAGES */}
+
+            <Alert show={msgFileNotImage} className="alert-file-not-image">
+              <p className="images-msg-error">
+                {errors.files}<b><i className="fas fa-exclamation-circle"></i></b>.<br />
+                Extensiones aceptadas: ".jpeg", ".jpg" y ".png".
+              </p>
+              <Col className="d-flex justify-content-end">
+                <Button
+                  className="btn-close-alert"
+                  onClick={() => showFileNotImage()}
+                >
+                  Cerrar <i className="fas fa-times-circle"></i>
+                </Button>
+              </Col>
+            </Alert>
 
             {
               files.length > 0 && files.length > 10
@@ -319,10 +321,10 @@ export const Formulario = () => {
 
           </Form.Group>
 
-          <Button className='m-2' type="submit"  disabled={files.length > 10} >
+          <Button className='m-2' type="submit" disabled={files.length > 10 || msgFileNotImage} >
             Confirmar
           </Button>
-          <Button className='m-2' type="reset"  onClick={handleCancel}>
+          <Button className='m-2' type="reset" onClick={handleReset}>
             Borrar
           </Button>
         </Form>
