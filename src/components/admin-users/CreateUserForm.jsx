@@ -75,8 +75,8 @@ export const CreateUserForm = () => {
                     <option value="Administrador">Administrador</option>
                 </Form.Select>
 
-                <Form.Group controlId="formFile" className="mb-3">
-                    <Form.Label>Default file input example</Form.Label>
+                <Form.Group controlId="formFile" className="mb-3 mt-3">
+                    <Form.Label>Seleccione una foto de perfil (opcional)</Form.Label>
                     <Form.Control
                         type="file"
                         name="avatar"

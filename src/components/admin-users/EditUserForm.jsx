@@ -12,10 +12,11 @@ const EditUserForm = ({userToEdit}) => {
     const [lastName, setLastName] = useState(userToEdit.lastName);
     const [password, setPassword] = useState("");
     const [role, setRole] = useState(userToEdit.role);
+    const [avatar, setAvatar] = useState("");
 
     const { updateUser } = useContext(UserAdminContext);
 
-    const updatedUser = { id, email, name, lastName, password, role };
+    const updatedUser = { id, email, name, lastName, password, role, avatar };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -76,14 +77,17 @@ const EditUserForm = ({userToEdit}) => {
                     <option value="Administrador">Administrador</option>
                 </Form.Select>
 
-                {/* <Form.Group controlId="formFile" className="mb-3">
-                            <Form.Label>Default file input example</Form.Label>
-                            <Form.Control
-                                type="file"
-                                name="avatar"
-                               
-                                accept="image/png , image/jpeg, image/jpg" />
-                        </Form.Group> */}
+                <Form.Group controlId="formFile" className="mb-3 mt-3">
+                    <Form.Label>Seleccione una foto de perfil (opcional)</Form.Label>
+                    <Form.Control
+                        type="file"
+                        name="avatar"
+                        accept="image/png , image/jpeg, image/jpg"
+                        file={avatar}
+                        defaultValue={avatar}
+                        onChange={(e) => setAvatar(e.target.value)}
+                    />
+                </Form.Group>
                 <Button type="submit" className="mt-3 buttonPosition" >
                     Guardar
                 </Button>
