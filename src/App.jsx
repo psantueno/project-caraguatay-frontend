@@ -5,13 +5,16 @@ import { Footer } from './components/footer/Footer';
 import { AppRouter } from './routers/AppRouter'
 
 
+
 export const App = () => {
 
   return (
     <div className="app">
       <Header />
       <Container className='container-pages'>
-        <AppRouter />
+        
+          <AppRouter />
+        
       </Container>
       <Footer />
     </div>

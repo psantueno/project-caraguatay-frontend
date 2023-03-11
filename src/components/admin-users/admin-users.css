@@ -3,3 +3,13 @@
     border-left: none;
     border-top: none;
 }
+
+.buttonPosition{
+    float: right
+}
+
+.data-highlight {
+    font-weight: bold;
+    color: #315C94;
+   
+}
