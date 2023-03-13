@@ -16,7 +16,7 @@
   };
 
   const validarPassword = (value) => {
-    const regEx = new RegExp('^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,16}$')
+    const regEx = new RegExp(/(?=(.*[0-9]))(?=.*[\!@#$%^&*()\\[\]{}\-_+=|:;"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{6,}/)
     return regEx.test(value)?true:false
 
   };

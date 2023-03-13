@@ -21,6 +21,7 @@ export const CreateUser = ({ show, onClose }) => {
 
     const onValidateEmail = ({ target }) => {
         handleChange({target})
+        console.log(email);
         if (validations.validarEmail(target.value)) {
             target.className = 'form-control is-valid'
             errors[0] = true
@@ -83,6 +84,7 @@ export const CreateUser = ({ show, onClose }) => {
 
     const onSubmit = (e) => {
         e.preventDefault();
+        console.log("paso");
         if (errors.filter((error)=>{return !error}).length>0){
             console.log("hay errores")
             return
