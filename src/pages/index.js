@@ -1,6 +1,6 @@
 export * from './Comunicados'
 export * from './CulturaTurismo'
-export * from './Deporte'
+export * from './Deportes'
 export * from './Historia'
 export * from './PuntoDigital'
 export * from './Home'
