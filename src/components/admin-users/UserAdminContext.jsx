@@ -7,9 +7,9 @@ const UserAdminContextProvider  = (props) => {
     const [alertMessage, setAlertMessage] = useState(null);
 
     const [users, setUsers] = useState([
-        { id: 1, avatar: [Avatar], email: "maria.gainza@gmail.com", name: "María", lastName: 'Gainza', role: 'Administrador', password:123456},
-        { id: 2, avatar: [Avatar], email: "ada.lovelace@gmail.com", name: "Ada", lastName: 'Lovelace', role: 'Administrador', password:123456},
-        { id: 3, avatar: [Avatar], email: "fito.paez@gmail.com", name: "Fito", lastName: 'Paez', role: 'Administrador',password:123456 } 
+        { id: 1, avatar: Avatar, email: "maria.gainza@gmail.com", name: "María", lastName: 'Gainza', role: 'Administrador', password:123456},
+        { id: 2, avatar: Avatar, email: "ada.lovelace@gmail.com", name: "Ada", lastName: 'Lovelace', role: 'Administrador', password:123456},
+        { id: 3, avatar: Avatar, email: "fito.paez@gmail.com", name: "Fito", lastName: 'Paez', role: 'Administrador',password:123456 } 
     ])
 
     
@@ -27,9 +27,9 @@ const UserAdminContextProvider  = (props) => {
         setAlertMessage(`El usuario fue creado correctamente con el email ${email}.`)
     }
 
-    const deleteUser = (id) => {
+    const deleteUser = ({id, email}) => {
         setUsers(users.filter(user => user.id !== id))
-        setAlertMessage(`El usuario con el id ${id} fue eliminado correctamente.`)
+        setAlertMessage(`El usuario con el email ${email} fue eliminado correctamente.`)
     }
 
     const updateUser = (id, updatedUser) => {
@@ -44,7 +44,7 @@ const UserAdminContextProvider  = (props) => {
       useEffect(() => {
         const timeoutId = setTimeout(() => {
             setAlertMessage(null);
-        }, 2000);
+        }, 5000);
     
         return () => clearTimeout(timeoutId);
       }, [alertMessage]);

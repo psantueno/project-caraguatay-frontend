@@ -13,3 +13,8 @@
     color: #315C94;
    
 }
+
+.avatar {
+    max-width: 70px;
+    margin: auto;
+}

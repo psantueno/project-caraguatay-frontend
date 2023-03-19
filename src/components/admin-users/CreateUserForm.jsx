@@ -2,13 +2,14 @@ import React, { useContext, useState } from 'react';
 import { UserAdminContext } from './UserAdminContext';
 import { Form, Button } from 'react-bootstrap';
 import './admin-users.css';
+//import AvatarDefault from '../../assets/images/user-avatar.png'
 
 export const CreateUserForm = () => {
 
     const { addUser } = useContext(UserAdminContext);
 
     const [newUser, setNewUser] = useState({
-        email: "", name: "", lastName: "", password: "", role: "", avatar: []
+        email: "", name: "", lastName: "", password: "", role: "", avatar: ""
     });
 
     const onInputChange = (e) => {
@@ -17,9 +18,12 @@ export const CreateUserForm = () => {
 
     const { email, name, lastName, password, role, avatar } = newUser;
 
+    //const onInputFile 
+    //e.target.files => input file => fileName
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        addUser(email, name, lastName, password, role);
+        addUser(email, name, lastName, password, role, avatar);
 
     }
 
@@ -82,7 +86,6 @@ export const CreateUserForm = () => {
                         name="avatar"
                         accept="image/png , image/jpeg, image/jpg"
                         file={avatar}
-                        value={avatar}
                         onChange={(e) => onInputChange(e)}
                     />
                 </Form.Group>

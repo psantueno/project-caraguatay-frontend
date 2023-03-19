@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { UserAdminContext } from './UserAdminContext';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Row } from 'react-bootstrap';
 import './admin-users.css';
 
 const EditUserForm = ({userToEdit}) => {
@@ -79,6 +79,9 @@ const EditUserForm = ({userToEdit}) => {
 
                 <Form.Group controlId="formFile" className="mb-3 mt-3">
                     <Form.Label>Seleccione una foto de perfil (opcional)</Form.Label>
+
+                    <Row className='p-3'>Imagen actual <img src={userToEdit.avatar} alt="" className="avatar" /></Row>
+
                     <Form.Control
                         type="file"
                         name="avatar"
@@ -87,6 +90,7 @@ const EditUserForm = ({userToEdit}) => {
                         defaultValue={avatar}
                         onChange={(e) => setAvatar(e.target.value)}
                     />
+                    
                 </Form.Group>
                 <Button type="submit" className="mt-3 buttonPosition" >
                     Guardar
