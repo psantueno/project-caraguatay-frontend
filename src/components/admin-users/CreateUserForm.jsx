@@ -1,16 +1,19 @@
 import React, { useContext, useState } from 'react';
 import { UserAdminContext } from './UserAdminContext';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 import './admin-users.css';
-//import AvatarDefault from '../../assets/images/user-avatar.png'
+import AvatarDefault from '../../assets/user-avatar.png'
 
 export const CreateUserForm = () => {
 
     const { addUser } = useContext(UserAdminContext);
 
     const [newUser, setNewUser] = useState({
-        email: "", name: "", lastName: "", password: "", role: "", avatar: ""
+        email: "", name: "", lastName: "", password: "", role: "", avatar: null
     });
+
+    const [msgFileNotImage, setMsgFileNotImage] = useState(false);
+    const [errors, setErrors] = useState({});
 
     const onInputChange = (e) => {
         setNewUser({ ...newUser, [e.target.name]: e.target.value })
@@ -18,13 +21,46 @@ export const CreateUserForm = () => {
 
     const { email, name, lastName, password, role, avatar } = newUser;
 
-    //const onInputFile 
-    //e.target.files => input file => fileName
+    /* Funciones específicas de manejo de avatar */
+   
+    const handleFiles = (e) => {
+        const file = e.target.files[0];
+        const fileName = file.name.toLowerCase();
+
+        if (!fileName.endsWith('.jpg') && !fileName.endsWith('.jpeg') && !fileName.endsWith('.png')) {
+            setMsgFileNotImage(true);
+            setErrors(prevErrors => ({
+                ...prevErrors,
+                avatar: [...(prevErrors.avatar || []), `El archivo "${fileName}" no es una imagen`]
+            }));
+            return;
+        }
+
+        setNewUser(prevState => ({
+            ...prevState,
+            avatar: file
+        }));
+
+        // Si se selecciona un archivo válido, se borran los errores previos
+        delete errors.avatar;
+        setMsgFileNotImage(false);
+    };
+
+    const showFileNotImage = () => {
+        delete errors.avatar;
+        setMsgFileNotImage(false)
+    }
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        addUser(email, name, lastName, password, role, avatar);
-
+        if (!newUser.avatar) {
+            setNewUser(prevState => ({
+                ...prevState,
+                avatar: AvatarDefault
+            }));
+        }
+        addUser(email, name, lastName, password, role, newUser.avatar);
     }
 
     return (
@@ -86,8 +122,29 @@ export const CreateUserForm = () => {
                         name="avatar"
                         accept="image/png , image/jpeg, image/jpg"
                         file={avatar}
-                        onChange={(e) => onInputChange(e)}
+                        onChange={handleFiles}
+                        multiple={false}
                     />
+
+                    <Row>
+                        {/* Pre visualización mostrar la imagen seleccionada */}
+                        <p className='mt-2'>Imagen seleccionada</p>
+                        <Col sm={4}>
+                            {newUser.avatar ? (
+                                <img src={URL.createObjectURL(newUser.avatar)} alt="Avatar" className='uploaded-avatar' />
+                            ) : (
+                                <img src={AvatarDefault} alt="Avatar por default" className='uploaded-avatar' />
+                            )}
+
+                        </Col>
+
+                        <Col sm={8} >
+                            {/* Errores */}
+                            <p className="file-type-error">{errors && errors.avatar} </p>
+                            
+                        </Col>
+
+                    </Row>
                 </Form.Group>
 
                 <Button type="submit" className="mt-3 buttonPosition" >
