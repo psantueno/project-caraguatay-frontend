@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from 'react-router';
-import { Camping, PlacesToVisit, Entrepreneurship, Location } from '../components/culturaTurismo';
+import { Campings, PlacesToVisit, Entrepreneurship, Location } from '../components/culturaTurismo';
 
 export const CulturaTurismoRouter = () => {
 
@@ -9,7 +9,7 @@ export const CulturaTurismoRouter = () => {
       <Route path="ubicacion" element={<Location />} />
       <Route path="turismo" element={<PlacesToVisit />} />
       <Route path="emprendimientos" element={<Entrepreneurship />} />
-      <Route path="camping" element={<Camping />} />
+      <Route path="camping" element={<Campings />} />
       /* Ruta a la que dirige por defecto cuando clickeamos en CULTURA Y TURISMO */
       <Route path="/" element={<Navigate to="/cultura-turismo/ubicacion" />} />
     </Routes>
