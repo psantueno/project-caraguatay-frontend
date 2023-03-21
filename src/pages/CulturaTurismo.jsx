@@ -9,7 +9,7 @@ export const CulturaTurismo = () => {
   return (
 
     <>
-      <Container>
+      <Container style={{maxWidth:'1200px'}}>
 
         <h1>Cultura y Turismo</h1>
         <ButtonSquareList buttons={CultureBtns} />

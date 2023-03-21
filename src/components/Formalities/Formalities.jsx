@@ -2,21 +2,27 @@ import {FormalitiesBtns} from '../../assets/data/FormalitiesBtns'
 import { Container, Row } from 'react-bootstrap'
 import { ButtonNoUrlList } from '../buttonsWithoutURL/ButtonNoUrlList'
 import { MacroClick, DriveLicence, CommerceEnable, PrivateConstruction } from '../Formalities';
-import { useState } from 'react'
-
+import { useState , useEffect} from 'react'
 
 export const Formalities = () => {
+
+  const [display, setDisplay] = useState(null)
+  const [isMacroClickActive, setIsMacroClickActive] = useState(false);
+  const [isDriveLicenceActive, setIsDriveLicenceActive] = useState(false);
+  const [isCommerceEnableActive, setIsCommerceEnableActive] = useState(false);
+  const [isPrivateConstructionActive, setIsPrivateConstructionActive] = useState(false);
+
   
-
-  const [display, setDisplay] = useState()
-  const [isActive, setIsActive] = useState(false)
-
+  
   const changeDisplay = (event) => {
+    
+    setIsMacroClickActive(event.target.id === "macroClick" && !isMacroClickActive );
+    setIsDriveLicenceActive(event.target.id === "licencia_conducir" && !isDriveLicenceActive ) ;
+    setIsCommerceEnableActive(event.target.id === "habilitacion_comercial" && !isCommerceEnableActive  );
+    setIsPrivateConstructionActive(event.target.id === "obras_particulares" && !isPrivateConstructionActive  );
+    setDisplay(event.target.id)
    
-   setDisplay(event?.target.id)
-   console.log(event.target.id)
   }
-
 
   return (
     <>
@@ -24,15 +30,17 @@ export const Formalities = () => {
 
         <h1>Guía de Trámites</h1>
 
-            <ButtonNoUrlList changeDisplay={changeDisplay} buttons={FormalitiesBtns} isActive={()=>setIsActive(true)}/>
+            <ButtonNoUrlList 
+              changeDisplay={changeDisplay} 
+                buttons={FormalitiesBtns} 
+                onClick={()=>changeDisplay()}/>
         
-        <Container>
-
-        
-          {( display === "macroClick") && <MacroClick />}
-          {( display === "licencia_conducir") && <DriveLicence />}
-          {( display === 'habilitacion_comercial') && <CommerceEnable />}
-          {( display === 'obras_particulares') && <PrivateConstruction />}
+          <Container>
+    
+              {(display === "macroClick"  && isMacroClickActive) && <MacroClick /> }
+              {(display === "licencia_conducir" && isDriveLicenceActive) && <DriveLicence />}
+              {(display === 'habilitacion_comercial' && isCommerceEnableActive) && <CommerceEnable />}
+              {(display === 'obras_particulares' && isPrivateConstructionActive) && <PrivateConstruction />}
 
           </Container>
 

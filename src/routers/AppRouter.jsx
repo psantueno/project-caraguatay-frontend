@@ -2,7 +2,7 @@ import { Routes, Route} from 'react-router-dom';
 import { NewsDetail } from '../components/news/NewsDetail';
 import { NewsForm } from '../components/form-news/NewsForm';
 
-import { Comunicados, CulturaTurismo, Deporte, Historia, PuntoDigital, UserAdmin } from '../pages';
+import { Comunicados, CulturaTurismo, Deportes, Historia, PuntoDigital, UserAdmin } from '../pages';
 import { Home } from '../pages/Home';
 import { LoginPage } from '../components/auth/LoginPage';
 import { ResetPassword } from '../components/auth/ResetPassword';
@@ -18,10 +18,10 @@ export const AppRouter = () => {
         <Route exact path="/login" element={<LoginPage/>}></Route>
         <Route exact path="/restablecer_contrasena" element={<ResetPassword/>}></Route>
         <Route exact path="/comunicados" element={<Comunicados />} ></Route>
-        <Route exact path="/deportes" element={<Deporte />} ></Route>
+        <Route exact path="/deportes" element={<Deportes />} ></Route>
         <Route exact path="cultura-turismo/*" element={<CulturaTurismo />}></Route>
         <Route exact path="/historia/*" element={<Historia />} ></Route>
-        <Route exact path="/punto-digital" element={<PuntoDigital />} ></Route>
+        <Route exact path="/punto-digital/*" element={<PuntoDigital />} ></Route>
         <Route exact path="/formulario" element={<NewsForm />} ></Route>
         <Route exact path="/noticias/1" element={<NewsDetail />} ></Route>
         <Route exact path="/admin/usuarios" element={<UserAdmin />} ></Route>
