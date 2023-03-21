@@ -1,7 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { UserAdminContext } from './UserAdminContext';
-import { Form, Button, Row } from 'react-bootstrap';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 import './admin-users.css';
+import AvatarDefault from '../../assets/user-avatar.png'
 
 const EditUserForm = ({userToEdit}) => {
 
@@ -17,6 +18,31 @@ const EditUserForm = ({userToEdit}) => {
     const { updateUser } = useContext(UserAdminContext);
 
     const updatedUser = { id, email, name, lastName, password, role, avatar };
+
+    const [msgFileNotImage, setMsgFileNotImage] = useState(false);
+    const [errors, setErrors] = useState({});
+
+     /* Funciones específicas de manejo de avatar */
+     const handleFiles = (e) => {
+        const file = e.target.files[0];
+        const fileName = file.name.toLowerCase();
+
+        if (!fileName.endsWith('.jpg') && !fileName.endsWith('.jpeg') && !fileName.endsWith('.png')) {
+            setMsgFileNotImage(true);
+            setErrors(prevErrors => ({
+                ...prevErrors,
+                avatar: [...(prevErrors.avatar || []), `El archivo "${fileName}" no es una imagen`]
+            }));
+            return;
+        }
+        updateUser(prevState => ({
+            ...prevState,
+            avatar: file
+        }));
+        // Si se selecciona un archivo válido, se borran los errores previos
+        delete errors.avatar;
+        setMsgFileNotImage(false);
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -88,9 +114,25 @@ const EditUserForm = ({userToEdit}) => {
                         accept="image/png , image/jpeg, image/jpg"
                         file={avatar}
                         defaultValue={avatar}
-                        onChange={(e) => setAvatar(e.target.value)}
+                        onChange={handleFiles}
+                        multiple={false}
                     />
-                    
+                    <Row>
+                        {/* Pre visualización mostrar la imagen seleccionada */}
+                        <p className='mt-2'>Imagen seleccionada</p>
+                        <Col sm={4}>
+                            {avatar ? (
+                                <img src={URL.createObjectURL(avatar)} alt="Avatar" className='uploaded-avatar' />
+                            ) : (
+                                <img src={avatar} alt="Avatar por default" className='uploaded-avatar' />
+                            )}
+                        </Col>
+
+                        <Col sm={8} >
+                            {/* Errores */}
+                            <p className="file-type-error">{errors && errors.avatar} </p>
+                        </Col>
+                    </Row>
                 </Form.Group>
                 <Button type="submit" className="mt-3 buttonPosition" >
                     Guardar

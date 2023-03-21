@@ -9,7 +9,7 @@ export const CreateUserForm = () => {
     const { addUser } = useContext(UserAdminContext);
 
     const [newUser, setNewUser] = useState({
-        email: "", name: "", lastName: "", password: "", role: "", avatar: null
+        email: "", name: "", lastName: "", password: "", role: "", avatar: ""
     });
 
     const [msgFileNotImage, setMsgFileNotImage] = useState(false);
@@ -22,7 +22,6 @@ export const CreateUserForm = () => {
     const { email, name, lastName, password, role, avatar } = newUser;
 
     /* Funciones específicas de manejo de avatar */
-   
     const handleFiles = (e) => {
         const file = e.target.files[0];
         const fileName = file.name.toLowerCase();
@@ -35,12 +34,10 @@ export const CreateUserForm = () => {
             }));
             return;
         }
-
         setNewUser(prevState => ({
             ...prevState,
             avatar: file
         }));
-
         // Si se selecciona un archivo válido, se borran los errores previos
         delete errors.avatar;
         setMsgFileNotImage(false);
@@ -62,7 +59,7 @@ export const CreateUserForm = () => {
         }
         addUser(email, name, lastName, password, role, newUser.avatar);
     }
-
+    console.log(email, name, lastName, password, role, avatar);
     return (
         <>
             <Form onSubmit={handleSubmit}>
@@ -130,20 +127,17 @@ export const CreateUserForm = () => {
                         {/* Pre visualización mostrar la imagen seleccionada */}
                         <p className='mt-2'>Imagen seleccionada</p>
                         <Col sm={4}>
-                            {newUser.avatar ? (
-                                <img src={URL.createObjectURL(newUser.avatar)} alt="Avatar" className='uploaded-avatar' />
+                            {avatar ? (
+                                <img src={URL.createObjectURL(avatar)} alt="Avatar" className='uploaded-avatar' />
                             ) : (
                                 <img src={AvatarDefault} alt="Avatar por default" className='uploaded-avatar' />
                             )}
-
                         </Col>
 
                         <Col sm={8} >
                             {/* Errores */}
                             <p className="file-type-error">{errors && errors.avatar} </p>
-                            
                         </Col>
-
                     </Row>
                 </Form.Group>
 
@@ -156,4 +150,3 @@ export const CreateUserForm = () => {
         </>
     )
 }
-

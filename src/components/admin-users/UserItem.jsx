@@ -40,11 +40,11 @@ export const UserItem = ({ user }) => {
   return (
     <>
 
-      <td> <img src={user.avatar} alt="" /></td>
-      <td> {user.email}</td>
-      <td> <DisplayButton fx={handleShowUserDetails} arg={user} /></td>
-      <td> <DeleteButton fx={handleShowConfirmDelete} /></td>
-      <td> <EditButton fx={handleShow} arg={user} /></td>
+      <td><img src={user.avatar} alt=""/></td>
+      <td>{user.email}</td>
+      <td><DisplayButton fx={handleShowUserDetails} arg={user}/></td>
+      <td><DeleteButton fx={handleShowConfirmDelete}/></td>
+      <td><EditButton fx={handleShow} arg={user}/></td>
 
       {/* MODAL PARA DESPLEGAR FORM DE CREACIÓN DE USUARIO */}
 
