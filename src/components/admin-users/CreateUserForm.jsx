@@ -2,30 +2,127 @@ import React, { useContext, useState } from 'react';
 import { UserAdminContext } from './UserAdminContext';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import './admin-users.css';
-import AvatarDefault from '../../assets/user-avatar.png'
+import AvatarDefault from '../../assets/user-avatar.png';
+import { useForm } from '../../hooks/useForm';
+import { validations } from '../helpers/validations';
 
 export const CreateUserForm = () => {
 
+    const initialForm = {
+        email: '',
+        name: '',
+        lastName: '',
+        password: '',
+        role: '',
+        avatar: '',
+    }
+
+    const formErrors = {
+        email: false,
+        name: false,
+        lastName: false,
+        password: false,
+        role: false,
+        avatar: false,
+    }
+
+    const [errorEmail, setErrorEmail ] = useState({ error: false, msg: ""});
+
     const { addUser } = useContext(UserAdminContext);
 
-    const [newUser, setNewUser] = useState({
-        email: "", name: "", lastName: "", password: "", role: "", avatar: ""
-    });
+    // const [newUser, setNewUser] = useState({
+    //     email: "", name: "", lastName: "", password: "", role: "", avatar: ""
+    // });
 
     const [msgFileNotImage, setMsgFileNotImage] = useState(false);
-    const [errors, setErrors] = useState({});
+    const [errors, setErrors] = useState(formErrors);
 
     const onInputChange = (e) => {
+        onValidateEmail(e)
+        onValidateName(e)
+        onValidateLastName(e)
+        onValidatePassword(e)
+        onValidateRole(e)
         setNewUser({ ...newUser, [e.target.name]: e.target.value })
     }
 
-    const { email, name, lastName, password, role, avatar } = newUser;
+   // const { email, name, lastName, password, role, avatar } = newUser;
+    const { email, name, lastName, password, role, avatar, handleChange } = useForm(initialForm)
+
+    
+
+    // VALIDATIONS FROM LEAN
+
+    const onValidateEmail = ({ target }) => {
+        handleChange({target})
+        console.log(email);
+        if (validations.validarEmail(target.value)) {
+            target.className = 'form-control is-valid'
+            setErrors({...formErrors, email: true})
+            setErrorEmail({ error: false, msg: ""})
+        } else {
+            target.className = 'form-control is-invalid';
+            setErrors({...formErrors, email: false})
+            setErrorEmail({ error: true, msg: "Ingrese un formato de email válido."})
+        }
+    }
+    const onValidateName = ({ target }) => {
+        handleChange({target})
+        if (validations.validarTexto(target.value)) {
+            target.className = 'form-control is-valid'
+            errors[1] = true
+        } else {
+            target.className = 'form-control is-invalid';
+            errors[1] = false
+        }
+    }
+    const onValidateLastName = ({ target }) => {
+        handleChange({target})
+        if (validations.validarTexto(target.value)) {
+            target.className = 'form-control is-valid'
+            errors[2] = true
+        } else {
+            target.className = 'form-control is-invalid';
+            errors[2] = false
+        }
+    }
+    const onValidatePassword = ({ target }) => {
+        handleChange({target})
+        if (validations.validarPassword(target.value)) {
+            target.className = 'form-control is-valid'
+            errors[3] = true
+        } else {
+            target.className = 'form-control is-invalid';
+            errors[3] = false
+        }
+    }
+    const onValidateRole = ({ target }) => {
+        handleChange({target})//revisar porque esto no cambia el valor
+        console.log(target.value);
+        if (validations.validarTexto(target.value)) {
+            target.className = 'form-control is-valid'
+            errors[4] = true
+        } else {
+            target.className = 'form-control is-invalid';
+            errors[4] = false
+        }
+    }
+    const onValidateAvatar = (target) => {
+        handleChange(target)
+        if (validations.validarTexto(target.value)) {
+            target.className = 'form-control is-valid'
+            errors[5] = true
+        } else {
+            target.className = 'form-control is-invalid';
+            errors[5] = false
+        }
+    }
 
     /* Funciones específicas de manejo de avatar */
-    const handleFiles = (e) => {
-        const file = e.target.files[0];
+    const handleFiles = ({target}) => {
+        const file = target.files[0];
         const fileName = file.name.toLowerCase();
-
+        onValidateAvatar(target)
         if (!fileName.endsWith('.jpg') && !fileName.endsWith('.jpeg') && !fileName.endsWith('.png')) {
             setMsgFileNotImage(true);
             setErrors(prevErrors => ({
@@ -48,9 +145,20 @@ export const CreateUserForm = () => {
         setMsgFileNotImage(false)
     }
 
+    const validateErrors = () => {
+        const valores = Object.values(formErrors);
+        for (let i = 0; i < valores.length; i++) {
+            if (valores = false) return false
+        }
+        return true;
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (!validateErrors()) {
+            console.log("Se encontraron errores") // Agregarle un modal o alert con el mensaje.
+            return 
+        } 
         if (!newUser.avatar) {
             setNewUser(prevState => ({
                 ...prevState,
@@ -68,10 +176,12 @@ export const CreateUserForm = () => {
                     <Form.Label>Dirección de e-mail:</Form.Label>
                     <Form.Control
                         value={email}
-                        onChange={(e) => onInputChange(e)}
+                        onChange={onInputChange}
+                        onBlur={onValidateEmail}       
                         type="email"
                         name="email"
                         placeholder="Ingrese el email de la persona." />
+                       { errorEmail.error && <Form.Label> {errorEmail.msg} </Form.Label>}
                 </Form.Group>
 
                 <Form.Group className="mb-3" >
@@ -80,6 +190,8 @@ export const CreateUserForm = () => {
                         name="name"
                         value={name}
                         onChange={(e) => onInputChange(e)}
+                        onBlur={onValidateName}
+                        
                         type="text"
                         placeholder="Ingrese el nombre de la persona." />
                 </Form.Group>
@@ -89,7 +201,8 @@ export const CreateUserForm = () => {
                     <Form.Control
                         name="lastName"
                         value={lastName}
-                        onChange={(e) => onInputChange(e)}
+                        onChange={onInputChange}
+                        onBlur={onValidateLastName}
                         type="text"
                         placeholder="Ingrese el apellido de la persona." />
                 </Form.Group>
@@ -99,7 +212,8 @@ export const CreateUserForm = () => {
                     <Form.Control
                         name="password"
                         value={password}
-                        onChange={(e) => onInputChange(e)}
+                        onChange={onInputChange}
+                        onBlur={onValidatePassword}
                         type="password"
                         placeholder="Elija la contraseña original." />
                 </Form.Group>
@@ -107,7 +221,8 @@ export const CreateUserForm = () => {
                 <Form.Select
                     name="role"
                     value={role}
-                    onChange={(e) => onInputChange(e)}>
+                    onChange={onInputChange}>
+                    onBlur={onValidateRole}
                     <option>Rol</option>
                     <option value="Administrador">Administrador</option>
                 </Form.Select>
@@ -120,6 +235,7 @@ export const CreateUserForm = () => {
                         accept="image/png , image/jpeg, image/jpg"
                         file={avatar}
                         onChange={handleFiles}
+                        onBlur={onValidateAvatar}
                         multiple={false}
                     />
 

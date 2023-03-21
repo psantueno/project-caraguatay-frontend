@@ -2,7 +2,7 @@
     return value.trim().length < length ? false : true;
   };
   const validarTexto = (value) => {
-    const regEx = new RegExp("\\W")
+    const regEx = new RegExp(/^[ a-zA-ZñÑáéíóúÁÉÍÓÚ]+$/)
     return regEx.test(value)?true:false;
   };
   const validarNumero = (value) => {
@@ -11,12 +11,12 @@
   };
 
   const validarEmail = (value) => {
-    const regEx = new RegExp("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$")
+    const regEx = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g)
     return regEx.test(value)?true:false;
   };
 
   const validarPassword = (value) => {
-    const regEx = new RegExp('^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,16}$')
+    const regEx = new RegExp(/(?=(.*[0-9]))(?=.*[\!@#$%^&*()\\[\]{}\-_+=|:;"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{6,}/)
     return regEx.test(value)?true:false
 
   };
