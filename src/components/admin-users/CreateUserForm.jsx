@@ -33,34 +33,49 @@ export const CreateUserForm = () => {
     const [errorRole, setErrorRole ] = useState({ error: false, msg: ""});
     const [errorAvatar, setErrorAvatar ] = useState({ error: false, msg: ""});
     
+    const [msgFileNotImage, setMsgFileNotImage] = useState(false);
+    const [errors, setErrors] = useState(formErrors);
+    
     const { addUser } = useContext(UserAdminContext);
-
+    
+    const { email, name, lastName, password, role, avatar, form, handleChange, setForm } = useForm(initialForm)
     // const [newUser, setNewUser] = useState({
     //     email: "", name: "", lastName: "", password: "", role: "", avatar: ""
     // });
 
-    const [msgFileNotImage, setMsgFileNotImage] = useState(false);
-    const [errors, setErrors] = useState(formErrors);
 
-    const onInputChange = (e) => {
-        onValidateEmail(e)
-        onValidateName(e)
-        onValidateLastName(e)
-        onValidatePassword(e)
-        onValidateRole(e)
-        setForm({ ...newUser, [e.target.name]: e.target.value })
+    
+    const onEmailChange = ({target})=>{
+        console.log((target.value));
+        handleChange({target})
+        onValidateEmail(target)        
     }
-
+    const onNameChange = ({target})=>{
+        handleChange({target})
+        onValidateName(target)        
+    }
+    const onLastnameChange = ({target})=>{
+        handleChange({target})
+        onValidateLastName(target)        
+    }
+    const onPasswordChange = ({target})=>{
+        console.log(target.value);
+        handleChange({target})
+        onValidatePassword(target)        
+    }
+    const onRolChange = ({target})=>{
+        handleChange({target})
+        onValidateRole(target)        
+    }
+    
    // const { email, name, lastName, password, role, avatar } = newUser;
-    const { email, name, lastName, password, role, avatar, handleChange, setForm } = useForm(initialForm)
 
     
 
     // VALIDATIONS FROM LEAN
 
-    const onValidateEmail = ({ target }) => {
-        handleChange({target})
-        console.log(email);
+    const onValidateEmail = ( target ) => {
+
         if (validations.validarEmail(target.value)) {
             target.className = 'form-control is-valid'
             setErrors({...formErrors, email: true})
@@ -71,8 +86,7 @@ export const CreateUserForm = () => {
             setErrorEmail({ error: true, msg: "Ingrese un formato de email válido."})
         }
     }
-    const onValidateName = ({ target }) => {
-        handleChange({target})
+    const onValidateName = (target ) => {
         if (validations.validarTexto(target.value)) {
             target.className = 'form-control is-valid'
             setErrors({...formErrors, email: true})
@@ -83,8 +97,7 @@ export const CreateUserForm = () => {
             setErrorName({ error: true, msg: "El nombre solo admite letras."})
         }
     }
-    const onValidateLastName = ({ target }) => {
-        handleChange({target})
+    const onValidateLastName = (target) => {
         if (validations.validarTexto(target.value)) {
             target.className = 'form-control is-valid'
             setErrors({...formErrors, email: true})
@@ -95,8 +108,7 @@ export const CreateUserForm = () => {
             setErrorLastName({ error: true, msg: ""})
         }
     }
-    const onValidatePassword = ({ target }) => {
-        handleChange({target})
+    const onValidatePassword = ( target) => {
         if (validations.validarPassword(target.value)) {
             target.className = 'form-control is-valid'
             setErrors({...formErrors, email: true})
@@ -107,8 +119,7 @@ export const CreateUserForm = () => {
             setErrorPassword({ error: true, msg: ""})
         }
     }
-    const onValidateRole = ({ target }) => {
-        handleChange({target})//revisar porque esto no cambia el valor
+    const onValidateRole = (target ) => {
         console.log(target.value);
         if (validations.validarTexto(target.value)) {
             target.className = 'form-control is-valid'
@@ -121,7 +132,6 @@ export const CreateUserForm = () => {
         }
     }
     const onValidateAvatar = (target) => {
-        handleChange(target)
         if (validations.validarTexto(target.value)) {
             target.className = 'form-control is-valid'
             setErrors({...formErrors, email: true})
@@ -191,7 +201,7 @@ export const CreateUserForm = () => {
                     <Form.Label>Dirección de e-mail:</Form.Label>
                     <Form.Control
                         value={email}
-                        onChange={onInputChange}
+                        onChange={onEmailChange}
                         onBlur={onValidateEmail}       
                         type="email"
                         name="email"
@@ -204,7 +214,7 @@ export const CreateUserForm = () => {
                     <Form.Control
                         name="name"
                         value={name}
-                        onChange={(e) => onInputChange(e)}
+                        onChange={onNameChange}
                         onBlur={onValidateName}
                         type="text"
                         placeholder="Ingrese el nombre de la persona." />
@@ -216,7 +226,7 @@ export const CreateUserForm = () => {
                     <Form.Control
                         name="lastName"
                         value={lastName}
-                        onChange={onInputChange}
+                        onChange={onLastnameChange}
                         onBlur={onValidateLastName}
                         type="text"
                         placeholder="Ingrese el apellido de la persona." />
@@ -228,7 +238,7 @@ export const CreateUserForm = () => {
                     <Form.Control
                         name="password"
                         value={password}
-                        onChange={onInputChange}
+                        onChange={onPasswordChange}
                         onBlur={onValidatePassword}
                         type="password"
                         placeholder="Elija la contraseña original." />
@@ -238,7 +248,7 @@ export const CreateUserForm = () => {
                 <Form.Select
                     name="role"
                     value={role}
-                    onChange={onInputChange}>
+                    onChange={onRolChange}>
                     onBlur={onValidateRole}
                     <option>Rol</option>
                     <option value="Administrador">Administrador</option>
