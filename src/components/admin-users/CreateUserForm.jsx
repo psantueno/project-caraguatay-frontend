@@ -27,7 +27,12 @@ export const CreateUserForm = () => {
     }
 
     const [errorEmail, setErrorEmail ] = useState({ error: false, msg: ""});
-
+    const [errorName, setErrorName ] = useState({ error: false, msg: ""});
+    const [errorLastName, setErrorLastName ] = useState({ error: false, msg: ""});
+    const [errorPassword, setErrorPassword ] = useState({ error: false, msg: ""});
+    const [errorRole, setErrorRole ] = useState({ error: false, msg: ""});
+    const [errorAvatar, setErrorAvatar ] = useState({ error: false, msg: ""});
+    
     const { addUser } = useContext(UserAdminContext);
 
     // const [newUser, setNewUser] = useState({
@@ -43,11 +48,11 @@ export const CreateUserForm = () => {
         onValidateLastName(e)
         onValidatePassword(e)
         onValidateRole(e)
-        setNewUser({ ...newUser, [e.target.name]: e.target.value })
+        setForm({ ...newUser, [e.target.name]: e.target.value })
     }
 
    // const { email, name, lastName, password, role, avatar } = newUser;
-    const { email, name, lastName, password, role, avatar, handleChange } = useForm(initialForm)
+    const { email, name, lastName, password, role, avatar, handleChange, setForm } = useForm(initialForm)
 
     
 
@@ -70,30 +75,36 @@ export const CreateUserForm = () => {
         handleChange({target})
         if (validations.validarTexto(target.value)) {
             target.className = 'form-control is-valid'
-            errors[1] = true
+            setErrors({...formErrors, email: true})
+            setErrorName({ error: false, msg: ""})
         } else {
             target.className = 'form-control is-invalid';
-            errors[1] = false
+            setErrors({...formErrors, email: false})
+            setErrorName({ error: true, msg: "El nombre solo admite letras."})
         }
     }
     const onValidateLastName = ({ target }) => {
         handleChange({target})
         if (validations.validarTexto(target.value)) {
             target.className = 'form-control is-valid'
-            errors[2] = true
+            setErrors({...formErrors, email: true})
+            setErrorLastName({ error: false, msg: "El apellido solo admite letras."})
         } else {
             target.className = 'form-control is-invalid';
-            errors[2] = false
+            setErrors({...formErrors, email: false})
+            setErrorLastName({ error: true, msg: ""})
         }
     }
     const onValidatePassword = ({ target }) => {
         handleChange({target})
         if (validations.validarPassword(target.value)) {
             target.className = 'form-control is-valid'
-            errors[3] = true
+            setErrors({...formErrors, email: true})
+            setErrorPassword({ error: false, msg: "Debe usar al menos 1 minúscula, una mayúscula, 1 caracter especial. Mínimo 6 caracteres."})
         } else {
             target.className = 'form-control is-invalid';
-            errors[3] = false
+            setErrors({...formErrors, email: false})
+            setErrorPassword({ error: true, msg: ""})
         }
     }
     const onValidateRole = ({ target }) => {
@@ -101,20 +112,24 @@ export const CreateUserForm = () => {
         console.log(target.value);
         if (validations.validarTexto(target.value)) {
             target.className = 'form-control is-valid'
-            errors[4] = true
+            setErrors({...formErrors, email: true})
+            setErrorRole({ error: false, msg: "Seleccione una opción."})
         } else {
             target.className = 'form-control is-invalid';
-            errors[4] = false
+            setErrors({...formErrors, email: false})
+            setErrorRole({ error: true, msg: ""})
         }
     }
     const onValidateAvatar = (target) => {
         handleChange(target)
         if (validations.validarTexto(target.value)) {
             target.className = 'form-control is-valid'
-            errors[5] = true
+            setErrors({...formErrors, email: true})
+            setErrorAvatar({ error: false, msg: "La imagen no debe pesar más de XX MB."})
         } else {
             target.className = 'form-control is-invalid';
-            errors[5] = false
+            setErrors({...formErrors, email: false})
+            setErrorAvatar({ error: true, msg: ""})
         }
     }
 
@@ -131,7 +146,7 @@ export const CreateUserForm = () => {
             }));
             return;
         }
-        setNewUser(prevState => ({
+        setAvatar(prevState => ({
             ...prevState,
             avatar: file
         }));
@@ -148,7 +163,7 @@ export const CreateUserForm = () => {
     const validateErrors = () => {
         const valores = Object.values(formErrors);
         for (let i = 0; i < valores.length; i++) {
-            if (valores = false) return false
+            if (valores === false) return false
         }
         return true;
     }
@@ -159,13 +174,13 @@ export const CreateUserForm = () => {
             console.log("Se encontraron errores") // Agregarle un modal o alert con el mensaje.
             return 
         } 
-        if (!newUser.avatar) {
-            setNewUser(prevState => ({
+        if (!avatar) {
+            setForm(prevState => ({
                 ...prevState,
                 avatar: AvatarDefault
             }));
         }
-        addUser(email, name, lastName, password, role, newUser.avatar);
+        addUser(email, name, lastName, password, role, avatar);
     }
     console.log(email, name, lastName, password, role, avatar);
     return (
@@ -191,9 +206,9 @@ export const CreateUserForm = () => {
                         value={name}
                         onChange={(e) => onInputChange(e)}
                         onBlur={onValidateName}
-                        
                         type="text"
                         placeholder="Ingrese el nombre de la persona." />
+                        { errorName.error && <Form.Label> {errorName.msg} </Form.Label>}
                 </Form.Group>
 
                 <Form.Group className="mb-3">
@@ -205,6 +220,7 @@ export const CreateUserForm = () => {
                         onBlur={onValidateLastName}
                         type="text"
                         placeholder="Ingrese el apellido de la persona." />
+                        { errorLastName.error && <Form.Label> {errorLastName.msg} </Form.Label>}
                 </Form.Group>
 
                 <Form.Group className="mb-3" >
@@ -216,6 +232,7 @@ export const CreateUserForm = () => {
                         onBlur={onValidatePassword}
                         type="password"
                         placeholder="Elija la contraseña original." />
+                        {errorPassword.error && <Form.Label> {errorPassword.msg} </Form.Label>}
                 </Form.Group>
 
                 <Form.Select
@@ -225,6 +242,7 @@ export const CreateUserForm = () => {
                     onBlur={onValidateRole}
                     <option>Rol</option>
                     <option value="Administrador">Administrador</option>
+                    { errorRole.error && <Form.Label> {errorRole.msg} </Form.Label>}
                 </Form.Select>
 
                 <Form.Group controlId="formFile" className="mb-3 mt-3">
@@ -237,7 +255,8 @@ export const CreateUserForm = () => {
                         onChange={handleFiles}
                         onBlur={onValidateAvatar}
                         multiple={false}
-                    />
+                        />
+                        { errorAvatar.error && <Form.Label> {errorAvatar.msg} </Form.Label>}
 
                     <Row>
                         {/* Pre visualización mostrar la imagen seleccionada */}
