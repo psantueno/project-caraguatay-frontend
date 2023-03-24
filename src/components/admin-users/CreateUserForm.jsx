@@ -39,11 +39,6 @@ export const CreateUserForm = () => {
     const { addUser } = useContext(UserAdminContext);
     
     const { email, name, lastName, password, role, avatar, form, handleChange, setForm } = useForm(initialForm)
-    // const [newUser, setNewUser] = useState({
-    //     email: "", name: "", lastName: "", password: "", role: "", avatar: ""
-    // });
-
-
     
     const onEmailChange = ({target})=>{
         console.log((target.value));
@@ -156,7 +151,7 @@ export const CreateUserForm = () => {
             }));
             return;
         }
-        setAvatar(prevState => ({
+        setForm(prevState => ({
             ...prevState,
             avatar: file
         }));
