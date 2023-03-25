@@ -41,35 +41,31 @@ export const CreateUserForm = () => {
     const { email, name, lastName, password, role, avatar, form, handleChange, setForm } = useForm(initialForm)
     
     const onEmailChange = ({target})=>{
-        console.log((target.value));
         handleChange({target})
-        onValidateEmail(target)        
+        onValidateEmail({target})        
     }
     const onNameChange = ({target})=>{
         handleChange({target})
-        onValidateName(target)        
+        onValidateName({target})        
     }
     const onLastnameChange = ({target})=>{
         handleChange({target})
-        onValidateLastName(target)        
+        onValidateLastName({target})        
     }
     const onPasswordChange = ({target})=>{
         console.log(target.value);
         handleChange({target})
-        onValidatePassword(target)        
+        onValidatePassword({target})        
     }
     const onRolChange = ({target})=>{
         handleChange({target})
-        onValidateRole(target)        
+        onValidateRole({target})        
     }
-    
-   // const { email, name, lastName, password, role, avatar } = newUser;
-
-    
+        
 
     // VALIDATIONS FROM LEAN
 
-    const onValidateEmail = ( target ) => {
+    const onValidateEmail = ( {target} ) => {
 
         if (validations.validarEmail(target.value)) {
             target.className = 'form-control is-valid'
@@ -81,7 +77,7 @@ export const CreateUserForm = () => {
             setErrorEmail({ error: true, msg: "Ingrese un formato de email válido."})
         }
     }
-    const onValidateName = (target ) => {
+    const onValidateName = ({target} ) => {
         if (validations.validarTexto(target.value)) {
             target.className = 'form-control is-valid'
             setErrors({...formErrors, email: true})
@@ -92,29 +88,29 @@ export const CreateUserForm = () => {
             setErrorName({ error: true, msg: "El nombre solo admite letras."})
         }
     }
-    const onValidateLastName = (target) => {
+    const onValidateLastName = ({target}) => {
         if (validations.validarTexto(target.value)) {
             target.className = 'form-control is-valid'
             setErrors({...formErrors, email: true})
-            setErrorLastName({ error: false, msg: "El apellido solo admite letras."})
+            setErrorLastName({ error: false, msg: ""})
         } else {
             target.className = 'form-control is-invalid';
             setErrors({...formErrors, email: false})
-            setErrorLastName({ error: true, msg: ""})
+            setErrorLastName({ error: true, msg: "El apellido solo admite letras."})
         }
     }
-    const onValidatePassword = ( target) => {
+    const onValidatePassword = ( {target}) => {
         if (validations.validarPassword(target.value)) {
             target.className = 'form-control is-valid'
             setErrors({...formErrors, email: true})
-            setErrorPassword({ error: false, msg: "Debe usar al menos 1 minúscula, una mayúscula, 1 caracter especial. Mínimo 6 caracteres."})
+            setErrorPassword({ error: false, msg: ""})
         } else {
             target.className = 'form-control is-invalid';
             setErrors({...formErrors, email: false})
-            setErrorPassword({ error: true, msg: ""})
+            setErrorPassword({ error: true, msg: "Debe usar al menos 1 minúscula, una mayúscula, 1 caracter especial. Mínimo 6 caracteres."})
         }
     }
-    const onValidateRole = (target ) => {
+    const onValidateRole = ({target} ) => {
         console.log(target.value);
         if (validations.validarTexto(target.value)) {
             target.className = 'form-control is-valid'
@@ -126,7 +122,7 @@ export const CreateUserForm = () => {
             setErrorRole({ error: true, msg: ""})
         }
     }
-    const onValidateAvatar = (target) => {
+    const onValidateAvatar = ({target}) => {
         if (validations.validarTexto(target.value)) {
             target.className = 'form-control is-valid'
             setErrors({...formErrors, email: true})
@@ -245,7 +241,7 @@ export const CreateUserForm = () => {
                     value={role}
                     onChange={onRolChange}>
                     onBlur={onValidateRole}
-                    <option>Rol</option>
+                    <option value="" disabled selected hidden>Rol</option>
                     <option value="Administrador">Administrador</option>
                     { errorRole.error && <Form.Label> {errorRole.msg} </Form.Label>}
                 </Form.Select>
