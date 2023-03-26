@@ -14,7 +14,7 @@ export const Campings = () => {
           <h5><b>Campings</b></h5>
         </Row>
 
-        <Container className='list-cards-cultura'>
+        <Container className='list-cards-section'>
 
           {
             ListCampings.map((camping) => (

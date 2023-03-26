@@ -1,8 +1,8 @@
-import {FormalitiesBtns} from '../../assets/data/FormalitiesBtns'
-import { Container, Row } from 'react-bootstrap'
-import { ButtonNoUrlList } from '../buttonsWithoutURL/ButtonNoUrlList'
+import {FormalitiesBtns} from '../../../assets/data/FormalitiesBtns'
+import { Container } from 'react-bootstrap'
+import { ButtonNoUrlList } from '../../buttonsWithoutURL/ButtonNoUrlList'
 import { MacroClick, DriveLicence, CommerceEnable, PrivateConstruction } from '../Formalities';
-import { useState , useEffect} from 'react'
+import { useState } from 'react'
 
 export const Formalities = () => {
 
@@ -26,9 +26,10 @@ export const Formalities = () => {
 
   return (
     <>
-      <Container>
+      <Container className='containers-home'>
 
-        <h1>Guía de Trámites</h1>
+        <h4>Guía de Trámites</h4>
+        <hr />
 
             <ButtonNoUrlList 
               changeDisplay={changeDisplay} 
