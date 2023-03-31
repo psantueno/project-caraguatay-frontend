@@ -22,14 +22,14 @@ export const DPCard = ({image, title, start, status, req1, req2, description}) =
                 <div className="requirements-card">
                     <p className="subtitles-card"><b>Requisitos:</b></p>
                     <ul>
-                        <li>{ req1 }</li>
-                        <li>{ req2 }</li>
+                        <li style={{listStyleType: 'disclosure-closed'}}>{ req1 }</li>
+                        <li style={{listStyleType: 'disclosure-closed'}}>{ req2 }</li>
                     </ul>
                 </div>
 
                 <div className="btns-admin-card">
                     <EditButton />
-                    <DeleteButton/>
+                    <DeleteButton />
                 </div>
                 
             </div>

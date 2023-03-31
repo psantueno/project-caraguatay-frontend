@@ -783,7 +783,10 @@ color:#315C94;
 
 .btns-admin-card {
   border-top: 1px ridge;
+  display: flex;
+  justify-content: flex-end;
 }
+
 /* Add rounded corners to the top left and the top right corner of the image */
 
 /* .row{
@@ -792,6 +795,34 @@ color:#315C94;
 
 
 /* END BUTTONS */
+
+/*  START FORM DIGITAL POINT */
+
+.helper-form {
+  color: #315C94;
+  font-size: 0.7em !important;
+  margin-top: 2px;
+  margin-bottom: 0;
+}
+
+.characters-counter {
+  color: #315C94;
+  font-size: 0.7em !important;
+  margin-top: 2px;
+  margin-bottom: 0;
+  font-style: italic;
+  text-align: right;
+}
+
+.container-helpers {
+  margin-bottom: 10px;
+}
+
+.items-requirements {
+  font-size: 0.9em;
+}
+
+/*  END FORM DIGITAL POINT */
 
 
 

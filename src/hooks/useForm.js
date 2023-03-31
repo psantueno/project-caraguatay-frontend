@@ -12,16 +12,18 @@ La funcion "FormValidation" recibe los datos del form, eventos, inputs y errores
 */
 
 
-export const useForm = (initialForm = {}, FormValidations = {}, inputs={}, handleShow={}) => {
+export const useForm = (initialForm = {}, FormValidations = {}, inputs = {}, handleShow = {}) => {
 
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
+  const [requirementValue, setRequirementValue] = useState("");
+  const [items, setItems] = useState([]);       // Maneja los ítems que se agregan en el input de requisitos.
 
-  const handleChange = ({target}) => {
+  const handleChange = ({ target }) => {
     const { name, value } = target;
-    console.log(target);
+
     setForm(prevState => ({
       ...prevState,
       [name]: value
@@ -29,8 +31,13 @@ export const useForm = (initialForm = {}, FormValidations = {}, inputs={}, handl
   }
 
   const handleBlur = (e) => {
-    handleChange(e);
-    setErrors(FormValidations(form, e, inputs, errors));
+    if (!(e.target.name === "image")) {                            //adaptado para que no genere inconsistencias en DP Create new.
+      handleChange(e);
+      setErrors(FormValidations(form, e, inputs, errors));
+    } else {
+      setErrors(FormValidations(form, e, inputs, errors));
+    }
+
   };
 
   const handleKeyUp = (e) => {
@@ -44,7 +51,8 @@ export const useForm = (initialForm = {}, FormValidations = {}, inputs={}, handl
   }
 
   const handleReset = () => {                                  // establece los valores del form a los iniciales y resetea los 
-    setForm(initialForm);                                     // className de todos los inputs evitando que queden en rojo o verde.
+    setForm(initialForm);
+    setItems([]);                                             // className de todos los inputs evitando que queden en rojo o verde.
     for (let clave in inputs) {
       inputs[clave].current.className = "form-control";
     }
@@ -60,6 +68,9 @@ export const useForm = (initialForm = {}, FormValidations = {}, inputs={}, handl
       console.log(form);
       setShowMessage(true);
       setForm(initialForm);
+      setItems([])
+      setRequirementValue('')
+      inputs.image.current.value = '';
       handleReset();
 
     } else {
@@ -80,6 +91,10 @@ export const useForm = (initialForm = {}, FormValidations = {}, inputs={}, handl
     handleSubmit,
     setShowMessage,
     setErrors,
+    requirementValue,
+    items,
+    setItems,
+    setRequirementValue,
     loading,
     errors,
     showMessage,
