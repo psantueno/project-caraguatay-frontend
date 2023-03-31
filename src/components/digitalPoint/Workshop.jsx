@@ -1,6 +1,7 @@
 import { Button, Container, Row } from 'react-bootstrap';
 import { ListDPNews } from '../../assets/data/ListDPNews';
 import { DPCard } from './components/DPCard';
+import { ModalCreate } from './components/modals/ModalCreate';
 
 
 export const Workshop = () => {
@@ -8,17 +9,14 @@ export const Workshop = () => {
   return (
 
     <Container>
-      
-        <h5><b>Capacitaciones</b></h5>
 
-        <div className='box-btn-DP'>
-        <Button style={{ width: 'auto', textAlign: '' }}>
-          <i className="fas fa-plus"></i> Nuevo
-        </Button>
-      </div>
-      
+      <h5><b>Capacitaciones</b></h5>
+
+      <ModalCreate />
 
       <Container className='list-cards-section'>
+
+        {/* MAP DE LAS TARJETAS DE TALLERES / CAPACITACIONES */}
 
         {
           ListDPNews.map((dpnew) => (
@@ -32,6 +30,7 @@ export const Workshop = () => {
         }
 
       </Container>
+
     </Container>
   )
 }
