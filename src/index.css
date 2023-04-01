@@ -155,9 +155,14 @@ z-index: 10000;
 /*START HOME*/
 
 .banner-home{
-  margin-top: 15px;
+  margin-top: 20px;
+  margin-bottom: 25px;
   -webkit-user-select: none !important;
   user-select: none !important;
+}
+
+.containers-home {
+  margin-bottom: 35px;
 }
 
 /* END HOME*/
@@ -525,9 +530,9 @@ a.link-activated , .link-activated{
 
   -webkit-user-select: none !important;
   user-select: none;
-  background-color: #d2d5d8;
-  color: #626b76;
-   width: 47%;/* option traditional*/
+  background-color: #acd8ec;
+  color: #315c94;
+  width: 47%;/* option traditional*/
   flex: 10%;
   height: 80px;
   padding: 3px;
@@ -553,7 +558,7 @@ a.link-activated:hover, .link-activated:hover {
 }
 
 /* START CULTURA Y TURISMO - CAMPING */
-.cultura-card {
+.sections-card {
   width: 260px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
@@ -561,7 +566,7 @@ a.link-activated:hover, .link-activated:hover {
   margin-bottom: 35px;
 }
 
-.cultura-card img{
+.sections-card img{
   width: 100%;
   height: auto;
   border-radius: 5px 5px 0 0;
@@ -580,6 +585,7 @@ color:#315C94;
 
 .column-contact > p > i {
   color:#315c94;
+  text-shadow: none !important;
   /* margin-top: 20px; */
 }
 
@@ -587,11 +593,11 @@ color:#315C94;
  text-decoration: none;
 }
 
-.card-title-cultura {
+.card-title-section {
   margin-bottom: 15px;
 }
 
-.list-cards-cultura {
+.list-cards-section {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -703,7 +709,7 @@ color:#315C94;
   --bs-btn-hover-color: #fff !important;
   --bs-btn-hover-border-color: #fff !important;
   --bs-btn-hover-bg: #315C94 !important;
-  --bs-btn-hover-border-color: #315C94 !important;
+  --bs-btn-hover-border-color: #ffffff !important;
   --bs-btn-active-color: #fff;
   --bs-btn-active-bg: #fff !important;
   --bs-btn-active-border-color: #315C94 !important;
@@ -717,6 +723,7 @@ color:#315C94;
 .btn {
   font-weight: bold !important;
   border-radius: 50px !important;
+  box-shadow: 0px 4px 4px rgba(199, 199, 199, 1);
 }
 
 .alert-file-not-image {
@@ -739,8 +746,47 @@ color:#315C94;
   color:  #ffffff;
 }
   
-
 /* END NEWS FORM */
+
+/* START DIGITAL POINT */
+
+.registration-card {
+  margin-bottom: 5px;
+}
+
+.registration-card-open {
+  margin-bottom: 5px;
+  color: #198754;
+  font-weight: 400;
+  text-shadow: 1px 1px 10px rgba(99, 195, 129, 0.8);
+}
+
+.registration-card-closed {
+  margin-bottom: 5px;
+  color: #dc3545;
+  font-weight: 400;
+  text-shadow: 1px 1px 10px rgba(208, 116, 116, 0.8);
+}
+
+.description-card {
+  margin-bottom: 0;
+  margin-top: 12px;
+}
+
+.subtitles-card {
+  margin-bottom: 0;
+}
+
+.box-btn-DP {
+  display: flex;
+  justify-content: end;
+}
+
+.btns-admin-card {
+  border-top: 1px ridge;
+  display: flex;
+  justify-content: flex-end;
+}
 
 /* Add rounded corners to the top left and the top right corner of the image */
 
@@ -750,6 +796,34 @@ color:#315C94;
 
 
 /* END BUTTONS */
+
+/*  START FORM DIGITAL POINT */
+
+.helper-form {
+  color: #315C94;
+  font-size: 0.7em !important;
+  margin-top: 2px;
+  margin-bottom: 0;
+}
+
+.characters-counter {
+  color: #315C94;
+  font-size: 0.7em !important;
+  margin-top: 2px;
+  margin-bottom: 0;
+  font-style: italic;
+  text-align: right;
+}
+
+.container-helpers {
+  margin-bottom: 10px;
+}
+
+.items-requirements {
+  font-size: 0.9em;
+}
+
+/*  END FORM DIGITAL POINT */
 
 
 

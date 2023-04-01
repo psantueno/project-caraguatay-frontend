@@ -1,24 +1,26 @@
-import { Container } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap'
 import { ButtonSquareList } from '../components/buttonsSquare/ButtonSquareList';
 import { DigitalPointBtns } from '../assets/data/DigitalPointBtns';
 import { DigitalPointRouter } from '../routers/DigitalPointRouter';
-import logo from '../assets/images/Puntodigital-banner.png'
+import bannerPD from '../assets/images/banner-punto-digital.png'
 
 export const PuntoDigital = () => {
+
   return (
-    <Container style={{maxWidth:'1200px', textAlign:'center'}}>
-     
-    
-      <img src={logo} alt=''  style={{minWidth:'300px'}}/>
+
+    <Container>
+
+      <img src={bannerPD} alt='' style={{ width: '100%', marginBottom: '40px', marginTop: '30px' }} />
+
+      <ButtonSquareList buttons={DigitalPointBtns} />
+
+      <Row className='text-indent'>
+
+      </Row >
+
+      <DigitalPointRouter />
 
 
-     <Container>
-      
-        <h1>  Punto Digital</h1>
-        <ButtonSquareList buttons={DigitalPointBtns} />
-        <DigitalPointRouter />
-        </Container>
-
-      </Container>
+    </Container>
   )
 }
