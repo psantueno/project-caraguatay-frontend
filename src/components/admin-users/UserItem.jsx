@@ -30,7 +30,7 @@ export const UserItem = ({ user }) => {
 
   const handleConfirmDeletion = (user) => {
     deleteUser(userIdToDelete);
-    setShowConfirmDelete(false);
+    
   }
 
   useEffect(() => {
