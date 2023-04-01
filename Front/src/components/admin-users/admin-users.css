@@ -1,0 +1,33 @@
+.table-users {
+    border-right: none;
+    border-left: none;
+    border-top: none;
+}
+
+.buttonPosition{
+    float: right
+}
+
+.data-highlight {
+    font-weight: bold;
+    color: #315C94;
+   
+}
+
+.avatar {
+    max-width: 70px;
+    margin: auto;
+}
+
+.uploaded-avatar {
+    width: 70px;
+    height: 70px;
+    margin: auto;
+    border-radius: 50px;
+    border: 2px solid #315C94;
+}
+
+.file-type-error {
+    color: rgb(167, 33, 33);
+    margin-top: 5px;
+}

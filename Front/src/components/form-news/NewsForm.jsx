@@ -1,0 +1,335 @@
+import { useRef, useState } from 'react';
+import { Button, Form, Container, Col, Row, Table, Alert } from 'react-bootstrap';
+import { useForm } from '../../hooks/useForm';
+import { NewsFormValidations } from './NewsFormValidations';
+import { DeleteButton } from '../buttons/DeleteButton'
+import dayjs from "dayjs";
+
+
+const initialForm = {
+  date: dayjs().format("YYYY-MM-DD"),
+  title: "",
+  mainText: "",
+  category: "default",
+  files: []
+};
+
+
+export const NewsForm = () => {
+
+  const [msgFileNotImage, setMsgFileNotImage] = useState(false);
+
+
+  const inputs = {
+    title: useRef(),
+    mainText: useRef(),
+    date: useRef(),
+    category: useRef(),
+    files: useRef()
+  }
+
+  const {
+    form,
+    setForm,
+    handleChange,
+    handleBlur,
+    handleKeyUp,
+    handleMouseup,
+    handleReset,
+    handleSubmit,
+    setShowMessage,
+    setErrors,
+    files,
+    errors,
+    showMessage,
+  } = useForm(initialForm, NewsFormValidations, inputs)
+
+
+  /* Funciones específicas de news form */
+
+  const handleFiles = (e) => {
+
+    const { files } = e.target;
+
+    for (let i = 0; i < files.length; i++) {                // validación de que todos los elementos sean imagenes.
+      const fileName = files[i].name.toLowerCase();
+      if (!fileName.endsWith('.jpg') && !fileName.endsWith('.jpeg') && !fileName.endsWith('.png')) {
+        setMsgFileNotImage(true);
+        setErrors({
+          ...errors,
+          files: `El archivo "${fileName}" no es una imagen `
+        });
+        return;
+      }
+    }
+    delete errors.files;
+    setForm(prevState => {
+      const newFiles = Array.from(files);
+      return {
+        ...prevState,
+        files: prevState.files.concat(newFiles)
+      };
+    });
+  };
+  
+
+  const handleClick = () => {
+    inputs.files.current.click();
+  };
+
+
+  const handleDelete = (index) => {
+    setForm(prevForm => ({
+      ...prevForm,
+      files: prevForm.files.filter((_, i) => i !== index)
+    }));
+  }
+
+  const showFileNotImage = () => {
+    delete errors.files;
+    setMsgFileNotImage(false)
+  }
+
+
+  return (
+    <>
+      <Alert show={showMessage} variant="primary" className="mt-2">
+        <Row>
+          <Col>
+            <p>La publicación se ha creado correctamente.</p>
+          </Col>
+          <Col className="d-flex justify-content-end">
+            <Button
+              onClick={() => setShowMessage(false)}>
+              Cerrar
+            </Button>
+          </Col>
+        </Row>
+      </Alert>
+
+      <Container className='mt-4'>
+        <h4>Crear noticia</h4>
+      </Container>
+
+      <Container className='mb-3 mt-3'>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group controlId='category'>
+            <Form.Label className='mt-1 form-field-name'>Categoría</Form.Label>
+            <Form.Select
+              name="category"
+              value={form.category}
+              ref={inputs.category}
+              onChange={handleChange}
+              onMouseUp={handleMouseup}
+              onBlur={handleBlur}
+              required
+            >
+              <option value="default">-Seleccione una categoría-</option>
+              <option value="Deportes" >Deportes</option>
+              <option value="Comunicados" >Comunicados</option>
+              <option value="Cultura y turismo" >Cultura y turismo</option>
+              <option value="Punto Digital">Punto digital</option>
+            </Form.Select>
+
+            {
+              errors && errors.category
+                ? <Form.Control.Feedback type="invalid">
+                  {errors.category}
+                </Form.Control.Feedback>
+                : null
+            }
+
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="date">
+            <Form.Label className='mt-2 form-field-name'>Fecha</Form.Label>
+            <Form.Control
+              name="date"
+              type="date"
+              min={dayjs().format("YYYY-MM-DD")}
+              value={form.date}
+              ref={inputs.date}
+              onChange={handleChange}
+              onKeyUp={handleKeyUp}
+              onBlur={handleBlur}
+              required
+            />
+
+            {
+              errors && errors.date
+                ? <Form.Control.Feedback type="invalid">
+                  {errors.date}
+                </Form.Control.Feedback>
+                : null
+            }
+
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId='title'>
+            <Form.Label className='mt-1 form-field-name'>Título</Form.Label>
+            <Form.Control as="textarea" rows={1} size="md"
+              name="title"
+              placeholder="Escriba el título de la publicación"
+              value={form.title}
+              ref={inputs.title}
+              onChange={handleChange}
+              onKeyUp={handleKeyUp}
+              onBlur={handleBlur}
+              required
+            />
+
+            {
+              errors && errors.title
+                ? <Form.Control.Feedback type="invalid">
+                  {errors.title}
+                </Form.Control.Feedback>
+                : null
+            }
+
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId='mainText'>
+            <Form.Label className='mt-1 form-field-name'>Texto completo</Form.Label>
+            <Form.Control as="textarea" rows={6} cols={50} size="md"
+              name="mainText"
+              placeholder="Escriba el texto de la publicación"
+              value={form.mainText}
+              ref={inputs.mainText}
+              onChange={handleChange}
+              onKeyUp={handleKeyUp}
+              onBlur={handleBlur}
+              required
+            />
+
+            {
+              errors && errors.mainText
+                ? <Form.Control.Feedback type="invalid">
+                  {errors.mainText}
+                </Form.Control.Feedback>
+                : null
+            }
+
+          </Form.Group>
+
+          <Form.Group controlId="images" className="mb-3">
+            <Form.Label className='mt-1 form-field-name'>Seleccione las imágenes asociadas</Form.Label>
+
+            <Form.Control
+              type="file"
+              name="images"
+              style={{ display: 'none' }}
+              multiple
+              ref={inputs.files}
+              onChange={handleFiles}
+              onBlur={handleBlur}
+              accept="image/png , image/jpeg, image/jpg"
+            />
+
+            {/* SIMULADOR DE INPUT FILES */}
+
+            <Table className='table'>
+              <tbody>
+                <tr className='row-table'>
+                  <td style={{ backgroundColor: "#e9ecef", padding: "5px" }} >
+                    Imágenes seleccionadas:
+                  </td>
+
+                  <td name="files" style={{ backgroundColor: "#ffffff", padding: "5px", border: "1px solid", textAlign: "center" }}>
+                    {files.length}
+                  </td>
+                </tr>
+              </tbody>
+            </Table>
+
+            {/* SIMULADOR DE INPUT FILES */}
+
+            {/* ERRORS MANAGEMENT */}
+
+            {
+              files.length > 0 && files.length <= 10
+                ? (
+                  <p className="images-msg-ok">
+                    Archivos cargados correctamente <b><i className="fas fa-check"></i></b>.<br />
+                  </p>
+                )
+                : null
+            }
+
+            {/* ERRORS MANAGEMENT */}
+
+            <Col>
+              <div className='container-upload-image'>
+                <div onClick={handleClick} className='box-upload'>
+                  <img className="icon-camera" src="https://img.icons8.com/sf-regular/48/d2d5d8/null/add-camera.png" />
+                </div>
+              </div>
+            </Col>
+
+            {/* MAPEO DE LAS PREVIEW Y HANDLEDELETE */}
+
+            {
+              files && files.length > 0
+                ? <div className='images-preview'>
+                  {
+                    files.map((file, index) => {
+                      return (
+                        <div className='box-individual-preview' key={index}>
+                          <img src={URL.createObjectURL(file)} alt={file.name} className="image-individual" />
+                          <DeleteButton fx={handleDelete} arg={index} size="sm" />
+                        </div>
+                      )
+                    })
+                  }
+                </div>
+                : null
+            }
+
+            {/* MAPEO DE LAS PREVIEW Y HANDLEDELETE */}
+
+            {/* DETALLE DE ERRORS IMAGES */}
+
+            <Alert show={msgFileNotImage} className="alert-file-not-image">
+              <p className="images-msg-error">
+                {errors.files}<b><i className="fas fa-exclamation-circle"></i></b>.<br />
+                Extensiones aceptadas: ".jpeg", ".jpg" y ".png".
+              </p>
+              <Col className="d-flex justify-content-end">
+                <Button
+                  className="btn-close-alert"
+                  onClick={() => showFileNotImage()}
+                >
+                  Cerrar <i className="fas fa-times-circle"></i>
+                </Button>
+              </Col>
+            </Alert>
+
+            {
+              files.length > 0 && files.length > 10
+                ? (
+                  <p className="images-msg-error">
+                    Errores encontrados <b><i className="fas fa-exclamation-circle"></i></b><br />
+                    Seleccione un máximo de <b>10</b> imágenes. <br />
+                    <span>
+                      Por favor elimine <b> {files.length - 10} </b> de la lista actual.
+                    </span>
+                  </p>
+                )
+                : null
+            }
+
+            {/* DETALLE DE ERRORS IMAGES  */}
+
+          </Form.Group>
+
+          <Button className='m-2' type="submit" disabled={files.length > 10 || msgFileNotImage} >
+            Confirmar
+          </Button>
+          <Button className='m-2' type="reset" onClick={handleReset}>
+            Borrar
+          </Button>
+        </Form>
+      </Container>
+
+    </>
+  )
+}

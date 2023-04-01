@@ -1,0 +1,898 @@
+* {
+  font-family: 'Inter', sans-serif;
+}
+a { 
+    text-decoration: none !important;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-title {
+    font-size: 25px;
+    margin-top: 5px;
+   
+}
+/* Titles for forms */
+.form-title {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.form-link {
+  text-decoration: none;
+  color: #000;
+}
+
+.form-link:hover {
+  text-decoration: none;
+  color: #315C94;
+}
+
+/* START HEADER */
+
+.main-div-header{
+  display:flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #c1cdd6;
+  border-color: #315C94;
+border-bottom-style: solid;
+border-width: thick;
+position: fixed;
+z-index: 10000;
+}
+
+.logo-header{
+  width: 140px;
+  height: 75px;
+}
+
+.main-div-header i.fa-user {
+  font-size: 1.5em;
+  color: #315c94;
+  text-shadow: 2px 2px 4px rgba(49, 92, 148, 0.4)
+}
+
+/* btn-hamburguer */
+
+.navbar-hamburguer {
+  position: relative;
+}
+
+.navbar-hamburguer-toggler {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  height: 19px;
+  justify-content: space-between;
+  outline: none;
+  padding: 0;
+  width: 25px;
+}
+
+.navbar-hamburguer-toggler-line {
+  background-color: #315C94;
+  height: 3px;
+  transition: all 0.2s ease-in-out;
+  width: 100%;
+  box-shadow: 2px 2px 4px rgba(49, 92, 148, 0.4);
+}
+
+.navbar-hamburguer-toggler.open .navbar-hamburguer-toggler-line:first-of-type {
+  transform: rotate(45deg) translate(5px, 5px);
+  box-shadow: 2px 2px 4px rgba(49, 92, 148, 0.4);
+}
+
+.navbar-hamburguer-toggler.open .navbar-hamburguer-toggler-line:nth-of-type(2) {
+  opacity: 0;
+}
+
+.navbar-hamburguer-toggler.open .navbar-hamburguer-toggler-line:last-of-type {
+  transform: rotate(-45deg) translate(6px, -6px);
+  box-shadow: 2px 2px 4px rgba(49, 92, 148, 0.4);
+}
+
+.container-links-header {
+  background-color: #C1CDD6;
+  display: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  top: 78px;
+  border: #315C94 solid 2px;
+  position: fixed;
+  right: 0;
+  z-index: 999;
+
+}
+
+.container-links-header.open {
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+  background-color: rgba(193, 205, 214, 0.8);
+}
+
+.container-links-header li {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  border-bottom: #315C94 solid 1px;
+}
+
+.container-links-header li a {
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  color: #315C94;
+  font-weight: 600;
+  transition: color 500ms;
+}
+
+.container-links-header li a:hover {
+  color: #859499;
+}
+
+.navbar-collapse-hamburguer.open {
+  display: block;
+}
+
+.nav-link-header.open {
+  display: block;
+}
+
+/* btn-hamburguer */
+
+/* END HEADER */
+
+/*START HOME*/
+
+.banner-home{
+  margin-top: 20px;
+  margin-bottom: 25px;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+}
+
+.containers-home {
+  margin-bottom: 35px;
+}
+
+/* END HOME*/
+
+/* START FOOTER */
+.footer {
+  background-color: #C1CDD6;
+  border-color: #315C94;
+  border-top-style: solid;
+  border-width: thick;
+  color: #315C94;
+}
+
+.phones {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 5px;
+  margin-bottom: 8px;
+}
+
+.phone-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+  margin: 2px;
+  transition: color 500ms;
+}
+
+.icon-circle {
+  background: #FFFFFF;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.img-icon {
+  width: 28px;
+  height: 28px;
+}
+
+a.link-phones {
+  text-decoration: none;
+  color: #315C94;
+  flex: 30%;
+  transition: color 100ms;
+}
+
+a.link-phones:hover {
+  color: #859499;
+}
+
+.number-phone,
+.menu-subtitle {
+  font-weight: 500;
+  font-size: 13px;
+  margin-bottom: 0px;
+  font-family: fantasy;
+}
+
+.title-phone {
+  font-size: 11px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.list-section {
+  list-style: none;
+  font-size: 12px;
+  padding-left: 5px;
+}
+
+.section-contact-follow {
+  display: flex;
+  justify-content: space-around;
+}
+
+.copyright {
+  display: flex;
+  justify-content: center;
+  font-size: 2.5vw;
+}
+
+.powered-by {
+  display: flex;
+  justify-content: center;
+}
+
+/*Buttons*/
+
+.btn-square{
+    -webkit-user-select: none !important;
+    user-select: none;
+    background-color: #C4D6DE;
+    color:#315C94;
+    width: 90px;
+    height: 80px;
+    padding: 5px;
+    border-radius: 3px;
+    margin:3px;
+    text-shadow: 1px 1px 5px rgba(49, 92, 148,0.4) !important;
+    box-shadow: 1px  5px 5px rgb(133, 148, 153) !important;
+    text-decoration: none !important;
+    transition: 0.7s;
+    
+}
+.btn-square:hover{
+    background-color:#9DB1C6;
+    box-shadow: 1px  5px 5px rgba(49, 92, 148,0.8) !important;
+    transform: scale(1.03);
+    color: #2d5a94;
+}
+
+.title-copyright {
+  margin: 0;
+  font-weight: 600;
+}
+
+/* END FOOTER */
+
+/* START NEWS */
+
+.container-news {
+  display: flex;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  justify-content: center;
+}
+
+.card-lg {
+  margin-left: 0 !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  border: none !important;
+}
+
+.cardNews {
+  width: 260px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-shadow: 0px 10px 5px rgb(136, 136, 136, 0.4);
+
+
+}
+
+.cardNews-lg {
+  min-width: 260px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-shadow: 0px 10px 5px rgb(136, 136, 136, 0.4);
+
+
+}
+
+.cardSubtitle {
+  display: flex;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  justify-content: space-between !important;
+  padding: 5px;
+  margin: 2px !important;
+  align-items: baseline;
+}
+
+.cardCategory {
+  text-align: start !important;
+  font-style: italic;
+
+  ;
+}
+
+.cardDate {
+  text-align: end;
+  color: #315C94;
+
+}
+
+.cardImg {
+
+  max-width: 260px !important;
+  height: 180px;
+}
+
+.slide {
+  display: grid;
+  min-width: 260px !important;
+  max-width: 1200px !important;
+  min-height: 280px;
+  max-height: 360px !important;
+
+}
+
+.cardTitle {
+  text-align: start !important;
+}
+
+.cardText {
+  font-size: 12px !important;
+  text-align: justify !important;
+  text-indent: 20px;
+}
+
+.cardLink {
+  text-align: end;
+  font-size: 11px !important;
+  text-decoration: none !important;
+  background-color: #fff !important;
+  color: #315C94;
+
+}
+
+.cardLink-lg {
+  text-align: end;
+  font-size: 16px !important;
+  text-decoration: none !important;
+  background-color: #fff !important;
+  color: #315C94;
+
+
+
+}
+
+.cards-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  margin: 0 .5em;
+}
+
+.slide-moreNews {
+  height: 460px !important;
+}
+
+/* END NEWS */
+
+
+/* START CULTURA Y TURISMO */
+
+
+.container-pages {
+  margin-top: 80px;
+}
+
+.text-paragraphs {
+  margin: 0;
+}
+
+.paragraphs {
+  text-align: justify;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 10px;
+  text-indent: 1cm;
+}
+
+.map-box {
+  text-align: center;
+  margin-top: 20px !important;
+  margin-bottom: 20px;
+}
+
+.maps-google {
+  border: solid 2px;
+}
+
+.box-img {
+  display: flex;
+
+} 
+
+/* END CULTURA Y TURISMO */
+
+/* START HISTORIA */
+
+ .text-indent  {
+    padding-right: 5px;
+    margin-top: 35px !important;
+    text-align: justify;
+}
+
+.text-indenth3 {
+     text-shadow: 5px 5px 10px 5px red ;  
+} 
+    
+.text-indent img {
+    /* width: 290px !important; */
+    max-width: 100%;
+    height: 80% !important;
+    text-align: center;
+    margin: auto;
+    margin-top:15px;
+    margin-bottom: 20px;
+    /* box-shadow: 5px 5px 10px 5px #859499 ;  */
+} 
+
+
+.text-indent p {
+    text-indent: 1cm;
+}
+
+.buttonToolBar{
+    text-align: center !important;
+}  
+
+/* END HISTORIA */
+
+
+/* START Buttons*/
+
+.btn-square-icon {
+  width: 100% !important;
+  font-size: 20px !important;
+  text-align: center !important;
+  /* display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important; */
+    
+}
+
+h6.btn-square-text {
+  margin: 3px;
+  text-align: center;
+  font-size: 0.8em;
+  overflow-wrap: anywhere;
+}
+
+a.link-btn-square, .link-btn-square {
+  -webkit-user-select: none !important;
+  user-select: none;
+  background-color: #C4D6DE;
+  color: #315C94;
+  /* width: 47%;  option traditional */
+  flex: 47%;
+  height: 80px;
+  padding: 4px;
+  border-radius: 3px;
+  margin: 3px 3px 5px 3px;
+  text-shadow: 1px 1px 5px rgba(49, 92, 148, 0.4) !important;
+  box-shadow: 1px 5px 5px rgb(133, 148, 153);
+  transition: 0.7s;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-decoration: none !important;
+}
+
+a.link-btn-square:hover, .link-btn-square:hover {
+  background-color: #9DB1C6;
+  box-shadow: 1px 5px 5px rgba(49, 92, 148, 0.8) !important;
+  transform: scale(1.03);
+  color: #2d5a94;
+}
+
+a.link-activated , .link-activated{
+
+  text-decoration: none !important;
+
+  -webkit-user-select: none !important;
+  user-select: none;
+  background-color: #acd8ec;
+  color: #315c94;
+  width: 47%;/* option traditional*/
+  flex: 10%;
+  height: 80px;
+  padding: 3px;
+  border-radius: 3px;
+  margin: 3px 3px 5px 3px;
+  text-shadow: 1px 1px 5px rgba(49, 92, 148, 0.4) !important;
+  box-shadow: 1px 5px 5px rgb(133, 148, 153);
+  transition: 0.7s;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+}
+
+a.link-activated:hover, .link-activated:hover {
+  color: #626b76;
+}
+
+.btn-toolbar {
+  justify-content: center !important;
+  cursor: pointer;
+}
+
+/* START CULTURA Y TURISMO - CAMPING */
+.sections-card {
+  width: 260px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border-radius: 5px; /* 5px rounded corners */
+  margin-bottom: 35px;
+}
+
+.sections-card img{
+  width: 100%;
+  height: auto;
+  border-radius: 5px 5px 0 0;
+  margin-bottom: 15px;
+}
+
+.social-net-card {
+  display: flex;
+  border-top: 1px ridge;
+}
+
+.box-simple-network {
+padding: 7px;
+color:#315C94;
+}
+
+.column-contact > p > i {
+  color:#315c94;
+  text-shadow: none !important;
+  /* margin-top: 20px; */
+}
+
+.column-contact > p > a {
+ text-decoration: none;
+}
+
+.card-title-section {
+  margin-bottom: 15px;
+}
+
+.list-cards-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.contact-card {
+  margin-bottom: 5px;
+}
+
+.phone-camping {
+  text-decoration: none !important;
+}
+
+/* END CULTURA Y TURISMO - CAMPING */
+
+/* START NEWS FORM */
+
+.form-images-row {
+  width: 39% !important;
+  flex-wrap: nowrap !important;
+  margin: 2px !important;
+  align-items: baseline
+}
+
+.form-image {
+  width: 60px !important;
+  margin: 2px;
+}
+
+.form-field-name {
+  font-weight: bold;
+}
+
+.container-upload-image {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: #d2d5d8;
+  margin-bottom: 10px;
+}
+
+.box-upload {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 60px;
+  border-style: dotted;
+  cursor: pointer;
+}
+
+.icon-camera {
+  cursor: pointer;
+}
+
+.table {
+  border-collapse: collapse;
+  border: 1px solid;
+  border-color: black !important;
+}
+
+.row-table { 
+  border: 1px solid;
+}
+
+.images-preview {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.box-individual-preview {
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.image-individual {
+  margin-right: 5px;
+  width: 40px;
+  height: 40px;
+  border-radius: 0;
+}
+
+.images-msg-error {
+  width: 100%;
+  margin-top: 0.25rem;
+  margin-bottom: 0.45rem;
+  font-size: .875em;
+  color: #dc3545;
+}
+
+.images-msg-ok {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: .875em;
+  color: #198754;
+}
+
+.btn-primary {
+  transition: all 500ms ;
+  --bs-btn-color: #315C94 !important;
+  --bs-btn-bg: #fff !important;
+  --bs-btn-border-color: #315C94 !important;
+  --bs-btn-hover-color: #fff !important;
+  --bs-btn-hover-border-color: #fff !important;
+  --bs-btn-hover-bg: #315C94 !important;
+  --bs-btn-hover-border-color: #ffffff !important;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #fff !important;
+  --bs-btn-active-border-color: #315C94 !important;
+  --bs-btn-disabled-color: #a2a5a7  !important;
+  --bs-btn-disabled-bg: #ffffff   !important;
+  --bs-btn-disabled-border-color: #a2a5a7  !important;
+  box-shadow: 0 5px 6px -6px #222;
+}
+
+
+.btn {
+  font-weight: bold !important;
+  border-radius: 50px !important;
+  box-shadow: 0px 4px 4px rgba(199, 199, 199, 1);
+}
+
+.alert-file-not-image {
+  background-color: #ffffff !important;
+  border-style: none !important;
+}
+
+.btn-close-alert {
+  color: #dc3545;;
+  border-color: #dc3545;
+  /* width: 60px;
+    height: 50px; */
+  
+  transition: all 500ms;
+}
+
+.btn-close-alert:hover {
+  background-color: #dc3545;;
+  border-color: #ffffff;
+  color:  #ffffff;
+}
+  
+/* END NEWS FORM */
+
+/* START DIGITAL POINT */
+
+.registration-card {
+  margin-bottom: 5px;
+}
+
+.registration-card-open {
+  margin-bottom: 5px;
+  color: #198754;
+  font-weight: 400;
+  text-shadow: 1px 1px 10px rgba(99, 195, 129, 0.8);
+}
+
+.registration-card-closed {
+  margin-bottom: 5px;
+  color: #dc3545;
+  font-weight: 400;
+  text-shadow: 1px 1px 10px rgba(208, 116, 116, 0.8);
+}
+
+.description-card {
+  margin-bottom: 0;
+  margin-top: 12px;
+}
+
+.subtitles-card {
+  margin-bottom: 0;
+}
+
+.box-btn-DP {
+  display: flex;
+  justify-content: end;
+}
+
+.btns-admin-card {
+  border-top: 1px ridge;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Add rounded corners to the top left and the top right corner of the image */
+
+/* .row{
+  --bs-gutter-x: auto !important
+} */
+
+
+/* END BUTTONS */
+
+/*  START FORM DIGITAL POINT */
+
+.helper-form {
+  color: #315C94;
+  font-size: 0.7em !important;
+  margin-top: 2px;
+  margin-bottom: 0;
+}
+
+.characters-counter {
+  color: #315C94;
+  font-size: 0.7em !important;
+  margin-top: 2px;
+  margin-bottom: 0;
+  font-style: italic;
+  text-align: right;
+}
+
+.container-helpers {
+  margin-bottom: 10px;
+}
+
+.items-requirements {
+  font-size: 0.9em;
+}
+
+/*  END FORM DIGITAL POINT */
+
+
+
+
+/* START MEDIA QUERIES */
+/* @media screen and (min-width:568px) {}
+
+
+
+@media screen and (min-width:768px) {} */
+
+
+/* @media screen and (min-width: 760px) {
+  .cards-wrapper {
+    display: inline-block;
+    width: calc(100%/2);
+    align-items: center;
+    justify-content: center;
+
+  }
+
+  .carousel.inner {
+    overflow: scroll;
+
+  }
+
+  .carousel.slide {
+    text-align: center;
+  }
+}
+
+.btn-square-icon{
+    width:100%;
+    font-size: 22px;
+    text-align: center;
+    align-self: auto;
+   
+}
+
+h6.btn-square-text {
+    margin: auto;
+    text-align: center;
+    font-size: 14px;
+    text-decoration: none !important;
+}
+
+
+
+/* START MEDIA QUERIES */
+/* @media screen and (min-width:300px) and (max-width:576px){ */
+
+  /* .btn-toolbar{
+    width: 87%;
+  
+    
+  } */
+
+  /* .btn-square {
+    height: min-content!important;
+    width: 50px;
+
+    } */
+  /* h6.btn-square-text{
+    font-size: 10px !important;
+        
+    }
+
+  /* .body-culturayturismo {
+    padding-right: 5px;
+    max-width: 576px;
+  
+    } */
