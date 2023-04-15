@@ -1,0 +1,24 @@
+
+----Usuarios: 
+    ---->CRUD Usuarios
+    ---->traerUsuario
+    ---->Lista Usuarios
+    //---->DashBoard Usuarios
+----Noticias:
+    ---->CRUD Noticias
+    ---->Listar Noticias(desde hasta (opt))
+    ---->Listar Noticia
+        ----> listarPorCatergoria(revisar)
+            ---->Deportes
+            ---->Comunicados
+    ---->Listar Noticias por usuario
+----Digital Point
+    ---->CRUD DigitalPoint
+    ---->Listar DigitalPoints
+    ---->Listar DigitalPoint
+    ---->Listar DigitalPoint por categoria
+
+
+    RUTAS EN ESPAÑOL 
+    ENDPOINTS EN INGLES
+
