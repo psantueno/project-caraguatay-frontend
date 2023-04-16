@@ -48,7 +48,8 @@ const  config = {
 };
 const Users = sequelize.connection.define(alias,cols,config)
 Users.associate = (models)=>{
-    Users.belongsTo(models.UserRole)
+    Users.belongsTo(models.UserRole),
+    Users.hasMany(models.Post)
 }
 
 

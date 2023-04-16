@@ -9,6 +9,7 @@ const mysql = require("mysql");
 //ROUTES
 //TODO: Crear Rutas
  import userRoutes from './routes/Routes.Usuarios';
+ import postRoutes from './routes/Routes.Post'
 // import ciudadRouter from "./routes/Routes.Ciudades";
 // import facturasRouter from "./routes/Router.Facturas";
 //
@@ -34,8 +35,9 @@ app.use(methodOverride("_method"));
 app.use(bodyParser.json());
 
 app.use(express.urlencoded({ extended: false })); //URL encode  - Para que nos pueda llegar la información desde el formulario al req.body
-app.set("port", 4000);
+app.set("port", 4001);
 sequelize.testConn();
 app.use("/api/users", userRoutes);
+app.use("/api/noticias", postRoutes);
 
 export default app;
