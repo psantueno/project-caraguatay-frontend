@@ -28,10 +28,44 @@ const createPost = async(req,res)=>{
 const listPost = async(req,res)=>{
     try {
         const post = await Posts.findOne({
-            where: { idusers: req.params.id },
+            where: { idPost: req.params.idPost },
           });
         res.json({
           result: { status: 200, post },
+        });
+      } catch (error) {
+        res.json({
+          data: error,
+          status: 500,
+        });
+      }
+};
+
+const listAllPosts = async(req,res)=>{
+    try {
+        const count = await Posts.count()
+        const post = await Posts.findAll({
+          });
+        res.json({
+          result: { status: 200,count, post },
+        });
+      } catch (error) {
+        res.json({
+          data: error,
+          status: 500,
+        });
+      }
+};
+const listPostByUser = async(req,res)=>{
+    try {
+        const count = await Posts.count({
+            where: { idusers: req.params.idUser },
+        })
+        const post = await Posts.findAll({
+            where: { idusers: req.params.idUser },
+          });
+        res.json({
+          result: { status: 200,count, post },
         });
       } catch (error) {
         res.json({
@@ -97,6 +131,8 @@ const deletePost = async(req,res)=>{
 export const methods = {
     createPost,
     listPost,
+    listAllPosts,
+    listPostByUser,
     updatePost,
     deletePost
 }
