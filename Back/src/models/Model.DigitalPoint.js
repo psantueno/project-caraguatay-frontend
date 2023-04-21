@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import { sequelize } from "../config/connection"
+import { sequelize } from "../database/config/connection"
 
 
 // `idDigitalPoint` VARCHAR(36) NOT NULL,
@@ -12,7 +12,7 @@ import { sequelize } from "../config/connection"
 // `idDpCategory` INT NOT NULL,
 // `idmedia1` INT NOT NULL,
 
-const alias = 'DigitalPonint';
+const alias = 'digitalpoint';
 const cols = {
     idDigitalPoint:{ 
         type: DataTypes.UUID,
@@ -58,11 +58,11 @@ const  config = {
     timestamps: false,
 };
 
-const DigitalPoint = sequelize.connection.define(alias,cols,config);
+const DigitalPoint = sequelize.connection.define(alias,cols,config)
 // Ciudades.associate = function (models) {
 //     Ciudades.hasMany(models.Clientes, {
 //         as: "Clientes",
 //         foreignKey: 'idCiudad',
 //     })
 // }
-export default Ciudades
+export default DigitalPoint

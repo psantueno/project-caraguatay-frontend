@@ -10,7 +10,7 @@ const mysql = require("mysql");
 //TODO: Crear Rutas
  import userRoutes from './routes/Routes.Usuarios';
  import postRoutes from './routes/Routes.Post'
-// import ciudadRouter from "./routes/Routes.Ciudades";
+ import digitalPointRoutes from "./routes/Routes.DigitalPoint";
 // import facturasRouter from "./routes/Router.Facturas";
 //
 
@@ -39,5 +39,6 @@ app.set("port", 4001);
 sequelize.testConn();
 app.use("/api/users", userRoutes);
 app.use("/api/noticias", postRoutes);
+app.use("/api/puntoDigital",digitalPointRoutes)
 
 export default app;
