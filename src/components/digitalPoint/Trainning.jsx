@@ -23,9 +23,9 @@ export const Trainning = () => {
 
             <DPCard
               key={dpnew.id}
+              dpnew={ dpnew }
               {...dpnew}
             />
-
           ))
         }
 
