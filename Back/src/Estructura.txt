@@ -1,22 +1,10 @@
 
 ----Usuarios: 
-    ---->CRUD Usuarios
-    ---->traerUsuario
-    ---->Lista Usuarios
-    //---->DashBoard Usuarios
+    //---->DashBoard Usuarios(Como va a ser el dashboard, que info va a requerir y demas...)
 ----Noticias:
-    ---->CRUD Noticias
-    ---->Listar Noticias(desde hasta (opt))
-    ---->Listar Noticia
-        ----> listarPorCatergoria(revisar)
-            ---->Deportes
-            ---->Comunicados
-    ---->Listar Noticias por usuario
+    --->Subir las imagenes de media
 ----Digital Point
-    ---->CRUD DigitalPoint
-    ---->Listar DigitalPoints
-    ---->Listar DigitalPoint
-    ---->Listar DigitalPoint por categoria
+    --->Subir las imagenes de media 
 
 
     RUTAS EN ESPAÑOL 

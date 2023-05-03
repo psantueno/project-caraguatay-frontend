@@ -31,20 +31,20 @@ CREATE TABLE IF NOT EXISTS `projectCaraguatay`.`DigitalPoint` (
   `status` TINYINT NOT NULL,
   `requirements` VARCHAR(128) NULL,
   `Users_idusers` VARCHAR(40) NOT NULL,
-  `Dp_Category_idDpCategory` INT NOT NULL,
-  `Media_idmedia1` INT NOT NULL,
-  PRIMARY KEY (`idDigitalPoint`, `title`, `Users_idusers`, `Dp_Category_idDpCategory`, `Media_idmedia1`),
+  `idDpCategory` INT NOT NULL,
+  `idmedia` INT NOT NULL,
+  PRIMARY KEY (`idDigitalPoint`, `title`, `idusers`, `idDpCategory`, `idmedia`),
   UNIQUE INDEX `idAds_UNIQUE` (`idDigitalPoint` ASC) VISIBLE,
-  INDEX `fk_DigitalPoint_Users1_idx` (`Users_idusers` ASC) VISIBLE,
-  INDEX `fk_DigitalPoint_Dp_Category1_idx` (`Dp_Category_idDpCategory` ASC) VISIBLE,
-  INDEX `fk_DigitalPoint_Media1_idx` (`Media_idmedia1` ASC) VISIBLE,
+  INDEX `fk_DigitalPoint_Users1_idx` (`idusers` ASC) VISIBLE,
+  INDEX `fk_DigitalPoint_Dp_Category1_idx` (`idDpCategory` ASC) VISIBLE,
+  INDEX `fk_DigitalPoint_Media1_idx` (`idmedia1` ASC) VISIBLE,
   CONSTRAINT `fk_DigitalPoint_Users1`
-    FOREIGN KEY (`Users_idusers`)
+    FOREIGN KEY (`idusers`)
     REFERENCES `projectCaraguatay`.`Users` (`idusers`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_DigitalPoint_Dp_Category1`
-    FOREIGN KEY (`Dp_Category_idDpCategory`)
+    FOREIGN KEY (`idDpCategory`)
     REFERENCES `projectCaraguatay`.`Dp_Category` (`idDpCategory`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
@@ -77,12 +77,12 @@ CREATE TABLE IF NOT EXISTS `projectCaraguatay`.`Media` (
   `idmedia` INT NOT NULL,
   `mediaType` VARCHAR(5) NULL,
   `path` VARCHAR(256) NULL,
-  `Posts_idPost` INT NOT NULL,
-  PRIMARY KEY (`idmedia`, `Posts_idPost`),
+  `idPost` INT NOT NULL,
+  PRIMARY KEY (`idmedia`, `idPost`),
   UNIQUE INDEX `idmedia_UNIQUE` (`idmedia` ASC) VISIBLE,
-  INDEX `fk_Media_Posts1_idx` (`Posts_idPost` ASC) VISIBLE,
+  INDEX `fk_Media_Posts1_idx` (`idPost` ASC) VISIBLE,
   CONSTRAINT `fk_Media_Posts1`
-    FOREIGN KEY (`Posts_idPost`)
+    FOREIGN KEY (`idPost`)
     REFERENCES `projectCaraguatay`.`Posts` (`idPost`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -99,13 +99,13 @@ CREATE TABLE IF NOT EXISTS `projectCaraguatay`.`Posts` (
   `title` VARCHAR(32) NOT NULL,
   `body` VARCHAR(256) NOT NULL,
   `creationDate` DATETIME NOT NULL,
-  `Users_idusers` VARCHAR(40) NOT NULL,
-  `postCategory_idPostCategory` INT NOT NULL,
-  PRIMARY KEY (`idPost`, `Users_idusers`, `postCategory_idPostCategory`),
-  INDEX `fk_Posts_Users1_idx` (`Users_idusers` ASC) VISIBLE,
-  INDEX `fk_Posts_postCategory1_idx` (`postCategory_idPostCategory` ASC) VISIBLE,
+  `idusers` VARCHAR(40) NOT NULL,
+  `idPostCategory` INT NOT NULL,
+  PRIMARY KEY (`idPost`, `idusers`, `idPostCategory`),
+  INDEX `fk_Posts_Users1_idx` (`idusers` ASC) VISIBLE,
+  INDEX `fk_Posts_postCategory1_idx` (`idPostCategory` ASC) VISIBLE,
   CONSTRAINT `fk_Posts_Users1`
-    FOREIGN KEY (`Users_idusers`)
+    FOREIGN KEY (`idusers`)
     REFERENCES `projectCaraguatay`.`Users` (`idusers`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
@@ -142,12 +142,12 @@ CREATE TABLE IF NOT EXISTS `projectCaraguatay`.`Users` (
   `creationDate` DATETIME NOT NULL,
   `enabled` VARCHAR(36) BINARY NOT NULL,
   `avatar` VARCHAR(256) NOT NULL,
-  `UserRole_idRole` INT NOT NULL,
-  PRIMARY KEY (`idusers`, `UserRole_idRole`),
+  `idRole` INT NOT NULL,
+  PRIMARY KEY (`idusers`, `idRole`),
   UNIQUE INDEX `idusers_UNIQUE` (`idusers` ASC) VISIBLE,
-  INDEX `fk_Users_UserRole1_idx` (`UserRole_idRole` ASC) VISIBLE,
+  INDEX `fk_Users_UserRole1_idx` (`idRole` ASC) VISIBLE,
   CONSTRAINT `fk_Users_UserRole1`
-    FOREIGN KEY (`UserRole_idRole`)
+    FOREIGN KEY (`idRole`)
     REFERENCES `projectCaraguatay`.`UserRole` (`idRole`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
