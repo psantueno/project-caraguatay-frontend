@@ -17,7 +17,9 @@ export const useForm = (initialForm = {}, FormValidations = {}, inputs = {}, han
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
-  const [showMessage, setShowMessage] = useState(false);
+  const [showResOk, setShowResOk] = useState(false);
+  const [showResBad, setShowResBad] = useState(false);
+  const [responseMsg, setResponseMsg] = useState(null)
   const [requirementValue, setRequirementValue] = useState("");
   const [items, setItems] = useState([]);       // Maneja los ítems que se agregan en el input de requisitos.
 
@@ -58,25 +60,62 @@ export const useForm = (initialForm = {}, FormValidations = {}, inputs = {}, han
     }
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     handleChange(e);
     e.preventDefault();
+    setForm(prevState => {
+      const idUsers = 1;
+      return {
+        ...prevState,
+        idUsers: idUsers
+      };
+    });
+    
     setErrors(FormValidations(form, e, inputs, errors));
+
+    // podria setear form para agregar el idUser antes de enviarlo //
+    
 
     if (Object.keys(errors).length === 0) {
       setLoading(true);
       console.log(form);
-      setShowMessage(true);
-      setForm(initialForm);
-      setItems([])
-      setRequirementValue('')
-      inputs.image.current.value = '';
-      handleReset();
 
+      try {
+
+        const req = await fetch('http://localhost:4001/api/noticias/create', {
+          method: "POST",
+          body: JSON.stringify(form),
+          headers: { 'Content-Type': 'application/json' }
+        })
+
+        const res = await req.json();
+        
+        console.log(res)
+        
+        setResponseMsg(res);
+        
+        if (res.status===201) {
+          setShowResOk(true);
+          setShowResBad(false);
+          setForm(initialForm);
+          setItems([])
+          setRequirementValue('')
+          inputs.image.current.value = '';
+          handleReset();
+        } else {
+          setShowResBad(true);
+          console.log("-------------------")
+          console.log(res.errors)
+          console.log("-------------------")
+          
+        }
+      }
+      catch (error) {
+        console.log(error)
+      }
     } else {
-      setShowMessage(false);
-      alert("Revise los errores del formulario.");
-      return;
+      setShowResOk(false);
+      alert("Revise los errores del formulario");
     }
   }
 
@@ -89,7 +128,8 @@ export const useForm = (initialForm = {}, FormValidations = {}, inputs = {}, han
     handleMouseup,
     handleReset,
     handleSubmit,
-    setShowMessage,
+    setShowResOk,
+    setShowResBad,
     setErrors,
     requirementValue,
     items,
@@ -97,7 +137,9 @@ export const useForm = (initialForm = {}, FormValidations = {}, inputs = {}, han
     setRequirementValue,
     loading,
     errors,
-    showMessage,
+    showResOk,
+    showResBad,
+    responseMsg,
     ...form
   }
 }
