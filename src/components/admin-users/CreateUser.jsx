@@ -16,7 +16,7 @@ export const CreateUser = ({ show, onClose }) => {
         avatar: '',
     }
 
-   // const errors = [false,false,false,false,false,false]
+
     const { email, name, lastName, password, role, avatar, handleChange, handleSubmit } = useForm(initialForm)
 
     const onValidateEmail = ({ target }) => {

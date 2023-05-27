@@ -9,19 +9,18 @@ export const UsersTable = () => {
 
   const { users, alertMessage } = useContext(UserAdminContext);
 
+  // Reemplazar Show y Close por
+  //const { show, handleShow, handleClose } = useModal()
+  // import { useModal } from '../../../../hooks/useModal';
   const [show, setShow] = useState(false);
-
   const handleShow = () => setShow(true)
   const handleClose = () => setShow(false);
-  
+  // Fin de lo que tengo que reemplazar.
  
-
   useEffect(() =>{
     handleClose();
   }, [users])
 
-  
-  
   return (
     <>
 
