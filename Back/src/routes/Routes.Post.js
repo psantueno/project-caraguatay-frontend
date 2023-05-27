@@ -1,12 +1,12 @@
 import { Router } from "express";
-import {methods as postController} from '../controllers/Controller.Noticias';
+import {methods as newsController} from '../controllers/Controller.news';
 
 const router = Router();
-router.get('/list/all',postController.listAllPosts);
-router.get('/list/post/:idPost',postController.listPost);
-router.get('/list/byUser/:idUser',postController.listPostByUser);
-router.get('/list/byCategory/:idPostCategory',postController.listPostByCategory);
-router.post('/create/',postController.createPost);
-router.put('/update/:idPost',postController.updatePost);
-router.delete('/delete/:idPost',postController.deletePost);
+router.get('/list/all',newsController.listAllPosts);
+router.get('/list/post/:idPost',newsController.listPost);
+router.get('/list/byUser/:idUser',newsController.listPostByUser);
+router.get('/list/byCategory/:idPostCategory',newsController.listPostByCategory);
+router.post('/create/',newsController.createPost);
+router.put('/update/:idPost',newsController.updatePost);
+router.delete('/delete/:idPost',newsController.deletePost);
 export default router;

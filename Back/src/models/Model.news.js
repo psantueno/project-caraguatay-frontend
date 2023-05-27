@@ -1,9 +1,9 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../database/config/connection"
 
-const alias = "Post";
+const alias = "news";
 const cols ={
-    idPost:{ 
+    id_news:{ 
         type: DataTypes.UUID,
         primaryKey : true,
         allowNull:false,
@@ -17,15 +17,15 @@ const cols ={
         type: DataTypes.TEXT(20),
         allowNull:false,
     },
-    creationDate:{ 
+    creation_date:{ 
         type: DataTypes.DATE,
         allowNull:false,
     },
-    idUsers:{ 
+    id_users:{ 
         type: DataTypes.TEXT(20),
         allowNull:false,
     },
-    idPostCategory:{ 
+    id_news_category:{ 
         type: DataTypes.TEXT(20),
         allowNull:false,
     },
@@ -34,10 +34,10 @@ const  config = {
     timestamps: false,
 };
 
-const Posts = sequelize.connection.define(alias,cols,config);
-Posts.associate = (models)=>{
-    Posts.belongsTo(models.Users),
-    Posts.belongsTo(models.PostCategory)
+const news = sequelize.connection.define(alias,cols,config);
+news.associate = (models)=>{
+    news.belongsTo(models.users),
+    news.belongsTo(models.news_categories)
 }
 
-export default Posts;
+export default news;

@@ -1,4 +1,4 @@
-import db from "../models/";
+import db from "../models";
 import Posts from "../models/Model.Post";
 
 const sequelize = db.sequelize;
@@ -7,9 +7,9 @@ const createPost = async (req, res) => {
   Posts.create({
     title: req.body.title,
     body: req.body.body,
-    creationDate: "2023-04-04 15:39:25",
-    idUsers: req.body.idUsers,
-    idPostCategory: req.body.idPostCategory,
+    creation_date: "2023-04-04 15:39:25",
+    id_users: req.body.idUsers,
+    id_news_category: req.body.idPostCategory,
   })
     .then((result) => {
       res.json({
@@ -29,7 +29,7 @@ const listPost = async (req, res) => {
   try {
     const post = await Posts.findOne({
       where: {
-        idPost: objWhere.idPost,
+        id_news: objWhere.idPost,
       },
     });
     res.json({
@@ -65,7 +65,7 @@ const listAllPosts = async (req, res) => {
 const listPostByUser = async (req, res) => {
   try {
     const { count, rows } = await Posts.findAndCountAll({
-      where: { idusers: req.params.idUser },
+      where: { id_users: req.params.idUser },
     });
     res.json({
       result: { status: 200, count, post: rows },
@@ -81,7 +81,7 @@ const listPostByUser = async (req, res) => {
 const listPostByCategory = async (req, res) => {
   try {
     const { count, rows } = await Posts.findAndCountAll({
-      where: { idPostCategory: req.params.idPostCategory },
+      where: { id_news_category: req.params.idPostCategory },
     });
     res.json({
       result: { status: 200, count, post: rows },
@@ -99,13 +99,13 @@ const updatePost = async (req, res) => {
   try {
     console.log(req.params.idPost);
     const posts = await Posts.findOne({
-      where: { idPost: req.params.idPost },
+      where: { id_news: req.params.idPost },
     });
     if (posts) {
       posts.set({
         title: req.body.title,
         body: req.body.body,
-        idPostCategory: req.body.idPostCategory,
+        id_news_category: req.body.idPostCategory,
       });
       await posts.save();
       res.json({
@@ -113,7 +113,7 @@ const updatePost = async (req, res) => {
       });
     } else {
       res.json({
-        data: { msj: "No existe ningún cliente con esa ID", status: 500 },
+        data: { msj: "No existe ningún usuario con esa ID", status: 500 },
       });
     }
   } catch (error) {
@@ -127,7 +127,7 @@ const updatePost = async (req, res) => {
 const deletePost = async (req, res) => {
   try {
     const post = await Posts.findOne({
-      where: { idPost: req.params.idPost },
+      where: { id_news: req.params.idPost },
     });
     if (post) {
       await post.destroy();

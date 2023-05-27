@@ -5,9 +5,9 @@ import { sequelize } from "../config/connection"
 // `idDpCategory` INT NOT NULL,
 // `description` VARCHAR(45) NULL,
 
-const alias = 'Dp_Category';
+const alias = 'dp_categories';
 const cols = {
-    idDpCategory:{ 
+    id_dp_category:{ 
         type: DataTypes.UUID,
         primaryKey : true,
         allowNull:false,
@@ -24,11 +24,11 @@ const  config = {
 
 };
 
-const Dp_Category = sequelize.connection.define(alias,cols,config);
+const dp_categories = sequelize.connection.define(alias,cols,config);
 // Ciudades.associate = function (models) {
 //     Ciudades.hasMany(models.Clientes, {
 //         as: "Clientes",
 //         foreignKey: 'idCiudad',
 //     })
 // }
-export default Dp_Category
+export default dp_categories

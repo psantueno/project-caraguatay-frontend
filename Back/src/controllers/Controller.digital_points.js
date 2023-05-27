@@ -1,5 +1,5 @@
 import db from '../models';
-import DigitalPoint from '../models/Model.DigitalPoint'
+import digital_points from '../models/Model.digital_points';
 
 const sequelize = db.sequelize;
 
@@ -8,15 +8,15 @@ const createDigitalPoint = async (req, res) => {
         const data = {
             title: req.body.title,
             description: req.body.description,
-            beginDate: req.body.beginDate,
+            begin_date: req.body.beginDate,
             status: 1,
-            idUsers: req.body.idUsers,
+            id_users: req.body.idUsers,
             requirements: req.body.requirements,
-            idDpCategory: req.body.idDpcategory,
-            idmedia: req.body.idMedia,
+            id_dp_Category: req.body.idDpcategory,
+            id_media: req.body.idMedia,
         }
         console.log(data);
-        DigitalPoint.create(data)
+        digital_points.create(data)
             .then((result) => {
                 res.json({
                     data: result,
@@ -40,8 +40,8 @@ const createDigitalPoint = async (req, res) => {
 
 const listDigitalPoint = async (req, res) => {
     try {
-        const digitalPoint = await DigitalPoint.findOne({
-            where: { idDigitalPoint: req.params.idDigitalPoint },
+        const digitalPoint = await digital_points.findOne({
+            where: { id_digital_point: req.params.idDigitalPoint },
         })
         res.json({
             result: {
@@ -60,18 +60,18 @@ const listDigitalPoint = async (req, res) => {
 
 const updateDigitalPoint = async (req, res) => {
     try {
-        const digitalPoint = await DigitalPoint.findOne({
-            where: { idDigitalPoint: req.params.idDigitalPoint },
+        const digitalPoint = await digital_points.findOne({
+            where: { id_digital_point: req.params.idDigitalPoint },
         })
         if (digitalPoint) {
             digitalPoint.set({
                 title: req.body.title,
                 description: req.body.description,
-                beginDate: req.body.beginDate,
+                begin_date: req.body.beginDate,
                 status: 1,
                 requirements: req.body.requirements,
-                idDpCategory: req.body.idDpcategory,
-                idmedia: req.body.idMedia,
+                id_dp_Category: req.body.idDpcategory,
+                id_media: req.body.idMedia,
             })
             await digitalPoint.save();
             res.json({
@@ -93,8 +93,8 @@ const updateDigitalPoint = async (req, res) => {
 
 const deleteDigitalPoint = async (req, res) => {
     try {
-        const digitalPoint = await DigitalPoint.findOne({
-            where: { idDigitalPoint: req.params.idDigitalPoint },
+        const digitalPoint = await digital_points.findOne({
+            where: { id_digital_point: req.params.idDigitalPoint },
         })
         if (digitalPoint) {
             digitalPoint.destroy();
@@ -116,10 +116,10 @@ const deleteDigitalPoint = async (req, res) => {
 
 
 const listAllDigitalPoint = async (req, res) => {
-    const digitalPoint = await DigitalPoint.findAll({})
+    const {rows,count} = await digital_points.findAndCountAll({})
     res.json({
         result:
-            { status: 200, digitalPoint, page: req.params.page, amount }
+            { status: 200, digitalPoints:rows, page: req.params.page, amount:count }
     },
     )
 

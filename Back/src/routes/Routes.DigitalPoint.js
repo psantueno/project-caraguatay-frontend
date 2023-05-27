@@ -1,5 +1,5 @@
 import { Router } from "express";
-import {methods as digitalPoint} from '../controllers/Controller.DigitalPoint';
+import {methods as digitalPoint} from '../controllers/Controller.digital_points';
 const router = Router();
 router.get('list/all',digitalPoint.listAllDigitalPoint);
 router.get('/list/:idDigitalPoint',digitalPoint.listDigitalPoint);

@@ -1,9 +1,9 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../database/config/connection"
 
-const alias = "Users";
+const alias = "users";
 const cols = {
-    idUsers:{ 
+    id_user:{ 
         type: DataTypes.UUID,
         primaryKey : true,
         allowNull:false,
@@ -21,11 +21,7 @@ const cols = {
         type: DataTypes.TEXT(45),
         allowNull:false
     },
-    password:{
-        type: DataTypes.TEXT(45),
-        allowNull:false
-    },
-    creationDate:{
+    creation_date:{
         type: DataTypes.DATE(),
         allowNull:false
     },
@@ -36,21 +32,25 @@ const cols = {
         type:DataTypes.TEXT(256),
         allowNull:false
     },
-    idRole:{
+    id_role:{
         type:DataTypes.INTEGER(),
         allowNull:false,
+    },
+    password:{
+    type: DataTypes.TEXT(45),
+    allowNull:false
     }
-
+    
 }
 const  config = {
     timestamps: false,
 
 };
-const Users = sequelize.connection.define(alias,cols,config)
-Users.associate = (models)=>{
-    Users.belongsTo(models.UserRole),
-    Users.hasMany(models.Post)
+const users = sequelize.connection.define(alias,cols,config)
+users.associate = (models)=>{
+    users.belongsTo(models.user_roles),
+    users.hasMany(models.news)
 }
 
 
-export default Users;
+export default users;

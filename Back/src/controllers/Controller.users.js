@@ -1,6 +1,6 @@
-import db from "../models/";
-import Users from "../models/Model.User";
-import UserRole from "../models/Model.UserRole";
+import db from "../models";
+import users from "../models/Model.users";
+import user_roles from "../models/Model.user_roles";
 import { validateCliente } from "./helpers/validations.Usuarios";
 //TODO:
 // ----Usuarios: 
@@ -22,15 +22,15 @@ const createUsuario = async (req, res) => {
     //   });
     //   return;
     // }
-    Users.create({
+    users.create({
       name: req.body.name,
       lastname: req.body.lastname,
       email: req.body.email,
       enabled: 1,
-      creationDate:'15-04-2023',
+      creation_date:'15-04-2023',
       password: req.body.password,
       avatar: req.body.avatar,
-      idRole: req.body.idRole,
+      id_role: req.body.idRole,
     })
       .then((result) => {
         res.json({
@@ -49,8 +49,8 @@ const createUsuario = async (req, res) => {
 
   const listUser = async (req,res)=>{
     try {
-        const user = await Users.findOne({
-            where: { idusers: req.params.id },
+        const user = await users.findOne({
+            where: { id_user: req.params.id },
           });
         res.json({
           result: { status: 200, user, page: req.params.page, amount },
@@ -78,8 +78,8 @@ const updateUser = async (req,res)=>{
         //   return;
         // }
         console.log(req.params.id);
-        const user = await Users.findOne({
-          where: { idusers: req.params.id },
+        const user = await users.findOne({
+          where: { id_user: req.params.id },
         });
         if (user) {
           user.set({
@@ -89,7 +89,7 @@ const updateUser = async (req,res)=>{
             enabled: 1,
             password: req.body.password,
             avatar: req.body.avatar,
-            idRole: req.body.idRole,
+            id_role: req.body.idRole,
           });
           await user.save();
           res.json({
@@ -110,8 +110,8 @@ const updateUser = async (req,res)=>{
 
 const deleteUser = async (req,res)=>{
     try {
-        const user = await Users.findOne({
-          where: { idusers: req.params.id },
+        const user = await users.findOne({
+          where: { id_user: req.params.id },
         });
         if (user) {
           await user.destroy();
@@ -136,10 +136,9 @@ const deleteUser = async (req,res)=>{
 const listAllUsers = async (req,res)=>{
     try {
         console.log("Listar Usuarios");
-        const amount = await Users.count();
-        const clientes = await Users.findAll({order: [['name', 'ASC']],});
+        const {count, } = await users.findAndCountAll({order: [['name', 'ASC']],});
         res.json({
-          result: { status: 200, clientes, page: req.params.page, amount },
+          result: { status: 200, usuarios:rows, page: req.params.page, amount:count },
         });
       } catch (error) {
         res.json({

@@ -12,9 +12,9 @@ import { sequelize } from "../database/config/connection"
 // `idDpCategory` INT NOT NULL,
 // `idmedia1` INT NOT NULL,
 
-const alias = 'digitalpoint';
+const alias = 'digital_points';
 const cols = {
-    idDigitalPoint:{ 
+    id_digital_point:{ 
         type: DataTypes.UUID,
         primaryKey : true,
         allowNull:false,
@@ -28,7 +28,7 @@ const cols = {
         type: DataTypes.TEXT(32),
         allowNull:false
     },
-    beginDate:{
+    begin_date:{
         type: DataTypes.DATE(),
         allowNull:false
     },
@@ -44,12 +44,12 @@ const cols = {
         type:DataTypes.TEXT(40),
         allowNull:false
     },
-    idDpCategory:{
-        type:DataTypes.INTEGER(),
+    id_dp_Category:{
+        type: DataTypes.UUID,
         allowNull:false
     },
-    idmedia:{
-        type:DataTypes.INTEGER(),
+    id_media:{
+        type: DataTypes.UUID,
         allowNull:false
     }
 
@@ -58,11 +58,11 @@ const  config = {
     timestamps: false,
 };
 
-const DigitalPoint = sequelize.connection.define(alias,cols,config)
+const digital_points = sequelize.connection.define(alias,cols,config)
 // Ciudades.associate = function (models) {
 //     Ciudades.hasMany(models.Clientes, {
 //         as: "Clientes",
 //         foreignKey: 'idCiudad',
 //     })
 // }
-export default DigitalPoint
+export default digital_points

@@ -1,9 +1,9 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../database/config/connection"
 
-const alias = "Post";
+const alias = "news_categories";
 const cols ={
-    idPostidPostCategory:{ 
+    id_news_category:{ 
         type: DataTypes.UUID,
         primaryKey : true,
         allowNull:false,
@@ -18,9 +18,9 @@ const  config = {
     timestamps: false,
 };
 
-const PostsCategory = sequelize.connection.define(alias,cols,config);
-PostsCategory.associate = (models)=>{
-    PostsCategory.hasMany(models.Posts)
+const news_categories = sequelize.connection.define(alias,cols,config);
+news_categories.associate = (models)=>{
+    news_categories.hasMany(models.news)
 }
 
-export default PostsCategory;
+export default news_categories;

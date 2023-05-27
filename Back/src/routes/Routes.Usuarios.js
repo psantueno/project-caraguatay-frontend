@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import {methods as userController} from '../controllers/Controller.Usuarios'
+import {methods as userController} from '../controllers/Controller.users'
 
 const router = Router();
 router.get('/list/all',userController.listAllUsers);
