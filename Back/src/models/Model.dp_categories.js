@@ -5,37 +5,30 @@ import { sequelize } from "../config/connection"
 // `idDpCategory` INT NOT NULL,
 // `description` VARCHAR(45) NULL,
 
-const alias = 'media';
+const alias = 'dp_categories';
 const cols = {
-    id_media:{ 
+    id_dp_category:{ 
         type: DataTypes.UUID,
         primaryKey : true,
         allowNull:false,
         defaultValue: DataTypes.UUIDV4 
     },
-    media_type:{
-        type: DataTypes.TEXT(5),
+    description:{
+        type: DataTypes.TEXT(45),
         allowNull:false
     },
-    path:{
-        type: DataTypes.TEXT(256),
-        allowNull:false
-    },
-    id_news:{
-        type: DataTypes.UUID,
-        allowNull:false
-    },
+
 }
 const  config = {
     timestamps: false,
 
 };
 
-const media = sequelize.connection.define(alias,cols,config);
+const dp_categories = sequelize.connection.define(alias,cols,config);
 // Ciudades.associate = function (models) {
 //     Ciudades.hasMany(models.Clientes, {
 //         as: "Clientes",
 //         foreignKey: 'idCiudad',
 //     })
 // }
-export default media
+export default dp_categories
