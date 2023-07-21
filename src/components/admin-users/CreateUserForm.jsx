@@ -267,8 +267,8 @@ export const CreateUserForm = () => {
                     )}
                 </Form.Group>
 
-                <Form.Select name="role" value={role} onChange={onRolChange}>
-                    onBlur={onValidateRole}
+                <Form.Select name="role" value={role} onChange={onRolChange} onBlur={onValidateRole}>
+                    
                     <option value="role" >
                         Rol
                     </option>
