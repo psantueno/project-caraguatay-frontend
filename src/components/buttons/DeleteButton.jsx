@@ -3,7 +3,7 @@ import './buttons.css';
 
 export const DeleteButton = ({fx=null, arg=null}) => {
   return (
-      <button onClick={ () => fx(arg) } className='admin-button' type="button">
+      <button onClick={ () => fx(arg) } className='admin-button' type="button" title='Eliminar'>
         <i className="fas fa-trash-alt"></i>
       </button>  
   )

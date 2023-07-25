@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Button, Form, Container, Col, Row, Table, Alert } from 'react-bootstrap';
 import { useForm } from '../../hooks/useForm';
 import { NewsFormValidations } from './NewsFormValidations';
@@ -11,7 +11,8 @@ const initialForm = {
   title: "",
   mainText: "",
   category: "default",
-  files: []
+  files: [],
+  idUsers: 1
 };
 
 
@@ -37,11 +38,14 @@ export const NewsForm = () => {
     handleMouseup,
     handleReset,
     handleSubmit,
-    setShowMessage,
+    setShowResOk,
+    setShowResBad,
     setErrors,
     files,
     errors,
-    showMessage,
+    showResOk,
+    showResBad,
+    responseMsg,
   } = useForm(initialForm, NewsFormValidations, inputs)
 
 
@@ -90,22 +94,79 @@ export const NewsForm = () => {
     setMsgFileNotImage(false)
   }
 
+  const getCategorys = async () => {
+
+    try {
+
+      const res = await fetch('http://localhost:4001/api/noticias/create');
+      const categories = await res.json();
+      
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+
+  useEffect(() => {
+
+    // ejecucion del getCategories
+
+  }
+  , []);
+  
+
 
   return (
     <>
-      <Alert show={showMessage} variant="primary" className="mt-2">
-        <Row>
-          <Col>
-            <p>La publicación se ha creado correctamente.</p>
-          </Col>
-          <Col className="d-flex justify-content-end">
-            <Button
-              onClick={() => setShowMessage(false)}>
-              Cerrar
-            </Button>
-          </Col>
-        </Row>
-      </Alert>
+
+    {/*
+         TAREA: 
+
+     Hacer fetch para traer las categorias y mostrarlas al seleccionar en el form 
+     
+     */}
+
+      {/* RESPUESTA OK DEL RESPONSE */}
+
+            <Alert show={showResOk} variant="primary" className="mt-2">
+                <Row>
+                    <Col>
+                        <p> {responseMsg && responseMsg.msg ? responseMsg.msg : null} </p>
+                    </Col>
+                    <Col className="d-flex justify-content-end">
+                        <Button
+                            onClick={() => setShowResOk(false)}>
+                            Cerrar
+                        </Button>
+                    </Col>
+                </Row>
+            </Alert>
+
+        {/* RESPUESTA OK DEL RESPONSE */}
+
+        {/* RESPUESTA BAD DEL RESPONSE */}
+
+        <Alert show={showResBad} variant="danger" className="mt-2">
+                <Row>
+                    <Col>
+                        <p>{responseMsg && responseMsg.errors
+                        ? responseMsg.errors.map( (field, index) => (
+                          <li key={index}>{field.msg}</li>
+                         ))
+                        : null
+                        }</p>
+                    </Col>
+                    <Col className="d-flex justify-content-end">
+                        <Button
+                        variant='danger'
+                            onClick={() => setShowResBad(false)}>
+                            Cerrar
+                        </Button>
+                    </Col>
+                </Row>
+            </Alert>
+
+        {/* RESPUESTA BAD DEL RESPONSE */}
 
       <Container className='mt-4'>
         <h4>Crear noticia</h4>
@@ -125,10 +186,10 @@ export const NewsForm = () => {
               required
             >
               <option value="default">-Seleccione una categoría-</option>
-              <option value="Deportes" >Deportes</option>
-              <option value="Comunicados" >Comunicados</option>
-              <option value="Cultura y turismo" >Cultura y turismo</option>
-              <option value="Punto Digital">Punto digital</option>
+              <option value={1} >Deportes</option>
+              <option value={2} >Comunicados</option>
+              <option value={3} >Cultura y turismo</option>
+              <option value={4}>Punto digital</option>
             </Form.Select>
 
             {

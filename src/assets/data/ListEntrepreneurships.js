@@ -5,7 +5,7 @@ import EmprendImg from "../images/emprendimiento.jpeg";
 export const ListEntrepreneurships = [
     {
         id: 1,
-        cover: EmprendImg,
+        image: EmprendImg,
         name: "Dulces María",
         address: "Av. Santa Fe 255",
         phone: "+543751464327",
@@ -15,7 +15,7 @@ export const ListEntrepreneurships = [
     },
     {
         id: 2,
-        cover: EmprendImg,
+        image: EmprendImg,
         name: "Macetas y Plantas Doña Miriam",
         address: "Av. Santa Fe 255",
         phone: "+543751464327",
@@ -25,7 +25,7 @@ export const ListEntrepreneurships = [
     },
     {
         id: 3,
-        cover: EmprendImg,
+        image: EmprendImg,
         name: "Mates y Materas",
         address: "Av. Santa Fe 255",
         phone: "+543751464327",

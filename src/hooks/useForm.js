@@ -12,15 +12,20 @@ La funcion "FormValidation" recibe los datos del form, eventos, inputs y errores
 */
 
 
-export const useForm = (initialForm = {}, FormValidations = {}, inputs={}, handleShow={}) => {
+export const useForm = (initialForm = {}, FormValidations = {}, inputs = {}, handleShow = {}) => {
 
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
-  const [showMessage, setShowMessage] = useState(false);
+  const [showResOk, setShowResOk] = useState(false);
+  const [showResBad, setShowResBad] = useState(false);
+  const [responseMsg, setResponseMsg] = useState(null)
+  const [requirementValue, setRequirementValue] = useState("");
+  const [items, setItems] = useState([]);       // Maneja los ítems que se agregan en el input de requisitos.
 
-  const handleChange = ({target}) => {
+  const handleChange = ({ target }) => {
     const { name, value } = target;
+
     setForm(prevState => ({
       ...prevState,
       [name]: value
@@ -28,8 +33,13 @@ export const useForm = (initialForm = {}, FormValidations = {}, inputs={}, handl
   }
 
   const handleBlur = (e) => {
-    handleChange(e);
-    setErrors(FormValidations(form, e, inputs, errors));
+    if (!(e.target.name === "image")) {                            //adaptado para que no genere inconsistencias en DP Create new.
+      handleChange(e);
+      setErrors(FormValidations(form, e, inputs, errors));
+    } else {
+      setErrors(FormValidations(form, e, inputs, errors));
+    }
+
   };
 
   const handleKeyUp = (e) => {
@@ -43,28 +53,69 @@ export const useForm = (initialForm = {}, FormValidations = {}, inputs={}, handl
   }
 
   const handleReset = () => {                                  // establece los valores del form a los iniciales y resetea los 
-    setForm(initialForm);                                     // className de todos los inputs evitando que queden en rojo o verde.
+    setForm(initialForm);
+    setItems([]);                                             // className de todos los inputs evitando que queden en rojo o verde.
     for (let clave in inputs) {
       inputs[clave].current.className = "form-control";
     }
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     handleChange(e);
     e.preventDefault();
+    setForm(prevState => {
+      const idUsers = 1;
+      return {
+        ...prevState,
+        idUsers: idUsers
+      };
+    });
+    
     setErrors(FormValidations(form, e, inputs, errors));
+
+    // podria setear form para agregar el idUser antes de enviarlo //
+    
 
     if (Object.keys(errors).length === 0) {
       setLoading(true);
       console.log(form);
-      setShowMessage(true);
-      setForm(initialForm);
-      handleReset();
 
+      try {
+
+        const req = await fetch('http://localhost:4001/api/noticias/create', {
+          method: "POST",
+          body: JSON.stringify(form),
+          headers: { 'Content-Type': 'application/json' }
+        })
+
+        const res = await req.json();
+        
+        console.log(res)
+        
+        setResponseMsg(res);
+        
+        if (res.status===201) {
+          setShowResOk(true);
+          setShowResBad(false);
+          setForm(initialForm);
+          setItems([])
+          setRequirementValue('')
+          inputs.image.current.value = '';
+          handleReset();
+        } else {
+          setShowResBad(true);
+          console.log("-------------------")
+          console.log(res.errors)
+          console.log("-------------------")
+          
+        }
+      }
+      catch (error) {
+        console.log(error)
+      }
     } else {
-      setShowMessage(false);
-      alert("Revise los errores del formulario.");
-      return;
+      setShowResOk(false);
+      alert("Revise los errores del formulario");
     }
   }
 
@@ -77,11 +128,18 @@ export const useForm = (initialForm = {}, FormValidations = {}, inputs={}, handl
     handleMouseup,
     handleReset,
     handleSubmit,
-    setShowMessage,
+    setShowResOk,
+    setShowResBad,
     setErrors,
+    requirementValue,
+    items,
+    setItems,
+    setRequirementValue,
     loading,
     errors,
-    showMessage,
+    showResOk,
+    showResBad,
+    responseMsg,
     ...form
   }
 }

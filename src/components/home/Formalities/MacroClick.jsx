@@ -1,5 +1,5 @@
 import { Container, Row} from 'react-bootstrap'
-import macroPago from '../../assets/images/macro_click_pago.png'
+import macroPago from '../../../assets/images/macro_click_pago.png'
 
 export function MacroClick() {
   return (
