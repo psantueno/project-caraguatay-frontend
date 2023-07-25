@@ -716,6 +716,7 @@ color:#315C94;
   --bs-btn-disabled-color: #a2a5a7  !important;
   --bs-btn-disabled-bg: #ffffff   !important;
   --bs-btn-disabled-border-color: #a2a5a7  !important;
+  box-shadow: 0 5px 6px -6px #222;
 }
 
 
