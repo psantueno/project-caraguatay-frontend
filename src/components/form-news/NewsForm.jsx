@@ -2,8 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import { Button, Form, Container, Col, Row, Table, Alert } from 'react-bootstrap';
 import { useForm } from '../../hooks/useForm';
 import { NewsFormValidations } from './NewsFormValidations';
-import { DeleteButton } from '../buttons/DeleteButton'
+import { DeleteButton } from '../buttons/DeleteButton';
 import dayjs from "dayjs";
+
 
 
 const initialForm = {
@@ -11,7 +12,7 @@ const initialForm = {
   title: "",
   mainText: "",
   category: "default",
-  files: [],
+  imagesUrl: [],
   idUsers: 1
 };
 
@@ -41,6 +42,7 @@ export const NewsForm = () => {
     setShowResOk,
     setShowResBad,
     setErrors,
+    setFiles,
     files,
     errors,
     showResOk,
@@ -67,15 +69,10 @@ export const NewsForm = () => {
       }
     }
     delete errors.files;
-    setForm(prevState => {
-      const newFiles = Array.from(files);
-      return {
-        ...prevState,
-        files: prevState.files.concat(newFiles)
-      };
-    });
+
+    setFiles(prevState => [...prevState, ...Array.from(files)]);
   };
-  
+
 
   const handleClick = () => {
     inputs.files.current.click();
@@ -83,10 +80,7 @@ export const NewsForm = () => {
 
 
   const handleDelete = (index) => {
-    setForm(prevForm => ({
-      ...prevForm,
-      files: prevForm.files.filter((_, i) => i !== index)
-    }));
+    setFiles(prevState => prevState.filter((_, i) => i !== index));
   }
 
   const showFileNotImage = () => {
@@ -100,7 +94,7 @@ export const NewsForm = () => {
 
       const res = await fetch('http://localhost:4001/api/noticias/create');
       const categories = await res.json();
-      
+
     } catch (error) {
       console.log(error);
     }
@@ -112,14 +106,14 @@ export const NewsForm = () => {
     // ejecucion del getCategories
 
   }
-  , []);
-  
+    , []);
+
 
 
   return (
     <>
 
-    {/*
+      {/*
          TAREA: 
 
      Hacer fetch para traer las categorias y mostrarlas al seleccionar en el form 
@@ -128,45 +122,45 @@ export const NewsForm = () => {
 
       {/* RESPUESTA OK DEL RESPONSE */}
 
-            <Alert show={showResOk} variant="primary" className="mt-2">
-                <Row>
-                    <Col>
-                        <p> {responseMsg && responseMsg.msg ? responseMsg.msg : null} </p>
-                    </Col>
-                    <Col className="d-flex justify-content-end">
-                        <Button
-                            onClick={() => setShowResOk(false)}>
-                            Cerrar
-                        </Button>
-                    </Col>
-                </Row>
-            </Alert>
+      <Alert show={showResOk} variant="primary" className="mt-2">
+        <Row>
+          <Col>
+            <p> {responseMsg && responseMsg.msg ? responseMsg.msg : null} </p>
+          </Col>
+          <Col className="d-flex justify-content-end">
+            <Button
+              onClick={() => setShowResOk(false)}>
+              Cerrar
+            </Button>
+          </Col>
+        </Row>
+      </Alert>
 
-        {/* RESPUESTA OK DEL RESPONSE */}
+      {/* RESPUESTA OK DEL RESPONSE */}
 
-        {/* RESPUESTA BAD DEL RESPONSE */}
+      {/* RESPUESTA BAD DEL RESPONSE */}
 
-        <Alert show={showResBad} variant="danger" className="mt-2">
-                <Row>
-                    <Col>
-                        <p>{responseMsg && responseMsg.errors
-                        ? responseMsg.errors.map( (field, index) => (
-                          <li key={index}>{field.msg}</li>
-                         ))
-                        : null
-                        }</p>
-                    </Col>
-                    <Col className="d-flex justify-content-end">
-                        <Button
-                        variant='danger'
-                            onClick={() => setShowResBad(false)}>
-                            Cerrar
-                        </Button>
-                    </Col>
-                </Row>
-            </Alert>
+      <Alert show={showResBad} variant="danger" className="mt-2">
+        <Row>
+          <Col>
+            <p>{responseMsg && responseMsg.errors
+              ? responseMsg.errors.map((field, index) => (
+                <li key={index}>{field.msg}</li>
+              ))
+              : null
+            }</p>
+          </Col>
+          <Col className="d-flex justify-content-end">
+            <Button
+              variant='danger'
+              onClick={() => setShowResBad(false)}>
+              Cerrar
+            </Button>
+          </Col>
+        </Row>
+      </Alert>
 
-        {/* RESPUESTA BAD DEL RESPONSE */}
+      {/* RESPUESTA BAD DEL RESPONSE */}
 
       <Container className='mt-4'>
         <h4>Crear noticia</h4>
