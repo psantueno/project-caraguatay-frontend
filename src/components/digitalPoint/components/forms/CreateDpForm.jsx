@@ -39,14 +39,14 @@ export const CreateDpForm = () => {
         handleMouseup,
         handleReset,
         handleSubmit,
-        setShowMessage,
+        setShowResOk,
         setErrors,
         setItems,
         setRequirementValue,
         requirementValue,
         items,
         errors,
-        showMessage,
+        showResOk,
     } = useForm(initialForm, DpValidations, inputs)
 
 
@@ -195,19 +195,23 @@ export const CreateDpForm = () => {
 
         <>
 
-            <Alert show={showMessage} variant="primary" className="mt-2">
+        {/* RESPUESTA OK DEL RESPONSE */}
+
+            <Alert show={showResOk} variant="primary" className="mt-2">
                 <Row>
                     <Col>
                         <p>La publicación se ha creado correctamente.</p>
                     </Col>
                     <Col className="d-flex justify-content-end">
                         <Button
-                            onClick={() => setShowMessage(false)}>
+                            onClick={() => setShowResOk(false)}>
                             Cerrar
                         </Button>
                     </Col>
                 </Row>
             </Alert>
+
+        {/* RESPUESTA OK DEL RESPONSE */}
 
 
             <Container className='mb-3 mt-3'>

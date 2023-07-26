@@ -14,8 +14,12 @@ export const UserItem = ({ user }) => {
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [userIdToDelete, setUserIdToDelete] = useState(null);
 
+  // Reemplazar Show y Close por
+  //const { show, handleShow, handleClose } = useModal()
+  // import { useModal } from '../../../../hooks/useModal';
   const handleShow = () => setShow(true)
   const handleClose = () => setShow(false);
+  // Fin Reemplazar Show y Close 
 
   const handleShowUserDetails = () => setShowUserDetails(true);
   const handleCloseUserDetails = () => setShowUserDetails(false);
@@ -30,7 +34,6 @@ export const UserItem = ({ user }) => {
 
   const handleConfirmDeletion = (user) => {
     deleteUser(userIdToDelete);
-    setShowConfirmDelete(false);
   }
 
   useEffect(() => {
@@ -40,13 +43,14 @@ export const UserItem = ({ user }) => {
   return (
     <>
 
-      <td><img src={user.avatar} alt=""/></td>
+      <td><img src={user.avatar} alt="" /></td>
       <td>{user.email}</td>
-      <td><DisplayButton fx={handleShowUserDetails} arg={user}/></td>
-      <td><DeleteButton fx={handleShowConfirmDelete}/></td>
-      <td><EditButton fx={handleShow} arg={user}/></td>
+      <td><DisplayButton fx={handleShowUserDetails} arg={user} /></td>
+      <td><DeleteButton fx={handleShowConfirmDelete} /></td>
+      <td><EditButton fx={handleShow} arg={user} /></td>
 
-      {/* MODAL PARA DESPLEGAR FORM DE CREACIÓN DE USUARIO */}
+
+      {/* MODAL PARA DESPLEGAR FORM DE EDICION DE USUARIO */}
 
       <Modal show={show} onHide={handleClose} className="mt-5">
         <Modal.Header closeButton>
@@ -86,7 +90,7 @@ export const UserItem = ({ user }) => {
 
       {/* MODAL PARA DESPLEGAR USUARIO */}
 
-      <Modal show={showUserDetails}  onHide={handleCloseUserDetails}  className="mt-5">
+      <Modal show={showUserDetails} onHide={handleCloseUserDetails} className="mt-5">
         <Modal.Header closeButton>
           <Modal.Title>
             <h3 className="form-title mt-4">Detalle de usuario administrador</h3>
@@ -105,7 +109,7 @@ export const UserItem = ({ user }) => {
           <img src={user.avatar} alt="" />
 
           <Modal.Footer>
-            <Button  onClick={handleCloseUserDetails} >
+            <Button onClick={handleCloseUserDetails} >
               Volver al listado
             </Button>
           </Modal.Footer>
