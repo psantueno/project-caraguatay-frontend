@@ -26,6 +26,7 @@ export const Trainning = () => {
               dpnew={ dpnew }
               {...dpnew}
             />
+
           ))
         }
 
