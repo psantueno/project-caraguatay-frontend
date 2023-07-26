@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { validations } from '../components/helpers/validations';
+import { fileUpload } from '../helpers/fileUpload';
+
 
 /* 
 Este hook recibe: 
@@ -22,6 +23,7 @@ export const useForm = (initialForm = {}, FormValidations = {}, inputs = {}, han
   const [responseMsg, setResponseMsg] = useState(null)
   const [requirementValue, setRequirementValue] = useState("");
   const [items, setItems] = useState([]);       // Maneja los ítems que se agregan en el input de requisitos.
+  const [files, setFiles] = useState([])
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
@@ -70,15 +72,39 @@ export const useForm = (initialForm = {}, FormValidations = {}, inputs = {}, han
         idUsers: idUsers
       };
     });
-    
+
     setErrors(FormValidations(form, e, inputs, errors));
 
     // podria setear form para agregar el idUser antes de enviarlo //
-    
+
 
     if (Object.keys(errors).length === 0) {
       setLoading(true);
-      console.log(form);
+
+      const folder = "noticias";                               // apunta al presets "noticias" de cloudinary.
+
+      const fileUploadPromises = [];
+      for (const file of files) {                              // files viene del "estado files".
+        fileUploadPromises.push(fileUpload(file, folder))
+      }
+
+      const photosUrls = await Promise.all(fileUploadPromises);
+      console.log (photosUrls);
+
+      setForm(prevState => {
+        return {
+          ...prevState,
+          imagesUrl: photosUrls
+        };
+      });
+
+      // ver si se puede hacer lo mismo que con las imagenes: subir simultaneamente las urls en mysql.
+      // Para convertir un array de elementos a un string separados por comas, puedes utilizar el método join() en JavaScript. 
+      // El método join() une todos los elementos de un array en una cadena de texto, utilizando el separador que especifiques.
+      // Sí, puedes convertir un string separado por comas de nuevo a un array utilizando el método split() en JavaScript. 
+      // El método split() divide una cadena de texto en un array de subcadenas utilizando un separador especificado.
+
+      console.log(form)
 
       try {
 
@@ -89,12 +115,12 @@ export const useForm = (initialForm = {}, FormValidations = {}, inputs = {}, han
         })
 
         const res = await req.json();
-        
+
         console.log(res)
-        
+
         setResponseMsg(res);
-        
-        if (res.status===201) {
+
+        if (res.status === 201) {
           setShowResOk(true);
           setShowResBad(false);
           setForm(initialForm);
@@ -107,7 +133,7 @@ export const useForm = (initialForm = {}, FormValidations = {}, inputs = {}, han
           console.log("-------------------")
           console.log(res.errors)
           console.log("-------------------")
-          
+
         }
       }
       catch (error) {
@@ -116,7 +142,7 @@ export const useForm = (initialForm = {}, FormValidations = {}, inputs = {}, han
     } else {
       setShowResOk(false);
       alert("Revise los errores del formulario");
-    }
+     }
   }
 
   return {
@@ -131,15 +157,16 @@ export const useForm = (initialForm = {}, FormValidations = {}, inputs = {}, han
     setShowResOk,
     setShowResBad,
     setErrors,
+    setFiles,
     requirementValue,
     items,
+    files,
     setItems,
     setRequirementValue,
     loading,
     errors,
     showResOk,
     showResBad,
-    responseMsg,
-    ...form
+    responseMsg
   }
 }
