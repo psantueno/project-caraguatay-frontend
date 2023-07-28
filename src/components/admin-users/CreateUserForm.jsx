@@ -7,6 +7,9 @@ import { useForm } from "../../hooks/useForm";
 import { validations } from "../helpers/validations";
 
 export const CreateUserForm = () => {
+
+// VER LA FECHA DE CREACION CUANDO SE ENVIA EL FORM - AGREGAR PROCESO
+
     const initialForm = {
         email: "",
         name: "",
