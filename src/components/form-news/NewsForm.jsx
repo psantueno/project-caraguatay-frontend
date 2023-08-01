@@ -13,7 +13,7 @@ const initialForm = {
   mainText: "",
   category: "default",
   imagesUrl: [],
-  idUsers: 1
+  user_id: 1
 };
 
 

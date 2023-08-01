@@ -66,10 +66,10 @@ export const useForm = (initialForm = {}, FormValidations = {}, inputs = {}, han
     handleChange(e);
     e.preventDefault();
     setForm(prevState => {
-      const idUsers = 1;
+      const user_id = 1;
       return {
         ...prevState,
-        idUsers: idUsers
+        user_id: user_id
       };
     });
 
@@ -97,6 +97,13 @@ export const useForm = (initialForm = {}, FormValidations = {}, inputs = {}, han
           imagesUrl: photosUrls
         };
       });
+
+      // PROCESO //
+      // 1: Subir las imagenes y recibir la confirmacion ok. 
+      // 2: Crear la noticia.
+      // 3: Obtener el id de la noticia. 
+      // 4: Registramos en media las urls asociandolo al id de la noticia. 
+      // 5: Redirigir a la sección.
 
       // ver si se puede hacer lo mismo que con las imagenes: subir simultaneamente las urls en mysql.
       // Para convertir un array de elementos a un string separados por comas, puedes utilizar el método join() en JavaScript. 
