@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import { UserAdminContext } from "./UserAdminContext";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import "./admin-users.css";
-import AvatarDefault from "../../assets/user-avatar.png";
 import { useForm } from "../../hooks/useForm";
 import { validations } from "../helpers/validations";
 
@@ -154,22 +153,28 @@ export const CreateUserForm = () => {
     };
 
     /* Funciones específicas de manejo de avatar */
+   const fileDefault = "https://res.cloudinary.com/caraguatay/image/upload/v1691539178/avatar/user-profile_llmze1.png"
     const handleFiles = ({ target }) => {
-        if (target.files.length < 1) return;
+        if (target.files.length < 1) {
+            setForm((prevState) => ({
+                ...prevState,
+                avatar: fileDefault,
+            }));
+        };
         const file = target.files[0];
-        // const fileName = file.name.toLowerCase();
+        const fileName = file.name.toLowerCase();
         console.log("handleFiles antes", errors.avatar, errorAvatar.error);
         onValidateAvatar({ target });
         console.log("handleFiles despues", errors.avatar, errorAvatar.error);
         if (errorAvatar.error) return;
-        // if (!fileName.endsWith('.jpg') && !fileName.endsWith('.jpeg') && !fileName.endsWith('.png')) {
-        //     setMsgFileNotImage(true);
-        //     setErrors(prevErrors => ({
-        //         ...prevErrors,
-        //         avatar: [...(prevErrors.avatar || []), `El archivo "${fileName}" no es una imagen`]
-        //     }));
-        //     return;
-        // }
+        if (!fileName.endsWith('.jpg') && !fileName.endsWith('.jpeg') && !fileName.endsWith('.png')) {
+            setMsgFileNotImage(true);
+            setErrors(prevErrors => ({
+                ...prevErrors,
+                avatar: [...(prevErrors.avatar || []), `El archivo "${fileName}" no es una imagen`]
+            }));
+            return;
+        }
         setForm((prevState) => ({
             ...prevState,
             avatar: file,
@@ -202,7 +207,7 @@ export const CreateUserForm = () => {
         if (!avatar) {
             setForm((prevState) => ({
                 ...prevState,
-                avatar: AvatarDefault,
+                avatar: fileDefault,
             }));
         }
         addUser(email, name, lastName, password, role, avatar);
@@ -281,11 +286,12 @@ export const CreateUserForm = () => {
                     <Form.Control
                         type="file"
                         name="avatar"
-                        accept="image/png , image/jpeg, image/jpg"
-                        file={avatar}
+                        //ref={inputs.files}
                         onChange={handleFiles}
-                        multiple={false}
+                        //onBlur={handleBlur}
+                        accept="image/png , image/jpeg, image/jpg"
                     />
+                   
                     {errorAvatar.error && <Form.Label> {errorAvatar.msg} </Form.Label>}
 
                     <Row>
@@ -294,13 +300,13 @@ export const CreateUserForm = () => {
                         <Col sm={4}>
                             {avatar ? (
                                 <img
-                                    src={URL.createObjectURL(avatar)}
+                                    src={fileDefault}
                                     alt="Avatar"
                                     className="uploaded-avatar"
                                 />
                             ) : (
                                 <img
-                                    src={AvatarDefault}
+                                    src={fileDefault}
                                     alt="Avatar por default"
                                     className="uploaded-avatar"
                                 />
