@@ -1,17 +1,17 @@
 export const DigitalPointBtns = [
     {
         title: "Novedades",
-        icon: <i class="fas fa-exclamation-circle"></i>,
+        icon: <i className="fas fa-exclamation-circle"></i>,
         url: "/punto-digital/novedades"
     },
     {
         title: "Talleres",
-        icon: <i class="fas fa-chalkboard-teacher"></i>,
+        icon: <i className="fas fa-chalkboard-teacher"></i>,
         url: "/punto-digital/talleres"
     },
     {
         title: "Capacitaciones",
-        icon: <i class="fas fa-book"></i>,
+        icon: <i className="fas fa-book"></i>,
         url: "/punto-digital/capacitaciones"
     },
     {

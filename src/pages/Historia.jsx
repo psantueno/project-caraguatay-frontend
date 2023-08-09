@@ -12,6 +12,7 @@ export const Historia = () => {
       <Container style={{maxWidth:'1200px'}}>
 
         <h1>Historia</h1>
+        <hr />
         <ButtonSquareList buttons={HistoryBtns} />
         <HistoriaRouter />
 

@@ -1,12 +1,12 @@
 import { Navigate, Route, Routes } from 'react-router';
-import { DigitalPointNews, RoboticSchool, Trainning, Workshop} from '../components/digitalPoint';
+import { DPNews, RoboticSchool, Trainning, Workshop} from '../components/digitalPoint';
 
 export const DigitalPointRouter = () => {
 
     return (
 
         <Routes>
-            <Route path="novedades" element={<DigitalPointNews />} />
+            <Route path="novedades" element={<DPNews />} />
             <Route path="talleres" element={<Trainning />} />
             <Route path="escuela-robotica" element={<RoboticSchool />} />
             <Route path="capacitaciones" element={<Workshop />} />

@@ -5,7 +5,7 @@ import campingImg from "../images/camping.jpg"
 export const ListCampings = [
     {
         id: 1,
-        cover: campingImg,
+        image: campingImg,
         name: "Camping Municipal",
         address: "Av. Santa Fe 255",
         phone: "+543751464327",
@@ -15,7 +15,7 @@ export const ListCampings = [
     },
     {
         id: 2,
-        cover: campingImg,
+        image: campingImg,
         name: "Camping Ita Curuzú",
         address: "Av. Santa Fe 255",
         phone: "+543751464327",
@@ -25,7 +25,7 @@ export const ListCampings = [
     },
     {
         id: 3,
-        cover: campingImg,
+        image: campingImg,
         name: "Camping Los Caceritos",
         address: "Av. Santa Fe 255",
         phone: "+543751464327",

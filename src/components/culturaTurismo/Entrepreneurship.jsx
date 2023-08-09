@@ -12,7 +12,7 @@ export const Entrepreneurship = () => {
         <h5><b>Emprendedores</b></h5>
       </Row>
 
-      <Container className='list-cards-cultura'>
+      <Container className='list-cards-section'>
         {
           ListEntrepreneurships.map((emprendimiento) => (
 
