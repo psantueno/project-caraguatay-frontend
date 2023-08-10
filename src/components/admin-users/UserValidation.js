@@ -1,8 +1,6 @@
-import { validations } from "../helpers/validations";
-
 export const  UserValidations = (form, e, inputs, errors) => {
 
-    const { email, name, lastName, password, role, avatar } = inputs;
+    const { email, name, lastName, password, role } = inputs;
 
     if (e.target.name === "name" || e.type === 'submit') {
         if (!form.name.trim()) {

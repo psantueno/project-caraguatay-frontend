@@ -4,10 +4,10 @@ import { Form, Button, Row, Col, Alert } from "react-bootstrap";
 import "./admin-users.css";
 import { useForm } from "../../hooks/useForm";
 import { UserValidations } from "./UserValidation";
-import dayjs from "dayjs";
-
 
 export const CreateUserForm = () => {
+
+    // Agregar segundo ingreso de contraseña y validación de coincidencia.
 
     const inputs = {
         email: useRef(),
@@ -57,10 +57,13 @@ export const CreateUserForm = () => {
         setForm,
         setErrors,
         setFiles,
+        setShowResOk,
+        setShowResBad,
+        setResponseMsg,
         errors,
     } = useForm(initialForm, UserValidations, inputs);
 
-    /* Funciones específicas de Create User form */
+    /* Funciones específicas de Create User form: handleAvatar */
 
     const handleAvatar = async (e) => {
         const avatarFile = e.target.files[0];
@@ -85,8 +88,6 @@ export const CreateUserForm = () => {
     };
 
 
-
-
     const showFileNotImage = () => {
         delete errors.avatar;
         setMsgFileNotImage(false)
@@ -95,7 +96,7 @@ export const CreateUserForm = () => {
     /* Funciones específicas de form (handleSubmit) */
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!errors) {
@@ -103,18 +104,40 @@ export const CreateUserForm = () => {
             return;
         }
 
-        const currentDateString = dayjs().format('YYYY-MM-DD');
+        setForm(form);
 
-        // Update the form data with the current creation date
-        const updatedForm = {
-            ...form,
-            creationDate: currentDateString,
-        };
+        // addUser(form);
 
-        // Update the form state
-        setForm(updatedForm);
+        try {
 
-        addUser(form);
+            const req = await fetch('http://localhost:4001/api/users/create', {
+              method: "POST",
+              body: JSON.stringify(form),
+              headers: { 'Content-Type': 'application/json' }
+            })
+    
+            const res = await req.json();
+    
+            console.log(res)
+    
+            setResponseMsg(res);
+    
+            if (res.status === 201) {
+              setShowResOk(true);
+              setShowResBad(false);
+              setForm(initialForm); 
+              // inputs.image.current.value = '';
+            } else {
+              setShowResBad(true);
+              console.log("-------------------")
+              console.log(res.errors)
+              console.log("-------------------")
+    
+            }
+          }
+          catch (error) {
+            console.log(error)
+          }
     };
 
     console.log("Completed inputs", form);
