@@ -1,16 +1,28 @@
 import {createContext, useState, useEffect} from 'react';
-import Avatar from '../../assets/user-avatar.png'
 
 export const UserAdminContext = createContext()
 
 const UserAdminContextProvider  = (props) => {
     const [alertMessage, setAlertMessage] = useState(null);
+    const [users, setUsers] = useState([]);
 
-    const [users, setUsers] = useState([
-        { id: 1, avatar: Avatar, email: "maria.gainza@gmail.com", name: "María", lastName: 'Gainza', role: 'Administrador', password:123456},
-        { id: 2, avatar: Avatar, email: "ada.lovelace@gmail.com", name: "Ada", lastName: 'Lovelace', role: 'Administrador', password:123456},
-        { id: 3, avatar: Avatar, email: "fito.paez@gmail.com", name: "Fito", lastName: 'Paez', role: 'Administrador',password:123456 } 
-    ])
+    useEffect(() => {
+        const fetchUsers = async () => {
+          try {
+            const response = await fetch('http://localhost:4001/api/users/list/all');
+            if (!response.ok) {
+              throw new Error('Error fetching users');
+            }
+            const data = await response.json();
+            const fetchedUsers = data.result.clientes;
+            setUsers(fetchedUsers);
+          } catch (error) {
+            console.error('Error fetching users:', error);
+          }
+        };
+    
+        fetchUsers();
+      }, []);
 
     
     
@@ -18,9 +30,9 @@ const UserAdminContextProvider  = (props) => {
         setUsers(JSON.parse(localStorage.getItem('users')))
     }, [])
     
-    useEffect(() => {
-        localStorage.setItem('users', JSON.stringify(users))
-    })
+    // useEffect(() => {
+    //     localStorage.setItem('users', JSON.stringify(users))
+    // })
 
     const addUser = (form) => {
         setUsers([...users , {id: Date.now(), form}])
