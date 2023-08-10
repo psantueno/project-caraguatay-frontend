@@ -24,6 +24,7 @@ export const useForm = (initialForm = {}, FormValidations = {}, inputs = {}, han
   const [requirementValue, setRequirementValue] = useState("");
   const [items, setItems] = useState([]);       // Maneja los ítems que se agregan en el input de requisitos.
   const [files, setFiles] = useState([])
+  const [avatar, setAvatar] = useState([])
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
@@ -158,9 +159,11 @@ export const useForm = (initialForm = {}, FormValidations = {}, inputs = {}, han
     setShowResBad,
     setErrors,
     setFiles,
+    setAvatar,
     requirementValue,
     items,
     files,
+    avatar,
     setItems,
     setRequirementValue,
     loading,
