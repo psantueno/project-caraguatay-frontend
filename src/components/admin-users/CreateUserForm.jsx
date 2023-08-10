@@ -4,6 +4,7 @@ import { Form, Button, Row, Col, Alert } from "react-bootstrap";
 import "./admin-users.css";
 import { useForm } from "../../hooks/useForm";
 import { UserValidations } from "./UserValidation";
+import dayjs from "dayjs";
 
 
 export const CreateUserForm = () => {
@@ -17,8 +18,7 @@ export const CreateUserForm = () => {
         avatar: useRef(),
     }
 
-
-// VER LA FECHA DE CREACION CUANDO SE ENVIA EL FORM - AGREGAR PROCESO
+    const avatarDefault = "https://res.cloudinary.com/caraguatay/image/upload/v1691536662/avatar/user-avatar_d4x7se.png"
 
     const initialForm = {
         email: "",
@@ -26,7 +26,7 @@ export const CreateUserForm = () => {
         lastName: "",
         password: "",
         role: "",
-        avatar: "",
+        avatar: avatarDefault,
     };
 
     const formErrors = {
@@ -60,25 +60,42 @@ export const CreateUserForm = () => {
         errors,
     } = useForm(initialForm, UserValidations, inputs);
 
-    /* Funciones específicas de news form */
+    /* Funciones específicas de Create User form */
 
-    const handleAvatar = (e) => {
-
-        const avatar = e.target;
-        // Validación de que todos los elementos sean imagenes.
-            const fileName = avatar.name.toLowerCase();
-            if (!fileName.endsWith('.jpg') && !fileName.endsWith('.jpeg') && !fileName.endsWith('.png')) {
-                setMsgFileNotImage(false);
-                setErrors({
-                    ...errors,
-                    avatar: `El archivo "${fileName}" no es una imagen `
-                });
-                return;
-            }
-        
-            delete errors.files;
-
-            setAvatar(prevState => [...prevState, ...avatar]);
+    const handleAvatar = async (e) => {
+        const avatar = e.target.files[0];
+    
+        if (!avatar) {
+            return;
+        }
+    
+        // Add Cloudinary upload logic here
+        try {
+            const folder = "avatar";
+            const formData = new FormData();
+            formData.append("file", avatar);
+            formData.append("upload_preset", folder); 
+    
+            const response = await fetch(`https://api.cloudinary.com/v1_1/cloudinary/image/upload`, {
+                method: "POST",
+                body: formData
+            });
+    
+            const data = await response.json();
+            const avatarUrl = data.secure_url;
+    
+            // Update the avatar state
+            setAvatar(avatarUrl);
+    
+            // Clear error messages
+            setMsgFileNotImage(false);
+            setErrors({ ...errors, avatar: false });
+    
+        } catch (error) {
+            console.error("Error uploading image to Cloudinary:", error);
+            setMsgFileNotImage(true);
+            setErrors({ ...errors, avatar: "Error uploading image to Cloudinary." });
+        }
     };
 
 
@@ -86,28 +103,38 @@ export const CreateUserForm = () => {
         inputs.avatar.current.click();
     };
 
-    const avatarDefault = "https://res.cloudinary.com/caraguatay/image/upload/v1691539178/avatar/user-profile_llmze1.png"
-
+  
    
     const showFileNotImage = () => {
         delete errors.files;
         setMsgFileNotImage(false)
     }
-    /* Funciones específicas de manejo de avatar */
-   
 
+    /* Funciones específicas de form (handleSubmit) */
+    
+    
     const handleSubmit = (e) => {
-        handleChange(e);
         e.preventDefault();
-        setForm(prevState => {
-        const idUsers = 1;
-        return {
-            ...prevState,
-            idUsers: idUsers
+    
+        if (!errors) {
+            console.log("Se encontraron errores");
+            return;
+        }
+    
+        const currentDateString = dayjs().format('YYYY-MM-DD');
+    
+        // Update the form data with the current creation date
+        const updatedForm = {
+            ...form,
+            creationDate: currentDateString,
         };
-        })
-        addUser(email, name, lastName, password, role, avatar);
+    
+        // Update the form state
+        setForm(updatedForm);
+    
+        addUser(email, name, lastName, password, role, avatar, creationDate);
     };
+
     console.log("Completed inputs", form);
     return (
         <>
@@ -232,6 +259,7 @@ export const CreateUserForm = () => {
                         ref={inputs.avatar}
                         onChange={handleAvatar}
                         onBlur={handleBlur}
+                        onClick={handleClick}
                         accept="image/png , image/jpeg, image/jpg"
                     />
 
@@ -246,10 +274,6 @@ export const CreateUserForm = () => {
                         </Col>
                     </Row>
 
-
-                  
-
-                    
                     
                     {/* DETALLE DE ERRORS IMAGES */}
 

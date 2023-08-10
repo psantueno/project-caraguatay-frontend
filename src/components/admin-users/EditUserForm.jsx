@@ -2,10 +2,11 @@ import React, { useContext, useState } from 'react';
 import { UserAdminContext } from './UserAdminContext';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import './admin-users.css';
-import AvatarDefault from '../../assets/user-avatar.png'
+
 
 const EditUserForm = ({userToEdit}) => {
-
+    const AvatarDefault = "https://res.cloudinary.com/caraguatay/image/upload/v1691536662/avatar/user-avatar_d4x7se.png";
+    
     const id = userToEdit.id;
 
     const [email, setEmail] = useState(userToEdit.email);
