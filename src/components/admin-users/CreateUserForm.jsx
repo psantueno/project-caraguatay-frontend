@@ -56,83 +56,65 @@ export const CreateUserForm = () => {
         handleMouseup,
         setForm,
         setErrors,
-        setAvatar,
+        setFiles,
         errors,
     } = useForm(initialForm, UserValidations, inputs);
 
     /* Funciones específicas de Create User form */
 
     const handleAvatar = async (e) => {
-        const avatar = e.target.files[0];
-    
-        if (!avatar) {
+        const avatarFile = e.target.files[0];
+        const fileName = avatarFile.name.toLowerCase();
+        
+        if (!fileName.endsWith('.jpg') && !fileName.endsWith('.jpeg') && !fileName.endsWith('.png')) {
+            setMsgFileNotImage(true);
+            setErrors({
+                ...errors,
+                avatar: `El archivo "${fileName}" no es una imagen`
+            });
             return;
         }
     
-        // Add Cloudinary upload logic here
-        try {
-            const folder = "avatar";
-            const formData = new FormData();
-            formData.append("file", avatar);
-            formData.append("upload_preset", folder); 
+        delete errors.avatar;
     
-            const response = await fetch(`https://api.cloudinary.com/v1_1/cloudinary/image/upload`, {
-                method: "POST",
-                body: formData
-            });
-    
-            const data = await response.json();
-            const avatarUrl = data.secure_url;
-    
-            // Update the avatar state
-            setAvatar(avatarUrl);
-    
-            // Clear error messages
-            setMsgFileNotImage(false);
-            setErrors({ ...errors, avatar: false });
-    
-        } catch (error) {
-            console.error("Error uploading image to Cloudinary:", error);
-            setMsgFileNotImage(true);
-            setErrors({ ...errors, avatar: "Error uploading image to Cloudinary." });
-        }
+        setFiles([avatarFile]);
+        setForm({
+            ...form,
+            avatar: avatarFile, // Update the avatar field in the form
+        });
     };
 
 
-    const handleClick = () => {
-        inputs.avatar.current.click();
-    };
 
-  
-   
+
     const showFileNotImage = () => {
-        delete errors.files;
+        delete errors.avatar;
         setMsgFileNotImage(false)
     }
 
     /* Funciones específicas de form (handleSubmit) */
-    
-    
+
+
     const handleSubmit = (e) => {
         e.preventDefault();
-    
+
         if (!errors) {
             console.log("Se encontraron errores");
             return;
         }
-    
+
         const currentDateString = dayjs().format('YYYY-MM-DD');
-    
+
         // Update the form data with the current creation date
         const updatedForm = {
             ...form,
             creationDate: currentDateString,
         };
-    
+
         // Update the form state
         setForm(updatedForm);
-    
-        addUser(email, name, lastName, password, role, avatar, creationDate);
+
+        addUser(form);
     };
 
     console.log("Completed inputs", form);
@@ -259,22 +241,30 @@ export const CreateUserForm = () => {
                         ref={inputs.avatar}
                         onChange={handleAvatar}
                         onBlur={handleBlur}
-                        onClick={handleClick}
                         accept="image/png , image/jpeg, image/jpg"
                     />
 
                     <Row>
                         <p className="mt-2">Imagen seleccionada</p>
                         <Col sm={4}>
-                            <img
-                                src={avatar || avatarDefault}
-                                alt={avatar ? "Avatar" : "Avatar por default"}
-                                className="uploaded-avatar"
-                            />
+
+                            {/* AVATAR PREVIEW  */}
+
+                            {
+                                avatar && avatar.length > 0
+                                    ? <div className='images-preview'>
+                                        <div className='box-individual-preview'>
+                                            <img src={URL.createObjectURL(avatar[0])} alt={avatar[0].name} className="image-individual" />
+                                        </div>
+                                      </div>
+                                    : <img src={avatarDefault} className="image-individual" />
+                            }
+
+                            {/* AVATAR PREVIEW  */}
                         </Col>
                     </Row>
 
-                    
+
                     {/* DETALLE DE ERRORS IMAGES */}
 
                     <Alert show={msgFileNotImage} className="alert-file-not-image">
