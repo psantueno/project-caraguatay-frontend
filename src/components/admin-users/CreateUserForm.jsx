@@ -17,6 +17,9 @@ export const CreateUserForm = () => {
         avatar: useRef(),
     }
 
+
+// VER LA FECHA DE CREACION CUANDO SE ENVIA EL FORM - AGREGAR PROCESO
+
     const initialForm = {
         email: "",
         name: "",

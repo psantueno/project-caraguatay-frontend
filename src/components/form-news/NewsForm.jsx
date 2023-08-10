@@ -12,8 +12,8 @@ const initialForm = {
   title: "",
   mainText: "",
   category: "default",
-  imagesUrl: [],
-  idUsers: 1
+  imagesUrl: "",
+  user_id: 1
 };
 
 
