@@ -22,9 +22,9 @@ const UserAdminContextProvider  = (props) => {
         localStorage.setItem('users', JSON.stringify(users))
     })
 
-    const addUser = (email, name, lastName, password, role, avatar) => {
-        setUsers([...users , {id: Date.now(), email, name, lastName, password, role, avatar}])
-        setAlertMessage(`El usuario fue creado correctamente con el email ${email}.`)
+    const addUser = (form) => {
+        setUsers([...users , {id: Date.now(), form}])
+        setAlertMessage(`El usuario fue creado correctamente con el email ${form.email}.`)
     }
 
     const deleteUser = ({id, email}) => {
