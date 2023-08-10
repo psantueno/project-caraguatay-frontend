@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { fileUpload } from '../helpers/fileUpload';
 
 
@@ -21,9 +21,19 @@ export const useForm = (initialForm = {}, FormValidations = {}, inputs = {}, han
   const [showResOk, setShowResOk] = useState(false);
   const [showResBad, setShowResBad] = useState(false);
   const [responseMsg, setResponseMsg] = useState(null)
-  const [requirementValue, setRequirementValue] = useState("");
-  const [items, setItems] = useState([]);       // Maneja los ítems que se agregan en el input de requisitos.
+  const [requirementValue, setRequirementValue] = useState(""); // exclusivo DP.
+  const [items, setItems] = useState([]);       // Maneja los ítems que se agregan en el input de requisitos. Exclusivo de DP
   const [files, setFiles] = useState([])
+
+  useEffect(() => {
+    console.log('render form');
+  }, [form]);
+
+  useEffect(() => {
+    // if(form.imagesUrl.length>0) {
+    console.log('render form images')
+    // }
+  }, [form.imagesUrl]);
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
@@ -62,6 +72,7 @@ export const useForm = (initialForm = {}, FormValidations = {}, inputs = {}, han
     }
   }
 
+
   const handleSubmit = async (e) => {
     handleChange(e);
     e.preventDefault();
@@ -82,42 +93,27 @@ export const useForm = (initialForm = {}, FormValidations = {}, inputs = {}, han
       setLoading(true);
 
       const folder = "noticias";                               // apunta al presets "noticias" de cloudinary.
-
       const fileUploadPromises = [];
-      for (const file of files) {                              // files viene del "estado files".
+
+      for (const file of files) {                              // files viene del "estado files" en linea 26.
         fileUploadPromises.push(fileUpload(file, folder))
       }
 
-      const photosUrls = await Promise.all(fileUploadPromises);
-      console.log (photosUrls);
+      const photosUrls = await Promise.all(fileUploadPromises);   // proceso para obtener las urls de las imagenes subidas. 
+      const imagesToString = photosUrls.join(', ');               // proceso para convertir el array en strings separados por ", ".
 
-      setForm(prevState => {
-        return {
-          ...prevState,
-          imagesUrl: photosUrls
-        };
-      });
 
-      // PROCESO //
-      // 1: Subir las imagenes y recibir la confirmacion ok. 
-      // 2: Crear la noticia.
-      // 3: Obtener el id de la noticia. 
-      // 4: Registramos en media las urls asociandolo al id de la noticia. 
-      // 5: Redirigir a la sección.
+      const data = {                    // preparando el archivo para enviarlo al back.
+        ...form,
+        imagesUrl: imagesToString
+      }
 
-      // ver si se puede hacer lo mismo que con las imagenes: subir simultaneamente las urls en mysql.
-      // Para convertir un array de elementos a un string separados por comas, puedes utilizar el método join() en JavaScript. 
-      // El método join() une todos los elementos de un array en una cadena de texto, utilizando el separador que especifiques.
-      // Sí, puedes convertir un string separado por comas de nuevo a un array utilizando el método split() en JavaScript. 
-      // El método split() divide una cadena de texto en un array de subcadenas utilizando un separador especificado.
-
-      console.log(form)
 
       try {
 
         const req = await fetch('http://localhost:4001/api/noticias/create', {
           method: "POST",
-          body: JSON.stringify(form),
+          body: JSON.stringify(data),
           headers: { 'Content-Type': 'application/json' }
         })
 
@@ -149,7 +145,7 @@ export const useForm = (initialForm = {}, FormValidations = {}, inputs = {}, han
     } else {
       setShowResOk(false);
       alert("Revise los errores del formulario");
-     }
+    }
   }
 
   return {
