@@ -24,20 +24,6 @@ const UserAdminContextProvider  = (props) => {
         fetchUsers();
       }, []);
 
-    
-    
-    useEffect(() => {
-        setUsers(JSON.parse(localStorage.getItem('users')))
-    }, [])
-    
-    // useEffect(() => {
-    //     localStorage.setItem('users', JSON.stringify(users))
-    // })
-
-    const addUser = (form) => {
-        setUsers([...users , {id: Date.now(), form}])
-        setAlertMessage(`El usuario fue creado correctamente con el email ${form.email}.`)
-    }
 
     const deleteUser = ({id, email}) => {
         setUsers(users.filter(user => user.id !== id))
@@ -63,7 +49,7 @@ const UserAdminContextProvider  = (props) => {
       
 
         return (
-            <UserAdminContext.Provider value={{ users, addUser, deleteUser, updateUser, alertMessage, updateAlertMessage }}>
+            <UserAdminContext.Provider value={{ users, deleteUser, updateUser, alertMessage, updateAlertMessage }}>
                 {props.children}
             </UserAdminContext.Provider>
         )

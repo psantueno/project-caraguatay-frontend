@@ -1,5 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
-import { UserAdminContext } from "./UserAdminContext";
+import React, { useRef, useState } from "react";
 import { Form, Button, Row, Col, Alert } from "react-bootstrap";
 import "./admin-users.css";
 import { useForm } from "../../hooks/useForm";
@@ -40,8 +39,6 @@ export const CreateUserForm = () => {
 
     const [msgFileNotImage, setMsgFileNotImage] = useState(false);
 
-    const { addUser } = useContext(UserAdminContext);
-
     const {
         email,
         name,
@@ -60,6 +57,10 @@ export const CreateUserForm = () => {
         setShowResOk,
         setShowResBad,
         setResponseMsg,
+        handleReset,
+        showResOk,
+        showResBad,
+        responseMsg,
         errors,
     } = useForm(initialForm, UserValidations, inputs);
 
@@ -85,6 +86,7 @@ export const CreateUserForm = () => {
             ...form,
             avatar: avatarFile, // Update the avatar field in the form
         });
+        
     };
 
 
@@ -95,7 +97,6 @@ export const CreateUserForm = () => {
 
     /* Funciones específicas de form (handleSubmit) */
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -103,13 +104,9 @@ export const CreateUserForm = () => {
             console.log("Se encontraron errores");
             return;
         }
-
         setForm(form);
 
-        // addUser(form);
-
         try {
-
             const req = await fetch('http://localhost:4001/api/users/create', {
               method: "POST",
               body: JSON.stringify(form),
@@ -126,6 +123,7 @@ export const CreateUserForm = () => {
               setShowResOk(true);
               setShowResBad(false);
               setForm(initialForm); 
+              handleReset();
               // inputs.image.current.value = '';
             } else {
               setShowResBad(true);
@@ -143,6 +141,49 @@ export const CreateUserForm = () => {
     console.log("Completed inputs", form);
     return (
         <>
+
+        {/* RESPUESTA OK DEL RESPONSE */}
+
+      <Alert show={showResOk} variant="primary" className="mt-2">
+        <Row>
+          <Col>
+            <p> {responseMsg && responseMsg.msg ? responseMsg.msg : null} </p>
+          </Col>
+          <Col className="d-flex justify-content-end">
+            <Button
+              onClick={() => setShowResOk(false)}>
+              Cerrar
+            </Button>
+          </Col>
+        </Row>
+      </Alert>
+
+      {/* RESPUESTA OK DEL RESPONSE */}
+
+      {/* RESPUESTA BAD DEL RESPONSE */}
+
+      <Alert show={showResBad} variant="danger" className="mt-2">
+        <Row>
+          <Col>
+            <p>{responseMsg && responseMsg.errors
+              ? responseMsg.errors.map((field, index) => (
+                <li key={index}>{field.msg}</li>
+              ))
+              : null
+            }</p>
+          </Col>
+          <Col className="d-flex justify-content-end">
+            <Button
+              variant='danger'
+              onClick={() => setShowResBad(false)}>
+              Cerrar
+            </Button>
+          </Col>
+        </Row>
+      </Alert>
+
+      {/* RESPUESTA BAD DEL RESPONSE */}
+
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3">
                     <Form.Label>Dirección de e-mail:</Form.Label>

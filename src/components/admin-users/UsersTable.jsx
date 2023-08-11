@@ -4,18 +4,13 @@ import './admin-users.css';
 import {UserItem} from './UserItem';
 import { CreateUserForm } from './CreateUserForm';
 import { UserAdminContext } from './UserAdminContext';
+import { useModal } from '../../hooks/useModal';
 
 export const UsersTable = () => {
 
   const { users, alertMessage } = useContext(UserAdminContext);
 
-  // Reemplazar Show y Close por
-  //const { show, handleShow, handleClose } = useModal()
-  // import { useModal } from '../../../../hooks/useModal';
-  const [show, setShow] = useState(false);
-  const handleShow = () => setShow(true)
-  const handleClose = () => setShow(false);
-  // Fin de lo que tengo que reemplazar.
+  const { show, handleShow, handleClose } = useModal()
  
   useEffect(() =>{
     handleClose();
@@ -45,8 +40,10 @@ export const UsersTable = () => {
       <Table responsive size="sm" className="table-users mb-4">
         <thead>
           <tr>
+            
             <th></th>
             <th>Email</th>
+            <th></th>
             <th></th>
             <th></th>
             <th></th>

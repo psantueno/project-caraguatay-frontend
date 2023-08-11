@@ -20,16 +20,28 @@ export const UserItem = ({ user }) => {
   const handleCloseUserDetails = () => setShowUserDetails(false);
 
   const handleShowConfirmDelete = () => {
-    setUserIdToDelete(user);
+    setUserIdToDelete(user.id);
     setShowConfirmDelete(true);
   }
+
+  console.log("handleShowConfirmDelete", userIdToDelete)
+
   const handleCancelDeletion = () => {
     setShowConfirmDelete(false);
   }
 
-  const handleConfirmDeletion = (user) => {
-    deleteUser(userIdToDelete);
-  }
+ 
+  const handleConfirmDeletion = async (userIdToDelete) => {
+    console.log("handleConfirmDeletion", userIdToDelete)
+
+    try {
+      await deleteUser({ id: userIdToDelete });
+      setShowConfirmDelete(false);
+      handleClose();
+    } catch (error) {
+      console.log(error, "Error desde deletion");
+    }
+  };
 
   useEffect(() => {
     handleClose()
@@ -37,12 +49,13 @@ export const UserItem = ({ user }) => {
 
   return (
     <>
-
+      
       <td><img src={user.avatar} alt="" /></td>
       <td>{user.email}</td>
       <td><DisplayButton fx={handleShowUserDetails} arg={user} /></td>
       <td><DeleteButton fx={handleShowConfirmDelete} /></td>
       <td><EditButton fx={handleShow} arg={user} /></td>
+      <td style={{ display: 'none' }}>{user.id}</td>
 
 
       {/* MODAL PARA DESPLEGAR FORM DE EDICION DE USUARIO */}
