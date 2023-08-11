@@ -4,22 +4,17 @@ import './admin-users.css';
 import { DeleteButton, DisplayButton, EditButton } from '../buttons';
 import { UserAdminContext } from './UserAdminContext';
 import EditUserForm from './EditUserForm';
+import { useModal } from '../../hooks/useModal';
 
 export const UserItem = ({ user }) => {
 
   const { deleteUser } = useContext(UserAdminContext);
 
-  const [show, setShow] = useState(false);
   const [showUserDetails, setShowUserDetails] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [userIdToDelete, setUserIdToDelete] = useState(null);
 
-  // Reemplazar Show y Close por
-  //const { show, handleShow, handleClose } = useModal()
-  // import { useModal } from '../../../../hooks/useModal';
-  const handleShow = () => setShow(true)
-  const handleClose = () => setShow(false);
-  // Fin Reemplazar Show y Close 
+  const { show, handleShow, handleClose } = useModal()
 
   const handleShowUserDetails = () => setShowUserDetails(true);
   const handleCloseUserDetails = () => setShowUserDetails(false);
