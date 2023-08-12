@@ -3,6 +3,7 @@ import { Form, Button, Row, Col, Alert } from "react-bootstrap";
 import "./admin-users.css";
 import { useForm } from "../../hooks/useForm";
 import { UserValidations } from "./UserValidation";
+import { fileUpload } from '../../helpers/fileUpload';
 
 export const CreateUserForm = () => {
 
@@ -38,6 +39,7 @@ export const CreateUserForm = () => {
     };
 
     const [msgFileNotImage, setMsgFileNotImage] = useState(false);
+  
 
     const {
         email,
@@ -54,10 +56,12 @@ export const CreateUserForm = () => {
         setForm,
         setErrors,
         setFiles,
+        files,
         setShowResOk,
         setShowResBad,
         setResponseMsg,
         handleReset,
+        setLoading,
         showResOk,
         showResBad,
         responseMsg,
@@ -66,7 +70,7 @@ export const CreateUserForm = () => {
 
     /* Funciones específicas de Create User form: handleAvatar */
 
-    const handleAvatar = async (e) => {
+    const handleAvatar = (e) => {
         const avatarFile = e.target.files[0];
         const fileName = avatarFile.name.toLowerCase();
         
@@ -82,10 +86,11 @@ export const CreateUserForm = () => {
         delete errors.avatar;
     
         setFiles([avatarFile]);
-        setForm({
-            ...form,
-            avatar: avatarFile, // Update the avatar field in the form
-        });
+        console.log(avatarFile);
+        // setForm({
+        //     ...form,
+        //     avatar: avatarFile, // Update the avatar field in the form
+        // });
         
     };
 
@@ -98,13 +103,62 @@ export const CreateUserForm = () => {
     /* Funciones específicas de form (handleSubmit) */
 
     const handleSubmit = async (e) => {
+        handleChange(e);
         e.preventDefault();
 
         if (!errors) {
             console.log("Se encontraron errores");
             return;
         }
-        setForm(form);
+
+        if (Object.keys(errors).length === 0) {
+            setLoading(true);
+
+           
+        if (files.length > 0) {
+
+
+            const folder = "avatar"
+            const avatarUrl = await fileUpload(files[0], folder) // files es un array, solo enviamos 1 file
+            const data = {
+                ...form,
+                avatar: avatarUrl
+            }
+
+            try {
+                const req = await fetch('http://localhost:4001/api/users/create', {
+                  method: "POST",
+                  body: JSON.stringify(data),
+                  headers: { 'Content-Type': 'application/json' }
+                })
+        
+                const res = await req.json();
+        
+                console.log(res)
+        
+                setResponseMsg(res);
+        
+                if (res.status === 201) {
+                  setShowResOk(true);
+                  setShowResBad(false);
+                  setForm(initialForm); 
+                  handleReset();
+                  // inputs.image.current.value = '';
+                } else {
+                  setShowResBad(true);
+                  console.log("-------------------")
+                  console.log(res.errors)
+                  console.log("-------------------")
+        
+                }
+              }
+              catch (error) {
+                console.log(error)
+              }
+        }    
+                      
+         
+    
 
         try {
             const req = await fetch('http://localhost:4001/api/users/create', {
@@ -136,7 +190,15 @@ export const CreateUserForm = () => {
           catch (error) {
             console.log(error)
           }
-    };
+
+        } else {
+            setShowResOk(false);
+            alert("Revise los errores del formulario");
+          }
+        }
+
+         
+    
 
     console.log("Completed inputs", form);
     return (
@@ -315,12 +377,18 @@ export const CreateUserForm = () => {
                             {/* AVATAR PREVIEW  */}
 
                             {
-                                avatar && avatar.length > 0
-                                    ? <div className='images-preview'>
-                                        <div className='box-individual-preview'>
-                                            <img src={URL.createObjectURL(avatar[0])} alt={avatar[0].name} className="image-individual" />
+                                files && files.length > 0
+                                ? <div className='images-preview'>
+                                  {
+                                    files.map((file, index) => {
+                                      return (
+                                        <div className='box-individual-preview' key={index}>
+                                          <img src={URL.createObjectURL(file)} alt={file.name} className="image-individual" />
                                         </div>
-                                      </div>
+                                      )
+                                    })
+                                  }
+                                </div>
                                     : <img src={avatarDefault} className="image-individual" />
                             }
 
