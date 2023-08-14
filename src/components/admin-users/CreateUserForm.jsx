@@ -39,15 +39,8 @@ export const CreateUserForm = () => {
     };
 
     const [msgFileNotImage, setMsgFileNotImage] = useState(false);
-  
 
     const {
-        email,
-        name,
-        lastName,
-        password,
-        role,
-        avatar,
         form,
         handleChange,
         handleKeyUp,
@@ -87,11 +80,6 @@ export const CreateUserForm = () => {
     
         setFiles([avatarFile]);
         console.log(avatarFile);
-        // setForm({
-        //     ...form,
-        //     avatar: avatarFile, // Update the avatar field in the form
-        // });
-        
     };
 
 
@@ -116,8 +104,6 @@ export const CreateUserForm = () => {
 
            
         if (files.length > 0) {
-
-
             const folder = "avatar"
             const avatarUrl = await fileUpload(files[0], folder) // files es un array, solo enviamos 1 file
             const data = {
@@ -143,7 +129,6 @@ export const CreateUserForm = () => {
                   setShowResBad(false);
                   setForm(initialForm); 
                   handleReset();
-                  // inputs.image.current.value = '';
                 } else {
                   setShowResBad(true);
                   console.log("-------------------")
@@ -157,9 +142,7 @@ export const CreateUserForm = () => {
               }
         }    
                       
-         
-    
-
+        
         try {
             const req = await fetch('http://localhost:4001/api/users/create', {
               method: "POST",
@@ -178,7 +161,6 @@ export const CreateUserForm = () => {
               setShowResBad(false);
               setForm(initialForm); 
               handleReset();
-              // inputs.image.current.value = '';
             } else {
               setShowResBad(true);
               console.log("-------------------")
@@ -206,19 +188,19 @@ export const CreateUserForm = () => {
 
         {/* RESPUESTA OK DEL RESPONSE */}
 
-      <Alert show={showResOk} variant="primary" className="mt-2">
-        <Row>
-          <Col>
-            <p> {responseMsg && responseMsg.msg ? responseMsg.msg : null} </p>
-          </Col>
-          <Col className="d-flex justify-content-end">
-            <Button
-              onClick={() => setShowResOk(false)}>
-              Cerrar
-            </Button>
-          </Col>
-        </Row>
-      </Alert>
+        <Alert show={showResOk} variant="primary" className="mt-2">
+          <Row>
+            <Col>
+              <p> {responseMsg && responseMsg.msg ? responseMsg.msg : null} </p>
+            </Col>
+            <Col className="d-flex justify-content-end">
+              <Button
+                onClick={() => setShowResOk(false)}>
+                Cerrar
+              </Button>
+            </Col>
+          </Row>
+        </Alert>
 
       {/* RESPUESTA OK DEL RESPONSE */}
 
@@ -250,7 +232,7 @@ export const CreateUserForm = () => {
                 <Form.Group className="mb-3">
                     <Form.Label>Dirección de e-mail:</Form.Label>
                     <Form.Control
-                        value={email}
+                        value={form.email}
                         ref={inputs.email}
                         onChange={handleChange}
                         onKeyUp={handleKeyUp}
@@ -272,7 +254,7 @@ export const CreateUserForm = () => {
                     <Form.Label>Nombre</Form.Label>
                     <Form.Control
                         name="name"
-                        value={name}
+                        value={form.name}
                         ref={inputs.name}
                         onChange={handleChange}
                         onKeyUp={handleKeyUp}
@@ -294,7 +276,7 @@ export const CreateUserForm = () => {
                     <Form.Label>Apellido</Form.Label>
                     <Form.Control
                         name="lastName"
-                        value={lastName}
+                        value={form.lastName}
                         ref={inputs.lastName}
                         onChange={handleChange}
                         onKeyUp={handleKeyUp}
@@ -315,7 +297,7 @@ export const CreateUserForm = () => {
                     <Form.Label>Contraseña</Form.Label>
                     <Form.Control
                         name="password"
-                        value={password}
+                        value={form.password}
                         ref={inputs.password}
                         onChange={handleChange}
                         onKeyUp={handleKeyUp}

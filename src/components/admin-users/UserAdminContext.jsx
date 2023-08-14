@@ -14,7 +14,7 @@ const UserAdminContextProvider  = (props) => {
               throw new Error('Error fetching users');
             }
             const data = await response.json();
-            const fetchedUsers = data.result.clientes;
+            const fetchedUsers = data.result.usuarios;
             setUsers(fetchedUsers);
           } catch (error) {
             console.error('Error fetching users:', error);
@@ -25,10 +25,10 @@ const UserAdminContextProvider  = (props) => {
       }, []);
 
 
-    const deleteUser = ({id, email}) => {
-        setUsers(users.filter(user => user.id !== id))
-        setAlertMessage(`El usuario con el email ${email} fue eliminado correctamente.`)
-    }
+    // const deleteUser = ({id, email}) => {
+    //     setUsers(users.filter(user => user.id !== id))
+    //     setAlertMessage(`El usuario con el email ${email} fue eliminado correctamente.`)
+    // }
 
     const updateUser = (id, updatedUser) => {
         setUsers(users.map((user) => user.id === id ? updatedUser : user))
@@ -49,7 +49,7 @@ const UserAdminContextProvider  = (props) => {
       
 
         return (
-            <UserAdminContext.Provider value={{ users, deleteUser, updateUser, alertMessage, updateAlertMessage }}>
+            <UserAdminContext.Provider value={{ users,  updateUser, alertMessage, updateAlertMessage, setUsers }}>
                 {props.children}
             </UserAdminContext.Provider>
         )
