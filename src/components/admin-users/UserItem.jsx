@@ -12,30 +12,61 @@ export const UserItem = ({ user }) => {
 
   const [showUserDetails, setShowUserDetails] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
-  const [userIdToDelete, setUserIdToDelete] = useState(null);
-
+  
+  const [userDB, setUserDB] = useState([]);
   const { show, handleShow, handleClose } = useModal()
 
-  const handleShowUserDetails = () => setShowUserDetails(true);
+  // useEffect(() => {
+  //   console.log(userDB, "Updated userDB"); // Log the updated userDB state
+  // }, [userDB]);
+
+  const handleShowUserDetails = async () =>{ 
+    try {
+      const response = await fetch('http://localhost:4001/api/users/list', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id: user.id }), // Send the user ID
+      });
+
+      if (!response.ok) {
+        throw new Error('Error fetching user');
+      }
+
+      const data = await response.json();
+
+      if (data.result.status === 200) {
+        setUserDB(data.result.userDB);
+        setShowUserDetails(true);
+      } else {
+        console.error('User not found');
+      }
+    } catch (error) {
+      console.error('Error fetching user:', error);
+    }
+  };
+
+
   const handleCloseUserDetails = () => setShowUserDetails(false);
 
   const handleShowConfirmDelete = () => {
-    setUserIdToDelete(user.id);
+    
     setShowConfirmDelete(true);
   }
 
-  console.log("handleShowConfirmDelete", userIdToDelete)
+  
 
   const handleCancelDeletion = () => {
     setShowConfirmDelete(false);
   }
 
  
-  const handleConfirmDeletion = async (userIdToDelete) => {
-    console.log("handleConfirmDeletion", userIdToDelete)
+  const handleConfirmDeletion = async () => {
+  
 
     try {
-      await deleteUser({ id: userIdToDelete });
+      await deleteUser({ id: user.id });
       setShowConfirmDelete(false);
       handleClose();
     } catch (error) {
@@ -52,7 +83,7 @@ export const UserItem = ({ user }) => {
       
       <td><img src={user.avatar} alt="" /></td>
       <td>{user.email}</td>
-      <td><DisplayButton fx={handleShowUserDetails} arg={user} /></td>
+      <td><DisplayButton fx={handleShowUserDetails} arg={user.id} /></td>
       <td><DeleteButton fx={handleShowConfirmDelete} /></td>
       <td><EditButton fx={handleShow} arg={user} /></td>
       <td style={{ display: 'none' }}>{user.id}</td>
@@ -106,15 +137,15 @@ export const UserItem = ({ user }) => {
         </Modal.Header>
         <Modal.Body>
           <p className="form-title mt-4">Dirección de e-mail:</p>
-          <p>{user.email}</p>
+          <p>{userDB.email}</p>
           <p className="form-title mt-4">Nombre:</p>
-          <p>{user.name}</p>
+          <p>{userDB.name}</p>
           <p className="form-title mt-4">Apellido:</p>
-          <p>{user.lastName}</p>
+          <p>{userDB.lastName}</p>
           <p className="form-title mt-4">Rol:</p>
-          <p>{user.role}</p>
+          <p>{userDB.role}</p>
           <p className="form-title mt-4">Imagen:</p>
-          <img src={user.avatar} alt="" />
+          <img src={userDB.avatar} alt="" />
 
           <Modal.Footer>
             <Button onClick={handleCloseUserDetails} >

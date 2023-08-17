@@ -1,76 +1,86 @@
-import {createContext, useState, useEffect} from 'react';
+import { createContext, useState, useEffect } from 'react';
 
 export const UserAdminContext = createContext()
 
-const UserAdminContextProvider  = (props) => {
-    const [alertMessage, setAlertMessage] = useState(null);
-    const [users, setUsers] = useState([]);
-
-    useEffect(() => {
-        const fetchUsers = async () => {
-          try {
-            const response = await fetch('http://localhost:4001/api/users/list/all');
-            if (!response.ok) {
-              throw new Error('Error fetching users');
-            }
-            const data = await response.json();
-            const fetchedUsers = data.result.usuarios;
-            setUsers(fetchedUsers);
-          } catch (error) {
-            console.error('Error fetching users:', error);
-          }
-        };
-    
-        fetchUsers();
-      }, []);
+const UserAdminContextProvider = (props) => {
+  const [alertMessage, setAlertMessage] = useState(null);
+  const [users, setUsers] = useState([]);
 
 
-    const deleteUser = async ({id}) => {
-      console.log(id , "desde deleteUser function");
+  useEffect(() => {
+    const fetchUsers = async () => {
       try {
-        const response = await fetch(`http://localhost:4001/api/users/delete/${id}`, {
-          method: 'PUT',
-        });
-    
+        const response = await fetch('http://localhost:4001/api/users/list/all');
         if (!response.ok) {
-          throw new Error('Error deleting user');
+          throw new Error('Error fetching users');
         }
-    
-        setUsers(users.filter(user => user.enabled === 1));
-        setAlertMessage(`El usuario con el ID ${id} fue eliminado correctamente.`);
+        const data = await response.json();
+        const fetchedUsers = data.result.usuarios;
+        setUsers(fetchedUsers);
       } catch (error) {
-        console.error('Error deleting user:', error);
-        // Handle error and display appropriate message to the user
+        console.error('Error fetching users:', error);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
+  
+
+
+  const deleteUser = async (id) => {
+    console.log(id, "desde deleteUser function");
+    try {
+      const response = await fetch(`http://localhost:4001/api/users/delete/${id}`, {
+        method: 'PUT',
+      });
+
+      if (!response.ok) {
+        throw new Error('Error deleting user');
       }
 
-        // setUsers(users.filter(user => user.id !== id))
-        // setAlertMessage(`El usuario con el email ${id} fue eliminado correctamente.`)
+      setUsers(users.filter(user => user.enabled === 1));
+      setAlertMessage(`El usuario con el ID ${id} fue eliminado correctamente.`);
+    } catch (error) {
+      console.error('Error deleting user:', error);
+      // Handle error and display appropriate message to the user
     }
 
-    const updateUser = (id, updatedUser) => {
-        setUsers(users.map((user) => user.id === id ? updatedUser : user))
-        setAlertMessage(`El usuario con id ${id} fue actualizado correctamente.`)
-    }
+    // setUsers(users.filter(user => user.id !== id))
+    // setAlertMessage(`El usuario con el email ${id} fue eliminado correctamente.`)
+  }
 
-    const updateAlertMessage = (message) => {
-        setAlertMessage(message);
-      }
+  const updateUser = (id, updatedUser) => {
+    setUsers(users.map((user) => user.id === id ? updatedUser : user))
+    setAlertMessage(`El usuario con id ${id} fue actualizado correctamente.`)
+  }
 
-      useEffect(() => {
-        const timeoutId = setTimeout(() => {
-            setAlertMessage(null);
-        }, 5000);
-    
-        return () => clearTimeout(timeoutId);
-      }, [alertMessage]);
-      
+  const updateAlertMessage = (message) => {
+    setAlertMessage(message);
+  }
 
-        return (
-            <UserAdminContext.Provider value={{ users, deleteUser,  updateUser, alertMessage, updateAlertMessage, setUsers }}>
-                {props.children}
-            </UserAdminContext.Provider>
-        )
-    }
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setAlertMessage(null);
+    }, 5000);
+
+    return () => clearTimeout(timeoutId);
+  }, [alertMessage]);
+
+
+  return (
+    <UserAdminContext.Provider value={{ 
+      users,
+      deleteUser, 
+      updateUser, 
+      alertMessage, 
+      updateAlertMessage, 
+      setUsers, 
+      }}>
+      {props.children}
+    </UserAdminContext.Provider>
+  )
+}
 
 export default UserAdminContextProvider;
 
