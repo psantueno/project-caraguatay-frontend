@@ -33,6 +33,9 @@ const UserAdminContextProvider = (props) => {
     try {
       const response = await fetch(`http://localhost:4001/api/users/delete/${id}`, {
         method: 'PUT',
+        body: JSON.stringify(id),
+        headers: { 'Content-Type': 'application/json'
+    }
       });
 
       if (!response.ok) {
