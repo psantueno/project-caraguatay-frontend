@@ -28,13 +28,16 @@ const UserAdminContextProvider = (props) => {
   
 
 
-  const deleteUser = async (id) => {
-    console.log(id, "desde deleteUser function");
+ 
+const deleteUser = async (id) => {
+    console.log(JSON.stringify(id), "desde deleteUser function");
     try {
       const response = await fetch(`http://localhost:4001/api/users/delete/${id}`, {
         method: 'PUT',
+        body: JSON.stringify(id),
+        headers: { 'Content-Type': 'application/json'}
       });
-
+      console.log(response, "linea 41");
       if (!response.ok) {
         throw new Error('Error deleting user');
       }
@@ -47,8 +50,11 @@ const UserAdminContextProvider = (props) => {
     }
 
     // setUsers(users.filter(user => user.id !== id))
-    // setAlertMessage(`El usuario con el email ${id} fue eliminado correctamente.`)
+    // setAlertMessage(El usuario con el email ${id} fue eliminado correctamente.)
   }
+    // setUsers(users.filter(user => user.id !== id))
+    // setAlertMessage(`El usuario con el email ${id} fue eliminado correctamente.`)
+  
 
   const updateUser = (id, updatedUser) => {
     setUsers(users.map((user) => user.id === id ? updatedUser : user))
