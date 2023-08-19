@@ -120,7 +120,7 @@ export const CreateUserForm = () => {
         
                 const res = await req.json();
         
-                console.log(res)
+                console.log(res, "linea 123")
         
                 setResponseMsg(res);
         
@@ -191,7 +191,7 @@ export const CreateUserForm = () => {
         <Alert show={showResOk} variant="primary" className="mt-2">
           <Row>
             <Col>
-              <p> {responseMsg && responseMsg.msg ? responseMsg.msg : null} </p>
+              <p> {responseMsg && responseMsg.msg ? responseMsg.msg : null} </p>  
             </Col>
             <Col className="d-flex justify-content-end">
               <Button

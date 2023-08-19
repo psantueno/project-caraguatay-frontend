@@ -35,19 +35,15 @@ export const UsersTable = () => {
         </Row>
       </Container>
 
-  
-
       <Table responsive size="sm" className="table-users mb-4">
         <thead>
-          <tr>
-            
+          <tr>          
             <th></th>
             <th>Email</th>
             <th></th>
             <th></th>
             <th></th>
             <th></th>
-
           </tr>
         </thead>
         <tbody>

@@ -6,7 +6,6 @@ const UserAdminContextProvider = (props) => {
   const [alertMessage, setAlertMessage] = useState(null);
   const [users, setUsers] = useState([]);
 
-
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -21,40 +20,32 @@ const UserAdminContextProvider = (props) => {
         console.error('Error fetching users:', error);
       }
     };
-
     fetchUsers();
   }, []);
-
-  
-
-
  
 const deleteUser = async (id) => {
     console.log(JSON.stringify(id), "desde deleteUser function");
     try {
-      const response = await fetch(`http://localhost:4001/api/users/delete/${id}`, {
+      const response = await fetch("http://localhost:4001/api/users/delete", {
         method: 'PUT',
+        headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify(id),
-        headers: { 'Content-Type': 'application/json'}
       });
-      console.log(response, "linea 41");
       if (!response.ok) {
         throw new Error('Error deleting user');
       }
-
-      setUsers(users.filter(user => user.enabled === 1));
-      setAlertMessage(`El usuario con el ID ${id} fue eliminado correctamente.`);
+    // Parse the JSON data from the response
+    const responseData = await response.json();
+    console.log(responseData, "linea 48"); // Log the parsed JSON data
+    // Parse the "data" property within the response data
+    const userData = JSON.parse(responseData.data);
+      // setUsers(users.filter(user => user.enabled === 1));
+      setAlertMessage(`El usuario con el email ${userData.email} fue eliminado correctamente.`);
     } catch (error) {
       console.error('Error deleting user:', error);
-      // Handle error and display appropriate message to the user
     }
-
-    // setUsers(users.filter(user => user.id !== id))
-    // setAlertMessage(El usuario con el email ${id} fue eliminado correctamente.)
   }
-    // setUsers(users.filter(user => user.id !== id))
-    // setAlertMessage(`El usuario con el email ${id} fue eliminado correctamente.`)
-  
+    
 
   const updateUser = (id, updatedUser) => {
     setUsers(users.map((user) => user.id === id ? updatedUser : user))

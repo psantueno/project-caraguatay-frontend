@@ -11,7 +11,6 @@ export const useModal = () => {
     }
     const handleClose = () => setShow(false);
 
-
     return {
         show,
         handleShow,

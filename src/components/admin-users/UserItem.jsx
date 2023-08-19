@@ -16,11 +16,7 @@ export const UserItem = ({ user }) => {
   const [userDB, setUserDB] = useState([]);
   const { show, handleShow, handleClose } = useModal()
 
-  // useEffect(() => {
-  //   console.log(userDB, "Updated userDB"); // Log the updated userDB state
-  // }, [userDB]);
-
-  const handleShowUserDetails = async () =>{ 
+   const handleShowUserDetails = async () =>{ 
     try {
       const response = await fetch('http://localhost:4001/api/users/list', {
         method: 'POST',
@@ -47,24 +43,14 @@ export const UserItem = ({ user }) => {
     }
   };
 
-
   const handleCloseUserDetails = () => setShowUserDetails(false);
-
-  const handleShowConfirmDelete = () => {
-    
-    setShowConfirmDelete(true);
-  }
-
-  
+  const handleShowConfirmDelete = () => setShowConfirmDelete(true);
 
   const handleCancelDeletion = () => {
     setShowConfirmDelete(false);
   }
 
- 
   const handleConfirmDeletion = async () => {
-  
-
     try {
       await deleteUser({ id: user.id });
       setShowConfirmDelete(false);
@@ -79,8 +65,7 @@ export const UserItem = ({ user }) => {
   }, [user])
 
   return (
-    <>
-      
+    <>   
       <td><img src={user.avatar} alt="" /></td>
       <td>{user.email}</td>
       <td><DisplayButton fx={handleShowUserDetails} arg={user.id} /></td>
@@ -88,9 +73,7 @@ export const UserItem = ({ user }) => {
       <td><EditButton fx={handleShow} arg={user} /></td>
       <td style={{ display: 'none' }}>{user.id}</td>
 
-
       {/* MODAL PARA DESPLEGAR FORM DE EDICION DE USUARIO */}
-
       <Modal show={show} onHide={handleClose} className="mt-5">
         <Modal.Header closeButton>
           <Modal.Title>
@@ -108,11 +91,8 @@ export const UserItem = ({ user }) => {
         </Modal.Body>
       </Modal>
 
-
       {/* MODAL PARA DESPLEGAR CONFIRMACIÓN DE ELIMINACIÓN DE USUARIO */}
-
       <Modal show={showConfirmDelete} onHide={handleClose} className="mt-5 p-4">
-
         <Modal.Body>
           <h3 className="form-title mt-4">¿Confirma que desea eliminar el usuario registrado con el siguiente email?</h3>
           <p className="data-highlight">{user.email}</p>
@@ -128,7 +108,6 @@ export const UserItem = ({ user }) => {
       </Modal>
 
       {/* MODAL PARA DESPLEGAR USUARIO */}
-
       <Modal show={showUserDetails} onHide={handleCloseUserDetails} className="mt-5">
         <Modal.Header closeButton>
           <Modal.Title>
