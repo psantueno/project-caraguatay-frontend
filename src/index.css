@@ -826,6 +826,16 @@ color:#315C94;
 /*  END FORM DIGITAL POINT */
 
 
+/* START Generals Buttons */
+
+.loader-containter {
+  justify-content: center;
+  color: #315C94;
+}
+
+/* END Generals Buttons */
+
+
 
 
 /* START MEDIA QUERIES */
