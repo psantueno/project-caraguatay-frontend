@@ -2,17 +2,16 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import './admin-users.css';
 import { DeleteButton, DisplayButton, EditButton } from '../buttons';
-import { UserAdminContext } from './UserAdminContext';
 import EditUserForm from './EditUserForm';
 import { useModal } from '../../hooks/useModal';
 
 export const UserItem = ({ user }) => {
 
-  const { deleteUser } = useContext(UserAdminContext);
-
+  //const { deleteUser } = useContext(UserAdminContext);
   const [showUserDetails, setShowUserDetails] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
-  
+  const [alertMessage, setAlertMessage] = useState(null);
+
   const [userDB, setUserDB] = useState([]);
   const { show, handleShow, handleClose } = useModal()
 
@@ -51,13 +50,34 @@ export const UserItem = ({ user }) => {
   }
 
   const handleConfirmDeletion = async () => {
+   // try {
+     // await deleteUser({ id: user.id });
+  
     try {
-      await deleteUser({ id: user.id });
+      const response = await fetch("http://localhost:4001/api/users/delete", {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify({ id: user.id })
+      });
+      if (!response.ok) {
+        throw new Error('Error deleting user');
+      }
+    // Parse the JSON data from the response
+    const responseData = await response.json();
+    console.log(responseData, "linea 48"); // Log the parsed JSON data
+    // Parse the "data" property within the response data to capture the object user
+    const userData = JSON.parse(responseData.data);  //Ej. console.log(userData.email)
+      // setUsers(users.filter(user => user.enabled === 1));
+      console.log(responseData.msg, "linea 72")
+     // setAlertMessage(responseData.msg);
       setShowConfirmDelete(false);
       handleClose();
     } catch (error) {
-      console.log(error, "Error desde deletion");
+      console.error('Error deleting user:', error);
     }
+    // } catch (error) {
+    //   console.log(error, "Error desde deletion");
+    // }
   };
 
   useEffect(() => {
@@ -81,7 +101,7 @@ export const UserItem = ({ user }) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <EditUserForm userToEdit={user} />
+          <EditUserForm user={user} />
 
           <Modal.Footer>
             <Button onClick={handleClose}>

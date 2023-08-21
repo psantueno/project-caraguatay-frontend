@@ -8,9 +8,30 @@ import { useModal } from '../../hooks/useModal';
 
 export const UsersTable = () => {
 
-  const { users, alertMessage } = useContext(UserAdminContext);
+  const { 
+    alertMessage
+  } = useContext(UserAdminContext);
 
   const { show, handleShow, handleClose } = useModal()
+  const [users, setUsers] = useState([]);
+
+  const fetchUsers = async () => {
+    try {
+      const response = await fetch('http://localhost:4001/api/users/list/all');
+      if (!response.ok) {
+        throw new Error('Error fetching users');
+      }
+      const data = await response.json();
+      const fetchedUsers = data.result.usuarios;
+      setUsers(fetchedUsers);
+    } catch (error) {
+      console.error('Error fetching users:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
  
   useEffect(() =>{
     handleClose();
@@ -18,7 +39,6 @@ export const UsersTable = () => {
 
   return (
     <>
-
       {alertMessage && (
         <Alert  >
           {alertMessage}
@@ -49,7 +69,7 @@ export const UsersTable = () => {
         <tbody>
           {users.map((user, index) => (
             <tr key={index}>
-              <UserItem user={user} />
+              <UserItem user={user}  />
             </tr>
           ))}
 

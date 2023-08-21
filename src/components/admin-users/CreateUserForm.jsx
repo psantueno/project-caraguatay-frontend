@@ -357,7 +357,6 @@ export const CreateUserForm = () => {
                         <Col sm={4}>
 
                             {/* AVATAR PREVIEW  */}
-
                             {
                                 files && files.length > 0
                                 ? <div className='images-preview'>
