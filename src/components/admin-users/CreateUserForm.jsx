@@ -8,6 +8,8 @@ import { fileUpload } from '../../helpers/fileUpload';
 export const CreateUserForm = () => {
 
     // Agregar segundo ingreso de contraseña y validación de coincidencia.
+    // BUG encontrado 22AUG23: al crear usr subiendo imagen, duplica el usuario, uno con avatar y una sin.
+    // Corregir ccs de despliegue imagen de avatar elegida.
 
     const inputs = {
         email: useRef(),
@@ -179,10 +181,8 @@ export const CreateUserForm = () => {
           }
         }
 
-         
-    
-
     console.log("Completed inputs", form);
+
     return (
         <>
 
