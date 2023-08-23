@@ -328,10 +328,14 @@ export const CreateUserForm = ({ handleClose, setShowResOk, setShowResBad }) => 
 
         </Form.Group>
 
-        <Button type="submit" className="mt-3 buttonPosition">
-          Crear
-        </Button>
-      </Form>
-    </>
-  );
+                <Button type="submit" className="mt-3 buttonPosition">
+                    Crear
+                </Button>
+
+                <Loader/>
+
+                
+            </Form>
+        </>
+    );
 };

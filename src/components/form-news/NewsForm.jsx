@@ -1,9 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Button, Form, Container, Col, Row, Table, Alert } from 'react-bootstrap';
 import { useForm } from '../../hooks/useForm';
 import { NewsFormValidations } from './NewsFormValidations';
 import { DeleteButton } from '../buttons/DeleteButton';
+import { Loader } from '../buttons/Loader';
+import { useFetchNewsCategories } from '../../hooks/useFetchNewsCategories';
 import dayjs from "dayjs";
+import { uploadImages } from './helpers/uploadImages';
 
 
 
@@ -21,7 +24,6 @@ export const NewsForm = () => {
 
   const [msgFileNotImage, setMsgFileNotImage] = useState(false);
 
-
   const inputs = {
     title: useRef(),
     mainText: useRef(),
@@ -29,6 +31,8 @@ export const NewsForm = () => {
     category: useRef(),
     files: useRef()
   }
+
+  const { newsCategories } = useFetchNewsCategories(); // Hook personalizado que trae las categorías de noticias.
 
   const {
     form,
@@ -38,17 +42,22 @@ export const NewsForm = () => {
     handleKeyUp,
     handleMouseup,
     handleReset,
-    handleSubmit,
     setShowResOk,
     setShowResBad,
+    setResponseMsg,
+    setRequirementValue,
+    setItems,
     setErrors,
     setFiles,
+    setLoading,
+    FormValidations,
     files,
     errors,
+    loading,
     showResOk,
     showResBad,
     responseMsg,
-  } = useForm(initialForm, NewsFormValidations, inputs)
+  } = useForm(initialForm, NewsFormValidations, inputs)   // hook useForm que maneja el formulario.
 
 
   /* Funciones específicas de news form */
@@ -69,15 +78,12 @@ export const NewsForm = () => {
       }
     }
     delete errors.files;
-
     setFiles(prevState => [...prevState, ...Array.from(files)]);
   };
-
 
   const handleClick = () => {
     inputs.files.current.click();
   };
-
 
   const handleDelete = (index) => {
     setFiles(prevState => prevState.filter((_, i) => i !== index));
@@ -88,38 +94,65 @@ export const NewsForm = () => {
     setMsgFileNotImage(false)
   }
 
-  const getCategorys = async () => {
+  const handleSubmit = async (e) => {
 
-    try {
+    handleChange(e);
+    e.preventDefault();
+    setErrors(FormValidations(form, e, inputs, errors));
 
-      const res = await fetch('http://localhost:4001/api/noticias/create');
-      const categories = await res.json();
+    if (Object.keys(errors).length === 0) {
 
-    } catch (error) {
-      console.log(error);
+      setLoading(true);        // activa el loader
+
+      const imagesToString = await uploadImages(files); // Fx que que sube las imagenes a cloud y devuelve las urls.
+      const data = {                    // preparando el archivo para enviarlo al back.
+        ...form,
+        imagesUrl: imagesToString,
+        user_id: 2,
+      }
+        // Algunas ideas: podría sacar el state de loading, de showResok, showresBad e incluirlos en un helper fetch para el envio del form
+      try {
+        const req = await fetch('http://localhost:4001/api/noticias/create', {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: { 'Content-Type': 'application/json' }
+        })
+
+        const res = await req.json();
+        console.log(res, "146")
+        setResponseMsg(res);
+
+        if (res.status === 201) {
+          setLoading(false);
+          setShowResOk(true);
+          setShowResBad(false);
+          setForm(initialForm);
+          setItems([])
+          setRequirementValue('')
+          setFiles([]);
+          handleReset();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        } else {
+          setLoading(false);
+          setShowResBad(true);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          console.log(responseMsg, "163");
+        }
+      }
+      catch (error) {
+        console.log(error)
+      }
+    } else {
+      setShowResOk(false);
+      alert("Revise los errores del formulario");
     }
-
   }
-
-  useEffect(() => {
-
-    // ejecucion del getCategories
-
-  }
-    , []);
-
 
 
   return (
+
     <>
-
-      {/*
-         TAREA: 
-
-     Hacer fetch para traer las categorias y mostrarlas al seleccionar en el form 
-     
-     */}
-
       {/* RESPUESTA OK DEL RESPONSE */}
 
       <Alert show={showResOk} variant="primary" className="mt-2">
@@ -166,6 +199,7 @@ export const NewsForm = () => {
         <h4>Crear noticia</h4>
       </Container>
 
+
       <Container className='mb-3 mt-3'>
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId='category'>
@@ -179,11 +213,14 @@ export const NewsForm = () => {
               onBlur={handleBlur}
               required
             >
-              <option value="default">-Seleccione una categoría-</option>
-              <option value={1} >Deportes</option>
-              <option value={2} >Comunicados</option>
-              <option value={3} >Cultura y turismo</option>
-              <option value={4}>Punto digital</option>
+              <option disabled value="default">-Seleccione una categoría-</option>
+              {
+                newsCategories && newsCategories.length > 0
+                  ? (newsCategories.map((category, index) => (
+                    <option key={index} value={category.id} > {category.category} </option>
+                  )))
+                  : null
+              }
             </Form.Select>
 
             {
@@ -376,12 +413,18 @@ export const NewsForm = () => {
 
           </Form.Group>
 
-          <Button className='m-2' type="submit" disabled={files.length > 10 || msgFileNotImage} >
+          <Button className='m-2' type="submit" disabled={files.length > 10 || msgFileNotImage || loading} >
             Confirmar
           </Button>
-          <Button className='m-2' type="reset" onClick={handleReset}>
+          <Button className='m-2' type="reset" onClick={handleReset} disabled={loading} >
             Borrar
           </Button>
+
+          <Loader
+            loader={loading}
+            text={"Creando noticia, aguarde por favor..."}
+          />
+
         </Form>
       </Container>
 
