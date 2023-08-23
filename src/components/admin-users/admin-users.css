@@ -15,7 +15,8 @@
 }
 
 .avatar {
-    max-width: 70px;
+    width: 25px;
+    height: 25px;
     margin: auto;
 }
 

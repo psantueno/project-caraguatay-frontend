@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Table, Container, Col, Button, Row, Modal, Alert } from 'react-bootstrap';
 import './admin-users.css';
 import { CreateUserForm } from './CreateUserForm';
@@ -118,6 +118,7 @@ export const UsersTable = () => {
     }
   };
 
+
   useEffect(() => {
     handleClose()
   }, [userDB])
@@ -125,6 +126,7 @@ export const UsersTable = () => {
   useEffect(() => {
     handleClose();
   }, [users])
+  
 
   return (
     <>
@@ -193,7 +195,7 @@ export const UsersTable = () => {
           {users.map((user, index) => (
             <tr key={index}>
               {/* <UserItem user={user}  /> */}
-              <td><img src={user.avatar} alt="" /></td>
+              <td><img src={user.avatar} alt="" className="avatar" /></td>
               <td>{user.email}</td>
               <td><DisplayButton fx={handleShowUserDetails} arg={user} /></td>
               <td><DeleteButton fx={handleShowConfirmDelete} arg={user} /></td>
@@ -214,8 +216,12 @@ export const UsersTable = () => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <CreateUserForm />
-
+          <CreateUserForm 
+            handleClose={handleClose}
+            setShowResOk={setShowResOk} 
+            setShowResBad={setShowResBad} 
+           // responseMsg={responseMsg}
+            />
           <Modal.Footer>
             <Button onClick={handleClose}>
               Volver al listado
