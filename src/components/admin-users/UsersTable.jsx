@@ -285,7 +285,7 @@ export const UsersTable = () => {
           <p className="form-title mt-4">Rol:</p>
           <p>{userDB.role}</p>
           <p className="form-title mt-4">Imagen:</p>
-          <img src={userDB.avatar} alt="" />
+          <img src={userDB.avatar} alt="" className="avatarInDisplay" />
 
           <Modal.Footer>
             <Button onClick={handleCloseUserDetails} >
