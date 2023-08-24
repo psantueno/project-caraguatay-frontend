@@ -4,14 +4,14 @@ import "./admin-users.css";
 import { useForm } from "../../hooks/useForm";
 import { UserValidations } from "./UserValidation";
 import { fileUpload } from '../../helpers/fileUpload';
-import { Loader} from '../buttons/Loader';
+import { Loader } from '../buttons/Loader';
 
 export const CreateUserForm = ({ handleClose, setShowResOk, setShowResBad }) => {
 
   // Agregar segundo ingreso de contraseña y validación de coincidencia.
-  // Falta validación de usuario eliminado
+  // Falta testear validación de usuario eliminado
   // Falta resolver el pasaje de responseMsg a UsersTable
-  // Falta verificación de email duplicado en backend
+ 
 
   const inputs = {
     email: useRef(),
@@ -54,15 +54,11 @@ export const CreateUserForm = ({ handleClose, setShowResOk, setShowResBad }) => 
     setErrors,
     setFiles,
     files,
-    //setShowResOk,
-    //setShowResBad,
     setResponseMsg,
     handleReset,
     setLoading,
-    //showResOk,
-    // showResBad,
-    // responseMsg,
     errors,
+    responseMsg,
   } = useForm(initialForm, UserValidations, inputs);
 
   /* Funciones específicas de Create User form: handleAvatar */
@@ -124,24 +120,22 @@ export const CreateUserForm = ({ handleClose, setShowResOk, setShowResBad }) => 
           body: JSON.stringify(data),
           headers: { 'Content-Type': 'application/json' }
         });
-
         const res = await req.json();
-        const resMessage = res.msg;
-        console.log(resMessage, "linea 127");  // In console I see: El usuario fue creado correctamente con el email aracelicatalano@gmail.com. linea 127
-        setResponseMsg(resMessage);
-        console.log("linea 131"); // In console I see null
+        setResponseMsg(res);
+        console.log(responseMsg, "linea124");
 
-        if (res.status === 201) {
+        if (res.status === 201) {         
           setShowResOk(true);
           setShowResBad(false);
           setForm(initialForm);
           handleReset();
           handleClose();
-        } else {
+        } else {     
           setShowResBad(true);
           console.log("-------------------");
-          console.log(res.errors);
+          console.log(res);
           console.log("-------------------");
+          handleClose();
         }
       } catch (error) {
         console.log(error);
@@ -156,8 +150,6 @@ export const CreateUserForm = ({ handleClose, setShowResOk, setShowResBad }) => 
 
   return (
     <>
-
-
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
           <Form.Label>Dirección de e-mail:</Form.Label>
@@ -192,7 +184,6 @@ export const CreateUserForm = ({ handleClose, setShowResOk, setShowResBad }) => 
             type="text"
             placeholder="Ingrese el nombre de la persona."
           />
-
           {
             errors && errors.name
               ? <Form.Control.Feedback type="invalid">
@@ -257,9 +248,7 @@ export const CreateUserForm = ({ handleClose, setShowResOk, setShowResBad }) => 
           >
             <option value="default">- Seleccione el rol -</option>
             <option value={1} >Administrador</option>
-
           </Form.Select>
-
           {
             errors && errors.role
               ? <Form.Control.Feedback type="invalid">
@@ -267,9 +256,7 @@ export const CreateUserForm = ({ handleClose, setShowResOk, setShowResBad }) => 
               </Form.Control.Feedback>
               : null
           }
-
         </Form.Group>
-
         <Form.Group controlId="avatar" className="mb-3 mt-3">
           <Form.Label>Seleccione una foto de perfil - opcional</Form.Label>
 
@@ -307,7 +294,6 @@ export const CreateUserForm = ({ handleClose, setShowResOk, setShowResBad }) => 
             </Col>
           </Row>
 
-
           {/* DETALLE DE ERRORS IMAGES */}
 
           <Alert show={msgFileNotImage} className="alert-file-not-image">
@@ -329,14 +315,12 @@ export const CreateUserForm = ({ handleClose, setShowResOk, setShowResBad }) => 
 
         </Form.Group>
 
-                <Button type="submit" className="mt-3 buttonPosition">
-                    Crear
-                </Button>
+        <Button type="submit" className="mt-3 buttonPosition">
+          Crear
+        </Button>
 
-                <Loader/>
-
-                
-            </Form>
-        </>
-    );
+        <Loader />
+      </Form>
+    </>
+  );
 };

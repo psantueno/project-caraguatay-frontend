@@ -97,18 +97,21 @@ export const UsersTable = () => {
       if (!response.ok) {
         throw new Error('Error deleting user');
       }
-      const responseData = await response.json(); // Parse the JSON data from the response
-      // Parse the "data" property within the response data to capture the object user
-      //const userData = JSON.parse(responseData.data);  //Ej. console.log(userData.email)
-      console.log(responseData.msg, "linea 72");
-      setResponseMsg(responseData);
-      if (responseData.status === 201) {
+      const res = await response.json(); // Parse the JSON data from the response 
+
+      if (res.status === 201) {
+        console.log(res, "linea 103");
+        setResponseMsg(res);
+        console.log(responseMsg, "linea 105");
         setShowResOk(true);
         setShowResBad(false);
+        handleClose();
+        setShowConfirmDelete(false);
       } else {
         setShowResBad(true);
+        setResponseMsg(res);
         console.log("-------------------")
-        console.log(responseData.errors)
+        console.log(res)
         console.log("-------------------")
       }
       setShowConfirmDelete(false);

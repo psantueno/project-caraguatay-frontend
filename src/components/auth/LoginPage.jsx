@@ -40,7 +40,6 @@ export const LoginPage = () => {
     console.log("paso");
     e.preventDefault();
     setErrors(errors);
-    console.log(errors, "linea 43");
     if (Object.keys(errors).length === 0) {
       setLoading(true);
 
