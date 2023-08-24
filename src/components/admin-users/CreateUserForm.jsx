@@ -9,9 +9,9 @@ import { Loader} from '../buttons/Loader';
 export const CreateUserForm = ({ handleClose, setShowResOk, setShowResBad }) => {
 
   // Agregar segundo ingreso de contraseña y validación de coincidencia.
-  // Falta Password encrypt 
   // Falta validación de usuario eliminado
   // Falta resolver el pasaje de responseMsg a UsersTable
+  // Falta verificación de email duplicado en backend
 
   const inputs = {
     email: useRef(),
