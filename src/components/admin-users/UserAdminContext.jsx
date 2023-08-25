@@ -1,50 +1,62 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect, useRef } from 'react';
+import { useForm } from '../../hooks/useForm';
+import { UserValidations } from "./UserValidation";
 
 export const UserAdminContext = createContext()
 
-const UserAdminContextProvider = (props) => {
-  const [alertMessage, setAlertMessage] = useState(null);
-  // const [users, setUsers] = useState([]);
 
-  // useEffect(() => {
-  //   const fetchUsers = async () => {
-  //     try {
-  //       const response = await fetch('http://localhost:4001/api/users/list/all');
-  //       if (!response.ok) {
-  //         throw new Error('Error fetching users');
-  //       }
-  //       const data = await response.json();
-  //       const fetchedUsers = data.result.usuarios;
-  //       setUsers(fetchedUsers);
-  //     } catch (error) {
-  //       console.error('Error fetching users:', error);
-  //     }
-  //   };
-  //   fetchUsers();
-  // }, []);
+
+const UserAdminContextProvider = (props) => {
+  const avatarDefault = "https://res.cloudinary.com/caraguatay/image/upload/v1691536662/avatar/user-avatar_d4x7se.png";
+  
+  const initialForm = {
+    email: "",
+    name: "",
+    lastName: "",
+    password: "",
+    role: "",
+    avatar: avatarDefault,
+  };
+  
+  const formErrors = {
+    email: false,
+    name: false,
+    lastName: false,
+    password: false,
+    role: false,
+    avatar: false,
+  };
+
+  const inputs = {
+    email: useRef(),
+    name: useRef(),
+    lastName: useRef(),
+    password: useRef(),
+    role: useRef(),
+    avatar: useRef(),
+  }
+  
+  const {
+    setResponseMsg,
+    setShowResOk,
+    setShowResBad,
+    showResOk,
+    showResBad,
+    responseMsg,
+    form,
+    handleChange,
+    handleKeyUp,
+    handleBlur,
+    handleMouseup,
+    setForm,
+    setErrors,
+    setFiles,
+    files,
+    handleReset,
+    setLoading,
+    errors,
  
-// const deleteUser = async (id) => {
-//     console.log(JSON.stringify(id), "desde deleteUser function");
-//     try {
-//       const response = await fetch("http://localhost:4001/api/users/delete", {
-//         method: 'PUT',
-//         headers: { 'Content-Type': 'application/json'},
-//         body: JSON.stringify(id),
-//       });
-//       if (!response.ok) {
-//         throw new Error('Error deleting user');
-//       }
-//     // Parse the JSON data from the response
-//     const responseData = await response.json();
-//     console.log(responseData, "linea 48"); // Log the parsed JSON data
-//     // Parse the "data" property within the response data to capture the object user
-//     const userData = JSON.parse(responseData.data);  //Ej. console.log(userData.email)
-//       // setUsers(users.filter(user => user.enabled === 1));
-//       setAlertMessage(responseData.msg)
-//     } catch (error) {
-//       console.error('Error deleting user:', error);
-//     }
-//   }
+  } = useForm(initialForm, UserValidations, inputs);
     
 
   const updateUser = (id, updatedUser) => {
@@ -54,23 +66,41 @@ const UserAdminContextProvider = (props) => {
 
  
 
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setAlertMessage(null);
-    }, 5000);
+  // useEffect(() => {
+  //   const timeoutId = setTimeout(() => {
+  //     setAlertMessage(null);
+  //   }, 5000);
 
-    return () => clearTimeout(timeoutId);
-  }, [alertMessage]);
+  //   return () => clearTimeout(timeoutId);
+  // }, [alertMessage]);
 
 
   return (
     <UserAdminContext.Provider value={{ 
-  //    users,
-  //    deleteUser, 
-      updateUser, 
-      alertMessage, 
-
-   //   setUsers, 
+        initialForm,
+        formErrors,
+        inputs,
+        setResponseMsg,
+        setShowResOk,
+        setShowResBad,
+        showResOk,
+        showResBad,
+        responseMsg,
+        form,
+        handleChange,
+        handleKeyUp,
+        handleBlur,
+        handleMouseup,
+        setForm,
+        setErrors,
+        setFiles,
+        files,
+        handleReset,
+        setLoading,
+        errors,
+        UserValidations,  
+        avatarDefault
+     
       }}>
       {props.children}
     </UserAdminContext.Provider>

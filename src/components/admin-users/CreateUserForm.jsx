@@ -1,50 +1,19 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
 import { Form, Button, Row, Col, Alert } from "react-bootstrap";
 import "./admin-users.css";
-import { useForm } from "../../hooks/useForm";
-import { UserValidations } from "./UserValidation";
+//import { useForm } from "../../hooks/useForm";
+
 import { fileUpload } from '../../helpers/fileUpload';
 import { Loader } from '../buttons/Loader';
+import { UserAdminContext } from './UserAdminContext';
 
-export const CreateUserForm = ({ handleClose, setShowResOk, setShowResBad }) => {
+export const CreateUserForm = ({handleClose}) => {
 
   // Agregar segundo ingreso de contraseña y validación de coincidencia.
   // Falta testear validación de usuario eliminado
-  // Falta resolver el pasaje de responseMsg a UsersTable
- 
-
-  const inputs = {
-    email: useRef(),
-    name: useRef(),
-    lastName: useRef(),
-    password: useRef(),
-    role: useRef(),
-    avatar: useRef(),
-  }
-
-  const avatarDefault = "https://res.cloudinary.com/caraguatay/image/upload/v1691536662/avatar/user-avatar_d4x7se.png"
-
-  const initialForm = {
-    email: "",
-    name: "",
-    lastName: "",
-    password: "",
-    role: "",
-    avatar: avatarDefault,
-  };
-
-  const formErrors = {
-    email: false,
-    name: false,
-    lastName: false,
-    password: false,
-    role: false,
-    avatar: false,
-  };
-
-  const [msgFileNotImage, setMsgFileNotImage] = useState(false);
-
+  
   const {
+    initialForm,
     form,
     handleChange,
     handleKeyUp,
@@ -54,12 +23,21 @@ export const CreateUserForm = ({ handleClose, setShowResOk, setShowResBad }) => 
     setErrors,
     setFiles,
     files,
-    setResponseMsg,
     handleReset,
     setLoading,
     errors,
+    avatarDefault,
+    formErrors,
+    inputs,
+    setResponseMsg,
     responseMsg,
-  } = useForm(initialForm, UserValidations, inputs);
+     setShowResOk,
+    setShowResBad,
+  } = useContext(UserAdminContext);
+
+  const [msgFileNotImage, setMsgFileNotImage] = useState(false);
+
+ 
 
   /* Funciones específicas de Create User form: handleAvatar */
 
@@ -121,8 +99,9 @@ export const CreateUserForm = ({ handleClose, setShowResOk, setShowResBad }) => 
           headers: { 'Content-Type': 'application/json' }
         });
         const res = await req.json();
+        console.log(res, "linea 124");
         setResponseMsg(res);
-        console.log(responseMsg, "linea124");
+        console.log(responseMsg, "linea 126");
 
         if (res.status === 201) {         
           setShowResOk(true);

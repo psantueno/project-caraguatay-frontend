@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Table, Container, Col, Button, Row, Modal, Alert } from 'react-bootstrap';
 import './admin-users.css';
 import { CreateUserForm } from './CreateUserForm';
@@ -6,8 +6,11 @@ import { useModal } from '../../hooks/useModal';
 import { DeleteButton, DisplayButton, EditButton } from '../buttons';
 import { useForm } from "../../hooks/useForm";
 import EditUserForm from './EditUserForm';
+import { UserAdminContext } from './UserAdminContext';
 
 export const UsersTable = () => {
+
+
 
   const { show, handleShow, handleClose } = useModal()
   const [users, setUsers] = useState([]);
@@ -31,15 +34,23 @@ export const UsersTable = () => {
     setShowEditUserForm(true);
   };
 
-  const {
-    setResponseMsg,
-    setShowResOk,
-    setShowResBad,
-    showResOk,
-    showResBad,
-    responseMsg,
-  } = useForm();
+  // const {
+  //   setResponseMsg,
+  //   setShowResOk,
+  //   setShowResBad,
+  //   showResOk,
+  //   showResBad,
+  //   responseMsg,
+  // } = useForm();
 
+  const {
+      setResponseMsg,
+      setShowResOk,
+      setShowResBad,
+      showResOk,
+      showResBad,
+      responseMsg,
+    } = useContext(UserAdminContext);
 
   const fetchUsers = async () => {
     try {
@@ -221,9 +232,6 @@ export const UsersTable = () => {
         <Modal.Body>
           <CreateUserForm 
             handleClose={handleClose}
-            setShowResOk={setShowResOk} 
-            setShowResBad={setShowResBad} 
-           // responseMsg={responseMsg}
             />
           <Modal.Footer>
             <Button onClick={handleClose}>
