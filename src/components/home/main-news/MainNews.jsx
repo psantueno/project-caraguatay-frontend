@@ -1,5 +1,6 @@
-import { NewsItem } from '../../news/NewsItem';
+
 import { Container } from 'react-bootstrap';
+import { NewsItemContainer } from '../../news/NewsItemContainer';
 
 export const MainNews = () => {
 
@@ -10,13 +11,7 @@ export const MainNews = () => {
                 <h4>Noticias Principales</h4>
                 <hr />
 
-                <NewsItem />
-                <NewsItem />
-                <NewsItem />
-                <NewsItem />
-                <NewsItem />
-                <NewsItem />
-                <NewsItem />
+                <NewsItemContainer/>
 
             </Container>
 

@@ -18,7 +18,7 @@ export const NewsDetail = () => {
              
               <Card className='card-lg' >
                    
-                    <Card.Header data-ride="carousel "  className='carousel-slide ' col-lg-12="true" >
+                    <Card.Header data-ride="carousel "  className='carousel-slide '  > // le quite col-lg-12="true" 
                         <Carousel className="carousel-inner carousel-dark" >
                             <div className="carousel-item " interval={3000}>
                                 <Card.Img src={slide2} alt="..." className=' slide ' />

@@ -85,7 +85,7 @@ export const useForm = (initialForm = {}, FormValidations = {}, inputs = {}, han
     setErrors,
     setFiles,
     setLoading,
-    setAvatar,
+    // setAvatar,
     setResponseMsg,
     requirementValue,
     FormValidations,
