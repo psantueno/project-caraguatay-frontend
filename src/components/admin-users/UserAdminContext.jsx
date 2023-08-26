@@ -1,84 +1,106 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect, useRef } from 'react';
+import { useForm } from '../../hooks/useForm';
+import { UserValidations } from "./UserValidation";
 
 export const UserAdminContext = createContext()
 
+
+
 const UserAdminContextProvider = (props) => {
-  const [alertMessage, setAlertMessage] = useState(null);
-  const [users, setUsers] = useState([]);
-
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await fetch('http://localhost:4001/api/users/list/all');
-        if (!response.ok) {
-          throw new Error('Error fetching users');
-        }
-        const data = await response.json();
-        const fetchedUsers = data.result.usuarios;
-        setUsers(fetchedUsers);
-      } catch (error) {
-        console.error('Error fetching users:', error);
-      }
-    };
-
-    fetchUsers();
-  }, []);
-
+  const avatarDefault = "https://res.cloudinary.com/caraguatay/image/upload/v1691536662/avatar/user-avatar_d4x7se.png";
   
+  const initialForm = {
+    email: "",
+    name: "",
+    lastName: "",
+    password: "",
+    role: "",
+    avatar: avatarDefault,
+  };
+  
+  const formErrors = {
+    email: false,
+    name: false,
+    lastName: false,
+    password: false,
+    role: false,
+    avatar: false,
+  };
 
-
-  const deleteUser = async (id) => {
-    console.log(id, "desde deleteUser function");
-    try {
-      const response = await fetch(`http://localhost:4001/api/users/delete/${id}`, {
-        method: 'PUT',
-        body: JSON.stringify(id),
-        headers: { 'Content-Type': 'application/json'
-    }
-      });
-
-      if (!response.ok) {
-        throw new Error('Error deleting user');
-      }
-
-      setUsers(users.filter(user => user.enabled === 1));
-      setAlertMessage(`El usuario con el ID ${id} fue eliminado correctamente.`);
-    } catch (error) {
-      console.error('Error deleting user:', error);
-      // Handle error and display appropriate message to the user
-    }
-
-    // setUsers(users.filter(user => user.id !== id))
-    // setAlertMessage(`El usuario con el email ${id} fue eliminado correctamente.`)
+  const inputs = {
+    email: useRef(),
+    name: useRef(),
+    lastName: useRef(),
+    password: useRef(),
+    role: useRef(),
+    avatar: useRef(),
   }
+  
+  const {
+    setResponseMsg,
+    setShowResOk,
+    setShowResBad,
+    showResOk,
+    showResBad,
+    responseMsg,
+    form,
+    handleChange,
+    handleKeyUp,
+    handleBlur,
+    handleMouseup,
+    setForm,
+    setErrors,
+    setFiles,
+    files,
+    handleReset,
+    setLoading,
+    errors,
+ 
+  } = useForm(initialForm, UserValidations, inputs);
+    
 
   const updateUser = (id, updatedUser) => {
     setUsers(users.map((user) => user.id === id ? updatedUser : user))
     setAlertMessage(`El usuario con id ${id} fue actualizado correctamente.`)
   }
 
-  const updateAlertMessage = (message) => {
-    setAlertMessage(message);
-  }
+ 
 
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setAlertMessage(null);
-    }, 5000);
+  // useEffect(() => {
+  //   const timeoutId = setTimeout(() => {
+  //     setAlertMessage(null);
+  //   }, 5000);
 
-    return () => clearTimeout(timeoutId);
-  }, [alertMessage]);
+  //   return () => clearTimeout(timeoutId);
+  // }, [alertMessage]);
 
 
   return (
     <UserAdminContext.Provider value={{ 
-      users,
-      deleteUser, 
-      updateUser, 
-      alertMessage, 
-      updateAlertMessage, 
-      setUsers, 
+        initialForm,
+        formErrors,
+        inputs,
+        setResponseMsg,
+        setShowResOk,
+        setShowResBad,
+        showResOk,
+        showResBad,
+        responseMsg,
+        form,
+        handleChange,
+        handleKeyUp,
+        handleBlur,
+        handleMouseup,
+        setForm,
+        setErrors,
+        setFiles,
+        files,
+        handleReset,
+        setLoading,
+        errors,
+        UserValidations,  
+        avatarDefault
+     
       }}>
       {props.children}
     </UserAdminContext.Provider>
@@ -86,6 +108,3 @@ const UserAdminContextProvider = (props) => {
 }
 
 export default UserAdminContextProvider;
-
-
-

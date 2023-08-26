@@ -4,16 +4,16 @@ import { Form, Button, Row, Col } from 'react-bootstrap';
 import './admin-users.css';
 
 
-const EditUserForm = ({userToEdit}) => {
+const EditUserForm = ({user}) => {
     const AvatarDefault = "https://res.cloudinary.com/caraguatay/image/upload/v1691536662/avatar/user-avatar_d4x7se.png";
     
-    const id = userToEdit.id;
+    const id = user.id;
 
-    const [email, setEmail] = useState(userToEdit.email);
-    const [name, setName] = useState(userToEdit.name);
-    const [lastName, setLastName] = useState(userToEdit.lastName);
+    const [email, setEmail] = useState(user.email);
+    const [name, setName] = useState(user.name);
+    const [lastName, setLastName] = useState(user.lastName);
     const [password, setPassword] = useState("");
-    const [role, setRole] = useState(userToEdit.role);
+    const [role, setRole] = useState(user.role);
     const [avatar, setAvatar] = useState("");
 
     const { updateUser } = useContext(UserAdminContext);
@@ -107,7 +107,7 @@ const EditUserForm = ({userToEdit}) => {
                 <Form.Group controlId="formFile" className="mb-3 mt-3">
                     <Form.Label>Seleccione una foto de perfil (opcional)</Form.Label>
 
-                    <Row className='p-3'>Imagen actual <img src={userToEdit.avatar} alt="" className="avatar" /></Row>
+                    <Row className='p-3'>Imagen actual <img src={user.avatar} alt="" className="avatar" /></Row>
 
                     <Form.Control
                         type="file"

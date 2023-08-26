@@ -22,7 +22,7 @@ export const useForm = (initialForm = {}, FormValidations = {}, inputs = {}, han
   const [requirementValue, setRequirementValue] = useState(""); // exclusivo DP.
   const [items, setItems] = useState([]);       // Maneja los ítems que se agregan en el input de requisitos. Exclusivo de DP
   const [files, setFiles] = useState([])
-
+  const [avatar, setAvatar] = useState([])
 
   // useEffect(() => {
   //   console.log('render form');
@@ -85,19 +85,19 @@ export const useForm = (initialForm = {}, FormValidations = {}, inputs = {}, han
     setErrors,
     setFiles,
     setLoading,
-    // setAvatar,
+    setAvatar,
     setResponseMsg,
     requirementValue,
     FormValidations,
     items,
     files,
+    avatar,
     setItems,
     setRequirementValue,
     loading,
     errors,
     showResOk,
     showResBad,
-    responseMsg,
-    setLoading
+    responseMsg
   }
 }
