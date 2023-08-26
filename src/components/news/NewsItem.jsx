@@ -1,20 +1,38 @@
-import React from 'react'
-import { Card, Container } from 'react-bootstrap'
+import React, { useState } from 'react'
+import { Card, Container, Collapse } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import photo1 from '../../assets/images/news.jpg'
 import '../../index.css';
 
 
 export const NewsItem = ({
+   
 
     photo = { url: photo1 },
-    category = "Categoría",
-    date = '15/01/2023',
-    title = 'Titulo de la Noticia en dos lineas',
-    text = 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea, at hic. Molestias nihil repellendus velit quasi animi ducimus sint, perspiciatis sunt, cum quia magni praesentium iure accusamus minus provident possimus!',
-    link = "/noticias/1"
+    category = {category},
+    date = {date},
+    title = {title},
+    text = {mainText},
+    // link = {link}
 
 }) => {
+    const [open, setOpen] = useState(false);
+    const [textCollpase, setTextCollapse] = useState({})
+
+    const textCollapsed=  () => {
+        
+        setOpen(!open),
+        setTextCollapse(textCollpase)
+        
+        
+        }
+
+
+
+
+       
+        
+
 
 
 
@@ -34,11 +52,38 @@ export const NewsItem = ({
                     <Card.Body className='cardBody'>
                         <Card.Title className='cardTitle'>{title}</Card.Title>
                         <Card.Text className='cardText' >
-                            {text}
+                                {
+                                    <>
+                            
+
+                            { text.length < 100  ? {text} : 
+                            <>
+                             `${text.slice(0, 100)}...` 
+                            </>
+                            }
+                             
+                                                                                
+                                    <button onClick={textCollapsed}>
+                                    {open ? 'Leer menos...' : 'Leer más...'}
+                                    </button>
+                                
+                            </>
+                            }
+                            
+
+
+
+
+
+
+                            
                         </Card.Text>
                     </Card.Body>
+                    <Collapse in={open}>
+                        <div>{text}</div>
+                    </Collapse>
                     <Card.Footer className='cardLink'>
-                        <small className='text-muted ' ><Link to={link} className='cardLink'> Leer mas...</Link></small>
+                        {/* <small className='text-muted ' ><Link to={link} className='cardLink'> Leer mas...</Link></small> */}
                     </Card.Footer>
                 </Card>
             </Container>

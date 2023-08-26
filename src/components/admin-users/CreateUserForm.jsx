@@ -300,6 +300,6 @@ export const CreateUserForm = ({handleClose}) => {
 
         <Loader />
       </Form>
-    </>
-  );
+    </>
+  );
 };
