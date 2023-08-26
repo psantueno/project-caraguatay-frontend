@@ -6,35 +6,24 @@ import '../../index.css';
 
 
 export const NewsItem = ({
-   
+
 
     photo = { url: photo1 },
-    category = {category},
-    date = {date},
-    title = {title},
-    text = {mainText},
+    category = { category },
+    date = { date },
+    title = { title },
+    text = { mainText },
     // link = {link}
 
 }) => {
     const [open, setOpen] = useState(false);
     const [textCollpase, setTextCollapse] = useState({})
 
-    const textCollapsed=  () => {
-        
+    const textCollapsed = () => {
+
         setOpen(!open),
-        setTextCollapse(textCollpase)
-        
-        
-        }
-
-
-
-
-       
-        
-
-
-
+            setTextCollapse(textCollpase)
+    }
 
     return (
         <>
@@ -52,31 +41,23 @@ export const NewsItem = ({
                     <Card.Body className='cardBody'>
                         <Card.Title className='cardTitle'>{title}</Card.Title>
                         <Card.Text className='cardText' >
-                                {
-                                    <>
-                            
+                            {
+                                <>
 
-                            { text.length < 100  ? {text} : 
-                            <>
-                             `${text.slice(0, 100)}...` 
-                            </>
-                            }
-                             
-                                                                                
+
+                                    {text.length < 100 ? { text } :
+                                        <>
+                                            `${text.slice(0, 100)}...`
+                                        </>
+                                    }
+
                                     <button onClick={textCollapsed}>
-                                    {open ? 'Leer menos...' : 'Leer más...'}
+                                        {open ? 'Leer menos...' : 'Leer más...'}
                                     </button>
-                                
-                            </>
+
+                                </>
                             }
-                            
 
-
-
-
-
-
-                            
                         </Card.Text>
                     </Card.Body>
                     <Collapse in={open}>

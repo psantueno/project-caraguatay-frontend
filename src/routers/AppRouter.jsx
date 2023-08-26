@@ -1,12 +1,12 @@
 import { Routes, Route} from 'react-router-dom';
 import { NewsDetail } from '../components/news/NewsDetail';
-import { NewsForm } from '../components/form-news/NewsForm';
+import { CreateNewsForm } from '../components/news/CreateNewsForm';
 
 import { Comunicados, CulturaTurismo, Deportes, Historia, PuntoDigital, UserAdmin } from '../pages';
 import { Home } from '../pages/Home';
 import { LoginPage } from '../components/auth/LoginPage';
 import { ResetPassword } from '../components/auth/ResetPassword';
-
+import { NewsAdmin } from '../pages/NewsAdmin';
 
 
 export const AppRouter = () => {
@@ -22,9 +22,10 @@ export const AppRouter = () => {
         <Route exact path="cultura-turismo/*" element={<CulturaTurismo />}></Route>
         <Route exact path="/historia/*" element={<Historia />} ></Route>
         <Route exact path="/punto-digital/*" element={<PuntoDigital />} ></Route>
-        <Route exact path="/formulario" element={<NewsForm />} ></Route>
         <Route exact path="/noticias/1" element={<NewsDetail />} ></Route>
         <Route exact path="/admin/usuarios" element={<UserAdmin />} ></Route>
+        <Route exact path="/admin/noticias" element={<NewsAdmin />} ></Route>
+        <Route exact path="/admin/noticias/crear-noticia" element={<CreateNewsForm />} ></Route>
 
       </Routes>
     </>
