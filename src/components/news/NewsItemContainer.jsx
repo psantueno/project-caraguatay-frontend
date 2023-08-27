@@ -5,14 +5,15 @@ import { NewsItem } from "./NewsItem";
 
 export const NewsItemContainer = () => {
 
-    const { news } = useFetchNews();
+    const { news , urls} = useFetchNews();
+
 
     return (
         <>
             {
-                news.map((news, index) => (
+                news.map((news, i) => (
 
-                    <div key={index}>
+                    <div key={`${news.id}-${i}`}>
 
                         <NewsItem
                             // category = {news.newsCategory_id === categoryNews.id ? categoryNews.category : null}
@@ -20,8 +21,8 @@ export const NewsItemContainer = () => {
                             date={news.date}
                             title={news.title}
                             text={news.mainText}
-                            photo={news.url}
-
+                            urls= {news.urls}
+                        
                         />
 
                     </div>
@@ -31,5 +32,10 @@ export const NewsItemContainer = () => {
         </>
     )
 }
+
+
+
+                              
+
 
 

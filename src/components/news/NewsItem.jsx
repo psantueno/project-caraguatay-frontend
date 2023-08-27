@@ -1,22 +1,22 @@
-import React, { useState } from 'react'
-import { Card, Container, Collapse } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react'
+import { Card, Container, Collapse, Carousel } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-// import photo1 from '../../assets/images/news.jpg'
+import photo1 from '../../assets/images/news.jpg'
 import '../../index.css';
 
 
 export const NewsItem = ({
 
-    photo = { url },
-    category = { category },
-    date = { date },
-    title = { title },
-    text = { mainText },
-    // link = {link}
+    urls = "",
+    category = "",
+    date = "",
+    title = "",
+    text = "",
 
 }) => {
     const [open, setOpen] = useState(false);
     const [textCollpase, setTextCollapse] = useState({})
+    const [urlArray, setUrlArray] = useState([])
 
     const textCollapsed = () => {
 
@@ -24,11 +24,55 @@ export const NewsItem = ({
             setTextCollapse(textCollpase)
     }
 
+
+
+    useEffect(() => {
+        if (urls && urls.trim() !== "") {
+            setUrlArray(urls.split(',')); // Dividir la cadena `urls` por comas usando split(',')
+        } else {
+            setUrlArray([]); // Si urls es nulo o vacío, establecer urlArray como un arreglo vacío
+        }
+    }, [urls]);
+
+    // console.log('linea urlArray', urlArray);
+
+
+
     return (
         <>
             <Container className="container-news" >
+
                 <Card className='cardNews' >
-                    <Card.Img variant="top" src={photo} className='cardImg' />
+
+                    {
+                        urlArray.length === 0
+                            ?
+                            <Card.Img
+                                variant="top"
+                                src={"https://res.cloudinary.com/caraguatay/image/upload/v1692640610/noticias/x2voqpzpj0sppszw0wdu.jpg"
+                                }
+                                className='cardImg'
+                            />
+                            :
+                            (
+                                <Carousel className="carousel-inner-moreNews active carousel-dark" >
+                                    {
+                                    urlArray.map((url, i) => (
+                                        <Carousel.Item className='' interval={3000} key={i}>
+                                            <Card.Img
+                                                variant="top"
+                                                src={url}
+                                                className='cardImg'
+                                            />
+                                            {console.log(url, 'url del map')}
+                                        </Carousel.Item>
+                                    ))
+                                    }
+
+                                </Carousel>
+                            )
+                    }
+
                     <Card.Subtitle className="cardSubtitle">
                         <Card.Text className="cardCategory">
                             <small> <Link to="#" className="cardLink" > {category} </Link></small>

@@ -23,7 +23,7 @@ export const AppRouter = () => {
         <Route exact path="/historia/*" element={<Historia />} ></Route>
         <Route exact path="/punto-digital/*" element={<PuntoDigital />} ></Route>
         <Route exact path="/formulario" element={<NewsForm />} ></Route>
-        <Route exact path="/noticias/1" element={<NewsDetail />} ></Route>
+        <Route exact path="/noticias/*" element={<NewsDetail />} ></Route>
         <Route exact path="/admin/usuarios" element={<UserAdmin />} ></Route>
 
       </Routes>
