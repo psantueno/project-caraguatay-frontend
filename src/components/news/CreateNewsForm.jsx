@@ -20,7 +20,7 @@ const initialForm = {
 };
 
 
-export const NewsForm = () => {
+export const CreateNewsForm = () => {
 
   const [msgFileNotImage, setMsgFileNotImage] = useState(false);
 
