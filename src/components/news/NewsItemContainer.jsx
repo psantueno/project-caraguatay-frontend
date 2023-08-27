@@ -5,7 +5,7 @@ import { NewsItem } from "./NewsItem";
 
 export const NewsItemContainer = () => {
 
-    const { news , urls} = useFetchNews();
+    const { news } = useFetchNews();
 
 
     return (

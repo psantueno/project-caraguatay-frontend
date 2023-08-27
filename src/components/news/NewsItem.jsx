@@ -23,8 +23,7 @@ export const NewsItem = ({
         setOpen(!open),
             setTextCollapse(textCollpase)
     }
-
-
+ 
 
     useEffect(() => {
         if (urls && urls.trim() !== "") {
@@ -33,8 +32,6 @@ export const NewsItem = ({
             setUrlArray([]); // Si urls es nulo o vacío, establecer urlArray como un arreglo vacío
         }
     }, [urls]);
-
-    // console.log('linea urlArray', urlArray);
 
 
 
