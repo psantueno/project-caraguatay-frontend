@@ -1,5 +1,4 @@
 import { useFetchNews } from "../../hooks/useFetchNews";
-import { useFetchNewsCategories } from "../../hooks/useFetchNewsCategories";
 import { NewsItem } from "./NewsItem";
 
 
@@ -20,8 +19,10 @@ export const NewsItemContainer = () => {
                             category={news.category}
                             date={news.date}
                             title={news.title}
-                            text={news.mainText}
+                            mainText={news.mainText}
                             urls= {news.urls}
+                            urlArray={news.urlArray}
+                            link= {`/noticias/${news.id}`}
                         
                         />
 

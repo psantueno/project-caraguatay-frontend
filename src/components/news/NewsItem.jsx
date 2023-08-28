@@ -1,35 +1,40 @@
 import React, { useEffect, useState } from 'react'
 import { Card, Container, Collapse, Carousel } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import photo1 from '../../assets/images/news.jpg'
 import '../../index.css';
 
 
-export const NewsItem = ({
 
-    urls = "",
+export const NewsItem = ({
+    id= "",
+    urls ="",
     category = "",
     date = "",
     title = "",
-    text = "",
+    mainText = "",
+    urlArray = [],
+    link = ""
+    
+    
 
 }) => {
-    const [open, setOpen] = useState(false);
-    const [textCollpase, setTextCollapse] = useState({})
-    const [urlArray, setUrlArray] = useState([])
+    // const [open, setOpen] = useState(false);
+    // const [textCollpase, setTextCollapse] = useState({})
+    const [urlsArray, setUrlsArray] = useState(urlArray)
+   
+    
+    // const textCollapsed = () => {
 
-    const textCollapsed = () => {
+    //     setOpen(!open),
+    //         setTextCollapse(textCollpase)
+    // }
 
-        setOpen(!open),
-            setTextCollapse(textCollpase)
-    }
- 
 
     useEffect(() => {
         if (urls && urls.trim() !== "") {
-            setUrlArray(urls.split(',')); // Dividir la cadena `urls` por comas usando split(',')
+            setUrlsArray(urls.split(',')); // Dividir la cadena `urls` por comas usando split(',')
         } else {
-            setUrlArray([]); // Si urls es nulo o vacío, establecer urlArray como un arreglo vacío
+            setUrlsArray([]); // Si urls es nulo o vacío, establecer urlArray como un arreglo vacío
         }
     }, [urls]);
 
@@ -42,32 +47,41 @@ export const NewsItem = ({
                 <Card className='cardNews' >
 
                     {
-                        urlArray.length === 0
-                            ?
-                            <Card.Img
-                                variant="top"
-                                src={"https://res.cloudinary.com/caraguatay/image/upload/v1692640610/noticias/x2voqpzpj0sppszw0wdu.jpg"
-                                }
-                                className='cardImg'
-                            />
-                            :
-                            (
-                                <Carousel className="carousel-inner-moreNews active carousel-dark" >
-                                    {
-                                    urlArray.map((url, i) => (
-                                        <Carousel.Item className='' interval={3000} key={i}>
-                                            <Card.Img
-                                                variant="top"
-                                                src={url}
-                                                className='cardImg'
-                                            />
-                                            {console.log(url, 'url del map')}
-                                        </Carousel.Item>
-                                    ))
-                                    }
+                        urlsArray.length === 0  &&
+                        <Card.Img
+                            variant="top"
+                            src={"https://res.cloudinary.com/caraguatay/image/upload/v1693184996/Logos/escudo_yntmdj.png"
+                            }
+                            className='cardImg'
+                        />
+                    }
+                    {
+                        (urlsArray.length === 1) &&
+                        <Card.Img
+                            variant="top"
+                            src={urlsArray}
+                            className='cardImg'
+                        />
+                    }
+                    {
+                        (urlsArray.length > 1) &&
 
-                                </Carousel>
-                            )
+                        <Carousel className="carousel-inner-moreNews active carousel-dark" >
+                            {
+                                urlsArray.map((url, i) => (
+                                    <Carousel.Item className='' interval={3000} key={i}>
+                                        <Card.Img
+                                            variant="top"
+                                            src={url}
+                                            className='cardImg'
+                                        />
+                                        {console.log(url, 'url del map')}
+                                    </Carousel.Item>
+                                ))
+                            }
+
+                        </Carousel>
+
                     }
 
                     <Card.Subtitle className="cardSubtitle">
@@ -81,26 +95,27 @@ export const NewsItem = ({
                     <Card.Body className='cardBody'>
                         <Card.Title className='cardTitle'>{title}</Card.Title>
                         <Card.Text className='cardText' >
+
                             {
                                 <>
-                                    {text.length < 100 ? { text } :
+                                    {mainText.length < 250 ?  mainText  :
                                         <>
-                                            `${text.slice(0, 100)}...`
+                                           {`${mainText.slice(0, 250)}...`}
                                         </>
                                     }
-                                    <button onClick={textCollapsed}>
+                                    {/* <button onClick={textCollapsed}>
                                         {open ? 'Leer menos...' : 'Leer más...'}
-                                    </button>
+                                    </button> */}
                                 </>
                             }
 
                         </Card.Text>
                     </Card.Body>
-                    <Collapse in={open}>
-                        <div>{text}</div>
-                    </Collapse>
+                    {/* <Collapse in={open}>
+                        <div>{mainText}</div>
+                    </Collapse> */}
                     <Card.Footer className='cardLink'>
-                        {/* <small className='text-muted ' ><Link to={link} className='cardLink'> Leer mas...</Link></small> */}
+                        <small className='text-muted ' ><Link to={link} className='cardLink'> Leer mas...</Link></small>
                     </Card.Footer>
                 </Card>
             </Container>
