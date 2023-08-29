@@ -7,7 +7,7 @@ export const usefetchNewsById = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    console.log(id, 'este es el id');
+    // console.log(id, 'este es el id');
   
     useEffect(() => {
       const fetchData = async () => {
@@ -17,12 +17,13 @@ export const usefetchNewsById = () => {
           }
   
           const response = await fetch(`http://localhost:4001/api/noticias/${id}`);
+     
           if (!response.ok) {
               throw new Error('Error obteniendo noticias');
             }
             
             const data = await response.json();
-            console.log(data , 'linea20');
+          
           const fetchedNewsById = data.data;
   
           setNews(fetchedNewsById);

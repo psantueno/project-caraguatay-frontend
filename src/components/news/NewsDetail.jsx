@@ -3,32 +3,26 @@ import React, { useEffect, useState } from 'react'
 import { Card, Container, Button, Carousel, Col, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { ButtonGeneric } from '../ButtonGeneric'
-// import slide1 from '../../assets/images/slide1.jpg'
-// import slide2 from '../../assets/images/slide2.jpg'
-//import { Header } from '../header/Header'
 import '../../index.css';
+import { usefetchNewsById} from '../../hooks/index'
 import { NewsItem } from './NewsItem'
-import  { usefetchNewsById } from '../../hooks/useFetchNewsById'
 
 export const NewsDetail = () => {
 
     const { news, loading, error } = usefetchNewsById();
-    console.log(news , 'linea 16');
 
     if (loading) {
-      return <div>Cargando...</div>;
+        return <div>Cargando...</div>;
     }
-  
-    if (error) {
-      return <div>Error: {error.message}</div>;
-    }
-  
-    if (!news) {
-      return <div> No hay datos de noticias disponibles.</div>;
-    }
-console.log(news.urlArray, 'linea 28');
 
-    
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    }
+
+    if (!news) {
+        return <div> No hay datos de noticias disponibles.</div>;
+    }
+
     return (
 
         <>
@@ -37,45 +31,44 @@ console.log(news.urlArray, 'linea 28');
 
                     <Card className='card-lg' >
 
-                        <Card.Header data-ride="carousel " className='carousel-slide '  >  
-                        {/* le quite col-lg-12="true" */}
-                        {
-                        news.urlArray.length === 0  &&
-                        <Card.Img
-                            variant="top"
-                            src={"https://res.cloudinary.com/caraguatay/image/upload/v1692640610/noticias/x2voqpzpj0sppszw0wdu.jpg"
-                            }
-                            className='cardImg'
-                        />
-                    }
-                    {
-                        (news.urlArray.length === 1) &&
-                        <Card.Img
-                            variant="top"
-                            src={news.urls}
-                            className='cardImg'
-                        />
-                    }
-                    {
-                        (news.urlArray.length > 1) &&
-
-                        <Carousel className="carousel-inner-moreNews active carousel-dark" >
+                        <Card.Header data-ride="carousel " className='carousel-slide cardImg-detail lg={12} '   >
+                            {/* le quite col-lg-12="true" */}
                             {
-                                news.urlArray.map((url, i) => (
-                                    <Carousel.Item className='' interval={3000} key={i}>
-                                        <Card.Img
-                                            variant="top"
-                                            src={url}
-                                            className='cardImg'
-                                        />
-                                        {console.log(url, 'url del map')}
-                                    </Carousel.Item>
-                                ))
+                                news.urlArray.length === 0 &&
+                                <Card.Img
+                                    variant="top"
+                                    src={"https://res.cloudinary.com/caraguatay/image/upload/v1692640610/noticias/x2voqpzpj0sppszw0wdu.jpg"
+                                    }
+                                    className='cardImg'
+                                />
                             }
+                            {
+                                (news.urlArray.length === 1) &&
+                                <Card.Img
+                                    variant="top"
+                                    src={news.urls}
+                                    className='cardImg-detail'
+                                />
+                            }
+                            {
+                                (news.urlArray.length > 1) &&
 
-                        </Carousel>
+                                <Carousel className="carousel-inner active carousel-dark" >
+                                    {
+                                        news.urlArray.map((url, i) => (
+                                            <Carousel.Item className='' interval={3000} key={i}>
+                                                <Card.Img
+                                                    variant="top"
+                                                    src={url}
+                                                    className='cardImg-detail'
+                                                />
+                                            </Carousel.Item>
+                                        ))
+                                    }
 
-                    }
+                                </Carousel>
+
+                            }
                         </Card.Header>
 
 
@@ -108,39 +101,20 @@ console.log(news.urlArray, 'linea 28');
                     </Card>
                 </Col>
 
-                <Col xs={12} md={12} lg={3} className='d-block' >
+                <Col xs={12} md={6} lg={3} className='d-block' >
 
                     <h4> <strong> Mas noticias.. </strong></h4>
 
-                    <Row >
+                    
 
-
-                        <Carousel className="carousel-inner-moreNews active carousel-dark" >
-                            <div className="carousel-item  "  >
-                                <div className='cards-wrapper ' interval={3000} >
-                                    <NewsItem className=' slide-moreNews ' mainText={'un texto'} />
-
-                                </div>
-                            </div>
-                            <div className="carousel-item "  >
-                                <div className='cards-wrapper' interval={3000}>
-                                    <NewsItem className=' slide-moreNews' mainText={'un texto'} />
-                                </div>
-                            </div>
-                            <div className="carousel-item "  >
-                                <div className='cards-wrapper' interval={3000}>
-                                    <NewsItem className=' slide-moreNews '  mainText={'un texto'}/>
-                                </div>
-                            </div>
-
-                        </Carousel>
-
-
-                    </Row>
 
 
                 </Col>
-            </Row>
+            </Row >
+            <div>
+
+
+            </div>
 
 
 
@@ -148,3 +122,19 @@ console.log(news.urlArray, 'linea 28');
     )
 }
 
+{/* <Carousel className="carousel-inner-moreNews carousel-dark "  >
+
+                                    {moreNews.news.map((news, i) => (
+                                        <Carousel.Item key={`${news.id}-${i}`}>
+                                            <div className=''>
+                                                <NewsItem
+                                                    category={news.category}
+                                                    title={news.title}
+                                                    urls={news.urlArray}
+                                                    photo={''} // Asegúrate de proporcionar una imagen si es necesario
+                                                />
+                                            </div>
+                                        </Carousel.Item>
+                                    ))}
+
+                            {/* </Carousel> */}

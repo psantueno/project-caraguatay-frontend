@@ -6,29 +6,20 @@ import '../../index.css';
 
 
 export const NewsItem = ({
-    id= "",
-    urls ="",
+    id = "",
+    urls = "",
     category = "",
     date = "",
     title = "",
     mainText = "",
     urlArray = [],
     link = ""
-    
-    
+
+
 
 }) => {
-    // const [open, setOpen] = useState(false);
-    // const [textCollpase, setTextCollapse] = useState({})
+
     const [urlsArray, setUrlsArray] = useState(urlArray)
-   
-    
-    // const textCollapsed = () => {
-
-    //     setOpen(!open),
-    //         setTextCollapse(textCollpase)
-    // }
-
 
     useEffect(() => {
         if (urls && urls.trim() !== "") {
@@ -52,7 +43,7 @@ export const NewsItem = ({
                             variant="top"
                             src={"https://res.cloudinary.com/caraguatay/image/upload/v1693184996/Logos/escudo_yntmdj.png"
                             }
-                            className='cardImg'
+                            className='cardImg'                           
                         />
                     }
                     {
@@ -98,22 +89,16 @@ export const NewsItem = ({
 
                             {
                                 <>
-                                    {mainText.length < 250 ?  mainText  :
+                                    {mainText.length < 250 ? mainText :
                                         <>
-                                           {`${mainText.slice(0, 250)}...`}
+                                            {`${mainText.slice(0, 250)}...`}
                                         </>
                                     }
-                                    {/* <button onClick={textCollapsed}>
-                                        {open ? 'Leer menos...' : 'Leer más...'}
-                                    </button> */}
                                 </>
                             }
 
                         </Card.Text>
                     </Card.Body>
-                    {/* <Collapse in={open}>
-                        <div>{mainText}</div>
-                    </Collapse> */}
                     <Card.Footer className='cardLink'>
                         <small className='text-muted ' ><Link to={link} className='cardLink'> Leer mas...</Link></small>
                     </Card.Footer>

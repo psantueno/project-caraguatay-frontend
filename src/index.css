@@ -346,9 +346,17 @@ a.link-phones:hover {
 }
 
 .cardImg {
+  height: 270px;
+  max-width: 640px !important;
+  max-height: 580px !important;
+}
 
-  max-width: 260px !important;
-  height: 180px;
+.cardImg-detail {
+  width: auto; /* Permite que el ancho se ajuste automáticamente */
+  max-width: 640px !important;
+  max-height: 580px !important;
+  height: 520px; /* Establece la altura máxima */
+  object-fit: cover; /* Ajusta la imagen dentro del contenedor sin cortarla ni distorsionarla */
 }
 
 .slide {
@@ -356,7 +364,7 @@ a.link-phones:hover {
   min-width: 260px !important;
   max-width: 1200px !important;
   min-height: 280px;
-  max-height: 360px !important;
+  max-height: 500px !important;
 
 }
 
@@ -399,8 +407,22 @@ a.link-phones:hover {
   margin: 0 .5em;
 }
 
-.slide-moreNews {
-  height: 460px !important;
+.carousel-inner {
+
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  /* margin: auto; */
+  text-align: center;
+  max-height: 500px;
+}
+
+.carousel-item {
+  position: relative;
+  float: left;
+  width: 100%;
+ 
+
 }
 
 /* END NEWS */
