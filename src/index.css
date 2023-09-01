@@ -352,11 +352,11 @@ a.link-phones:hover {
 }
 
 .cardImg-detail {
-  width: auto; /* Permite que el ancho se ajuste automáticamente */
+  
   max-width: 640px !important;
   max-height: 580px !important;
   height: 520px; /* Establece la altura máxima */
-  object-fit: cover; /* Ajusta la imagen dentro del contenedor sin cortarla ni distorsionarla */
+  object-fit: contain; /* Ajusta la imagen dentro del contenedor sin cortarla  */
 }
 
 .slide {
