@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 export const usefetchNewsById = () => {
     const { id } = useParams();
     const [news, setNews] = useState(null);
+    const [idCat, setIdCat] = useState (null)
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -24,9 +25,12 @@ export const usefetchNewsById = () => {
             
             const data = await response.json();
           
-          const fetchedNewsById = data.data;
+          const {news, newsCategory_id} = data ;
+          
+    
   
-          setNews(fetchedNewsById);
+          setNews(news);
+          setIdCat(newsCategory_id)
           setLoading(false);
         } catch (error) {
           setError(error);
@@ -37,6 +41,6 @@ export const usefetchNewsById = () => {
       fetchData();
     }, [id]);
   
-    return { news, loading, error };
+    return { news, loading, error , idCat};
   };
   

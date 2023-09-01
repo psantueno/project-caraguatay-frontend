@@ -23,6 +23,7 @@ export const NewsItemContainer = () => {
                             urls= {news.urls}
                             urlArray={news.urlArray}
                             link= {`/noticias/${news.id}`}
+                            
                         
                         />
 

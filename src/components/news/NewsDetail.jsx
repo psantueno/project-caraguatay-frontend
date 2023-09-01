@@ -4,24 +4,27 @@ import { Card, Container, Button, Carousel, Col, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { ButtonGeneric } from '../ButtonGeneric'
 import '../../index.css';
-import { usefetchNewsById} from '../../hooks/index'
-import { NewsItem } from './NewsItem'
+import { useFetchNewsByCategory, usefetchNewsById } from '../../hooks/index'
+import { Loader } from '../buttons/Loader';
+import { NewsItem } from './NewsItem';
+
 
 export const NewsDetail = () => {
 
-    const { news, loading, error } = usefetchNewsById();
+    const { news, loading, error, idCat } = usefetchNewsById();
+    const { newsByCat, loadingCat } = useFetchNewsByCategory(idCat);
 
     if (loading) {
-        return <div>Cargando...</div>;
+        return <Loader text={'cargando la noticia'} loader={loading} />;  // importar el loader componente
+
     }
 
-    if (error) {
-        return <div>Error: {error.message}</div>;
-    }
+    // const moreNews = newsByCat.filter( (element) => element.id !== news.id)
+    // console.log(moreNews, 'morenews');
 
-    if (!news) {
-        return <div> No hay datos de noticias disponibles.</div>;
-    }
+    console.log(idCat, 'este es idcat');
+    console.log(newsByCat, 'este es newsByCat');
+
 
     return (
 
@@ -105,9 +108,39 @@ export const NewsDetail = () => {
 
                     <h4> <strong> Mas noticias.. </strong></h4>
 
-                    
+                    <Carousel className="carousel-inner-moreNews carousel-dark "  >
+
+                        {
+                            (loadingCat)
+
+                                ?
+
+                                <Loader text={'cargando más noticias'} loader={loadingCat} />
+
+                                :
 
 
+                                (
+                                   newsByCat && 
+                                    newsByCat.map((news, i) => (
+                                        <Carousel.Item key={`${news.id}-${i}`}>
+                                            <Card className=''>
+                                                <NewsItem
+                                                    category={news.category}
+                                                    title={news.title}
+
+                                                />
+                                            </Card>
+                                        </Carousel.Item>
+                                    ))
+                                    
+                                )
+
+
+
+                        }
+
+                    </Carousel>
 
                 </Col>
             </Row >
@@ -121,20 +154,3 @@ export const NewsDetail = () => {
         </>
     )
 }
-
-{/* <Carousel className="carousel-inner-moreNews carousel-dark "  >
-
-                                    {moreNews.news.map((news, i) => (
-                                        <Carousel.Item key={`${news.id}-${i}`}>
-                                            <div className=''>
-                                                <NewsItem
-                                                    category={news.category}
-                                                    title={news.title}
-                                                    urls={news.urlArray}
-                                                    photo={''} // Asegúrate de proporcionar una imagen si es necesario
-                                                />
-                                            </div>
-                                        </Carousel.Item>
-                                    ))}
-
-                            {/* </Carousel> */}

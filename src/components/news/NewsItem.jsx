@@ -13,7 +13,8 @@ export const NewsItem = ({
     title = "",
     mainText = "",
     urlArray = [],
-    link = ""
+    link = "",
+    
 
 
 
