@@ -8,9 +8,9 @@ export const useFetchNews = () => {
     const getNews = async () => {
         const response = await fetch('http://localhost:4001/api/noticias/list/all');
         if (!response.ok) {
-          throw new Error('Error obteniendo noticias');
+            throw new Error('Error obteniendo noticias');
         }
-       
+
         const data = await response.json();
         const fetchedNews = data.result.news;
         setNews(fetchedNews)
