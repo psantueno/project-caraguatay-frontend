@@ -1,39 +1,43 @@
 import { useFetchNews } from "../../hooks/useFetchNews";
-import { useFetchNewsCategories } from "../../hooks/useFetchNewsCategories";
 import { NewsItem } from "./NewsItem";
 
 
-export const NewsItemContainer = () =>{
+export const NewsItemContainer = () => {
 
-const { news } = useFetchNews();
-
-
+    const { news } = useFetchNews();
 
 
-return(
-    <>
-    {
-        news.map((news, index) => (
-    
-    <div key={index}>
+    return (
+        <>
+            {
+                news.map((news, i) => (
 
-        <NewsItem 
-        // category = {news.newsCategory_id === categoryNews.id ? categoryNews.category : null}
-        category ={news.category }
-        date = {news.date}
-        title = {news.title}
-        text = {news.mainText}
-      
-            
-            
-            />
+                    <div key={`${news.id}-${i}`}>
 
-    </div>
+                        <NewsItem
+                            // category = {news.newsCategory_id === categoryNews.id ? categoryNews.category : null}
+                            category={news.category}
+                            date={news.date}
+                            title={news.title}
+                            mainText={news.mainText}
+                            urls= {news.urls}
+                            urlArray={news.urlArray}
+                            link= {`/noticias/${news.id}`}
+                            
+                        
+                        />
 
-        
-      ))
-    }
-    </>
-)}
+                    </div>
+
+                ))
+            }
+        </>
+    )
+}
+
+
+
+                              
+
 
 
