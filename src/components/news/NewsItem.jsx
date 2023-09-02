@@ -3,6 +3,7 @@ import { Card, Container, Collapse } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import photo1 from '../../assets/images/news.jpg'
 import '../../index.css';
+import { DeleteButton, EditButton } from '../buttons';
 
 
 export const NewsItem = ({
@@ -63,8 +64,10 @@ export const NewsItem = ({
                     <Collapse in={open}>
                         <div>{text}</div>
                     </Collapse>
-                    <Card.Footer className='cardLink'>
+                    <Card.Footer className='cardLink' >
                         {/* <small className='text-muted ' ><Link to={link} className='cardLink'> Leer mas...</Link></small> */}
+                        <EditButton className="size-lg"/>
+                        <DeleteButton className="size-lg"/>
                     </Card.Footer>
                 </Card>
             </Container>

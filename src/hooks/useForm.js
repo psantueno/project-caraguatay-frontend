@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 /* 
 Este hook recibe: 
@@ -21,18 +21,9 @@ export const useForm = (initialForm = {}, FormValidations = {}, inputs = {}, han
   const [responseMsg, setResponseMsg] = useState(null)
   const [requirementValue, setRequirementValue] = useState(""); // exclusivo DP.
   const [items, setItems] = useState([]);       // Maneja los ítems que se agregan en el input de requisitos. Exclusivo de DP
-  const [files, setFiles] = useState([])
-  const [avatar, setAvatar] = useState([])
+  const [files, setFiles] = useState([]);
+  const [avatar, setAvatar] = useState([]);
 
-  // useEffect(() => {
-  //   console.log('render form');
-  // }, [form]);
-
-  // useEffect(() => {
-  //   // if(form.imagesUrl.length>0) {
-  //   console.log('render form images')
-  //   // }
-  // }, [form.imagesUrl]);
 
   const handleChange = ({ target }) => {
     const { name, value } = target;

@@ -8,7 +8,7 @@ export const MainNews = () => {
         <>
             <Container className='containers-home'>
 
-                <h4>Noticias Principales</h4>
+                <h4>Últimas Noticias</h4>
                 <hr />
 
                 <NewsItemContainer/>
