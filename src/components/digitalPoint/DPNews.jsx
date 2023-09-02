@@ -12,7 +12,7 @@ export const DPNews = () => {
           <h5><b>Novedades</b></h5>
         </Row>
 
-          <NewsItem/>
+          {/* <NewsItem/> */}
 
       </Container>
   )

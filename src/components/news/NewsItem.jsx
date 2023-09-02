@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Card, Container, Collapse, Carousel } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import '../../index.css';
+import { DeleteButton, EditButton } from '../buttons';
 
 
 
@@ -100,8 +101,13 @@ export const NewsItem = ({
 
                         </Card.Text>
                     </Card.Body>
+                    <Collapse in={open}>
+                        <div>{text}</div>
+                    </Collapse>
                     <Card.Footer className='cardLink'>
                         <small className='text-muted ' ><Link to={link} className='cardLink'> Leer mas...</Link></small>
+                        <EditButton className="size-lg"/>
+                        <DeleteButton className="size-lg"/>
                     </Card.Footer>
                 </Card>
             </Container>
@@ -109,4 +115,3 @@ export const NewsItem = ({
         </>
     )
 }
-

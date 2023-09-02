@@ -5,7 +5,7 @@ export const NewsFormValidations = (form, e, inputs, errors) => {
     const { category, title, mainText, date } = inputs;
 
     if (e) {
-
+      
       if (e.target.name === "category" || e.type === 'submit') {
         if (form.category === "default") {
           category.current.className = "form-control is-invalid";

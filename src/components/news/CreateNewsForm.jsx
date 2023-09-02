@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Button, Form, Container, Col, Row, Table, Alert } from 'react-bootstrap';
 import { useForm } from '../../hooks/useForm';
 import { NewsFormValidations } from './NewsFormValidations';
@@ -137,7 +137,6 @@ export const CreateNewsForm = () => {
           setLoading(false);
           setShowResBad(true);
           window.scrollTo({ top: 0, behavior: 'smooth' });
-          console.log(responseMsg, "163");
         }
       }
       catch (error) {
@@ -148,6 +147,11 @@ export const CreateNewsForm = () => {
       alert("Revise los errores del formulario");
     }
   }
+
+  useEffect(() => {
+    // Desplázate hacia arriba cuando el componente se monta
+    window.scrollTo(0, 0);
+  }, []);
 
 
   return (
@@ -196,7 +200,7 @@ export const CreateNewsForm = () => {
       {/* RESPUESTA BAD DEL RESPONSE */}
 
       <Container className='mt-4'>
-        <h4>Crear noticia</h4>
+        <h4><i className="far fa-newspaper"></i> Crear nueva noticia</h4>
       </Container>
 
 
