@@ -17,7 +17,13 @@ export const fileUpload = async ( file, folder ) => {
         });
 
 
-        if ( !resp.ok ) throw new Error('No se pudo subir imagen');
+        if ( !resp.ok ) {  
+            console.log(resp);   
+            console.error('Error al subir la imagen:', resp.status, resp.statusText);
+            const errorsArray = { success: false, msg: 'Hubo un problema al subir una o más imagenes. Por favor vuelva a intentarlo.' }
+            return errorsArray;
+        } 
+            
         const cloudResp = await resp.json();
 
         return cloudResp.secure_url;

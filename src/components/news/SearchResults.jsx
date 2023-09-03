@@ -7,7 +7,6 @@ export const SearchResults = ({ results }) => {
     return (
         <>
             <Container className="mt-4">
-                {/* <h3  className="mt-3 mb-1 search-results" > Se han encontrado <b>({results.length})</b> noticias:</h3> */}
                 <div className="alert alert-success">Se han encontrado <b>({results.length})</b> noticia(s):</div>
             </Container>
 
@@ -19,7 +18,10 @@ export const SearchResults = ({ results }) => {
                             category={news.category}
                             date={news.date}
                             title={news.title}
-                            text={news.mainText}
+                            mainText={news.mainText}
+                            urls={news.urls}
+                            urlArray={news.urlArray}
+                            link={`/noticias/${news.id}`}
                         />
                     </div>
                 ))

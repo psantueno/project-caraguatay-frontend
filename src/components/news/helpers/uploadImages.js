@@ -4,9 +4,27 @@ export const uploadImages = async (files) => {
 
     const folder = "noticias";                               // apunta al presets "noticias" de cloudinary.
     const fileUploadPromises = [];
+    const errors = [];
+    let shouldContinue = true;
 
-    for (const file of files) {                              // files viene del "estado files" en linea 26.
-        fileUploadPromises.push(fileUpload(file, folder))
+    for (const file of files) {                  // files viene del "estado files" en linea 26.
+        if (!shouldContinue) break;              // Si shouldContinue es falso, detiene la iteración.                                         
+                                   
+        const response = await fileUpload(file, folder);
+
+        if (response.success === false) {
+            errors.push(response);
+            shouldContinue = false;              // Establece shouldContinue en falso para detener la carga de imágenes.
+        } else {
+            fileUploadPromises.push(response);
+        }
+    }
+    
+    if (errors.length > 0) {
+        const errorsArray = {
+            errors
+          };
+        return errorsArray;
     }
 
     const photosUrls = await Promise.all(fileUploadPromises);   // proceso para obtener las urls de las imagenes subidas. 
@@ -14,3 +32,5 @@ export const uploadImages = async (files) => {
 
     return imagesToString;
 }
+
+// fileUploadPromises.push(fileUpload(file, folder)) esto reemplza las lineas9 a 14

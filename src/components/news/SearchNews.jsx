@@ -48,10 +48,8 @@ export const SearchNews = () => {
             try {
                 const res = await fetch('http://localhost:4001/api/noticias/buscar-noticia', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ title, category })
+                    body: JSON.stringify({ title, category }),
+                    headers: { 'Content-Type': 'application/json' }
                 });
 
                 if (res.status === 400) {
