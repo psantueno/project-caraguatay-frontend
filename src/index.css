@@ -425,6 +425,15 @@ a.link-phones:hover {
 
 }
 
+.moreNews-container {
+  display: flex;
+  margin-bottom: 15px !important;
+  margin-top: 5px !important;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+
 /* END NEWS */
 
 

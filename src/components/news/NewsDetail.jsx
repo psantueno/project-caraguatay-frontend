@@ -6,7 +6,9 @@ import { ButtonGeneric } from '../ButtonGeneric'
 import '../../index.css';
 import { useFetchNewsByCategory, usefetchNewsById } from '../../hooks/index'
 import { Loader } from '../buttons/Loader';
+import { MoreNews } from './MoreNews';
 import { NewsItem } from './NewsItem';
+
 
 
 export const NewsDetail = () => {
@@ -33,16 +35,17 @@ export const NewsDetail = () => {
                 <Col xs={12} lg={9}>
 
                     <Card className='card-lg' >
-
-                        <Card.Header data-ride="carousel " className='carousel-slide cardImg-detail lg={12} '   >
+                   
+                  <Card.Header data-ride="carousel " className='carousel-slide cardImg-detail lg={12} '   >
                             {/* le quite col-lg-12="true" */}
                             {
-                                news.urlArray.length === 0 &&
+                                news.urlArray.length === null &&
                                 <Card.Img
                                     variant="top"
                                     src={"https://res.cloudinary.com/caraguatay/image/upload/v1692640610/noticias/x2voqpzpj0sppszw0wdu.jpg"
                                     }
                                     className='cardImg'
+                                    styles={{display:'none'}}
                                 />
                             }
                             {
@@ -107,7 +110,8 @@ export const NewsDetail = () => {
                 <Col xs={12} md={6} lg={3} className='d-block' >
 
                     <h4> <strong> Mas noticias.. </strong></h4>
-
+                    </Col>
+                   
                     <Carousel className="carousel-inner-moreNews carousel-dark "  >
 
                         {
@@ -121,36 +125,31 @@ export const NewsDetail = () => {
 
 
                                 (
-                                   newsByCat && 
+                                    newsByCat &&
                                     newsByCat.map((news, i) => (
                                         <Carousel.Item key={`${news.id}-${i}`}>
                                             <Card className=''>
                                                 <NewsItem
                                                     category={news.category}
                                                     title={news.title}
+                                                    link= {news.link}
+                                                    
+                                                                                                       
 
                                                 />
                                             </Card>
                                         </Carousel.Item>
                                     ))
-                                    
                                 )
-
 
 
                         }
 
                     </Carousel>
+          
 
-                </Col>
             </Row >
-            <div>
-
-
-            </div>
-
-
-
+           
         </>
     )
 }
