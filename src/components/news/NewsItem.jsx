@@ -25,7 +25,8 @@ export const NewsItem = ({
 
     useEffect(() => {
         if (urls && urls.trim() !== "") {
-            setUrlsArray(urls.split(',')); // Dividir la cadena `urls` por comas usando split(',')
+            setUrlsArray(urls.split(','));
+            // setUrlsArray(urls.split(',').map(url => url.trim())); // Dividir la cadena `urls` por comas usando split(',')
         } else {
             setUrlsArray([]); // Si urls es nulo o vacío, establecer urlArray como un arreglo vacío
         }
@@ -68,7 +69,7 @@ export const NewsItem = ({
                                             src={url}
                                             className='cardImg'
                                         />
-                                        {console.log(url, 'url del map')}
+                                        {/* {console.log(url, 'url del map')} */}
                                     </Carousel.Item>
                                 ))
                             }
@@ -101,11 +102,8 @@ export const NewsItem = ({
 
                         </Card.Text>
                     </Card.Body>
-                    <Collapse in={open}>
-                        <div>{text}</div>
-                    </Collapse>
-                    <Card.Footer className='cardLink'>
                         <small className='text-muted ' ><Link to={link} className='cardLink'> Leer mas...</Link></small>
+                    <Card.Footer className='cardLink'>
                         <EditButton className="size-lg"/>
                         <DeleteButton className="size-lg"/>
                     </Card.Footer>

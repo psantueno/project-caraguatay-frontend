@@ -7,7 +7,7 @@ import { Loader } from '../buttons/Loader';
 import { useFetchNewsCategories } from '../../hooks/useFetchNewsCategories';
 import dayjs from "dayjs";
 import { uploadImages } from './helpers/uploadImages';
-
+import { useNavigate} from 'react-router-dom';
 
 
 const initialForm = {
@@ -59,6 +59,8 @@ export const CreateNewsForm = () => {
     responseMsg,
   } = useForm(initialForm, NewsFormValidations, inputs)   // hook useForm que maneja el formulario.
 
+  const navigate = useNavigate();
+
 
   /* Funciones específicas de news form */
 
@@ -104,13 +106,25 @@ export const CreateNewsForm = () => {
 
       setLoading(true);        // activa el loader
 
-      const imagesToString = await uploadImages(files); // Fx que que sube las imagenes a cloud y devuelve las urls.
-      const data = {                    // preparando el archivo para enviarlo al back.
+      const imagesToString = await uploadImages(files);       // Fx que que sube las imagenes a cloud y devuelve las urls.
+
+      if (imagesToString.errors && imagesToString.errors.length > 0) {   // si hay errores en la carga a cloudinary.
+
+        setLoading(false);
+        setShowResBad(true);
+        setResponseMsg(imagesToString);
+        return;
+      }
+
+      // const formattedImg = imagesToString.map(url => url.trim());
+      const formattedImg = imagesToString.split(' ').map(url => url.trim());
+
+      const data = {                                          // preparando el archivo para enviarlo al back.
         ...form,
-        imagesUrl: imagesToString,
+        imagesUrl: formattedImg,
         user_id: 2,
       }
-        // Algunas ideas: podría sacar el state de loading, de showResok, showresBad e incluirlos en un helper fetch para el envio del form
+      // Algunas ideas: podría sacar el state de loading, de showResok, showresBad e incluirlos en un helper fetch para el envio del form
       try {
         const req = await fetch('http://localhost:4001/api/noticias/create', {
           method: "POST",
@@ -119,7 +133,6 @@ export const CreateNewsForm = () => {
         })
 
         const res = await req.json();
-        console.log(res, "146")
         setResponseMsg(res);
 
         if (res.status === 201) {
@@ -153,6 +166,11 @@ export const CreateNewsForm = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(() => {
+    // Desplázate hacia arriba cuando el componente se monta
+
+  }, [files]);
+
 
   return (
 
@@ -166,7 +184,10 @@ export const CreateNewsForm = () => {
           </Col>
           <Col className="d-flex justify-content-end">
             <Button
-              onClick={() => setShowResOk(false)}>
+              onClick={() => {
+                setShowResOk(false);
+                navigate('/');
+              }}>
               Cerrar
             </Button>
           </Col>
@@ -371,7 +392,7 @@ export const CreateNewsForm = () => {
                       return (
                         <div className='box-individual-preview' key={index}>
                           <img src={URL.createObjectURL(file)} alt={file.name} className="image-individual" />
-                          <DeleteButton fx={handleDelete} arg={index} size="sm" />
+                          {!loading && <DeleteButton fx={handleDelete} arg={index} size="sm" />}
                         </div>
                       )
                     })

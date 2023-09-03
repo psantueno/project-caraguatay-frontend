@@ -21,6 +21,7 @@ export const MenuHamburguer = () => {
                         <li><Link to="/deportes" onClick={handleLinkClick}>DEPORTES</Link></li>
                         <li><Link to="/historia" onClick={handleLinkClick}>HISTORIA</Link></li>
                         <li><Link to="/punto-digital" onClick={handleLinkClick}>PUNTO DIGITAL</Link></li>
+                        <li><Link to="/admin/noticias" onClick={handleLinkClick}>ADMIN NOTICIAS</Link></li>
                     </ul>
                 </div>
             </div>

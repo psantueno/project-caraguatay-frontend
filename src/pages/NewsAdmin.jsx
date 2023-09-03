@@ -1,11 +1,16 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
 import { MainNews } from '../components/home/main-news/MainNews'
 import { SearchNews } from '../components/news/SearchNews'
 import { Button, Container } from 'react-bootstrap'
 
 
 export const NewsAdmin = () => {
+
+  useEffect(() => {
+    // Desplázate hacia arriba cuando el componente se monta
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
 
