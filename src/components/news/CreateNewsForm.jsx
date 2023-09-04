@@ -115,9 +115,10 @@ export const CreateNewsForm = () => {
         setResponseMsg(imagesToString);
         return;
       }
-
+      console.log(imagesToString, "enviando esto del front imagestostring");
       // const formattedImg = imagesToString.map(url => url.trim());
-      const formattedImg = imagesToString.split(' ').map(url => url.trim());
+      const formattedImg = imagesToString.split(', ').map(url => url.trim());
+      console.log(formattedImg, "enviando esto del front");
 
       const data = {                                          // preparando el archivo para enviarlo al back.
         ...form,
