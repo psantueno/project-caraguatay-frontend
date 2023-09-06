@@ -1,3 +1,5 @@
+/* CHEQUEAR SI USAMOS O NO ESTE COMPONENTE */
+
 import React from 'react'
 import { Card, Container } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
@@ -12,12 +14,8 @@ export const MoreNews = ({
     link = ""
 }) => {
 
-
-
     return (
         <Container className='moreNews-container'>
-
-
         <Card border="info" style={{ width: '18rem' }} className='cardNews'>
             <Card.Header>
                 <Card.Text className="cardCategory">
@@ -40,7 +38,7 @@ export const MoreNews = ({
                             }
                         </>
                     }
-                    <small className='text-muted ' ><Link to={link} className='cardLink'> Leer mas...</Link></small>
+                    {/* <small className='text-muted ' ><Link to={link} className='cardLink'> Leer mas...</Link></small> */}
                 </Card.Text>
                 <Card.Footer className='cardLink'>
                 </Card.Footer>
@@ -51,3 +49,4 @@ export const MoreNews = ({
 
     )
 }
+

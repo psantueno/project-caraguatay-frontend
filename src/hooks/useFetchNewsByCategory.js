@@ -8,7 +8,6 @@ export const useFetchNewsByCategory = ( id ) => {
   const [loadingCat, setLoadingCat] = useState(true);
   const [errorCat, setErrorCat] = useState(null);
 
-  console.log(id, 'este es el id que recibe para category en el fetch');
 
   const fetchDataByCat = async () => {
     try {

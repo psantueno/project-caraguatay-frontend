@@ -6,7 +6,6 @@ export const NewsItemContainer = () => {
 
     const { news } = useFetchNews();
 
-
     return (
         <>
             {

@@ -1,13 +1,10 @@
-
-import React, { useEffect, useState } from 'react'
-import { Card, Container, Button, Carousel, Col, Row } from 'react-bootstrap'
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom'
-import { ButtonGeneric } from '../ButtonGeneric'
-import '../../index.css';
 import { useFetchNewsByCategory, usefetchNewsById } from '../../hooks/index'
 import { Loader } from '../buttons/Loader';
-import { MoreNews } from './MoreNews';
 import { NewsItem } from './NewsItem';
+import { Card, Button, Carousel, Col, Row } from 'react-bootstrap'
+import '../../index.css';
 
 
 
@@ -16,16 +13,14 @@ export const NewsDetail = () => {
     const { news, loading, error, idCat } = usefetchNewsById();
     const { newsByCat, loadingCat } = useFetchNewsByCategory(idCat);
 
+    useEffect(() => {
+        // Desplázate hacia arriba cuando el componente se monta
+        window.scrollTo(0, 0);
+    }, [news]);
+
     if (loading) {
         return <Loader text={'cargando la noticia'} loader={loading} />;  // importar el loader componente
-
     }
-
-    // const moreNews = newsByCat.filter( (element) => element.id !== news.id)
-    // console.log(moreNews, 'morenews');
-
-    console.log(idCat, 'este es idcat');
-    console.log(newsByCat, 'este es newsByCat');
 
 
     return (
@@ -33,10 +28,8 @@ export const NewsDetail = () => {
         <>
             <Row >
                 <Col xs={12} lg={9}>
-
                     <Card className='card-lg' >
-                   
-                  <Card.Header data-ride="carousel " className='carousel-slide cardImg-detail lg={12} '   >
+                        <Card.Header data-ride="carousel " className='carousel-slide cardImg-detail lg={12} '   >
                             {/* le quite col-lg-12="true" */}
                             {
                                 news.urlArray.length === null &&
@@ -45,7 +38,7 @@ export const NewsDetail = () => {
                                     src={"https://res.cloudinary.com/caraguatay/image/upload/v1692640610/noticias/x2voqpzpj0sppszw0wdu.jpg"
                                     }
                                     className='cardImg'
-                                    styles={{display:'none'}}
+                                    styles={{ display: 'none' }}
                                 />
                             }
                             {
@@ -58,7 +51,6 @@ export const NewsDetail = () => {
                             }
                             {
                                 (news.urlArray.length > 1) &&
-
                                 <Carousel className="carousel-inner active carousel-dark" >
                                     {
                                         news.urlArray.map((url, i) => (
@@ -71,9 +63,7 @@ export const NewsDetail = () => {
                                             </Carousel.Item>
                                         ))
                                     }
-
                                 </Carousel>
-
                             }
                         </Card.Header>
 
@@ -94,62 +84,42 @@ export const NewsDetail = () => {
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer className='cardLink'>
-
-
                             <Link to="/">
-
-                                <ButtonGeneric text="<< Volver a noticias" />
-
+                                <Button className='btn' variant='outline-info'>Volver a noticias</Button>
                             </Link>
-
-
                         </Card.Footer>
                     </Card>
                 </Col>
 
                 <Col xs={12} md={6} lg={3} className='d-block' >
-
                     <h4> <strong> Mas noticias.. </strong></h4>
-                    </Col>
-                   
-                    <Carousel className="carousel-inner-moreNews carousel-dark "  >
+                </Col>
+                <Carousel className="carousel-inner-moreNews carousel-dark "  >
 
-                        {
-                            (loadingCat)
+                    {
+                        (loadingCat)
 
-                                ?
+                            ? <Loader text={'cargando más noticias'} loader={loadingCat} />
 
-                                <Loader text={'cargando más noticias'} loader={loadingCat} />
-
-                                :
-
-
-                                (
-                                    newsByCat &&
-                                    newsByCat.map((news, i) => (
-                                        <Carousel.Item key={`${news.id}-${i}`}>
-                                            <Card className=''>
-                                                <NewsItem
-                                                    category={news.category}
-                                                    title={news.title}
-                                                    link= {news.link}
-                                                    
-                                                                                                       
-
-                                                />
-                                            </Card>
-                                        </Carousel.Item>
-                                    ))
-                                )
-
-
-                        }
-
-                    </Carousel>
-          
-
+                            /* COMPONENTE QUE RENDERIZA MORE NEWS EN DETALLE DE NOTICIA */
+                            : (
+                                newsByCat &&
+                                newsByCat.map((news, i) => (
+                                    <Carousel.Item key={`${news.id}-${i}`}>
+                                        <Card className=''>
+                                            <NewsItem
+                                                category={news.category}
+                                                title={news.title}
+                                                link={`/noticias/${news.id}`}
+                                            />
+                                        </Card>
+                                    </Carousel.Item>
+                                ))
+                            )
+                        /* COMPONENTE QUE RENDERIZA MORE NEWS EN DETALLE DE NOTICIA */
+                    }
+                </Carousel>
             </Row >
-           
         </>
     )
 }
