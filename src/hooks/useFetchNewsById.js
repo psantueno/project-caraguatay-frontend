@@ -8,7 +8,6 @@ export const usefetchNewsById = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    // console.log(id, 'este es el id');
   
     useEffect(() => {
       const fetchData = async () => {

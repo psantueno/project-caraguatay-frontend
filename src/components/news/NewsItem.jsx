@@ -15,9 +15,6 @@ export const NewsItem = ({
     mainText = "",
     urlArray = [],
     link = "",
-    
-
-
 
 }) => {
 
@@ -33,13 +30,10 @@ export const NewsItem = ({
     }, [urls]);
 
 
-
     return (
         <>
             <Container className="container-news" >
-
                 <Card className='cardNews' >
-
                     {
                         urlsArray.length === 0  &&
                         <Card.Img
@@ -102,7 +96,7 @@ export const NewsItem = ({
 
                         </Card.Text>
                     </Card.Body>
-                        <small className='text-muted ' ><Link to={link} className='cardLink'> Leer mas...</Link></small>
+                        <Link to={`${link}`}><small className='text-muted ' >Leer mas...</small></Link>
                     <Card.Footer className='cardLink'>
                         <EditButton className="size-lg"/>
                         <DeleteButton className="size-lg"/>
