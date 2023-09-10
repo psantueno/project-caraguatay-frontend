@@ -20,6 +20,9 @@ export const NewsItem = ({
 
     const [urlsArray, setUrlsArray] = useState(urlArray)
 
+    // Reemplaza los espacios por guiones medios
+    const categorySlug = category.replace(/\s+/g, '-').toLowerCase() ;
+
     useEffect(() => {
         if (urls && urls.trim() !== "") {
             setUrlsArray(urls.split(','));
@@ -74,7 +77,7 @@ export const NewsItem = ({
 
                     <Card.Subtitle className="cardSubtitle">
                         <Card.Text className="cardCategory">
-                            <small> <Link to="#" className="cardLink" > {category} </Link></small>
+                            <small> <Link to={`/${categorySlug}` }className="cardLink" > {category} </Link></small>
                         </Card.Text>
                         <Card.Text className="cardLink">
                             <small >  {date} </small>

@@ -17,7 +17,7 @@ export const MenuHamburguer = () => {
                 <div className={`navbar-collapse-hamburguer ${open ? 'open' : ''}`}>
                     <ul className={`container-links-header ${open ? 'open' : ''}`}>
                         <li><Link to="/comunicados" onClick={handleLinkClick}>COMUNICADOS</Link></li>
-                        <li><Link to="/cultura-turismo" onClick={handleLinkClick}>CULTURA Y TURISMO</Link></li>
+                        <li><Link to="/cultura-y-turismo" onClick={handleLinkClick}>CULTURA Y TURISMO</Link></li>
                         <li><Link to="/deportes" onClick={handleLinkClick}>DEPORTES</Link></li>
                         <li><Link to="/historia" onClick={handleLinkClick}>HISTORIA</Link></li>
                         <li><Link to="/punto-digital" onClick={handleLinkClick}>PUNTO DIGITAL</Link></li>
