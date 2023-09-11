@@ -259,7 +259,12 @@ export const UsersTable = () => {
         </Modal.Body>
       </Modal>
 
-      {/* MODAL PARA DESPLEGAR CONFIRMACIÓN DE ELIMINACIÓN DE USUARIO */}
+      {/* MODAL PARA DESPLEGAR CONFIRMACIÓN DE ELIMINACIÓN DE USUARIO 
+      
+      Ver si este modal se puede reutilizar.
+      
+      */}
+      
       <Modal show={showConfirmDelete} onHide={handleClose} className="mt-5 p-4">
         <Modal.Body>
           <h3 className="form-title mt-4">¿Confirma que desea eliminar el usuario registrado con el siguiente email?</h3>
