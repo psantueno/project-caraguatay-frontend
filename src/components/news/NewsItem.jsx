@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import { Card, Container, Collapse, Carousel } from 'react-bootstrap'
+import { useEffect, useState } from 'react'
+import { Card, Container, Carousel } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import '../../index.css';
 import { DeleteButton, EditButton } from '../buttons';
-
+import '../../index.css';
 
 
 export const NewsItem = ({
@@ -15,10 +14,16 @@ export const NewsItem = ({
     mainText = "",
     urlArray = [],
     link = "",
+    onDelete,
 
 }) => {
 
     const [urlsArray, setUrlsArray] = useState(urlArray)
+
+    const handleDelete = () => {
+        onDelete(id);
+    };
+
 
     useEffect(() => {
         if (urls && urls.trim() !== "") {
@@ -99,7 +104,10 @@ export const NewsItem = ({
                         <Link to={`${link}`}><small className='text-muted ' >Leer mas...</small></Link>
                     <Card.Footer className='cardLink'>
                         <EditButton className="size-lg"/>
-                        <DeleteButton className="size-lg"/>
+                        <DeleteButton className="size-lg" 
+                        fx={handleDelete}
+                        arg={id}
+                        />
                     </Card.Footer>
                 </Card>
             </Container>
