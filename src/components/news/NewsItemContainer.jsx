@@ -1,10 +1,34 @@
+import { useState, useEffect } from "react";
 import { useFetchNews } from "../../hooks/useFetchNews";
 import { NewsItem } from "./NewsItem";
+import { useFetchNewsByCategory } from "../../hooks/useFetchNewsByCategory";
 
 
-export const NewsItemContainer = () => {
 
-    const { news } = useFetchNews();
+//Se componetiza este newsItemContainer para reutilizarlo en otras secciones//
+
+export const NewsItemContainer = ({ fetch, id, route }) => {
+    // console.log(id, 'este es el id que se pasa al fetch de newsBycategory');
+
+    const { news, loadingCat, errorCat } = id ? fetch(id) : fetch();;
+
+    // console.log(fetch(), 'fetchID');
+    // console.log(news, 'comunicados');
+
+
+    useEffect(() => {
+       
+       
+    }, [fetch, id]);
+
+    if (loadingCat) {
+        return <div>Cargando...</div>;
+    }
+    
+    if (errorCat) {
+        return <div>Error: {errorCat.message}</div>;
+    }
+
 
     return (
         <>
@@ -14,16 +38,15 @@ export const NewsItemContainer = () => {
                     <div key={`${news.id}-${i}`}>
 
                         <NewsItem
-                            // category = {news.newsCategory_id === categoryNews.id ? categoryNews.category : null}
                             category={news.category}
                             date={news.date}
                             title={news.title}
                             mainText={news.mainText}
-                            urls= {news.urls}
+                            urls={news.urls}
                             urlArray={news.urlArray}
-                            link= {`/noticias/${news.id}`}
-                            
-                        
+                            link={`/${route}/${news.id}`}
+
+
                         />
 
                     </div>
@@ -36,7 +59,7 @@ export const NewsItemContainer = () => {
 
 
 
-                              
+
 
 
 

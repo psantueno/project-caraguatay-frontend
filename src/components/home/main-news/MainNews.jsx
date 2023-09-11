@@ -1,6 +1,7 @@
 
 import { Container } from 'react-bootstrap';
 import { NewsItemContainer } from '../../news/NewsItemContainer';
+import { useFetchNews } from '../../../hooks/useFetchNews';
 
 export const MainNews = () => {
 
@@ -11,7 +12,9 @@ export const MainNews = () => {
                 <h4>Últimas Noticias</h4>
                 <hr />
 
-                <NewsItemContainer/>
+                <NewsItemContainer 
+                    fetch={useFetchNews} 
+                    route={'noticias'}/>
 
             </Container>
 

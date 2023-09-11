@@ -21,7 +21,19 @@ export const NewsItem = ({
     const [urlsArray, setUrlsArray] = useState(urlArray)
 
     // Reemplaza los espacios por guiones medios
-    const categorySlug = category.replace(/\s+/g, '-').toLowerCase() ;
+    // const categorySlug = category.replace(/\s+/g, '-').toLowerCase() ;
+
+    function categorySlug(category) {
+        // Divide la cadena en palabras
+        const words = category.split(/\s+/);
+      
+        // Si hay más de una palabra, únelas con "-"
+        if (words.length > 1) {
+          return words.join('-').toLowerCase();
+        } else {
+          return category.toLowerCase();
+        }
+      }
 
     useEffect(() => {
         if (urls && urls.trim() !== "") {
@@ -77,7 +89,7 @@ export const NewsItem = ({
 
                     <Card.Subtitle className="cardSubtitle">
                         <Card.Text className="cardCategory">
-                            <small> <Link to={`/${categorySlug}` }className="cardLink" > {category} </Link></small>
+                            <small> <Link to={`/${categorySlug(category)}` }className="cardLink" > {category} </Link></small>
                         </Card.Text>
                         <Card.Text className="cardLink">
                             <small >  {date} </small>

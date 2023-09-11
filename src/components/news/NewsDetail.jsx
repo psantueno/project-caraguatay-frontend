@@ -13,6 +13,20 @@ export const NewsDetail = () => {
     const { news, loading, error, idCat } = usefetchNewsById();
     const { newsByCat, loadingCat } = useFetchNewsByCategory(idCat);
 
+
+    
+    function categorySlug(category) {
+        // Divide la cadena en palabras
+        const words = category.split(/\s+/);
+      
+        // Si hay más de una palabra, únelas con "-"
+        if (words.length > 1) {
+          return words.join('-').toLowerCase();
+        } else {
+          return category.toLowerCase();
+        }
+      }
+
     useEffect(() => {
         // Desplázate hacia arriba cuando el componente se monta
         window.scrollTo(0, 0);
@@ -70,7 +84,7 @@ export const NewsDetail = () => {
 
                         <Card.Subtitle className="cardSubtitle" >
                             <Card.Text className="cardCategory">
-                                <small> <Link to="#" className="cardLink-lg" > {news.category} </Link></small>
+                                <small> <Link to={`/${categorySlug(news.category)}` } className="cardLink-lg" > {news.category} </Link></small>
                             </Card.Text>
                             <Card.Text className="cardLink-lg">
                                 <small >  {news.date} </small>

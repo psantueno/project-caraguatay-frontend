@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router';
 import { Campings, PlacesToVisit, Entrepreneurship, Location } from '../components/culturaTurismo';
+import { NewsDetail } from '../components/news/NewsDetail';
 
 export const CulturaTurismoRouter = () => {
 
@@ -7,6 +8,7 @@ export const CulturaTurismoRouter = () => {
 
     <Routes>
       <Route path="ubicacion" element={<Location />} />
+      <Route path="/:id" element={<NewsDetail />} />
       <Route path="turismo" element={<PlacesToVisit />} />
       <Route path="emprendimientos" element={<Entrepreneurship />} />
       <Route path="camping" element={<Campings />} />

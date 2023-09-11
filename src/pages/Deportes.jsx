@@ -1,5 +1,7 @@
 import { Container, Row } from 'react-bootstrap';
 import { NewsItem } from '../components/news/NewsItem';
+import { NewsItemContainer } from '../components/news/NewsItemContainer';
+import { useFetchNewsByCategory } from '../hooks';
 
 
 export const Deportes = () => {
@@ -14,10 +16,10 @@ export const Deportes = () => {
 
         <Row className='text-indent'>
           <h5 ><b>Últimas Noticias</b></h5>
-
-          <NewsItem />
-          <NewsItem />
-          <NewsItem />
+          <NewsItemContainer 
+            fetch={useFetchNewsByCategory} 
+            id="1" 
+            route={'deportes'}/>
         </Row >
 
       </Container>

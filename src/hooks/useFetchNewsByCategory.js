@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 
 export const useFetchNewsByCategory = ( id ) => {
 
-  const [newsByCat, setNewsByCat] = useState(null);
+  const [news, setNews] = useState(null);
   const [loadingCat, setLoadingCat] = useState(true);
   const [errorCat, setErrorCat] = useState(null);
 
@@ -23,8 +23,10 @@ export const useFetchNewsByCategory = ( id ) => {
       const data = await response.json();
      
 
-      const {news} = data.result;
-      setNewsByCat(news);
+      const dataResultNews = data.result.news;
+
+
+      setNews(dataResultNews);
       setLoadingCat(false);
 
     } catch (error) {
@@ -36,5 +38,5 @@ export const useFetchNewsByCategory = ( id ) => {
       fetchDataByCat();
   }, [id]);
 
-  return { newsByCat, loadingCat, errorCat };
+  return { news, loadingCat, errorCat };
 }
