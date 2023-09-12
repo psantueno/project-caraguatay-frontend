@@ -19,7 +19,7 @@ export const Deportes = () => {
           <NewsItemContainer 
             fetch={useFetchNewsByCategory} 
             id="1"
-            route={'deportes'}/>
+            route={'noticias'}/>
         </Row >
 
       </Container>

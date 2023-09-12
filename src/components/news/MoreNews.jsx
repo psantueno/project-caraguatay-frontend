@@ -1,7 +1,7 @@
 /* CHEQUEAR SI USAMOS O NO ESTE COMPONENTE */
 
 import React from 'react'
-import { Card, Container, Carousel } from 'react-bootstrap'
+import { Carousel } from 'react-bootstrap'
 import '../../index.css';
 import { NewsItem } from './NewsItem';
 import { Loader } from '../buttons/Loader';

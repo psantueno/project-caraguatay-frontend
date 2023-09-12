@@ -14,7 +14,8 @@ export const MainNews = () => {
 
                 <NewsItemContainer 
                     fetch={useFetchNews} 
-                    route={'noticias'}/>
+                    route={'noticias'}
+                    />
 
             </Container>
 
