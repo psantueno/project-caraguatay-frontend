@@ -90,7 +90,7 @@ export const NewsItem = ({
                             <small >  {date} </small>
                         </Card.Text>
                     </Card.Subtitle>
-                    <Card.Body className='cardBody'>
+                    <Card.Body className='cardBody card-body'>
                         <Card.Title className='cardTitle'>{title}</Card.Title>
                         <Card.Text className='cardText' >
 
@@ -106,7 +106,7 @@ export const NewsItem = ({
 
                         </Card.Text>
                     </Card.Body>
-                    <Link to={`${link}`}><small className='text-muted ' >Leer mas...</small></Link>
+                    <Link to={`${link}`}><small className='text-muted cardLink' >Leer mas...</small></Link>
                     <Card.Footer className='cardLink'>
                         <EditButton className="size-lg" />
                         <DeleteButton className="size-lg" />
