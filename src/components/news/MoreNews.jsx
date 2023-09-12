@@ -6,13 +6,11 @@ import '../../index.css';
 import { NewsItem } from './NewsItem';
 import { Loader } from '../buttons/Loader';
 
-export const MoreNews = ({ fetch, id }) => {
+export const MoreNews = ({ fetch, fetchId, newsId }) => {
 
-    const data = fetch(id)
+    const data = fetch(fetchId)
     const { news, loadingCat, errorCat } = data
     console.log(news, 'data');
-
-    // const newsFiltered= news.filter(n => n.id != news.id)
 
     if (loadingCat) {
         return <div> <Loader text={'cargando más noticias'} loader={loadingCat} /></div>;
@@ -21,14 +19,19 @@ export const MoreNews = ({ fetch, id }) => {
         return <div>Error: {errorCat.message}</div>;
     }
 
+    const filteredNews = news.filter((newsItem) => newsItem.id !== newsId);
+
+    console.log(filteredNews, 'esto es filterednews');
+
     return (
         <>
-            <Carousel className="carousel-inner-moreNews carousel-dark "  >
-                {
-                    /* COMPONENTE QUE RENDERIZA MORE NEWS EN DETALLE DE NOTICIA */
-                    (
-                        news &&
-                        news.map((news, i) => (
+            {
+                /* COMPONENTE QUE RENDERIZA MORE NEWS EN DETALLE DE NOTICIA */
+                (
+                    (filteredNews !== "") &&
+
+                    filteredNews.map((news, i) => (
+                        <Carousel className="carousel-inner-moreNews carousel-dark "  >
                             <Carousel.Item key={`${news.id}-${i}`} >
                                 <NewsItem
                                     urlArray={news.urlArray}
@@ -38,11 +41,11 @@ export const MoreNews = ({ fetch, id }) => {
                                     link={`/noticias/${news.id}`}
                                 />
                             </Carousel.Item>
-                        ))
-                    )
-                    /* COMPONENTE QUE RENDERIZA MORE NEWS EN DETALLE DE NOTICIA */
-                }
-            </Carousel>
+                        </Carousel>
+                    ))
+                )
+                /* COMPONENTE QUE RENDERIZA MORE NEWS EN DETALLE DE NOTICIA */
+            }
         </>
     )
 }

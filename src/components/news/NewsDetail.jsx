@@ -13,11 +13,6 @@ export const NewsDetail = () => {
 
     const { news, loading, error, idCat } = usefetchNewsById();
 
-    console.log('este es IDCAT en NewsDetail:' , idCat);
-
-
-
-
     function categorySlug(category) {
         // Divide la cadena en palabras
         const words = category.split(/\s+/);
@@ -38,7 +33,9 @@ export const NewsDetail = () => {
     if (loading) {
         return <Loader text={'cargando la noticia'} loader={loading} />;  // importar el loader componente
     }
-
+    if (error) {
+        return error  // importar el loader componente
+    }
 
     return (
 
@@ -113,8 +110,10 @@ export const NewsDetail = () => {
 
                 {/* <MoreNews id={`"${idCat}"`} /> */}
                 <MoreNews 
-                    id= {Number(idCat) }
-                    fetch={useFetchNewsByCategory}/>
+                    fetchId= {Number(idCat) }
+                    fetch={useFetchNewsByCategory}
+                    newsId={news.id}
+                    />
             </Row >
         </>
     )
