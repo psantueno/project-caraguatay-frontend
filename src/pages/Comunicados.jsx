@@ -18,8 +18,6 @@ export const Comunicados = () => {
             fetch={useFetchNewsByCategory} 
             id="2" 
             route={'comunicados'}/>
-         
-
         </Row >
 
       </Container>

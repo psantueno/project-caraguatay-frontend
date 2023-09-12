@@ -5,33 +5,36 @@ import { Loader } from '../buttons/Loader';
 import { NewsItem } from './NewsItem';
 import { Card, Button, Carousel, Col, Row } from 'react-bootstrap'
 import '../../index.css';
+import { MoreNews } from './MoreNews';
 
 
 
 export const NewsDetail = () => {
 
     const { news, loading, error, idCat } = usefetchNewsById();
-    const { newsByCat, loadingCat } = useFetchNewsByCategory(idCat);
+
+    console.log('este es IDCAT en NewsDetail:' , idCat);
 
 
-    
+
+
     function categorySlug(category) {
         // Divide la cadena en palabras
         const words = category.split(/\s+/);
-      
+
         // Si hay más de una palabra, únelas con "-"
         if (words.length > 1) {
-          return words.join('-').toLowerCase();
+            return words.join('-').toLowerCase();
         } else {
-          return category.toLowerCase();
+            return category.toLowerCase();
         }
-      }
-
+    }
+    
     useEffect(() => {
         // Desplázate hacia arriba cuando el componente se monta
         window.scrollTo(0, 0);
     }, [news]);
-
+    
     if (loading) {
         return <Loader text={'cargando la noticia'} loader={loading} />;  // importar el loader componente
     }
@@ -84,7 +87,7 @@ export const NewsDetail = () => {
 
                         <Card.Subtitle className="cardSubtitle" >
                             <Card.Text className="cardCategory">
-                                <small> <Link to={`/${categorySlug(news.category)}` } className="cardLink-lg" > {news.category} </Link></small>
+                                <small> <Link to={`/${categorySlug(news.category)}`} className="cardLink-lg" > {news.category} </Link></small>
                             </Card.Text>
                             <Card.Text className="cardLink-lg">
                                 <small >  {news.date} </small>
@@ -104,35 +107,14 @@ export const NewsDetail = () => {
                         </Card.Footer>
                     </Card>
                 </Col>
-
                 <Col xs={12} md={6} lg={3} className='d-block' >
                     <h4> <strong> Mas noticias.. </strong></h4>
                 </Col>
-                <Carousel className="carousel-inner-moreNews carousel-dark "  >
 
-                    {
-                        (loadingCat)
-
-                            ? <Loader text={'cargando más noticias'} loader={loadingCat} />
-
-                            /* COMPONENTE QUE RENDERIZA MORE NEWS EN DETALLE DE NOTICIA */
-                            : (
-                                newsByCat &&
-                                newsByCat.map((news, i) => (
-                                    <Carousel.Item key={`${news.id}-${i}`}>
-                                        <Card className=''>
-                                            <NewsItem
-                                                category={news.category}
-                                                title={news.title}
-                                                link={`/noticias/${news.id}`}
-                                            />
-                                        </Card>
-                                    </Carousel.Item>
-                                ))
-                            )
-                        /* COMPONENTE QUE RENDERIZA MORE NEWS EN DETALLE DE NOTICIA */
-                    }
-                </Carousel>
+                {/* <MoreNews id={`"${idCat}"`} /> */}
+                <MoreNews 
+                    id= {Number(idCat) }
+                    fetch={useFetchNewsByCategory}/>
             </Row >
         </>
     )

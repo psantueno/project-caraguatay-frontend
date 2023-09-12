@@ -1,7 +1,5 @@
-import { useState, useEffect } from "react";
-import { useFetchNews } from "../../hooks/useFetchNews";
+import { useEffect } from "react";
 import { NewsItem } from "./NewsItem";
-import { useFetchNewsByCategory } from "../../hooks/useFetchNewsByCategory";
 
 
 
@@ -10,7 +8,7 @@ import { useFetchNewsByCategory } from "../../hooks/useFetchNewsByCategory";
 export const NewsItemContainer = ({ fetch, id, route }) => {
     // console.log(id, 'este es el id que se pasa al fetch de newsBycategory');
 
-    const { news, loadingCat, errorCat } = id ? fetch(id) : fetch();;
+    const { news, loadingCat, errorCat } = id ? fetch(id) : fetch();
 
     // console.log(fetch(), 'fetchID');
     // console.log(news, 'comunicados');

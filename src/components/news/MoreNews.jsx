@@ -1,50 +1,52 @@
 /* CHEQUEAR SI USAMOS O NO ESTE COMPONENTE */
 
 import React from 'react'
-import { Card, Container } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Card, Container , Carousel} from 'react-bootstrap'
 import '../../index.css';
+import { NewsItem } from './NewsItem';
+import { Loader } from '../buttons/Loader';
 
-export const MoreNews = ({
-    id= "",
-    category = "",
-    date = "",
-    title = "",
-    mainText = "",
-    link = ""
-}) => {
+export const MoreNews = ( { fetch,  id } ) => {
+    const data = fetch(id)
+    const { news, loadingCat , errorCat} = data
+    
+    console.log(news , 'data');
+
+    // const newsFiltered= news.filter(n => n.id != news.id)
+   
+    if (loadingCat) {
+        return <div> <Loader text={'cargando más noticias'} loader={loadingCat} /></div>;
+    }
+    if (errorCat) {
+        return <div>Error: {errorCat.message}</div>;
+    }
 
     return (
-        <Container className='moreNews-container'>
-        <Card border="info" style={{ width: '18rem' }} className='cardNews'>
-            <Card.Header>
-                <Card.Text className="cardCategory">
-                    <small> <Link to="#" className="cardLink" > {category} </Link></small>
-                </Card.Text>
-                <Card.Text className="cardLink">
-                    <small >  {date} </small>
-                </Card.Text>
-            </Card.Header>
-            <Card.Body>
+        <>
+    <Carousel className="carousel-inner-moreNews carousel-dark "  >
+        {
 
-                <Card.Title className='cardTitle'>{title}</Card.Title>
-                <Card.Text className='cardText'>
-                    {
-                        <>
-                            {mainText.length < 150 ? mainText :
-                                <>
-                                    {`${mainText.slice(0, 150)}...`}
-                                </>
-                            }
-                        </>
-                    }
-                    {/* <small className='text-muted ' ><Link to={link} className='cardLink'> Leer mas...</Link></small> */}
-                </Card.Text>
-                <Card.Footer className='cardLink'>
-                </Card.Footer>
-            </Card.Body>
-        </Card>
-        </Container>
+            
+               /* COMPONENTE QUE RENDERIZA MORE NEWS EN DETALLE DE NOTICIA */
+                 (
+                    news && 
+                    news.map((news, i) => (
+                        <Carousel.Item key={`${news.id}-${i}`}>
+                            <Card className=''>
+                                <NewsItem
+                                    category={news.category}
+                                    title={news.title}
+                                    link={`/noticias/${news.id}`}
+                                />
+                            </Card>
+                        </Carousel.Item>
+                    ))
+                )
+            /* COMPONENTE QUE RENDERIZA MORE NEWS EN DETALLE DE NOTICIA */
+        }
+    </Carousel>
+    </>
+
 
 
     )
