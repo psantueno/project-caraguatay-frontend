@@ -20,25 +20,20 @@ export const NewsItem = ({
 
     const [urlsArray, setUrlsArray] = useState(urlArray)
 
-    // Reemplaza los espacios por guiones medios
-    // const categorySlug = category.replace(/\s+/g, '-').toLowerCase() ;
-
     function categorySlug(category) {
         // Divide la cadena en palabras
         const words = category.split(/\s+/);
-      
-        // Si hay más de una palabra, únelas con "-"
+        // Si hay más de una palabra, se unen con "-"
         if (words.length > 1) {
-          return words.join('-').toLowerCase();
+            return words.join('-').toLowerCase();
         } else {
-          return category.toLowerCase();
+            return category.toLowerCase();
         }
-      }
+    }
 
     useEffect(() => {
         if (urls && urls.trim() !== "") {
             setUrlsArray(urls.split(','));
-            // setUrlsArray(urls.split(',').map(url => url.trim())); // Dividir la cadena `urls` por comas usando split(',')
         } else {
             setUrlsArray([]); // Si urls es nulo o vacío, establecer urlArray como un arreglo vacío
         }
@@ -49,7 +44,7 @@ export const NewsItem = ({
         <>
             <Container className="container-news" >
                 <Card className='cardNews' >
-                    {
+                {/* {
                         urlsArray.length === 0  &&
                         <Card.Img
                             variant="top"
@@ -57,7 +52,7 @@ export const NewsItem = ({
                             }
                             className='cardImg'                           
                         />
-                    }
+                    } */}
                     {
                         (urlsArray.length === 1) &&
                         <Card.Img
@@ -89,7 +84,7 @@ export const NewsItem = ({
 
                     <Card.Subtitle className="cardSubtitle">
                         <Card.Text className="cardCategory">
-                            <small> <Link to={`/${categorySlug(category)}` }className="cardLink" > {category} </Link></small>
+                            <small> <Link to={`/${categorySlug(category)}`} className="cardLink" > {category} </Link></small>
                         </Card.Text>
                         <Card.Text className="cardLink">
                             <small >  {date} </small>
@@ -111,10 +106,10 @@ export const NewsItem = ({
 
                         </Card.Text>
                     </Card.Body>
-                        <Link to={`${link}`}><small className='text-muted ' >Leer mas...</small></Link>
+                    <Link to={`${link}`}><small className='text-muted ' >Leer mas...</small></Link>
                     <Card.Footer className='cardLink'>
-                        <EditButton className="size-lg"/>
-                        <DeleteButton className="size-lg"/>
+                        <EditButton className="size-lg" />
+                        <DeleteButton className="size-lg" />
                     </Card.Footer>
                 </Card>
             </Container>
