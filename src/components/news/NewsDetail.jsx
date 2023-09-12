@@ -44,7 +44,7 @@ export const NewsDetail = () => {
                 <Col xs={12} lg={9}>
                     <Card className='card-lg' >
                         <Card.Header data-ride="carousel " className='carousel-slide cardImg-detail lg={12} '   >
-                            {/* le quite col-lg-12="true" */}
+{/*                             
                             {
                                 news.urlArray.length === null &&
                                 <Card.Img
@@ -54,7 +54,7 @@ export const NewsDetail = () => {
                                     className='cardImg'
                                     styles={{ display: 'none' }}
                                 />
-                            }
+                            } */}
                             {
                                 (news.urlArray.length === 1) &&
                                 <Card.Img

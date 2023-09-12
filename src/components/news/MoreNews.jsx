@@ -8,9 +8,12 @@ import { Loader } from '../buttons/Loader';
 
 export const MoreNews = ({ fetch, fetchId, newsId }) => {
 
+    const typeOfId = typeof newsId
+    console.log(newsId, typeOfId)
+
     const data = fetch(fetchId)
     const { news, loadingCat, errorCat } = data
-    console.log(news, 'data');
+    console.log(news, 'data', 'y newsId', newsId, 'typeof:', typeOfId);
 
     if (loadingCat) {
         return <div> <Loader text={'cargando más noticias'} loader={loadingCat} /></div>;
@@ -26,13 +29,14 @@ export const MoreNews = ({ fetch, fetchId, newsId }) => {
     return (
         <>
             {
-                /* COMPONENTE QUE RENDERIZA MORE NEWS EN DETALLE DE NOTICIA */
-                (
-                    (filteredNews !== "") &&
-
-                    filteredNews.map((news, i) => (
-                        <Carousel className="carousel-inner-moreNews carousel-dark "  >
-                            <Carousel.Item key={`${news.id}-${i}`} >
+                filteredNews == "" ? (
+                    <div>
+                        <p>No hay más noticias asociadas</p>
+                    </div>
+                ) : (
+                    <Carousel className="carousel-inner-moreNews carousel-dark ">
+                        {filteredNews.map((news, i) => (
+                            <Carousel.Item key={`${news.id}-${i}`}>
                                 <NewsItem
                                     urlArray={news.urlArray}
                                     urls={news.urls}
@@ -41,10 +45,9 @@ export const MoreNews = ({ fetch, fetchId, newsId }) => {
                                     link={`/noticias/${news.id}`}
                                 />
                             </Carousel.Item>
-                        </Carousel>
-                    ))
+                        ))}
+                    </Carousel>
                 )
-                /* COMPONENTE QUE RENDERIZA MORE NEWS EN DETALLE DE NOTICIA */
             }
         </>
     )
