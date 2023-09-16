@@ -26,7 +26,7 @@ export const PuntoDigital = () => {
         <h5 ><b>Últimas Noticias en Digital Point</b></h5>
         <NewsItemContainer
           fetch={useFetchNewsByCategory}
-          id="4"
+          idCat="4"
           route={'noticias'} />
       </Row >
 

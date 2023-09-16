@@ -16,7 +16,7 @@ export const Comunicados = () => {
 
           <NewsItemContainer 
             fetch={useFetchNewsByCategory} 
-            id="2" 
+            idCat="2" 
             route={'noticias'}/>
         </Row >
 

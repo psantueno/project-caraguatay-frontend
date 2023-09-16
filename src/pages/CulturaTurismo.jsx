@@ -20,7 +20,7 @@ export const CulturaTurismo = () => {
        
         <NewsItemContainer 
             fetch={useFetchNewsByCategory} 
-            id="3" 
+            idCat="3" 
             route={'noticias'}/>
 
       </Container>
