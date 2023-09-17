@@ -15,9 +15,9 @@ export const Deportes = () => {
         <hr />
 
         <Row className='text-indent'>
-          <h5 ><b>Últimas Noticias</b></h5>
+          {/* <h5 ><b>Últimas Noticias</b></h5> */}
           <NewsItemContainer 
-            fetch={useFetchNewsByCategory} 
+            ft={useFetchNewsByCategory} 
             idCat="1"
             route={'noticias'}/>
         </Row >

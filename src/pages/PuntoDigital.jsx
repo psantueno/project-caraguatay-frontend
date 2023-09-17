@@ -23,9 +23,9 @@ export const PuntoDigital = () => {
       <DigitalPointRouter />
 
       <Row className='text-indent'>
-        <h5 ><b>Últimas Noticias en Digital Point</b></h5>
+        {/* <h5 ><b>Últimas Noticias en Digital Point</b></h5> */}
         <NewsItemContainer
-          fetch={useFetchNewsByCategory}
+          ft={useFetchNewsByCategory}
           idCat="4"
           route={'noticias'} />
       </Row >

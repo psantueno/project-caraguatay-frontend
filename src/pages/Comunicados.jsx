@@ -12,10 +12,10 @@ export const Comunicados = () => {
         <hr />
 
         <Row className='text-indent'>
-          <h5 ><b>Últimas Novedades</b></h5>
+          {/* <h5 ><b>Últimas Novedades</b></h5> */}
 
           <NewsItemContainer 
-            fetch={useFetchNewsByCategory} 
+            ft={useFetchNewsByCategory} 
             idCat="2" 
             route={'noticias'}/>
         </Row >
