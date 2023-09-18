@@ -50,7 +50,7 @@ export const NewsItemContainer = () => {
                 setShowResOk(true);
                 // window.scrollTo(0, 0);
                 // window.scrollTo(0, msgPosition);
-                refToMsg.current.scrollIntoView({ behavior: "smooth" });
+                refToMsg.current.scrollIntoView({ behavior: "smooth", passive: true });
 
                 /* Falta resolver el tema de que cuando elimino una news, haga el scroll.
                 Podria intentar poner un mensaje en el mismo modal para avisar o un nuevo modal para que el usuario clickee en ok 
@@ -77,10 +77,7 @@ export const NewsItemContainer = () => {
             <h4 ref={refToMsg}>Últimas Noticias</h4>
             <hr />
 
-            {/* SHOW CONFIRM DELETE 
-            
-            CREAR COMPONENTES DINAMICOS SHOW CONFIRM DELETE, SHOWRESOK Y RESBAD
-            */}
+            {/* SHOW CONFIRM DELETE */}
             <Modal show={showConfirmDelete} className="mt-5 p-4">
                 <Modal.Body>
                     <h3 className="form-title mt-4"><i className="fas fa-exclamation-triangle"></i> ¡Atención!. ¿Confirma que desea eliminar la noticia?</h3>
