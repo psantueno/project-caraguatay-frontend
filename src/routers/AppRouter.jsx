@@ -7,6 +7,7 @@ import { Home } from '../pages/Home';
 import { LoginPage } from '../components/auth/LoginPage';
 import { ResetPassword } from '../components/auth/ResetPassword';
 import { NewsAdmin } from '../pages/NewsAdmin';
+import { EditNewsForm } from '../components/news/EditNewsForm';
 
 
 export const AppRouter = () => {
@@ -26,6 +27,7 @@ export const AppRouter = () => {
         <Route exact path="/admin/usuarios" element={<UserAdmin />} ></Route>
         <Route exact path="/admin/noticias" element={<NewsAdmin />} ></Route>
         <Route exact path="/admin/noticias/crear-noticia" element={<CreateNewsForm />} ></Route>
+        <Route exact path="/admin/noticias/editar-noticia/:id" element={<EditNewsForm />} ></Route>
 
       </Routes>
     </>
