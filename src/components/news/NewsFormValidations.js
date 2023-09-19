@@ -51,6 +51,16 @@ export const NewsFormValidations = (form, e, inputs, errors) => {
           errors.date = "Ingrese una fecha válida"
         }
       }
+
+      if (e.target.name === "originalDate" || e.type === 'submit') {
+        if ((form.date === dayjs().format("YYYY-MM-DD")) || (form.date < dayjs().format("YYYY-MM-DD"))) {
+          date.current.className = "form-control is-valid";
+          delete errors.date;
+        } else {
+          date.current.className = "form-control is-invalid";
+          errors.date = "Ingrese una fecha válida"
+        }
+      }
     }
     return errors;
   }
