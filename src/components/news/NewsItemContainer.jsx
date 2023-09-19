@@ -1,22 +1,28 @@
+import React ,{ useRef, useState, useEffect } from "react";
+
 import { Alert, Button, Col, Modal, Row } from "react-bootstrap";
-import { useFetchNews } from "../../hooks/useFetchNews";
 import { NewsItem } from "./NewsItem";
-import { useRef, useState } from "react";
 import { Loader } from "../buttons/Loader";
 
 
-export const NewsItemContainer = () => {
 
-    const { news } = useFetchNews();
-    const [showResOk, setShowResOk] = useState(false);
-    const [showResBad, setShowResBad] = useState(false);
-    const [responseMsg, setResponseMsg] = useState(null)
-    const [showConfirmDelete, setShowConfirmDelete] = useState(false);
-    const [selectedNewsForDeletion, setSelectedNewsForDeletion] = useState(null);
-    const [loading, setLoading] = useState(false);
+//Se componetiza este newsItemContainer para reutilizarlo en otras secciones//
 
-    const refToMsg = useRef();
+export const NewsItemContainer = ({ ft, idCat, route }) => {
+//si el componente recibe un id, y el fetch requiere de ese id, hace la peticion, sino hace el fetch sin id (Ej: useFetchNews no requiere id, pero useFetchNewsByCategory si requiere id//
 
+
+// const { news } = useFetchNews();
+const [showResOk, setShowResOk] = useState(false);
+const [showResBad, setShowResBad] = useState(false);
+const [responseMsg, setResponseMsg] = useState(null)
+const [showConfirmDelete, setShowConfirmDelete] = useState(false);
+const [selectedNewsForDeletion, setSelectedNewsForDeletion] = useState(null);
+const [loading, setLoading] = useState(false);
+
+const refToMsg = useRef();
+
+const { news, loadingCat, errorCat } = idCat ? ft(idCat) : ft();
 
     const handleDeleteNews = (id) => {
         setSelectedNewsForDeletion(id);
@@ -26,16 +32,18 @@ export const NewsItemContainer = () => {
     const handleCancelDeletion = () => setShowConfirmDelete(false);
 
     const handleConfirmDeletion = async () => {
-
         setLoading(true)
         const id = selectedNewsForDeletion;
 
         try {
+
             const response = await fetch("http://localhost:4001/api/noticias/delete", {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ id })
+                body: JSON.stringify({ id: id})
             });
+
+            console.log('response', response);
 
             if (!response.ok) {
                 throw new Error('Hubo un error al eliminar la noticia.');
@@ -67,10 +75,20 @@ export const NewsItemContainer = () => {
             }
         } catch (error) {
             setShowConfirmDelete(false);
-            console.error('Error deleting user:', error);
+            console.error('Error deleting news:', error);
         }
     };
 
+useEffect(() => {
+}, [fetch, idCat]);
+
+if (loadingCat) {
+    return <div>Cargando...</div>;
+}
+
+if (errorCat) {
+    return <div>Error: {errorCat.message}</div>;
+}
     return (
         <>
 
@@ -80,7 +98,8 @@ export const NewsItemContainer = () => {
             {/* SHOW CONFIRM DELETE */}
             <Modal show={showConfirmDelete} className="mt-5 p-4">
                 <Modal.Body>
-                    <h3 className="form-title mt-4"><i className="fas fa-exclamation-triangle"></i> ¡Atención!. ¿Confirma que desea eliminar la noticia?</h3>
+                    <h3 className="form-title mt-4"><i className="fas fa-exclamation-triangle"></i> 
+                    {`¡Atención!. ¿Confirma que desea eliminar la noticia: ${selectedNewsForDeletion}? `}</h3>
                     <Modal.Footer>
                         <Button onClick={handleCancelDeletion} disabled={loading}>
                             Cancelar

@@ -1,52 +1,55 @@
 /* CHEQUEAR SI USAMOS O NO ESTE COMPONENTE */
 
 import React from 'react'
-import { Card, Container } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Carousel } from 'react-bootstrap'
 import '../../index.css';
+import { NewsItem } from './NewsItem';
+import { Loader } from '../buttons/Loader';
 
-export const MoreNews = ({
-    id= "",
-    category = "",
-    date = "",
-    title = "",
-    mainText = "",
-    link = ""
-}) => {
+export const MoreNews = ({ fetch, fetchId, newsId }) => {
+
+    const typeOfId = typeof newsId
+    console.log(newsId, typeOfId)
+
+    const data = fetch(fetchId)
+    const { news, loadingCat, errorCat } = data
+    console.log(news, 'data', 'y newsId', newsId, 'typeof:', typeOfId);
+
+    if (loadingCat) {
+        return <div> <Loader text={'cargando más noticias'} loader={loadingCat} /></div>;
+    }
+    if (errorCat) {
+        return <div>Error: {errorCat.message}</div>;
+    }
+
+    const filteredNews = news.filter((newsItem) => newsItem.id !== newsId);
+
+    console.log(filteredNews, 'esto es filterednews');
 
     return (
-        <Container className='moreNews-container'>
-        <Card border="info" style={{ width: '18rem' }} className='cardNews'>
-            <Card.Header>
-                <Card.Text className="cardCategory">
-                    <small> <Link to="#" className="cardLink" > {category} </Link></small>
-                </Card.Text>
-                <Card.Text className="cardLink">
-                    <small >  {date} </small>
-                </Card.Text>
-            </Card.Header>
-            <Card.Body>
-
-                <Card.Title className='cardTitle'>{title}</Card.Title>
-                <Card.Text className='cardText'>
-                    {
-                        <>
-                            {mainText.length < 150 ? mainText :
-                                <>
-                                    {`${mainText.slice(0, 150)}...`}
-                                </>
-                            }
-                        </>
-                    }
-                    {/* <small className='text-muted ' ><Link to={link} className='cardLink'> Leer mas...</Link></small> */}
-                </Card.Text>
-                <Card.Footer className='cardLink'>
-                </Card.Footer>
-            </Card.Body>
-        </Card>
-        </Container>
-
-
+        <>
+            {
+                filteredNews == "" ? (
+                    <div>
+                        <p>No hay más noticias asociadas</p>
+                    </div>
+                ) : (
+                    <Carousel className="carousel-inner-moreNews carousel-dark ">
+                        {filteredNews.map((news, i) => (
+                            <Carousel.Item key={`${news.id}-${i}`}>
+                                <NewsItem
+                                    urlArray={news.urlArray}
+                                    urls={news.urls}
+                                    category={news.category}
+                                    title={news.title}
+                                    link={`/noticias/${news.id}`}
+                                />
+                            </Carousel.Item>
+                        ))}
+                    </Carousel>
+                )
+            }
+        </>
     )
 }
 

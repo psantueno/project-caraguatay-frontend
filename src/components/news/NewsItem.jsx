@@ -20,6 +20,16 @@ export const NewsItem = ({
 
     const [urlsArray, setUrlsArray] = useState(urlArray)
 
+    function categorySlug(category) {
+        // Divide la cadena en palabras
+        const words = category.split(/\s+/);
+        // Si hay más de una palabra, se unen con "-"
+        if (words.length > 1) {
+            return words.join('-').toLowerCase();
+        } else {
+            return category.toLowerCase();
+        }
+    }
     const handleDelete = () => {
         onDelete(id);
     };
@@ -28,7 +38,6 @@ export const NewsItem = ({
     useEffect(() => {
         if (urls && urls.trim() !== "") {
             setUrlsArray(urls.split(','));
-            // setUrlsArray(urls.split(',').map(url => url.trim())); // Dividir la cadena `urls` por comas usando split(',')
         } else {
             setUrlsArray([]); // Si urls es nulo o vacío, establecer urlArray como un arreglo vacío
         }
@@ -39,15 +48,7 @@ export const NewsItem = ({
         <>
             <Container className="container-news" >
                 <Card className='cardNews' >
-                    {
-                        urlsArray.length === 0 &&
-                        <Card.Img
-                            variant="top"
-                            src={"https://res.cloudinary.com/caraguatay/image/upload/v1693184996/Logos/escudo_yntmdj.png"
-                            }
-                            className='cardImg'
-                        />
-                    }
+
                     {
                         (urlsArray.length === 1) &&
                         <Card.Img
@@ -79,13 +80,13 @@ export const NewsItem = ({
 
                     <Card.Subtitle className="cardSubtitle">
                         <Card.Text className="cardCategory">
-                            <small> <Link to="#" className="cardLink" > {category} </Link></small>
+                            <small> <Link to={`/${categorySlug(category)}`} className="cardLink" > {category} </Link></small>
                         </Card.Text>
                         <Card.Text className="cardLink">
                             <small >  {date} </small>
                         </Card.Text>
                     </Card.Subtitle>
-                    <Card.Body className='cardBody'>
+                    <Card.Body className='cardBody card-body'>
                         <Card.Title className='cardTitle'>{title}</Card.Title>
                         <Card.Text className='cardText' >
 
@@ -101,7 +102,8 @@ export const NewsItem = ({
 
                         </Card.Text>
                     </Card.Body>
-                    <Link to={`${link}`}><small className='text-muted ' >Leer mas...</small></Link>
+                    <Link to={`${link}`}><small className='text-muted cardLink' >Leer mas...</small></Link>
+
                     <Card.Footer className='cardLink'>
                         <Link to={`/admin/noticias/editar-noticia/${id}`}>
                             <button className='admin-button' type="button" title='Editar'>

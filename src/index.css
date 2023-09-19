@@ -175,6 +175,7 @@ z-index: 10000;
 
 /* START FOOTER */
 .footer {
+  margin-top: 70px;
   background-color: #C1CDD6;
   border-color: #315C94;
   border-top-style: solid;
@@ -298,7 +299,7 @@ a.link-phones:hover {
 
 .container-news {
   display: flex;
-  margin-top: 30px;
+  margin-top: 0px;
   margin-bottom: 30px;
   justify-content: center;
 }
@@ -369,19 +370,22 @@ a.link-phones:hover {
   display: grid;
   min-width: 260px !important;
   max-width: 1200px !important;
-  min-height: 280px;
+  min-height: 270px;
   max-height: 500px !important;
 
 }
 
 .cardTitle {
-  text-align: start !important;
+  text-align: center !important;
+  height: 100px !important;
+  display: contents;
 }
 
 .cardText {
   font-size: 12px !important;
   text-align: justify !important;
   text-indent: 20px;
+  padding: 5px;
 }
 
 .cardLink {
@@ -412,15 +416,30 @@ a.link-phones:hover {
 .card {
   margin: 0 .5em;
 }
+.card-body{
+  flex: 1 1 auto;
+  padding-right: 10px !important;
+  padding-left: 10px !important;
+  color: var(--bs-card-color)
+}
+
+.cardLink {
+  text-align: end;
+  font-size: 11px !important;
+  text-decoration: none !important;
+  background-color: #fff !important;
+  color: #315C94;
+  padding-left: 10px;
+}
 
 .carousel-inner {
 
   position: relative;
   width: 100%;
   overflow: hidden;
-  /* margin: auto; */
+  margin: auto;
   text-align: center;
-  max-height: 500px;
+  /* max-height: 520px; */
 }
 
 .carousel-item {

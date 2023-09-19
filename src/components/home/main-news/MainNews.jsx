@@ -1,15 +1,18 @@
 
 import { Container } from 'react-bootstrap';
 import { NewsItemContainer } from '../../news/NewsItemContainer';
-import { useRef } from 'react';
+import { useFetchNews } from '../../../hooks/useFetchNews';
 
 export const MainNews = () => {
 
     return (
         <>
             <Container className='containers-home'>
-                {/* Muestra las ultimas noticias */}
-                <NewsItemContainer />
+               
+                <NewsItemContainer 
+                    ft={useFetchNews} 
+                    route={'noticias'}
+                    />
 
             </Container>
 
