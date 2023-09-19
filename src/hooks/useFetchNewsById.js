@@ -5,6 +5,7 @@ export const usefetchNewsById = () => {
   const { id } = useParams();
   const [news, setNews] = useState(null);
   const [idCat, setIdCat] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [loadingFetch, setLoadingFetch] = useState(true);
   const [error, setError] = useState(null);
 
@@ -27,7 +28,9 @@ export const usefetchNewsById = () => {
 
         setNews(news);
         setIdCat(newsCategory_id);
+        setLoading(false);
         setLoadingFetch(false);
+
       } catch (error) {
         setError(error.message || 'Hubo un error al obtener los detalles de la noticia');
         setLoading(false);
@@ -37,5 +40,5 @@ export const usefetchNewsById = () => {
     fetchData();
   }, []);
 
-  return { news, loadingFetch, error, idCat, id };
+  return { news, loading, loadingFetch, error, idCat, id };
 };
