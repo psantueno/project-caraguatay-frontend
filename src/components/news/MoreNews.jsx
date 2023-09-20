@@ -38,6 +38,7 @@ export const MoreNews = ({ fech, fechId, newsId }) => {
                         {filteredNews.map((news, i) => (
                             <Carousel.Item key={`${news.id}-${i}`}>
                                 <NewsItem
+                                    id={news.id}
                                     urlArray={news.urlArray}
                                     urls={news.urls}
                                     category={news.category}
