@@ -110,8 +110,8 @@ export const NewsDetail = () => {
 
                 {/* <MoreNews id={`"${idCat}"`} /> */}
                 <MoreNews 
-                    fetchId= {Number(idCat) }
-                    fetch={useFetchNewsByCategory}
+                    fechId= {Number(idCat) }
+                    fech={useFetchNewsByCategory}
                     newsId={news.id}
                     />
             </Row >

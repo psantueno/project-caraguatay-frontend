@@ -6,12 +6,12 @@ import '../../index.css';
 import { NewsItem } from './NewsItem';
 import { Loader } from '../buttons/Loader';
 
-export const MoreNews = ({ fetch, fetchId, newsId }) => {
+export const MoreNews = ({ fech, fechId, newsId }) => {
 
     const typeOfId = typeof newsId
-    console.log(newsId, typeOfId)
+    // console.log(newsId, typeOfId)
 
-    const data = fetch(fetchId)
+    const data = fech(fechId)
     const { news, loadingCat, errorCat } = data
     console.log(news, 'data', 'y newsId', newsId, 'typeof:', typeOfId);
 
