@@ -11,7 +11,7 @@ import { MoreNews } from './MoreNews';
 
 export const NewsDetail = () => {
 
-    const { news, loading, error, idCat } = usefetchNewsById();
+    const { news, loadingFetch, error, idCat } = usefetchNewsById();
 
     function categorySlug(category) {
         // Divide la cadena en palabras
@@ -30,8 +30,8 @@ export const NewsDetail = () => {
         window.scrollTo(0, 0);
     }, [news]);
     
-    if (loading) {
-        return <Loader text={'cargando la noticia'} loader={loading} />;  // importar el loader componente
+    if (loadingFetch) {
+        return <Loader text={'cargando la noticia'} loader={loadingFetch} />;  // importar el loader componente
     }
     if (error) {
         return error  // importar el loader componente
@@ -99,7 +99,7 @@ export const NewsDetail = () => {
                         </Card.Body>
                         <Card.Footer className='cardLink'>
                             <Link to="/">
-                                <Button className='btn' variant='outline-info'>Volver a noticias</Button>
+                                <Button className='mt-3 buttonPosition' >Volver a noticias</Button>
                             </Link>
                         </Card.Footer>
                     </Card>
@@ -110,8 +110,8 @@ export const NewsDetail = () => {
 
                 {/* <MoreNews id={`"${idCat}"`} /> */}
                 <MoreNews 
-                    fetchId= {Number(idCat) }
-                    fetch={useFetchNewsByCategory}
+                    fechId= {Number(idCat) }
+                    fech={useFetchNewsByCategory}
                     newsId={news.id}
                     />
             </Row >

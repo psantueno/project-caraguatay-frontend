@@ -28,14 +28,15 @@ export const usefetchNewsById = () => {
         setNews(news);
         setIdCat(newsCategory_id);
         setLoadingFetch(false);
+
       } catch (error) {
         setError(error.message || 'Hubo un error al obtener los detalles de la noticia');
-        setLoading(false);
+        setLoadingFetch(false);
       }
     };
 
     fetchData();
-  }, []);
+  }, [id]);
 
   return { news, loadingFetch, error, idCat, id };
 };
