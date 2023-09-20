@@ -11,7 +11,7 @@ import { MoreNews } from './MoreNews';
 
 export const NewsDetail = () => {
 
-    const { news, loading, error, idCat } = usefetchNewsById();
+    const { news, loadingFetch, error, idCat } = usefetchNewsById();
 
     function categorySlug(category) {
         // Divide la cadena en palabras
@@ -30,8 +30,8 @@ export const NewsDetail = () => {
         window.scrollTo(0, 0);
     }, [news]);
     
-    if (loading) {
-        return <Loader text={'cargando la noticia'} loader={loading} />;  // importar el loader componente
+    if (loadingFetch) {
+        return <Loader text={'cargando la noticia'} loader={loadingFetch} />;  // importar el loader componente
     }
     if (error) {
         return error  // importar el loader componente
