@@ -99,7 +99,7 @@ export const NewsDetail = () => {
                         </Card.Body>
                         <Card.Footer className='cardLink'>
                             <Link to="/">
-                                <Button className='btn' variant='outline-info'>Volver a noticias</Button>
+                                <Button className='mt-3 buttonPosition' >Volver a noticias</Button>
                             </Link>
                         </Card.Footer>
                     </Card>
