@@ -48,10 +48,10 @@ export const CreateNewsForm = () => {
     setRequirementValue,
     setItems,
     setErrors,
-    setFiles,
+    setFilesNews,
     setLoading,
     FormValidations,
-    files,
+    filesNews,
     errors,
     loading,
     showResOk,
@@ -80,7 +80,7 @@ export const CreateNewsForm = () => {
       }
     }
     delete errors.files;
-    setFiles(prevState => [...prevState, ...Array.from(files)]);
+    setFilesNews(prevState => [...prevState, ...Array.from(files)]);
   };
 
   const handleClick = () => {
@@ -88,7 +88,7 @@ export const CreateNewsForm = () => {
   };
 
   const handleDelete = (index) => {
-    setFiles(prevState => prevState.filter((_, i) => i !== index));
+    setFilesNews(prevState => prevState.filter((_, i) => i !== index));
   }
 
   const showFileNotImage = () => {
@@ -106,19 +106,16 @@ export const CreateNewsForm = () => {
 
       setLoading(true);        // activa el loader
 
-      const imagesToString = await uploadImages(files);       // Fx que que sube las imagenes a cloud y devuelve las urls.
+      const imagesToString = await uploadImages(filesNews);       // Fx que que sube las imagenes a cloud y devuelve las urls.
 
       if (imagesToString.errors && imagesToString.errors.length > 0) {   // si hay errores en la carga a cloudinary.
-
         setLoading(false);
         setShowResBad(true);
         setResponseMsg(imagesToString);
         return;
       }
-      console.log(imagesToString, "enviando esto del front imagestostring");
-      // const formattedImg = imagesToString.map(url => url.trim());
+
       const formattedImg = imagesToString.split(', ').map(url => url.trim());
-      console.log(formattedImg, "enviando esto del front");
 
       const data = {                                          // preparando el archivo para enviarlo al back.
         ...form,
@@ -143,14 +140,14 @@ export const CreateNewsForm = () => {
           setForm(initialForm);
           setItems([])
           setRequirementValue('')
-          setFiles([]);
+          setFilesNews([]);
           handleReset();
-          window.scrollTo({ top: 0, behavior: 'smooth' });
+          window.scrollTo({ top: 0, behavior: 'smooth', passive: true });
 
         } else {
           setLoading(false);
           setShowResBad(true);
-          window.scrollTo({ top: 0, behavior: 'smooth' });
+          window.scrollTo({ top: 0, behavior: 'smooth', passive: true });
         }
       }
       catch (error) {
@@ -170,7 +167,7 @@ export const CreateNewsForm = () => {
   useEffect(() => {
     // Desplázate hacia arriba cuando el componente se monta
 
-  }, [files]);
+  }, [filesNews]);
 
 
   return (
@@ -353,7 +350,7 @@ export const CreateNewsForm = () => {
                   </td>
 
                   <td name="files" style={{ backgroundColor: "#ffffff", padding: "5px", border: "1px solid", textAlign: "center" }}>
-                    {files.length}
+                    {filesNews.length}
                   </td>
                 </tr>
               </tbody>
@@ -364,7 +361,7 @@ export const CreateNewsForm = () => {
             {/* ERRORS MANAGEMENT */}
 
             {
-              files.length > 0 && files.length <= 10
+              filesNews.length > 0 && filesNews.length <= 10
                 ? (
                   <p className="images-msg-ok">
                     Archivos cargados correctamente <b><i className="fas fa-check"></i></b>.<br />
@@ -386,10 +383,10 @@ export const CreateNewsForm = () => {
             {/* MAPEO DE LAS PREVIEW Y HANDLEDELETE */}
 
             {
-              files && files.length > 0
+              filesNews && filesNews.length > 0
                 ? <div className='images-preview'>
                   {
-                    files.map((file, index) => {
+                    filesNews.map((file, index) => {
                       return (
                         <div className='box-individual-preview' key={index}>
                           <img src={URL.createObjectURL(file)} alt={file.name} className="image-individual" />
@@ -422,13 +419,13 @@ export const CreateNewsForm = () => {
             </Alert>
 
             {
-              files.length > 0 && files.length > 10
+              filesNews.length > 0 && filesNews.length > 10
                 ? (
                   <p className="images-msg-error">
                     Errores encontrados <b><i className="fas fa-exclamation-circle"></i></b><br />
                     Seleccione un máximo de <b>10</b> imágenes. <br />
                     <span>
-                      Por favor elimine <b> {files.length - 10} </b> de la lista actual.
+                      Por favor elimine <b> {filesNews.length - 10} </b> de la lista actual.
                     </span>
                   </p>
                 )
@@ -439,7 +436,7 @@ export const CreateNewsForm = () => {
 
           </Form.Group>
 
-          <Button className='m-2' type="submit" disabled={files.length > 10 || msgFileNotImage || loading} >
+          <Button className='m-2' type="submit" disabled={filesNews.length > 10 || msgFileNotImage || loading} >
             Confirmar
           </Button>
           <Button className='m-2' type="reset" onClick={handleReset} disabled={loading} >

@@ -48,15 +48,7 @@ export const NewsItem = ({
         <>
             <Container className="container-news" >
                 <Card className='cardNews' >
-                {/* {
-                        urlsArray.length === 0  &&
-                        <Card.Img
-                            variant="top"
-                            src={"https://res.cloudinary.com/caraguatay/image/upload/v1693184996/Logos/escudo_yntmdj.png"
-                            }
-                            className='cardImg'                           
-                        />
-                    } */}
+
                     {
                         (urlsArray.length === 1) &&
                         <Card.Img
@@ -111,11 +103,16 @@ export const NewsItem = ({
                         </Card.Text>
                     </Card.Body>
                     <Link to={`${link}`}><small className='text-muted cardLink' >Leer mas...</small></Link>
+
                     <Card.Footer className='cardLink'>
-                        <EditButton className="size-lg"/>
-                        <DeleteButton className="size-lg" 
-                        fx={handleDelete}
-                        arg={id}
+                        <Link to={`/admin/noticias/editar-noticia/${id}`}>
+                            <button className='admin-button' type="button" title='Editar'>
+                                <i className="fas fa-pen"></i>
+                            </button>
+                        </Link>
+                        <DeleteButton className="size-lg"
+                            fx={handleDelete}
+                            arg={id}
                         />
                     </Card.Footer>
                 </Card>
