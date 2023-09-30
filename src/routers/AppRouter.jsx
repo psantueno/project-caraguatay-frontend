@@ -31,6 +31,7 @@ export const AppRouter = () => {
         <Route exact path="/admin/noticias" element={<NewsAdmin />} ></Route>
         <Route exact path="/admin/noticias/crear-noticia" element={<CreateNewsForm />} ></Route>
         <Route exact path="/admin/noticias/editar-noticia/:id" element={<EditNewsForm />} ></Route>
+        <Route exact path="/admin/punto-digital/crear-noticia" element={<CreateNewsForm />} ></Route>
 
       </Routes>
     </>
