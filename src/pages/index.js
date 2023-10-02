@@ -5,4 +5,7 @@ export * from './Historia'
 export * from './PuntoDigital'
 export * from './Home'
 export * from './UserAdmin'
+// export * from './Trainning'
+// export * from './Workshop'
+
 

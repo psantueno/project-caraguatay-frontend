@@ -5,6 +5,8 @@ import { DigitalPointRouter } from '../routers/DigitalPointRouter';
 import bannerPD from '../assets/images/banner-punto-digital.png'
 import { NewsItemContainer } from '../components/news/NewsItemContainer';
 import { useFetchNewsByCategory } from '../hooks';
+import { ModalCreate } from '../components/digitalPoint/components/modals/ModalCreate';
+
 
 export const PuntoDigital = () => {
 
@@ -17,17 +19,16 @@ export const PuntoDigital = () => {
       <ButtonSquareList buttons={DigitalPointBtns} />
 
       <Row className='text-indent'>
-
+      <ModalCreate />   {/* MODAL PARA DESPLEGAR FORM DE CREACIÓN DE TALLER / CAPACITACIÓN */}
       </Row >
 
       <DigitalPointRouter />
 
       <Row className='text-indent'>
-        {/* <h5 ><b>Últimas Noticias en Digital Point</b></h5> */}
         <NewsItemContainer
           ft={useFetchNewsByCategory}
           idCat="4"
-          route={'noticias'} />
+          route={'punto-digital'} />
       </Row >
 
 

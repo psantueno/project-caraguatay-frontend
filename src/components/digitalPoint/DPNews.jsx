@@ -1,5 +1,6 @@
 import { Container, Row } from 'react-bootstrap'
-import { NewsItem } from '../news/NewsItem'
+import { Trainning } from './Trainning'
+import { Workshop } from './Workshop'
 
 
 export const DPNews = () => {
@@ -12,7 +13,8 @@ export const DPNews = () => {
           <h5><b>Novedades</b></h5>
         </Row>
 
-          {/* <NewsItem/> */}
+          <Trainning/>
+          <Workshop />
 
       </Container>
   )

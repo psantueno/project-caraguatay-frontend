@@ -79,6 +79,7 @@ export const useForm = (initialForm = {}, FormValidations = {}, inputs = {}, han
     setAvatar,
     setResponseMsg,
     requirementValue,
+    handleSubmit,
     FormValidations,
     items,
     filesNews,
