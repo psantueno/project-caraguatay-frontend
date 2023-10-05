@@ -3,9 +3,13 @@ import { DeleteButton } from "../../buttons/DeleteButton"
 import { EditButton } from "../../buttons/EditButton"
 import { ModalEdit } from "./modals/ModalEdit"
 
-export const DPCard = ({ id, image, title, start, status, req1, req2, description, dpnew }) => {
+export const DPCard = ({ id, image, title, start, status, requirements, description, dpnew }) => {
 
     const { show, handleShow, handleClose } = useModal()
+
+    const arrayReq = requirements.split( ";")
+
+
 
     return (
 
@@ -25,10 +29,20 @@ export const DPCard = ({ id, image, title, start, status, req1, req2, descriptio
 
                 <div className="requirements-card">
                     <p className="subtitles-card"><b>Requisitos:</b></p>
-                    <ul>
-                        <li style={{ listStyleType: 'disclosure-closed' }}>{req1}</li>
-                        <li style={{ listStyleType: 'disclosure-closed' }}>{req2}</li>
-                    </ul>
+        
+                    {
+                        arrayReq && arrayReq.map((req, i) => (
+                            <ul key={i}>
+                                <li style={{ listStyleType: 'disclosure-closed' }}>{req}</li>
+                                
+                            </ul>
+
+                        ))
+
+                    } 
+
+
+                    
                 </div>
 
                 <div className="btns-admin-card">
@@ -38,7 +52,7 @@ export const DPCard = ({ id, image, title, start, status, req1, req2, descriptio
 
             </div>
 
-            <ModalEdit show={ show }  handleClose={ handleClose } id={ id } dpnew={ dpnew } />
+            <ModalEdit show={show} handleClose={handleClose} id={id} dpnew={dpnew} />
 
         </div>
     )

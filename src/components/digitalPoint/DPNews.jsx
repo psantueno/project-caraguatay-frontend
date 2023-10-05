@@ -1,5 +1,5 @@
 import { Container, Row } from 'react-bootstrap'
-import { Trainning } from './Trainning'
+import { Training } from './Training'
 import { Workshop } from './Workshop'
 
 
@@ -13,7 +13,7 @@ export const DPNews = () => {
           <h5><b>Novedades</b></h5>
         </Row>
 
-          <Trainning/>
+          <Training/>
           <Workshop />
 
       </Container>

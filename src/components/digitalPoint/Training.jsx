@@ -3,14 +3,14 @@ import { DPCard } from './components/DPCard';
 import { ModalCreate } from './components/modals/ModalCreate';
 import { useFetchDpByCategory } from '../../hooks/useFetchDpByCategory';
 
-export const Trainning = () => {
+export const Training = () => {
 
-  const {eventsDp}= useFetchDpByCategory(1)
+  const {eventsDp}= useFetchDpByCategory(2)
   // console.log(eventsDp);
   
   return (
     <Container>
-      <h5><b>Talleres</b></h5>
+      <h5><b>Capacitaciones</b></h5>
       
       <Container className='list-cards-section'>
         {/* MAP DE LAS TARJETAS DE TALLERES / CAPACITACIONES */}

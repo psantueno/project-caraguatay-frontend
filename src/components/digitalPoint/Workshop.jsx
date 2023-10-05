@@ -6,12 +6,12 @@ import { useFetchDpByCategory } from '../../hooks/useFetchDpByCategory';
 
 export const Workshop = () => {
 
-  const {eventsDp}= useFetchDpByCategory(2)
+  const {eventsDp}= useFetchDpByCategory(1)
   // console.log(eventsDp);
 
   return (
     <Container>
-      <h5><b>Capacitaciones</b></h5>
+      <h5><b>Talleres</b></h5>
   
       <Container className='list-cards-section'>
         {/* MAP DE LAS TARJETAS DE TALLERES / CAPACITACIONES */}
