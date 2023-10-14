@@ -15,7 +15,7 @@ export const useFetchDpByCategory = ( id ) => {
                 throw new Error('Error obteniendo Eventos de Punto Digital con esta categoría declarada');
             } else {
 
-                const response = await fetch(`http://localhost:4001/api/puntodigital/list/byCategory/${id}`)
+                const response = await fetch(`http://localhost:4001/api/punto-digital/list/byCategory/${id}`)
                 // console.log(response, "esto es RESPONSE")
 
                 if (!response.ok) {

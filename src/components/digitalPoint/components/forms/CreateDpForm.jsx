@@ -3,7 +3,14 @@ import { Button, Form, Container, Col, Row, Alert } from 'react-bootstrap';
 import { useForm } from '../../../../hooks/useForm';
 import { DpValidations } from '../DpValidations';
 import { DeleteButton } from '../../../buttons';
+import { fileUpload } from '../../../../helpers/fileUpload'
+import { useFetchDP } from '../../../../hooks/useFetchDP';
+
+
 import dayjs from "dayjs";
+import { useFetchDpCategories } from '../../../../hooks/useFetchDpCategories';
+// import { useModal } from '../../../../hooks';
+// import { useFetchDpByCategory } from '../../../../hooks/useFetchDpByCategory';
 
 
 const initialForm = {
@@ -17,7 +24,11 @@ const initialForm = {
 };
 
 
-export const CreateDpForm = () => {
+export const CreateDpForm = ({ handleClose }) => {
+
+
+    const { dPCategories } = useFetchDpCategories()
+
 
 
     const inputs = {
@@ -32,13 +43,13 @@ export const CreateDpForm = () => {
 
     const {
         form,
+        FormValidations,
         setForm,
         handleChange,
         handleBlur,
         handleKeyUp,
         handleMouseup,
         handleReset,
-        handleSubmit,
         setShowResOk,
         setErrors,
         setItems,
@@ -46,14 +57,20 @@ export const CreateDpForm = () => {
         requirementValue,
         items,
         errors,
+        setFiles,
+        files,
         showResOk,
+        setShowResBad,
+        setLoading,
+        setResponseMsg,
+        loading
     } = useForm(initialForm, DpValidations, inputs)
 
 
-   {/* START SPECIFIC FUNCTIONS OF FORM */}
+    {/* START SPECIFIC FUNCTIONS OF FORM */ }
 
     const checkTotalCharacters = (array) => {             // ----> Fx encargada de contar los caracteres de un array y que devuelve
-                                                         //la cantidad de caracteres restantes para completar el max.
+        //la cantidad de caracteres restantes para completar el max.
         let totalCharacters = 0;
 
         for (let i = 0; i < array.length; i++) {
@@ -88,7 +105,7 @@ export const CreateDpForm = () => {
         });
 
         if (form.requirements && (checkTotalCharacters(form.requirements) < 0)) return;
-        
+
         delete errors.requirements;
         inputs.requirements.current.className = "form-control is-valid";
 
@@ -131,71 +148,171 @@ export const CreateDpForm = () => {
     };
 
 
+    // const handleFile = (e) => {
+
+    //     const { files } = e.target;
+
+    //     if (!files[0] && form.image != undefined) {    // ---> cuando hay una imagen cargada, pero el user abre el seleccionador y
+    //         //cancela o cierra el mismo sin elegir archivo.
+    //         setForm(prevState => {
+    //             return {
+    //                 ...prevState,
+    //                 image: undefined
+    //             }
+    //         });
+    //         inputs.image.current.className = "form-control is-invalid";
+    //         errors.image = 'La imagen de portada es requerida.'
+    //         return;
+
+    //     } else if (!files[0] && form.image === undefined) {  // ---> cuando no hay archivo cargado. Se abre el seleccionador y cancela
+    //         //o cierra el mismo sin elegir archivo.
+    //         setErrors(prevState => {
+    //             return {
+    //                 ...prevState,
+    //                 image: 'La imagen de portada es requerida.'
+    //             }
+    //         });
+    //         inputs.image.current.className = "form-control is-invalid";
+
+    //     } else {  // ---> cuando existe un archivo que no es imagen.
+
+    //         const fileName = files[0].name.toLowerCase();
+
+    //         if (!fileName.endsWith('.jpg') && !fileName.endsWith('.jpeg') && !fileName.endsWith('.png')) {
+
+    //             setForm(prevState => {
+    //                 return {
+    //                     ...prevState,
+    //                     image: undefined
+    //                 }
+    //             });
+    //             errors.image = `El archivo "${fileName}" no es una imagen.`
+    //             inputs.image.current.className = "form-control is-invalid";
+
+    //             return;
+
+    //         } else {   // ---> cuando existe el archivo y es una imagen.
+
+    //             const newFile = files[0];
+    //             setForm(prevState => {
+    //                 return {
+    //                     ...prevState,
+    //                     image: newFile
+    //                 }
+    //             });
+    //             setFile
+    //             inputs.image.current.className = "form-control is-valid";
+    //             delete errors.image;
+    //         }
+    //     }
+    // };
+    const showFileNotImage = () => {
+        delete errors.avatar;
+        setMsgFileNotImage(false)
+    }
+
+
     const handleFile = (e) => {
+        const imageDp = e.target.files[0];
+        const fileName = imageDp.name.toLowerCase();
 
-        const { files } = e.target;
-
-        if (!files[0] && form.image != undefined) {    // ---> cuando hay una imagen cargada, pero el user abre el seleccionador y
-                                                        //cancela o cierra el mismo sin elegir archivo.
-            setForm(prevState => {
-                return {
-                    ...prevState,
-                    image: undefined
-                }
+        if (!fileName.endsWith('.jpg') && !fileName.endsWith('.jpeg') && !fileName.endsWith('.png')) {
+            setMsgFileNotImage(true);
+            setErrors({
+                ...errors,
+                image: `El archivo "${fileName}" no es una imagen`
             });
-            inputs.image.current.className = "form-control is-invalid";
-            errors.image = 'La imagen de portada es requerida.'
             return;
-
-        } else if (!files[0] && form.image === undefined) {  // ---> cuando no hay archivo cargado. Se abre el seleccionador y cancela
-                                                            //o cierra el mismo sin elegir archivo.
-            setErrors(prevState => {
-                return {
-                    ...prevState,
-                    image: 'La imagen de portada es requerida.'
-                }
-            });
-            inputs.image.current.className = "form-control is-invalid";
-
-        } else {  // ---> cuando existe un archivo que no es imagen.
-
-            const fileName = files[0].name.toLowerCase();
-
-            if (!fileName.endsWith('.jpg') && !fileName.endsWith('.jpeg') && !fileName.endsWith('.png')) {
-
-                setForm(prevState => {
-                    return {
-                        ...prevState,
-                        image: undefined
-                    }
-                });
-                errors.image = `El archivo "${fileName}" no es una imagen.`
-                inputs.image.current.className = "form-control is-invalid";
-
-                return;
-
-            } else {   // ---> cuando existe el archivo y es una imagen.
-
-                const newFile = files[0];
-                setForm(prevState => {
-                    return {
-                        ...prevState,
-                        image: newFile
-                    }
-                });
-                inputs.image.current.className = "form-control is-valid";
-                delete errors.image;
-            }
         }
+
+        delete errors.avatar;
+
+        setFiles([imageDp]);
+        console.log(imageDp);
     };
 
-    {/* END FUNCTIONS */}
+
+
+    const handleSubmit = async (e) => {
+
+        handleChange(e);
+        e.preventDefault();
+        setErrors(FormValidations(form, e, inputs, errors));
+
+        if (Object.keys(errors).length === 0) {
+
+            setLoading(true);
+            console.log(loading); // activa el loader
+
+            // Algunas ideas: podría sacar el state de loading, de showResok, showresBad e incluirlos en un helper fetch para el envio del form
+            try {
+                let reqToString = form.requirements
+                let imageDpUrl = form.image; // Keep the current avatar URL
+
+                if (files.length > 0) {
+                    const folder = "avatar";
+                    imageDpUrl = await fileUpload(files[0], folder); // Update avatar URL with new image
+                }
+
+                if (form.requirements.length > 0) {
+                    reqToString = form.requirements.join(";")
+                }
+
+                const data = {
+                    ...form,
+                    image: imageDpUrl,
+                    requirements: reqToString,
+                    user_id: 2,
+                    dpCategory_id: form.category,
+
+                };
+                const req = await fetch('http://localhost:4001/api/punto-digital/create', {
+                    method: "POST",
+                    body: JSON.stringify(data),
+                    headers: { 'Content-Type': 'application/json' }
+                })
+
+                const res = await req.json();
+                setResponseMsg(res);
+                console.log(res)
+
+                if (res.status === 201) {
+                    setLoading(false);
+                    setShowResOk(true);
+                    setShowResBad(false);
+                    setForm(initialForm);
+                    setItems([])
+                    setRequirementValue('')
+                    setFiles([]);
+                    handleReset();
+                    handleClose();
+
+                    window.scrollTo({ top: 0, behavior: 'smooth', passive: true });
+
+                } else {
+                    setLoading(false);
+                    setShowResBad(true);
+                    handleClose();
+                    window.scrollTo({ top: 0, behavior: 'smooth', passive: true });
+                }
+            }
+            catch (error) {
+                console.log(error)
+            }
+        } else {
+            setShowResOk(false);
+            alert("Revise los errores del formulario");
+        }
+    }
+
+
+    {/* END FUNCTIONS */ }
 
     return (
 
         <>
 
-        {/* RESPUESTA OK DEL RESPONSE */}
+            {/* RESPUESTA OK DEL RESPONSE */}
 
             <Alert show={showResOk} variant="primary" className="mt-2">
                 <Row>
@@ -211,8 +328,7 @@ export const CreateDpForm = () => {
                 </Row>
             </Alert>
 
-        {/* RESPUESTA OK DEL RESPONSE */}
-
+            {/* RESPUESTA OK DEL RESPONSE */}
 
             <Container className='mb-3 mt-3'>
 
@@ -230,8 +346,13 @@ export const CreateDpForm = () => {
                             required
                         >
                             <option value="default">-Seleccione una categoría-</option>
-                            <option value="taller" >Taller</option>
-                            <option value="capacitacion" >Capacitación</option>
+                            {
+                                dPCategories && dPCategories.map(cat => (
+                                    <option value={cat.id}>{cat.category}</option>
+                                ))
+
+                            }
+
                         </Form.Select>
 
                         {
@@ -256,8 +377,8 @@ export const CreateDpForm = () => {
                             required
                         >
                             <option value="default">-Seleccione el estado-</option>
-                            <option value="open" >Abiertas</option>
-                            <option value="closed" >Cerradas</option>
+                            <option value={1} >Abiertas</option>
+                            <option value={0} >Cerradas</option>
                         </Form.Select>
 
                         {
@@ -401,7 +522,6 @@ export const CreateDpForm = () => {
                             </div>
                         }
                         {/* HELPER TEXT DE REQUIREMENTS */}
-
 
                         {/* PREVIEW REQUIREMENTS */}
                         <ul>
