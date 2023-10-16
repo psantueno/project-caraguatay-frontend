@@ -14,7 +14,8 @@ export const useModal = () => {
     return {
         show,
         handleShow,
-        handleClose
+        handleClose,
+        
     }
 
 }

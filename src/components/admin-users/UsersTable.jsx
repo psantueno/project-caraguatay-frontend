@@ -4,15 +4,16 @@ import './admin-users.css';
 import { CreateUserForm } from './CreateUserForm';
 import { useModal } from '../../hooks/useModal';
 import { DeleteButton, DisplayButton, EditButton } from '../buttons';
-import { useForm } from "../../hooks/useForm";
+import { useForm } from "../../hooks/useForm"; // sacar cuando termino ModalTemplate
 import EditUserForm from './EditUserForm';
 import { UserAdminContext } from './UserAdminContext';
+import ModalTemplate from '../../helpers/ModalTemplate';
 
 export const UsersTable = () => {
 
 
 
-  const { show, handleShow, handleClose } = useModal()
+  const { show, handleShow, handleClose } = useModal(); 
   const [users, setUsers] = useState([]);
   const [userDB, setUserDB] = useState([]);
   const [showUserDetails, setShowUserDetails] = useState(false);
@@ -34,16 +35,7 @@ export const UsersTable = () => {
     setShowEditUserForm(true);
   };
 
-  // const {
-  //   setResponseMsg,
-  //   setShowResOk,
-  //   setShowResBad,
-  //   showResOk,
-  //   showResBad,
-  //   responseMsg,
-  // } = useForm();
-
-  const {
+    const {
       setResponseMsg,
       setShowResOk,
       setShowResBad,
@@ -223,6 +215,18 @@ export const UsersTable = () => {
 
       {/* MODAL PARA DESPLEGAR FORM DE CREACIÓN DE USUARIO */}
 
+      <ModalTemplate 
+        show={show}
+        onHide={handleClose}
+        title="Crear un nuevo usuario administrador"
+        modalForm={<CreateUserForm 
+          handleClose={handleClose}
+          />}
+        buttonOne={handleClose}
+        buttonOneText="Volver al listado"    
+      />
+{/* 
+
       <Modal show={show} onHide={handleClose} className="mt-5">
         <Modal.Header closeButton>
           <Modal.Title>
@@ -239,7 +243,7 @@ export const UsersTable = () => {
             </Button>
           </Modal.Footer>
         </Modal.Body>
-      </Modal>
+      </Modal> */}
 
       {/* MODAL PARA DESPLEGAR FORM DE EDICION DE USUARIO */}
       <Modal show={showEditUserForm} onHide={handleCloseEdit} className="mt-5">

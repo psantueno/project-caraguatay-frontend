@@ -31,7 +31,7 @@ export const CreateUserForm = ({handleClose}) => {
     inputs,
     setResponseMsg,
     responseMsg,
-     setShowResOk,
+    setShowResOk,
     setShowResBad,
   } = useContext(UserAdminContext);
 
