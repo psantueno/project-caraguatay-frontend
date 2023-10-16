@@ -1,22 +1,22 @@
+import React,{ useContext } from 'react'
 import { Alert, Container, Row , Col, Button} from 'react-bootstrap'
 import { Training } from './Training'
 import { Workshop } from './Workshop'
 import { RoboticSchool } from './RoboticSchool'
-import { useForm } from '../../hooks'
+import { DPAdminContext } from './DPAdminContext'
 
 
 export const DPNews = () => {
   
 
-//***REVISAR ALERTS USANDO USECONTEXT***
-
   const {
+    setResponseMsg,
     setShowResOk,
     setShowResBad,
     showResOk,
     showResBad,
     responseMsg,
-  } = useForm();
+  } = useContext(DPAdminContext);
 
   return (
     <>

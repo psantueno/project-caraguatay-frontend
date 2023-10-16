@@ -3,10 +3,17 @@ import { DeleteButton } from "../../buttons/DeleteButton"
 import { EditButton } from "../../buttons/EditButton"
 import { ModalEdit } from "./modals/ModalEdit"
 import { ModalCancel } from "./modals/ModalCancel"
+import { useState } from "react"
 
 export const DPCard = ({ id, image, title, start, status, requirements, description, dpnew }) => {
 
-    const { show, handleShow, handleClose } = useModal()
+    const { show, handleShow, handleClose } = useModal();
+    const [showConfirmDelete, setShowConfirmDelete] = useState(false);
+    const handleCancelDeletion = () => setShowConfirmDelete(false);
+
+    const handleShowConfirmDelete = () => {
+        setShowConfirmDelete(true);
+      };
 
     const arrayReq = requirements.split( ";")
 
@@ -43,14 +50,14 @@ export const DPCard = ({ id, image, title, start, status, requirements, descript
 
                 <div className="btns-admin-card">
                     <EditButton fx={handleShow} />
-                    <DeleteButton  fx={handleShow} />
+                    <DeleteButton  fx={handleShowConfirmDelete} />
                 </div>
 
             </div>
 
             <ModalEdit show={show} handleClose={handleClose} id={id} dpnew={dpnew} />
 
-            <ModalCancel show={show} handleClose={handleClose} id={id} title={title}  />
+            <ModalCancel show={showConfirmDelete} handleClose={handleCancelDeletion} id={id} title={title}  />
 
 
         </div>

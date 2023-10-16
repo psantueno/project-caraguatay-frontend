@@ -1,9 +1,11 @@
 import { Button, Modal } from 'react-bootstrap';
 import { useForm, useModal } from '../../../../hooks';
+import { useContext } from 'react';
+import { DPAdminContext } from '../../DPAdminContext';
 
 export const ModalCancel = ({ show, handleClose, id, title }) => {
 
-    /*revisar con Context*/
+ 
     const {
         setResponseMsg,
         setShowResOk,
@@ -11,7 +13,7 @@ export const ModalCancel = ({ show, handleClose, id, title }) => {
         showResOk,
         showResBad,
         responseMsg,
-    } = useForm();
+    } = useContext(DPAdminContext);
 
 
 
@@ -28,9 +30,10 @@ export const ModalCancel = ({ show, handleClose, id, title }) => {
                 throw new Error('Error deleting event');
             }
             const res = await response.json(); // Parse the JSON data from the response 
-
-            if (res.status === 201) {
+            console.log(res, "linea 33");
+            if (res.status === 200) {
                 setResponseMsg(res);
+                console.log(res, "linea 123");
                 setShowResOk(true);
                 setShowResBad(false);
                 handleClose();
@@ -59,17 +62,17 @@ export const ModalCancel = ({ show, handleClose, id, title }) => {
                         <h3 className="form-title mt-4"> ¿Desea elimiar el evento: {title}?  </h3>
                     </Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Footer>
 
 
-                    {/* <Button onClick={handleClose}>
+                    <Button onClick={handleClose}>
                         Cancelar
-                    </Button> */}
+                    </Button>
                     <Button onClick={handleConfirmDeletion}>
                         Sí, eliminar
                     </Button>
 
-                </Modal.Body>
+                </Modal.Footer>
             </Modal>
 
         </>

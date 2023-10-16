@@ -31,8 +31,6 @@ export const CreateDpForm = ({ handleClose }) => {
 
     const { dPCategories } = useFetchDpCategories()
 
-
-
     
     const inputs = {
         title: useRef(),
