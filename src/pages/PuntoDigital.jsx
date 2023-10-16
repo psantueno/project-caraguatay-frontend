@@ -4,11 +4,12 @@ import { DigitalPointBtns } from '../assets/data/DigitalPointBtns';
 import { DigitalPointRouter } from '../routers/DigitalPointRouter';
 import bannerPD from '../assets/images/banner-punto-digital.png'
 import { NewsItemContainer } from '../components/news/NewsItemContainer';
-import { useFetchNewsByCategory } from '../hooks';
+import { useFetchNewsByCategory, useForm } from '../hooks';
 import { ModalCreate } from '../components/digitalPoint/components/modals/ModalCreate';
 
 
 export const PuntoDigital = () => {
+
 
   return (
 
@@ -18,11 +19,15 @@ export const PuntoDigital = () => {
 
       <ButtonSquareList buttons={DigitalPointBtns} />
 
+
+
       <Row className='text-indent'>
-      <ModalCreate />   {/* MODAL PARA DESPLEGAR FORM DE CREACIÓN DE TALLER / CAPACITACIÓN */}
+        <ModalCreate />   {/* MODAL PARA DESPLEGAR FORM DE CREACIÓN DE TALLER / CAPACITACIÓN */}
       </Row >
 
       <DigitalPointRouter />
+
+
 
       <Row className='text-indent'>
         <NewsItemContainer

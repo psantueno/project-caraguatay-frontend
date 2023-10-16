@@ -2,14 +2,13 @@ import { useModal } from "../../../hooks/useModal"
 import { DeleteButton } from "../../buttons/DeleteButton"
 import { EditButton } from "../../buttons/EditButton"
 import { ModalEdit } from "./modals/ModalEdit"
+import { ModalCancel } from "./modals/ModalCancel"
 
 export const DPCard = ({ id, image, title, start, status, requirements, description, dpnew }) => {
 
     const { show, handleShow, handleClose } = useModal()
 
     const arrayReq = requirements.split( ";")
-
-
 
     return (
 
@@ -47,12 +46,15 @@ export const DPCard = ({ id, image, title, start, status, requirements, descript
 
                 <div className="btns-admin-card">
                     <EditButton fx={handleShow} />
-                    <DeleteButton />
+                    <DeleteButton  fx={handleShow} />
                 </div>
 
             </div>
 
             <ModalEdit show={show} handleClose={handleClose} id={id} dpnew={dpnew} />
+
+            <ModalCancel show={show} handleClose={handleClose} id={id} title={title}  />
+
 
         </div>
     )

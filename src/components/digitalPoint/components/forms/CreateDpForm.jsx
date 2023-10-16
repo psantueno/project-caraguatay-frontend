@@ -1,11 +1,11 @@
 import { useRef } from 'react';
-import { Button, Form, Container, Col, Row, Alert } from 'react-bootstrap';
+import { Button, Form, Container, Col, Row, Alert, Modal } from 'react-bootstrap';
 import { useForm } from '../../../../hooks/useForm';
 import { DpValidations } from '../DpValidations';
 import { DeleteButton } from '../../../buttons';
 import { fileUpload } from '../../../../helpers/fileUpload'
 import { useFetchDP } from '../../../../hooks/useFetchDP';
-
+import { useModal } from '../../../../hooks/useModal';
 
 import dayjs from "dayjs";
 import { useFetchDpCategories } from '../../../../hooks/useFetchDpCategories';
@@ -27,10 +27,13 @@ const initialForm = {
 export const CreateDpForm = ({ handleClose }) => {
 
 
+ 
+
     const { dPCategories } = useFetchDpCategories()
 
 
 
+    
     const inputs = {
         title: useRef(),
         description: useRef(),
@@ -345,10 +348,10 @@ export const CreateDpForm = ({ handleClose }) => {
                             onBlur={handleBlur}
                             required
                         >
-                            <option value="default">-Seleccione una categoría-</option>
+                            <option value="default"> -Seleccione una categoría-</option>
                             {
-                                dPCategories && dPCategories.map(cat => (
-                                    <option value={cat.id}>{cat.category}</option>
+                                dPCategories && dPCategories.map((cat, index) => (
+                                    <option key={index} value={cat.id}>{cat.category}</option>
                                 ))
 
                             }
@@ -544,6 +547,10 @@ export const CreateDpForm = ({ handleClose }) => {
                 </Form>
 
             </Container>
+
+
+ 
+
 
         </>
     )
