@@ -1,4 +1,6 @@
-import { Container, Row } from 'react-bootstrap'
+import { useContext } from 'react';
+import { Alert, Container, Row, Col, Button } from 'react-bootstrap'
+import DPAdminContextProvider, { DPAdminContext } from '../components/digitalPoint/DPAdminContext';
 import { ButtonSquareList } from '../components/buttonsSquare/ButtonSquareList';
 import { DigitalPointBtns } from '../assets/data/DigitalPointBtns';
 import { DigitalPointRouter } from '../routers/DigitalPointRouter';
@@ -6,24 +8,32 @@ import bannerPD from '../assets/images/banner-punto-digital.png'
 import { NewsItemContainer } from '../components/news/NewsItemContainer';
 import { useFetchNewsByCategory, useForm } from '../hooks';
 import { ModalCreate } from '../components/digitalPoint/components/modals/ModalCreate';
-import DPAdminContextProvider from '../components/digitalPoint/DPAdminContext';
 
 
 export const PuntoDigital = () => {
 
+  // const {
+  //   setShowResOk,
+  //   setShowResBad,
+  //   showResOk,
+  //   showResBad,
+  //   responseMsg,
+  // } = useContext(DPAdminContext, DPAdminContextProvider);
+
   return (
     <>
+ 
       <Container>
+
         <img src={bannerPD} alt='' style={{ width: '100%', marginBottom: '40px', marginTop: '30px' }} />
+
         <ButtonSquareList buttons={DigitalPointBtns} />
+
         <Row className='text-indent'>
           <ModalCreate />   {/* MODAL PARA DESPLEGAR FORM DE CREACIÓN DE TALLER / CAPACITACIÓN */}
         </Row >
 
-        <DPAdminContextProvider>
-          <DigitalPointRouter />
-        </DPAdminContextProvider>
-
+        <DigitalPointRouter />
 
         <Row className='text-indent'>
           <NewsItemContainer

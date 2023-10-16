@@ -288,7 +288,7 @@ export const CreateDpForm = ({ handleClose }) => {
                     handleReset();
                     handleClose();
 
-                    window.scrollTo({ top: 0, behavior: 'smooth', passive: true });
+                    window.scrollTo({ top: 100, behavior: 'smooth', passive: true });
 
                 } else {
                     setLoading(false);
@@ -313,23 +313,24 @@ export const CreateDpForm = ({ handleClose }) => {
 
         <>
 
-            {/* RESPUESTA OK DEL RESPONSE */}
+// {/* 
+//             {/* RESPUESTA OK DEL RESPONSE */}
+{/* 
+//             <Alert show={showResOk} variant="primary" className="mt-2">
+//                 <Row>
+//                     <Col>
+//                         <p>La publicación se ha creado correctamente.</p>
+//                     </Col>
+//                     <Col className="d-flex justify-content-end">
+//                         <Button
+//                             onClick={() => setShowResOk(false)}>
+//                             Cerrar
+//                         </Button>
+//                     </Col>
+//                 </Row>
+//             </Alert> */}
 
-            <Alert show={showResOk} variant="primary" className="mt-2">
-                <Row>
-                    <Col>
-                        <p>La publicación se ha creado correctamente.</p>
-                    </Col>
-                    <Col className="d-flex justify-content-end">
-                        <Button
-                            onClick={() => setShowResOk(false)}>
-                            Cerrar
-                        </Button>
-                    </Col>
-                </Row>
-            </Alert>
-
-            {/* RESPUESTA OK DEL RESPONSE */}
+// {/*    RESPUESTA OK DEL RESPONSE */}
 
             <Container className='mb-3 mt-3'>
 

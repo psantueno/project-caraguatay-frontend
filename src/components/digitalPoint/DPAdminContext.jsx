@@ -7,33 +7,33 @@ export const DPAdminContext = createContext()
 const DPAdminContextProvider = (props) => {
 
   const initialForm = {
+    category: "default",
+    status: "default",
     start: dayjs().format("YYYY-MM-DD"),
     title: "",
     description: "",
-    category: "default",
-    status: "default",
+    image: undefined,
     requirements: [],
-    image: undefined
 };
 
   const formErrors = {
+    category: false,
+    status: false,
     start: false,
     title: false,
     description: false,
-    category: false,
-    status: false,
-    requirements: false,
     image: false,
+    requirements: false,
   };
 
   const inputs = {
+    category: useRef(),
+    status: useRef(),
     start: useRef(),
     title: useRef(),
     description: useRef(),
-    category: useRef(),
-    status: useRef(),
+    image: useRef(),
     requirements: useRef(),
-    image: useRef()
   }
   
 

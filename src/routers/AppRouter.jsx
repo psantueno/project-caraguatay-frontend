@@ -1,4 +1,4 @@
-import { Routes, Route} from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { NewsDetail } from '../components/news/NewsDetail';
 import { CreateNewsForm } from '../components/news/CreateNewsForm';
 
@@ -8,22 +8,32 @@ import { LoginPage } from '../components/auth/LoginPage';
 import { ResetPassword } from '../components/auth/ResetPassword';
 import { NewsAdmin } from '../pages/NewsAdmin';
 import { EditNewsForm } from '../components/news/EditNewsForm';
+import DPAdminContextProvider from '../components/digitalPoint/DPAdminContext';
+// import { CreateDpForm } from '../components/digitalPoint/components/forms/CreateDpForm';
 
 
 export const AppRouter = () => {
-  
+
   return (
     <>
+
+
+      <DPAdminContextProvider>
+        <Routes>
+          <Route exact path="/punto-digital/*" element={<PuntoDigital />} ></Route>
+          {/* <Route exact path="/admin/punto-digital/crear-evento" element={<CreateDpForm/>} ></Route> */}
+        </Routes>
+      </DPAdminContextProvider>
+
       <Routes>
         <Route exact path="/" element={<Home />} ></Route>
-        <Route exact path="/login" element={<LoginPage/>}></Route>
-        <Route exact path="/restablecer_contrasena" element={<ResetPassword/>}></Route>
+        <Route exact path="/login" element={<LoginPage />}></Route>
+        <Route exact path="/restablecer_contrasena" element={<ResetPassword />}></Route>
         <Route exact path="/comunicados" element={<Comunicados />} ></Route>
         <Route exact path="/comunicados/:id" element={<NewsDetail />} ></Route>
         <Route exact path="/deportes" element={<Deportes />} ></Route>
         <Route exact path="/deportes/:id" element={<NewsDetail />} ></Route>
         <Route exact path="/historia/*" element={<Historia />} ></Route>
-        <Route exact path="/punto-digital/*" element={<PuntoDigital />} ></Route>
         <Route exact path="/noticias/:id" element={<NewsDetail />} ></Route>
         <Route exact path="/cultura-y-turismo/*" element={<CulturaTurismo />}></Route>
 
@@ -31,9 +41,10 @@ export const AppRouter = () => {
         <Route exact path="/admin/noticias" element={<NewsAdmin />} ></Route>
         <Route exact path="/admin/noticias/crear-noticia" element={<CreateNewsForm />} ></Route>
         <Route exact path="/admin/noticias/editar-noticia/:id" element={<EditNewsForm />} ></Route>
-        <Route exact path="/admin/punto-digital/crear-noticia" element={<CreateNewsForm />} ></Route>
 
       </Routes>
+
+
     </>
   )
 }

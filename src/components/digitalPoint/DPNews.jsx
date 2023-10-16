@@ -10,16 +10,13 @@ export const DPNews = () => {
 
 
   const {
-    initialForm,
-    formErrors,
-    inputs,
-    setResponseMsg,
+   
     setShowResOk,
     setShowResBad,
     showResOk,
     showResBad,
     responseMsg,
-  } = useContext(DPAdminContext);
+  } = useContext(DPAdminContext, DPAdminContextProvider);
 
   return (
     <>
@@ -67,15 +64,14 @@ export const DPNews = () => {
 
       <Container>
         <Row className='text-indent'>
-          
+
           <h5><b>Novedades</b></h5>
 
-          <DPAdminContextProvider>
+
             <Training />
             <Workshop />
             <RoboticSchool />
-          </DPAdminContextProvider>
-
+    
 
 
         </Row>
