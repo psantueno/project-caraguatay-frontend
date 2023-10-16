@@ -10,6 +10,8 @@ export const DPCard = ({ id, image, title, start, status, requirements, descript
 
     const arrayReq = requirements.split( ";")
 
+    
+
     return (
 
         <div className="sections-card">
@@ -19,7 +21,7 @@ export const DPCard = ({ id, image, title, start, status, requirements, descript
                 <h6 className="card-title-section"><b>{title}</b></h6>
                 <div className="column-contact">
                     <p className='contact-card'><i className="far fa-calendar-alt"></i> Fecha de inicio: {start}</p>
-                    <p className={status == "abiertas" ? 'registration-card-open' : 'registration-card-closed'}><i className="fas fa-pen-alt"></i> Inscripciones {status}</p>
+                    <p className={status === 1 ? 'registration-card-open' : 'registration-card-closed'}><i className="fas fa-pen-alt"></i> Inscripción </p>
                 </div>
                 <div className="description-card">
                     <p className="subtitles-card"><b>Descripción:</b></p>
@@ -33,15 +35,10 @@ export const DPCard = ({ id, image, title, start, status, requirements, descript
                         arrayReq && arrayReq.map((req, i) => (
                             <ul key={i}>
                                 <li style={{ listStyleType: 'disclosure-closed' }}>{req}</li>
-                                
                             </ul>
-
                         ))
-
                     } 
-
-
-                    
+        
                 </div>
 
                 <div className="btns-admin-card">

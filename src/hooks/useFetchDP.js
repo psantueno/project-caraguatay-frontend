@@ -4,7 +4,7 @@ export const useFetchDP = () => {
     const [newsDp, setNewsDp] = useState([]);
 
     const getNewsDP = async () => {
-        const response = await fetch('http://localhost:4001/api/puntoDigital/list/all');
+        const response = await fetch('http://localhost:4001/api/punto-digital-cat/list/all');
         if (!response.ok) {
             throw new Error('Error obteniendo Eventos de Punto Digital. Por favor reintente nuevamente.');
         }
