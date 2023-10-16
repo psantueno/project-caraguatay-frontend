@@ -1,15 +1,18 @@
-import React,{ useContext } from 'react'
-import { Alert, Container, Row , Col, Button} from 'react-bootstrap'
+import React, { useContext } from 'react'
+import { Alert, Container, Row, Col, Button } from 'react-bootstrap'
 import { Training } from './Training'
 import { Workshop } from './Workshop'
 import { RoboticSchool } from './RoboticSchool'
-import { DPAdminContext } from './DPAdminContext'
+import DPAdminContextProvider, { DPAdminContext } from './DPAdminContext'
 
 
 export const DPNews = () => {
-  
+
 
   const {
+    initialForm,
+    formErrors,
+    inputs,
     setResponseMsg,
     setShowResOk,
     setShowResBad,
@@ -63,14 +66,20 @@ export const DPNews = () => {
 
 
       <Container>
-
         <Row className='text-indent'>
+          
           <h5><b>Novedades</b></h5>
+
+          <DPAdminContextProvider>
+            <Training />
+            <Workshop />
+            <RoboticSchool />
+          </DPAdminContextProvider>
+
+
+
         </Row>
 
-        <Training />
-        <Workshop />
-        <RoboticSchool />
 
       </Container>
     </>
