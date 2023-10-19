@@ -12,13 +12,6 @@ import { ModalCreate } from '../components/digitalPoint/components/modals/ModalC
 
 export const PuntoDigital = () => {
 
-  // const {
-  //   setShowResOk,
-  //   setShowResBad,
-  //   showResOk,
-  //   showResBad,
-  //   responseMsg,
-  // } = useContext(DPAdminContext, DPAdminContextProvider);
 
   return (
     <>
@@ -35,10 +28,12 @@ export const PuntoDigital = () => {
 
         <DigitalPointRouter />
 
-        <Row className='text-indent'>
+      {/*  esto renderiza las ultimas noticias***/}
+      
+        <Row className='text-indent'> 
           <NewsItemContainer
             ft={useFetchNewsByCategory}
-            idCat="4"
+            idCat="4"   
             route={'punto-digital'} />
         </Row >
       </Container>

@@ -131,10 +131,10 @@ export const CreateDpForm = ({ handleClose }) => {
 
                 inputs.requirements.current.className = "form-control is-invalid";
 
-                setTimeout(() => {
-                    inputs.requirements.current.className = "form-control";
-                    delete errors.requirements;
-                }, 5000);
+                // setTimeout(() => {
+                //     inputs.requirements.current.className = "form-control";
+                //     delete errors.requirements;
+                // }, 5000);
 
                 return;
             }

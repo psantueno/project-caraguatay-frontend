@@ -52,7 +52,7 @@ const DPAdminContextProvider = (props) => {
     const timeoutId = setTimeout(() => {
       setShowResOk(false);
       setShowResBad(false);
-    }, 5000);
+    }, 55000);
 
     return () => clearTimeout(timeoutId);
   }, [showResBad, showResOk]);

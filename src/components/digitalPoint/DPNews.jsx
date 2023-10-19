@@ -4,77 +4,39 @@ import { Training } from './Training'
 import { Workshop } from './Workshop'
 import { RoboticSchool } from './RoboticSchool'
 import DPAdminContextProvider, { DPAdminContext } from './DPAdminContext'
+import { ResOkResBad } from '../../helpers/ResOkResBad'
 
 
 export const DPNews = () => {
 
 
-  const {
-   
-    setShowResOk,
-    setShowResBad,
-    showResOk,
-    showResBad,
-    responseMsg,
-  } = useContext(DPAdminContext, DPAdminContextProvider);
-
   return (
     <>
 
-      {/* RESPUESTA OK DEL RESPONSE */}
-      <Alert show={showResOk} variant="primary" className="mt-2">
-        <Row>
-          <Col>
-            <p> {responseMsg && responseMsg.msg ? responseMsg.msg : null} </p>
-          </Col>
-          <Col className="d-flex justify-content-end">
-            <Button
-              onClick={() => setShowResOk(false)}>
-              Cerrar
-            </Button>
-          </Col>
-        </Row>
-      </Alert>
-      {/* RESPUESTA OK DEL RESPONSE */}
-
-      {/* RESPUESTA BAD DEL RESPONSE */}
-
-      <Alert show={showResBad} variant="danger" className="mt-2">
-        <Row>
-          <Col>
-            <p>{responseMsg && responseMsg.errors
-              ? responseMsg.errors.map((field, index) => (
-                <li key={index}>{field.msg}</li>
-              ))
-              : null
-            }</p>
-          </Col>
-          <Col className="d-flex justify-content-end">
-            <Button
-              variant='danger'
-              onClick={() => setShowResBad(false)}>
-              Cerrar
-            </Button>
-          </Col>
-        </Row>
-      </Alert>
-      {/* RESPUESTA BAD DEL RESPONSE */}
+      {/* <ResOkResBad/> */}
 
 
-
-      <Container>
-        <Row className='text-indent'>
+      <Container >
+        <Row className='' s={12} md={6} lg={3} >
 
           <h5><b>Novedades</b></h5>
-
-
-            <Training />
-            <Workshop />
-            <RoboticSchool />
-    
-
-
         </Row>
+
+        <Row className='' s={12} md={6} lg={3} >
+
+          <Training />
+        </Row>
+        <Row className='t' s={12} md={6} lg={3} >
+
+          <Workshop />
+        </Row>
+        <Row className='' s={12} md={6} lg={3} >
+
+          <RoboticSchool />
+        </Row>
+
+
+
 
 
       </Container>
