@@ -1,44 +1,25 @@
 import React, { useContext } from 'react'
-import { Alert, Container, Row, Col, Button } from 'react-bootstrap'
-import { Training } from './Training'
-import { Workshop } from './Workshop'
-import { RoboticSchool } from './RoboticSchool'
-import DPAdminContextProvider, { DPAdminContext } from './DPAdminContext'
+import { Container, Row } from 'react-bootstrap'
 import { ResOkResBad } from '../../helpers/ResOkResBad'
 
 
-export const DPNews = () => {
-
-
+export const DPNews = ({ fns }) => {
+  
   return (
     <>
-
-      {/* <ResOkResBad/> */}
-
+      <ResOkResBad />
 
       <Container >
-        <Row className='' s={12} md={6} lg={3} >
-
+        <Row>
           <h5><b>Novedades</b></h5>
         </Row>
-
-        <Row className='' s={12} md={6} lg={3} >
-
-          <Training />
-        </Row>
-        <Row className='t' s={12} md={6} lg={3} >
-
-          <Workshop />
-        </Row>
-        <Row className='' s={12} md={6} lg={3} >
-
-          <RoboticSchool />
-        </Row>
-
-
-
-
-
+        {
+          fns && fns.map((fn, index) => (
+            <Row  key={index}>
+              {[fn]}
+            </Row>
+          ))
+        }
       </Container>
     </>
   )
