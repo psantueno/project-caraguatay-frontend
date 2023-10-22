@@ -1,12 +1,12 @@
 import { Container, Row } from 'react-bootstrap'
-import { AlertHandler} from '../../helpers/AlertHandler'
+import { DPAlertHandler} from '../../helpers/DPAlertHandler'
 
 
 export const DPNews = ({ fns }) => {
   
   return (
     <>
-      <AlertHandler />
+      <DPAlertHandler />
 
       <Container >
 
