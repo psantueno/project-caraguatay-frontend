@@ -1,8 +1,5 @@
-import { useContext } from 'react';
-import DPAdminContextProvider, { DPAdminContext } from './DPAdminContext';
-import { Alert, Button, Col, Container, Row } from 'react-bootstrap';
+import {  Container } from 'react-bootstrap';
 import { DPCard } from './components/DPCard'
-import { ModalCreate } from './components/modals/ModalCreate'
 import { useFetchDpByCategory } from '../../hooks/useFetchDpByCategory';
 
 
@@ -18,12 +15,16 @@ export const Workshop = () => {
       <Container className='list-cards-section'>
         {/* MAP DE LAS TARJETAS DE TALLERES */}
         {
-          eventsDp && eventsDp.map((dpItem) => (
-            <DPCard
-              key={dpItem.id}
-              {...dpItem}
-            />
-          ))
+          eventsDp && eventsDp.length > 0 ? (
+            eventsDp.map((dpItem) => (
+              <DPCard
+                key={dpItem.id}
+                {...dpItem}
+              />
+            ))
+          ) : (
+            <p>No existen eventos para mostrar</p>
+          )
         }
       </Container>
     </Container>

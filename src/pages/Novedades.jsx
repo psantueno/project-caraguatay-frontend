@@ -1,13 +1,21 @@
 
-import { Container } from 'react-bootstrap'
+import { Container , Row } from 'react-bootstrap'
 import { DPNews, RoboticSchool, Training, Workshop } from '../components/digitalPoint';
 
 
 export const Novedades = () => {
 
   return (
-    <Container>
-      <DPNews fns={[<Training />, <Workshop />, <RoboticSchool />]} />
-    </Container>
-  )
+    <>
+
+      <Row>
+        <h5><b>Novedades</b></h5>
+      </Row>
+
+
+      <Container>
+        <DPNews fns={[<Training />, <Workshop />, <RoboticSchool />]} />
+      </Container>
+    </>
+      )
 }

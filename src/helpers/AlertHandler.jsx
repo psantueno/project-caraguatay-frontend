@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
-import { Alert, Button, Col, Container, Row } from 'react-bootstrap';
+import { Alert, Button, Col, Row } from 'react-bootstrap';
 import DPAdminContextProvider, { DPAdminContext } from '../components/digitalPoint/DPAdminContext';
 
-export const ResOkResBad = () => {
+export const AlertHandler = () => {
 
     const {
         setShowResOk,

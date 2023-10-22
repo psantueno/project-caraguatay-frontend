@@ -1,25 +1,25 @@
-import React, { useContext } from 'react'
 import { Container, Row } from 'react-bootstrap'
-import { ResOkResBad } from '../../helpers/ResOkResBad'
+import { AlertHandler} from '../../helpers/AlertHandler'
 
 
 export const DPNews = ({ fns }) => {
   
   return (
     <>
-      <ResOkResBad />
+      <AlertHandler />
 
       <Container >
-        <Row>
-          <h5><b>Novedades</b></h5>
-        </Row>
+
+      {/* ver de haer que cuando no haya nada renderice un cartel de NO HAY NADA PARA MOSTRAR     */ }
+
         {
           fns && fns.map((fn, index) => (
             <Row  key={index}>
-              {[fn]}
+              {fn}
             </Row>
           ))
         }
+
       </Container>
     </>
   )
