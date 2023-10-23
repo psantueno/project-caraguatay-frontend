@@ -26,7 +26,7 @@ export const ModalCreate = () => {
                 </Modal.Header>
                 <Modal.Body>
 
-                    <CreateDpForm />
+                    <CreateDpForm handleClose={handleClose}/>
 
                     <Modal.Footer>
                         <Button onClick={handleClose}>

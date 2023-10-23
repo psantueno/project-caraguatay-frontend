@@ -68,7 +68,7 @@ export const NewsDetail = () => {
                                 <Carousel className="carousel-inner active carousel-dark" >
                                     {
                                         news.urlArray.map((url, i) => (
-                                            <Carousel.Item className='' interval={3000} key={i}>
+                                            <Carousel.Item className='' interval={33000} key={i}>
                                                 <Card.Img
                                                     variant="top"
                                                     src={url}
