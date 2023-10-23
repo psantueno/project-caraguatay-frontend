@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import DPAdminContextProvider, { DPAdminContext } from '../components/digitalPoint/DPAdminContext';
+import DPAdminContextProvider, { DPAdminContext } from '../components/digitalPoint/context/DPAdminContext';
 import { ShowAlerts } from './ShowAlerts';
 
 export const DPAlertHandler = () => {

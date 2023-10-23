@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { Alert, Container, Row, Col, Button } from 'react-bootstrap'
-import DPAdminContextProvider, { DPAdminContext } from '../components/digitalPoint/DPAdminContext';
+import DPAdminContextProvider, { DPAdminContext } from '../components/digitalPoint/context/DPAdminContext';
+
 import { ButtonSquareList } from '../components/buttonsSquare/ButtonSquareList';
 import { DigitalPointBtns } from '../assets/data/DigitalPointBtns';
 import { DigitalPointRouter } from '../routers/DigitalPointRouter';

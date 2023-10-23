@@ -1,7 +1,7 @@
 import { Button, Modal } from 'react-bootstrap';
 import { useForm, useModal } from '../../../../hooks';
 import { useContext } from 'react';
-import { DPAdminContext } from '../../DPAdminContext';
+import { DPAdminContext } from '../../context/DPAdminContext';
 
 export const ModalCancel = ({ show, handleClose, id, title }) => {
 
