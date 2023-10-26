@@ -236,7 +236,7 @@ export const CreateNewsForm = () => {
               onBlur={handleBlur}
               required
             >
-              <option disabled value="default">-Seleccione una categoría-</option>
+                    <option disabled value="default">-Seleccione una categoría-</option>
               {
                 newsCategories && newsCategories.length > 0
                   ? (newsCategories.map((category, index) => (

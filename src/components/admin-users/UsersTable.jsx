@@ -35,7 +35,8 @@ export const UsersTable = () => {
     setShowEditUserForm(true);
   };
 
-    const {
+  
+  const {
       setResponseMsg,
       setShowResOk,
       setShowResBad,

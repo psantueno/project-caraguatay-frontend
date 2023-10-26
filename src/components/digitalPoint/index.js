@@ -1,4 +1,5 @@
 export * from './DPNews'
-export * from './Trainning'
+export * from './Training'
 export * from './RoboticSchool'
 export * from './Workshop'
+export * from './context/DPAdminContext'
