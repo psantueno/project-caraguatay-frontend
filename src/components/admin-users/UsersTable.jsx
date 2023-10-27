@@ -8,13 +8,12 @@ import { useForm } from "../../hooks/useForm"; // sacar cuando termino ModalTemp
 import EditUserForm from './EditUserForm';
 import { UserAdminContext } from './UserAdminContext';
 import ModalTemplate from '../../helpers/ModalTemplate';
+import { useFetchUsers } from '../../hooks/useFetchUsers';
 
 export const UsersTable = () => {
 
-
-
   const { show, handleShow, handleClose } = useModal(); 
-  const [users, setUsers] = useState([]);
+ // const [users, setUsers] = useState([]);
   const [userDB, setUserDB] = useState([]);
   const [showUserDetails, setShowUserDetails] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
@@ -24,6 +23,9 @@ export const UsersTable = () => {
   const [selectedUserForDeletion, setSelectedUserForDeletion] = useState(null);
   const [selectedUserForEdition, setSelectedUserForEdition] = useState(null);
   const handleCloseEdit = () => setShowEditUserForm(false);
+
+
+  const { users } = useFetchUsers()
 
   const handleShowConfirmDelete = (user) => {
     setSelectedUserForDeletion(user);
@@ -45,24 +47,7 @@ export const UsersTable = () => {
       responseMsg,
     } = useContext(UserAdminContext);
 
-  const fetchUsers = async () => {
-    try {
-      const response = await fetch('http://localhost:4001/api/users/list/all');
-      if (!response.ok) {
-        throw new Error('Error fetching users');
-      }
-      const data = await response.json();
-      const fetchedUsers = data.result.usuarios;
-      setUsers(fetchedUsers);
-    } catch (error) {
-      console.error('Error fetching users:', error);
-    }
-  };
-
-  useEffect(() => {
-    fetchUsers();
-  }, [selectedUserForDeletion]);  // no actualiza al eliminar
-
+  
   const handleShowUserDetails = async (user) => {
     try {
       const response = await fetch('http://localhost:4001/api/users/list', {

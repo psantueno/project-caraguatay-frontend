@@ -23,7 +23,6 @@ export const useForm = (initialForm = {}, FormValidations = {}, inputs = {}, han
   const [items, setItems] = useState([]);       // Maneja los ítems que se agregan en el input de requisitos. Exclusivo de DP
   const [files, setFiles] = useState([]); // Maneja las imagenes del CRUD de Usuarios
   const [filesNews, setFilesNews] = useState([]);
-  const [files, setFiles] = useState([]);
   const [avatar, setAvatar] = useState([]);
 
 
