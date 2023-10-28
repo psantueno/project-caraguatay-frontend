@@ -3,6 +3,7 @@ import { Form, Button, Row, Col, Alert } from "react-bootstrap";
 import "./admin-users.css";
 //import { useForm } from "../../hooks/useForm";
 
+
 import { fileUpload } from '../../helpers/fileUpload';
 import { Loader } from '../buttons/Loader';
 import { UserAdminContext } from './UserAdminContext';
@@ -31,7 +32,7 @@ export const CreateUserForm = ({handleClose}) => {
     inputs,
     setResponseMsg,
     responseMsg,
-     setShowResOk,
+    setShowResOk,
     setShowResBad,
   } = useContext(UserAdminContext);
 
@@ -236,6 +237,7 @@ export const CreateUserForm = ({handleClose}) => {
               : null
           }
         </Form.Group>
+
         <Form.Group controlId="avatar" className="mb-3 mt-3">
           <Form.Label>Seleccione una foto de perfil - opcional</Form.Label>
 
@@ -260,13 +262,13 @@ export const CreateUserForm = ({handleClose}) => {
                       files.map((file, index) => {
                         return (
                           <div className='box-individual-preview' key={index}>
-                            <img src={URL.createObjectURL(file)} alt={file.name} className="image-individual" />
+                            <img src={URL.createObjectURL(file)} alt={file.name} className="avatar" />
                           </div>
                         )
                       })
                     }
                   </div>
-                  : <img src={avatarDefault} className="image-individual" />
+                  : <img src={avatarDefault} className="avatar" />
               }
 
               {/* AVATAR PREVIEW  */}
