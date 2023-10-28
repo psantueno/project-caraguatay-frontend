@@ -3,13 +3,15 @@ import { UserAdminContext } from './UserAdminContext';
 import { Form, Button, Row, Col, Alert } from 'react-bootstrap';
 import './admin-users.css';
 import { useForm } from '../../hooks/useForm';
-import { UserValidations} from "./UserValidation";
+import { UserValidations } from "./UserValidation";
+import { useFetchUserRoles } from '../../hooks/useFetchUserRoles';
 
-const EditUserForm = ({ user }) => {
+const EditUserForm = ({ user, handleCloseEdit }) => {
     const AvatarDefault = "https://res.cloudinary.com/caraguatay/image/upload/v1691536662/avatar/user-avatar_d4x7se.png";
     const [msgFileNotImage, setMsgFileNotImage] = useState(false);
     const id = user.id;
-
+    const { userRoles } = useFetchUserRoles();
+    console.log(userRoles)
     const initialForm = {
         email: user ? user.email : '',
         name: user ? user.name : '',
@@ -32,7 +34,7 @@ const EditUserForm = ({ user }) => {
         responseMsg,
         setShowResOk,
         setShowResBad,
-         } = useContext(UserAdminContext);
+    } = useContext(UserAdminContext);
 
     const {
         form,
@@ -52,74 +54,81 @@ const EditUserForm = ({ user }) => {
     } = useForm(initialForm, UserValidations, inputs);
 
 
-  /* Funciones específicas de Create User form: handleAvatar */
+    /* Funciones específicas de Create User form: handleAvatar */
 
-  const handleAvatar = (e) => {
-    const avatarFile = e.target.files[0];
-    const fileName = avatarFile.name.toLowerCase();
+    const handleAvatar = (e) => {
+        const avatarFile = e.target.files[0];
+        const fileName = avatarFile.name.toLowerCase();
 
-    if (!fileName.endsWith('.jpg') && !fileName.endsWith('.jpeg') && !fileName.endsWith('.png')) {
-      setMsgFileNotImage(true);
-      setErrors({
-        ...errors,
-        avatar: `El archivo "${fileName}" no es una imagen`
-      });
-      return;
-    }
-
-    delete errors.avatar;
-
-    setFiles([avatarFile]);
-    console.log(avatarFile);
-  };
-
-  
-  const handleSubmit = async (e) => {
-
-    handleChange(e);
-    e.preventDefault();
-    setErrors(errors);
-
-    if (Object.keys(errors).length === 0) {
-
-      setLoading(true);        // activa el loader
-
-      try {
-        const req = await fetch("http://localhost:4001/api/users/update" , {
-          method: "PUT",
-          body: JSON.stringify(form),
-          headers: { 'Content-Type': 'application/json' }
-        })
-        console.log(form, "linea 93")
-
-        const res = await req.json();
-        setResponseMsg(res);
-
-        console.log("res", res)
-
-        if (res.status === 200) {
-          setLoading(false);
-          setShowResOk(true);
-          setShowResBad(false);
-          setForm(initialForm);
-          //setFiles
-          handleReset();
-          window.scrollTo({ top: 0, behavior: 'smooth', passive: true });
-
-        } else {
-          setLoading(false);
-          setShowResBad(true);
-          window.scrollTo({ top: 0, behavior: 'smooth', passive: true });
+        if (!fileName.endsWith('.jpg') && !fileName.endsWith('.jpeg') && !fileName.endsWith('.png')) {
+            setMsgFileNotImage(true);
+            setErrors({
+                ...errors,
+                avatar: `El archivo "${fileName}" no es una imagen`
+            });
+            return;
         }
-      }
-      catch (error) {
-        console.log(error)
-      }
-    } else {
-      setShowResOk(false);
-      alert("Revise los errores del formulario");
+
+        delete errors.avatar;
+
+        setFiles([avatarFile]);
+        console.log(avatarFile);
+    };
+
+
+    const handleSubmit = async (e) => {
+
+        handleChange(e);
+        e.preventDefault();
+        setErrors(errors);
+
+        if (Object.keys(errors).length === 0) {
+
+            setLoading(true);        // activa el loader
+
+            try {
+                const req = await fetch("http://localhost:4001/api/users/update", {
+                    method: "PUT",
+                    body: JSON.stringify(({
+                        id: user.id,
+                        newData: {
+                            ...form,
+                        },
+                    }),),
+                    headers: { 'Content-Type': 'application/json' }
+                })
+                console.log(form, "linea 93")
+
+                const res = await req.json();
+                setResponseMsg(res);
+
+                console.log("res", res)
+
+                if (res.status === 200) {
+                    setLoading(false);
+                    setShowResOk(true);
+                    setShowResBad(false);
+                    setForm(initialForm);
+                    //setFiles
+                    handleReset();
+                    handleCloseEdit();
+                    window.scrollTo({ top: 0, behavior: 'smooth', passive: true });
+
+                } else {
+                    setLoading(false);
+                    setShowResBad(true);
+                    handleCloseEdit();
+                    window.scrollTo({ top: 0, behavior: 'smooth', passive: true });
+                }
+            }
+            catch (error) {
+                console.log(error)
+            }
+        } else {
+            setShowResOk(false);
+            alert("Revise los errores del formulario");
+        }
     }
-  }
 
 
     return (
@@ -222,8 +231,14 @@ const EditUserForm = ({ user }) => {
                         onBlur={handleBlur}
                         required
                     >
-                        <option  value="default">- Seleccione el rol -</option>
-                        <option value={1} >Administrador</option>
+                        <option disabled value="default">- Seleccione el rol -</option>
+                        {
+                            userRoles && userRoles.length > 0
+                                ? (userRoles.map((role, index) => (
+                                    <option key={index} value={role.id} > {role.role} </option>
+                                )))
+                                : null
+                        }
                     </Form.Select>
                 </Form.Group>
 
@@ -238,6 +253,23 @@ const EditUserForm = ({ user }) => {
                         onBlur={handleBlur}
                         accept="image/png , image/jpeg, image/jpg"
                     />
+
+                    <Row>
+                        <p className="mt-2">Imagen de perfil actual</p>
+                        <Col sm={4}>
+
+                            {/* PREVIEW DE LAS URLS QUE ESTAN EN BD */}
+                            {
+        
+                                <div className='images-preview'>
+                                    { user.avatar && user.avatar }
+                                </div>
+                       
+                        
+                            }
+                            {/* PREVIEW DE LAS URLS QUE ESTAN EN BD */}
+                        </Col>
+                    </Row>
 
                     <Row>
                         <p className="mt-2">Imagen seleccionada</p>

@@ -262,13 +262,13 @@ export const CreateUserForm = ({handleClose}) => {
                       files.map((file, index) => {
                         return (
                           <div className='box-individual-preview' key={index}>
-                            <img src={URL.createObjectURL(file)} alt={file.name} className="image-individual" />
+                            <img src={URL.createObjectURL(file)} alt={file.name} className="avatar" />
                           </div>
                         )
                       })
                     }
                   </div>
-                  : <img src={avatarDefault} className="image-individual" />
+                  : <img src={avatarDefault} className="avatar" />
               }
 
               {/* AVATAR PREVIEW  */}

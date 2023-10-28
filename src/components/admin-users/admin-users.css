@@ -18,6 +18,8 @@
     width: 25px;
     height: 25px;
     margin: auto;
+    border-radius: 50%;
+    
 }
 .avatarInDisplay{
     width: 50px;

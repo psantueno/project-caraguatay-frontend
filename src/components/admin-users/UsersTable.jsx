@@ -239,7 +239,7 @@ export const UsersTable = () => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <EditUserForm user={selectedUserForEdition} />
+          <EditUserForm user={selectedUserForEdition} handleCloseEdit={handleCloseEdit} />
 
           <Modal.Footer>
             <Button onClick={handleCloseEdit}>
