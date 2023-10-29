@@ -288,7 +288,7 @@ export const UsersTable = () => {
       <Modal show={showUserDetails} onHide={handleCloseUserDetails} className="mt-5">
         <Modal.Header closeButton>
           <Modal.Title>
-            <h3 className="form-title mt-4">Detalle de usuario administrador</h3>
+            <h3 className="form-title mt-4">Detalle del usuario administrador</h3>   {/* IMPORTANTE: Ver si en vez de administrador, puede decir el nombre del user */}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>

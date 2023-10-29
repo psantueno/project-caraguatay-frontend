@@ -1,8 +1,9 @@
 * {
   font-family: 'Inter', sans-serif;
 }
-a { 
-    text-decoration: none !important;
+
+a {
+  text-decoration: none !important;
 }
 
 .app {
@@ -11,10 +12,11 @@ a {
 }
 
 .main-title {
-    font-size: 25px;
-    margin-top: 5px;
-   
+  font-size: 25px;
+  margin-top: 5px;
+
 }
+
 /* Titles for forms */
 .form-title {
   font-weight: bold;
@@ -37,22 +39,36 @@ a {
   font-weight: 400;
 }
 
+.link-italic {
+  font-style: italic;
+  font-size: 0.9em;
+  font-weight: bold;
+  color: #859499;
+  text-decoration: none;
+  transition: color 500ms;
+}
+
+.link-italic:hover {
+  font-weight: bold;
+  color: #315C94;
+}
+
 /* START HEADER */
 
-.main-div-header{
-  display:flex;
+.main-div-header {
+  display: flex;
   width: 100%;
   justify-content: space-around;
   align-items: center;
   background-color: #c1cdd6;
   border-color: #315C94;
-border-bottom-style: solid;
-border-width: thick;
-position: fixed;
-z-index: 10000;
+  border-bottom-style: solid;
+  border-width: thick;
+  position: fixed;
+  z-index: 10000;
 }
 
-.logo-header{
+.logo-header {
   width: 140px;
   height: 75px;
 }
@@ -63,10 +79,39 @@ z-index: 10000;
   text-shadow: 2px 2px 4px rgba(49, 92, 148, 0.4)
 }
 
+.user-navbar-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-weight: bold;
+}
+
+.user-name-navbar {
+  font-size: 0.85em;
+  margin: 0px 0px 0px 4px;
+}
+
+.avatar-in-navbar {
+  width: 46px;
+  height: 46px;
+  font-size: 1.5em;
+  color: #315c94;
+  border-color: #315c94;
+  border-style: solid;
+  box-shadow: 0px 0px 4px rgba(49, 92, 148, 0.4);
+  border-radius: 50%;
+}
+
 /* btn-hamburguer */
 
 .navbar-hamburguer {
   position: relative;
+}
+
+.navbar-hamburguer-user-toggler{
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 .navbar-hamburguer-toggler {
@@ -115,7 +160,47 @@ z-index: 10000;
   position: fixed;
   right: 0;
   z-index: 999;
+}
 
+.container-links-userProfile {
+  background-color: #C1CDD6;
+  display: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  top: 78px;
+  border: #315C94 solid 2px;
+  position: fixed;
+  left: 0;
+  z-index: 999;
+}
+
+.container-links-userProfile.open {
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+  background-color: rgba(193, 205, 214, 0.8);
+}
+
+.container-links-userProfile li {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  border-bottom: #315C94 solid 1px;
+}
+
+.container-links-userProfile li a {
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  color: #315C94;
+  font-weight: 600;
+  transition: color 500ms;
+}
+
+.container-links-userProfile li a:hover {
+  color: #859499;
 }
 
 .container-links-header.open {
@@ -146,6 +231,20 @@ z-index: 10000;
   color: #859499;
 }
 
+.button-logout {
+  align-items: center;
+  color: #315C94;
+  transition: color 500ms;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  font-weight: 600;
+}
+
+.button-logout:hover {
+  color: #dc3545;
+}
+
 .navbar-collapse-hamburguer.open {
   display: block;
 }
@@ -160,7 +259,7 @@ z-index: 10000;
 
 /*START HOME*/
 
-.banner-home{
+.banner-home {
   margin-top: 20px;
   margin-bottom: 25px;
   -webkit-user-select: none !important;
@@ -265,27 +364,28 @@ a.link-phones:hover {
 
 /*Buttons*/
 
-.btn-square{
-    -webkit-user-select: none !important;
-    user-select: none;
-    background-color: #C4D6DE;
-    color:#315C94;
-    width: 90px;
-    height: 80px;
-    padding: 5px;
-    border-radius: 3px;
-    margin:3px;
-    text-shadow: 1px 1px 5px rgba(49, 92, 148,0.4) !important;
-    box-shadow: 1px  5px 5px rgb(133, 148, 153) !important;
-    text-decoration: none !important;
-    transition: 0.7s;
-    
+.btn-square {
+  -webkit-user-select: none !important;
+  user-select: none;
+  background-color: #C4D6DE;
+  color: #315C94;
+  width: 90px;
+  height: 80px;
+  padding: 5px;
+  border-radius: 3px;
+  margin: 3px;
+  text-shadow: 1px 1px 5px rgba(49, 92, 148, 0.4) !important;
+  box-shadow: 1px 5px 5px rgb(133, 148, 153) !important;
+  text-decoration: none !important;
+  transition: 0.7s;
+
 }
-.btn-square:hover{
-    background-color:#9DB1C6;
-    box-shadow: 1px  5px 5px rgba(49, 92, 148,0.8) !important;
-    transform: scale(1.03);
-    color: #2d5a94;
+
+.btn-square:hover {
+  background-color: #9DB1C6;
+  box-shadow: 1px 5px 5px rgba(49, 92, 148, 0.8) !important;
+  transform: scale(1.03);
+  color: #2d5a94;
 }
 
 .title-copyright {
@@ -342,7 +442,6 @@ a.link-phones:hover {
 .cardCategory {
   text-align: start !important;
   font-style: italic;
-
   ;
 }
 
@@ -359,11 +458,13 @@ a.link-phones:hover {
 }
 
 .cardImg-detail {
-  
+
   max-width: 640px !important;
   max-height: 580px !important;
-  height: 520px; /* Establece la altura máxima */
-  object-fit: contain; /* Ajusta la imagen dentro del contenedor sin cortarla  */
+  height: 520px;
+  /* Establece la altura máxima */
+  object-fit: contain;
+  /* Ajusta la imagen dentro del contenedor sin cortarla  */
 }
 
 .slide {
@@ -416,7 +517,8 @@ a.link-phones:hover {
 .card {
   margin: 0 .5em;
 }
-.card-body{
+
+.card-body {
   flex: 1 1 auto;
   padding-right: 10px !important;
   padding-left: 10px !important;
@@ -446,7 +548,7 @@ a.link-phones:hover {
   position: relative;
   float: left;
   width: 100%;
- 
+
 
 }
 
@@ -494,41 +596,41 @@ a.link-phones:hover {
 .box-img {
   display: flex;
 
-} 
+}
 
 /* END CULTURA Y TURISMO */
 
 /* START HISTORIA */
 
- .text-indent  {
-    padding-right: 5px;
-    margin-top: 35px !important;
-    text-align: justify;
+.text-indent {
+  padding-right: 5px;
+  margin-top: 35px !important;
+  text-align: justify;
 }
 
 .text-indenth3 {
-     text-shadow: 5px 5px 10px 5px red ;  
-} 
-    
+  text-shadow: 5px 5px 10px 5px red;
+}
+
 .text-indent img {
-    /* width: 290px !important; */
-    max-width: 100%;
-    height: 80% !important;
-    text-align: center;
-    margin: auto;
-    margin-top:15px;
-    margin-bottom: 20px;
-    /* box-shadow: 5px 5px 10px 5px #859499 ;  */
-} 
+  /* width: 290px !important; */
+  max-width: 100%;
+  height: 80% !important;
+  text-align: center;
+  margin: auto;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  /* box-shadow: 5px 5px 10px 5px #859499 ;  */
+}
 
 
 .text-indent p {
-    text-indent: 1cm;
+  text-indent: 1cm;
 }
 
-.buttonToolBar{
-    text-align: center !important;
-}  
+.buttonToolBar {
+  text-align: center !important;
+}
 
 /* END HISTORIA */
 
@@ -542,7 +644,7 @@ a.link-phones:hover {
   /* display: flex !important;
   flex-direction: row !important;
   justify-content: center !important; */
-    
+
 }
 
 h6.btn-square-text {
@@ -552,7 +654,8 @@ h6.btn-square-text {
   overflow-wrap: anywhere;
 }
 
-a.link-btn-square, .link-btn-square {
+a.link-btn-square,
+.link-btn-square {
   -webkit-user-select: none !important;
   user-select: none;
   background-color: #C4D6DE;
@@ -573,14 +676,16 @@ a.link-btn-square, .link-btn-square {
   text-decoration: none !important;
 }
 
-a.link-btn-square:hover, .link-btn-square:hover {
+a.link-btn-square:hover,
+.link-btn-square:hover {
   background-color: #9DB1C6;
   box-shadow: 1px 5px 5px rgba(49, 92, 148, 0.8) !important;
   transform: scale(1.03);
   color: #2d5a94;
 }
 
-a.link-activated , .link-activated{
+a.link-activated,
+.link-activated {
 
   text-decoration: none !important;
 
@@ -588,7 +693,8 @@ a.link-activated , .link-activated{
   user-select: none;
   background-color: #acd8ec;
   color: #315c94;
-  width: 47%;/* option traditional*/
+  width: 47%;
+  /* option traditional*/
   flex: 10%;
   height: 80px;
   padding: 3px;
@@ -604,7 +710,8 @@ a.link-activated , .link-activated{
 
 }
 
-a.link-activated:hover, .link-activated:hover {
+a.link-activated:hover,
+.link-activated:hover {
   color: #626b76;
 }
 
@@ -616,13 +723,14 @@ a.link-activated:hover, .link-activated:hover {
 /* START CULTURA Y TURISMO - CAMPING */
 .sections-card {
   width: 260px;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
-  border-radius: 5px; /* 5px rounded corners */
+  border-radius: 5px;
+  /* 5px rounded corners */
   margin-bottom: 35px;
 }
 
-.sections-card img{
+.sections-card img {
   width: 100%;
   height: auto;
   border-radius: 5px 5px 0 0;
@@ -635,18 +743,18 @@ a.link-activated:hover, .link-activated:hover {
 }
 
 .box-simple-network {
-padding: 7px;
-color:#315C94;
+  padding: 7px;
+  color: #315C94;
 }
 
-.column-contact > p > i {
-  color:#315c94;
+.column-contact>p>i {
+  color: #315c94;
   text-shadow: none !important;
   /* margin-top: 20px; */
 }
 
-.column-contact > p > a {
- text-decoration: none;
+.column-contact>p>a {
+  text-decoration: none;
 }
 
 .card-title-section {
@@ -717,7 +825,7 @@ color:#315C94;
   border-color: black !important;
 }
 
-.row-table { 
+.row-table {
   border: 1px solid;
 }
 
@@ -758,7 +866,7 @@ color:#315C94;
 }
 
 .btn-primary {
-  transition: all 500ms ;
+  transition: all 500ms;
   --bs-btn-color: #315C94 !important;
   --bs-btn-bg: #fff !important;
   --bs-btn-border-color: #315C94 !important;
@@ -769,9 +877,9 @@ color:#315C94;
   --bs-btn-active-color: #fff;
   --bs-btn-active-bg: #fff !important;
   --bs-btn-active-border-color: #315C94 !important;
-  --bs-btn-disabled-color: #a2a5a7  !important;
-  --bs-btn-disabled-bg: #ffffff   !important;
-  --bs-btn-disabled-border-color: #a2a5a7  !important;
+  --bs-btn-disabled-color: #a2a5a7 !important;
+  --bs-btn-disabled-bg: #ffffff !important;
+  --bs-btn-disabled-border-color: #a2a5a7 !important;
   box-shadow: 0 5px 6px -6px #222;
 }
 
@@ -788,20 +896,22 @@ color:#315C94;
 }
 
 .btn-close-alert {
-  color: #dc3545;;
+  color: #dc3545;
+  ;
   border-color: #dc3545;
   /* width: 60px;
     height: 50px; */
-  
+
   transition: all 500ms;
 }
 
 .btn-close-alert:hover {
-  background-color: #dc3545;;
+  background-color: #dc3545;
+  ;
   border-color: #ffffff;
-  color:  #ffffff;
+  color: #ffffff;
 }
-  
+
 /* END NEWS FORM */
 
 /* START DIGITAL POINT */
@@ -894,11 +1004,10 @@ color:#315C94;
 /* START MSG ALERT CUSTOM */
 
 .custom-alert {
-  background-color: #c1cdd6; 
-  color: #315C94; 
- 
-}
+  background-color: #c1cdd6;
+  color: #315C94;
 
+}
 
 
 
@@ -949,18 +1058,18 @@ h6.btn-square-text {
 /* START MEDIA QUERIES */
 /* @media screen and (min-width:300px) and (max-width:576px){ */
 
-  /* .btn-toolbar{
+/* .btn-toolbar{
     width: 87%;
   
     
   } */
 
-  /* .btn-square {
+/* .btn-square {
     height: min-content!important;
     width: 50px;
 
     } */
-  /* h6.btn-square-text{
+/* h6.btn-square-text{
     font-size: 10px !important;
         
     }
