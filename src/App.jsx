@@ -3,6 +3,7 @@ import { Container } from 'react-bootstrap';
 import { Header } from './components/header/Header';
 import { Footer } from './components/footer/Footer';
 import { AppRouter } from './routers/AppRouter'
+import { AuthProvider } from './components/auth/context/AuthProvider';
 
 
 
@@ -10,13 +11,15 @@ export const App = () => {
 
   return (
     <div className="app">
-      <Header />
-      <Container className='container-pages'>
-        
+      <AuthProvider>
+        <Header />
+        <Container className='container-pages'>
+
           <AppRouter />
-        
-      </Container>
-      <Footer />
+
+        </Container>
+        <Footer />
+      </AuthProvider>
     </div>
   )
 }

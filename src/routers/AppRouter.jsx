@@ -7,6 +7,7 @@ import { LoginPage } from '../components/auth/LoginPage';
 import { ResetPassword } from '../components/auth/ResetPassword';
 import { NewsAdmin } from '../pages/NewsAdmin';
 import { EditNewsForm } from '../components/news/EditNewsForm';
+import { DetailUser } from '../components/admin-users/DetailUser';
 
 
 export const AppRouter = () => {
@@ -27,6 +28,8 @@ export const AppRouter = () => {
         <Route exact path="/cultura-y-turismo/*" element={<CulturaTurismo />}></Route>
         <Route exact path="/punto-digital/*" element={<PuntoDigital />} ></Route>
         <Route exact path="/admin/usuarios" element={<UserAdmin />} ></Route>
+        <Route exact path="/admin/usuarios/datalle-usuario" element={<DetailUser />} ></Route>
+        
         <Route exact path="/admin/noticias" element={<NewsAdmin />} ></Route>
         <Route exact path="/admin/noticias/crear-noticia" element={<CreateNewsForm />} ></Route>
         <Route exact path="/admin/noticias/editar-noticia/:id" element={<EditNewsForm />} ></Route>
