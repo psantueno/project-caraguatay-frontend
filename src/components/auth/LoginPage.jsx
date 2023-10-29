@@ -95,6 +95,11 @@ export const LoginPage = () => {
     }
   }, [showResOk]);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth', passive: true });
+  }, [])
+  
+
   return (
     <>
       <Container className="mt-2 mb-2 text-center">
@@ -174,7 +179,7 @@ export const LoginPage = () => {
             }
           </Form.Group>
 
-          <Button type="submit" disabled={loading} >
+          <Button className="btn-primary" type="submit" disabled={loading} >
             Ingresar
           </Button>
         </Form>
