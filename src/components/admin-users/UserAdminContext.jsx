@@ -65,14 +65,14 @@ const UserAdminContextProvider = (props) => {
   }
 
  
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {    
+      setShowResOk(false);
+      setShowResBad(false);
+    }, 5000);
 
-  // useEffect(() => {
-  //   const timeoutId = setTimeout(() => {
-  //     setAlertMessage(null);
-  //   }, 5000);
-
-  //   return () => clearTimeout(timeoutId);
-  // }, [alertMessage]);
+    return () => clearTimeout(timeoutId);
+  }, [showResBad,showResOk]);
 
 
   return (

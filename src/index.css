@@ -412,7 +412,7 @@ a.link-phones:hover {
 }
 
 .cardNews {
-  width: 260px !important;
+  width: 290px !important;
   margin: 0 !important;
   padding: 0 !important;
   box-shadow: 0px 10px 5px rgb(136, 136, 136, 0.4);
@@ -452,14 +452,9 @@ a.link-phones:hover {
 }
 
 .cardImg {
-  height: 270px;
-  max-width: 640px !important;
-  max-height: 580px !important;
-}
-
-.cardImg-detail {
-
-  max-width: 640px !important;
+  min-height: 300px;
+  width: 100%;
+  max-width: 1200px !important;
   max-height: 580px !important;
   height: 520px;
   /* Establece la altura máxima */
@@ -535,21 +530,30 @@ a.link-phones:hover {
 }
 
 .carousel-inner {
-
+  padding-left:1px;
+  padding-right:1px;
   position: relative;
   width: 100%;
   overflow: hidden;
-  margin: auto;
-  text-align: center;
   /* max-height: 520px; */
 }
+
+.carousel-control-prev{
+  left: -17px
+}
+.carousel-control-next{
+  right: -17px
+}
+.carousel-control-next-icon, .carousel-control-prev-icon{
+  background-color: gray;
+}
+
 
 .carousel-item {
   position: relative;
   float: left;
   width: 100%;
-
-
+  margin-top: 0px !important;
 }
 
 .moreNews-container {
@@ -608,10 +612,11 @@ a.link-phones:hover {
   text-align: justify;
 }
 
-.text-indenth3 {
-  text-shadow: 5px 5px 10px 5px red;
-}
+.text-indent h3 {
+     text-shadow: 5px 5px 10px 5px red ;  
+} 
 
+    
 .text-indent img {
   /* width: 290px !important; */
   max-width: 100%;
@@ -722,17 +727,20 @@ a.link-activated:hover,
 
 /* START CULTURA Y TURISMO - CAMPING */
 .sections-card {
-  width: 260px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  width: 300px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
   border-radius: 5px;
   /* 5px rounded corners */
   margin-bottom: 35px;
 }
 
+
 .sections-card img {
-  width: 100%;
-  height: auto;
+
+.sections-card img{
+  width: 250px;
+  height: 220px;
   border-radius: 5px 5px 0 0;
   margin-bottom: 15px;
 }
@@ -766,7 +774,7 @@ a.link-activated:hover,
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 120px;
 }
 
 .contact-card {
@@ -915,6 +923,9 @@ a.link-activated:hover,
 /* END NEWS FORM */
 
 /* START DIGITAL POINT */
+.dpCard-image{
+  text-align: center;
+}
 
 .registration-card {
   margin-bottom: 5px;
@@ -922,6 +933,7 @@ a.link-activated:hover,
 
 .registration-card-open {
   margin-bottom: 5px;
+  text-align: left;
   color: #198754;
   font-weight: 400;
   text-shadow: 1px 1px 10px rgba(99, 195, 129, 0.8);
@@ -929,18 +941,37 @@ a.link-activated:hover,
 
 .registration-card-closed {
   margin-bottom: 5px;
+  text-align: left;
   color: #dc3545;
   font-weight: 400;
   text-shadow: 1px 1px 10px rgba(208, 116, 116, 0.8);
 }
 
 .description-card {
+  font-size: 12px !important;
   margin-bottom: 0;
   margin-top: 12px;
+  text-align: justify;
+  height: 120px;
+}
+
+.requirements-card {
+  font-size: 12px !important;
+  text-align: left;
+  height: 140px;
+  ;display: table-footer-group;
+
+}
+.requirements-card-li {
+  font-size: 12px !important;
+  text-align: left;
+  padding-right: 5px;
 }
 
 .subtitles-card {
   margin-bottom: 0;
+  text-align: left;
+  font-size: 14px;
 }
 
 .box-btn-DP {
@@ -964,6 +995,8 @@ a.link-activated:hover,
 /* END BUTTONS */
 
 /*  START FORM DIGITAL POINT */
+
+
 
 .helper-form {
   color: #315C94;

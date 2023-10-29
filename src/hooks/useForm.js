@@ -92,6 +92,8 @@ export const useForm = (initialForm = {}, FormValidations = {}, inputs = {}, han
     errors,
     showResOk,
     showResBad,
-    responseMsg
+    responseMsg,
+    files,
+    setFiles
   }
 }

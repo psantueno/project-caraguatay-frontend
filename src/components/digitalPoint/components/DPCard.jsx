@@ -2,21 +2,38 @@ import { useModal } from "../../../hooks/useModal"
 import { DeleteButton } from "../../buttons/DeleteButton"
 import { EditButton } from "../../buttons/EditButton"
 import { ModalEdit } from "./modals/ModalEdit"
+import { ModalCancel } from "./modals/ModalCancel"
+import { useState } from "react"
 
-export const DPCard = ({ id, image, title, start, status, req1, req2, description, dpnew }) => {
+export const DPCard = ({ id, image, title, start, status, requirements, description, dpnew, enabled }) => {
 
-    const { show, handleShow, handleClose } = useModal()
+    console.log(status, 'estatus');
+    const { show, handleShow, handleClose } = useModal();
+    const [showConfirmDelete, setShowConfirmDelete] = useState(false);
+    const handleCancelDeletion = () => setShowConfirmDelete(false);
+
+    const handleShowConfirmDelete = () => {
+        setShowConfirmDelete(true);
+    };
+
+    const arrayReq = requirements.split(";")
 
     return (
 
         <div className="sections-card">
-            <img src={image} alt="" />
+            <div className="dpCard-image">
+                <img src={image} alt="" />
+            </div>
             <br />
             <div className="container">
                 <h6 className="card-title-section"><b>{title}</b></h6>
                 <div className="column-contact">
                     <p className='contact-card'><i className="far fa-calendar-alt"></i> Fecha de inicio: {start}</p>
-                    <p className={status == "abiertas" ? 'registration-card-open' : 'registration-card-closed'}><i className="fas fa-pen-alt"></i> Inscripciones {status}</p>
+                    <p className={status == 1 ? 'registration-card-open' : 'registration-card-closed'}><i className="fas fa-pen-alt"></i>
+                        {
+                            status == 1 ? "Inscripcion Abierta" : "Inscripción Cerrada"
+                        }
+                    </p>
                 </div>
                 <div className="description-card">
                     <p className="subtitles-card"><b>Descripción:</b></p>
@@ -25,20 +42,30 @@ export const DPCard = ({ id, image, title, start, status, req1, req2, descriptio
 
                 <div className="requirements-card">
                     <p className="subtitles-card"><b>Requisitos:</b></p>
-                    <ul>
-                        <li style={{ listStyleType: 'disclosure-closed' }}>{req1}</li>
-                        <li style={{ listStyleType: 'disclosure-closed' }}>{req2}</li>
-                    </ul>
+
+
+                    {
+                        arrayReq && arrayReq.map((req, i) => (
+                            <ul key={i} >
+                                <li className="requirements-card-li">{req}</li>
+                            </ul>
+                        ))
+                    }
+
+
                 </div>
 
                 <div className="btns-admin-card">
                     <EditButton fx={handleShow} />
-                    <DeleteButton />
+                    <DeleteButton fx={handleShowConfirmDelete} />
                 </div>
 
             </div>
 
-            <ModalEdit show={ show }  handleClose={ handleClose } id={ id } dpnew={ dpnew } />
+            <ModalEdit show={show} handleClose={handleClose} id={id} dpnew={dpnew} />
+
+            <ModalCancel show={showConfirmDelete} handleClose={handleCancelDeletion} id={id} title={title} />
+
 
         </div>
     )

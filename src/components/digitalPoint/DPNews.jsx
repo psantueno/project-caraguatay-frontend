@@ -1,19 +1,26 @@
 import { Container, Row } from 'react-bootstrap'
-import { NewsItem } from '../news/NewsItem'
+import { DPAlertHandler} from '../../helpers/DPAlertHandler'
 
 
-export const DPNews = () => {
-
+export const DPNews = ({ fns }) => {
+  
   return (
+    <>
+      <DPAlertHandler />
 
-    <Container>
+      <Container >
 
-        <Row className='text-indent'>
-          <h5><b>Novedades</b></h5>
-        </Row>
+      {/* ver de haer que cuando no haya nada renderice un cartel de NO HAY NADA PARA MOSTRAR     */ }
 
-          {/* <NewsItem/> */}
+        {
+          fns && fns.map((fn, index) => (
+            <Row  key={index}>
+              {fn}
+            </Row>
+          ))
+        }
 
       </Container>
+    </>
   )
 }

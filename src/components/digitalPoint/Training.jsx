@@ -1,18 +1,18 @@
+
 import { Container } from 'react-bootstrap';
-import { useFetchDpByCategory } from '../../hooks/useFetchDpByCategory';
 import { DPCard } from './components/DPCard';
+import { useFetchDpByCategory } from '../../hooks/useFetchDpByCategory';
 
-export const RoboticSchool = () => {
+export const Training = () => {
 
-  const { eventsDp } = useFetchDpByCategory(3)
+  const { eventsDp } = useFetchDpByCategory(2)
 
   return (
-
     <Container>
-      <h5><b>Escuela de Robótica</b></h5>
+      <h5><b>Capacitaciones</b></h5>
 
       <Container className='list-cards-section'>
-        {/* MAP DE LAS TARJETAS DE ESCUELA ROBOTICA*/}
+        {/* MAP DE LAS TARJETAS DE CAPACITACIONES */}
         {
           eventsDp && eventsDp.length > 0 ? (
             eventsDp.map((dpItem) => (
