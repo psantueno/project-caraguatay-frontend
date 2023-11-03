@@ -19,7 +19,7 @@ export const ModalEdit = ({ show, handleClose, id, dpnew }) => {
                 </Modal.Header>
                 <Modal.Body>
 
-                    <EditDpForm id={ id } />
+                    <EditDpForm id={ id  } dpnew={dpnew} />
 
                     <Modal.Footer>
                         <Button onClick={handleClose}>

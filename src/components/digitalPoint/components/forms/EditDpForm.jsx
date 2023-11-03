@@ -1,7 +1,135 @@
 import { Button, Form, Container, Col, Row, Alert, Modal } from 'react-bootstrap';
+import { DPAdminContext } from '../../context/DPAdminContext';
+import { DpValidations } from '../DpValidations';
+import { useForm } from '../../../../hooks/useForm';
+import { useContext, useRef } from 'react';
+import { useFetchDpCategories } from '../../../../hooks/useFetchDpCategories';
+import dayjs from "dayjs";
+
+export const EditDpForm = ({ id , dpnew}) => {
 
 
-export const EditDpForm = ({ id }) => {
+
+    const { dPCategories } = useFetchDpCategories()
+
+    const initialForm = {
+        category: dpnew ? dpnew.category : '',
+        status: dpnew ? dpnew.status : '',
+        start: dpnew ? dpnew.start : '',
+        title: dpnew ? dpnew.title : '',
+        description: dpnew ? dpnew.description : '',
+        image: dpnew ? dpnew.image : '',
+        requeriments: dpnew ? dpnew.requirements : '',
+    };
+
+    const inputs = {
+        title: useRef(),
+        description: useRef(),
+        category: useRef(),
+        image: useRef(),
+        status: useRef(),
+        requirements: useRef()
+    }
+
+    const {
+        setResponseMsg,
+        responseMsg,
+        setShowResOk,
+        setShowResBad,
+    } = useContext(DPAdminContext);
+
+    const {
+        form,
+        handleChange,
+        handleKeyUp,
+        handleBlur,
+        handleMouseup,
+        setForm,
+        setErrors,
+        setRequirementValue,
+        requirementValue,
+        setFiles,
+        files,
+        handleReset,
+        setLoading,
+        errors,
+        avatarDefault,
+        formErrors,
+    } = useForm(initialForm, DpValidations, inputs);
+
+
+    const handleFile = (e) => {
+        const imageDp = e.target.files[0];
+        const fileName = imageDp.name.toLowerCase();
+
+        if (!fileName.endsWith('.jpg') && !fileName.endsWith('.jpeg') && !fileName.endsWith('.png')) {
+            setMsgFileNotImage(true);
+            setErrors({
+                ...errors,
+                image: `El archivo "${fileName}" no es una imagen`
+            });
+            return;
+        }
+
+        delete errors.avatar;
+
+        setFiles([imageDp]);
+        console.log(imageDp);
+    };
+
+    const handleKeyDown = (e) => {
+
+        if (e.key === 'Enter') {
+            e.preventDefault();
+
+            if (requirementValue.trim().length < 3) return;  // Controla que el item a ingresar tenga al menos 3 caracteres.
+
+            if (form.requirements && !(requirementValue.trim().length <= checkTotalCharacters(form.requirements))) { // Control para saber si el ítem a ingresar no supera el max permitido(130).
+
+                setErrors(prevState => {
+                    return {
+                        ...prevState,
+                        requirements: 'Máximo permitido: 130 caracteres. Edite el ítem actual o elimine alguno de los ingresados.'
+                    }
+                });
+
+                inputs.requirements.current.className = "form-control is-invalid";
+
+                // setTimeout(() => {
+                //     inputs.requirements.current.className = "form-control";
+                //     delete errors.requirements;
+                // }, 5000);
+
+                return;
+            }
+
+            else {                                                                   // ----> Agrega el nuevo ítem a la lista.
+                delete errors.requirements;
+                inputs.requirements.current.className = "form-control is-valid";
+                addItem(requirementValue);
+                setRequirementValue('');
+            }
+        }
+    };
+    const checkTotalCharacters = (array) => {             // ----> Fx encargada de contar los caracteres de un array y que devuelve
+        //la cantidad de caracteres restantes para completar el max.
+        let totalCharacters = 0;
+
+       if( array ) {
+        for (let i = 0; i < array.length; i++) {
+            totalCharacters += array[i].length;
+        }
+       }
+            
+      
+
+        totalCharacters = 130 - totalCharacters;
+        return totalCharacters;
+    }
+
+
+
+
 
 
     const handleSubmit ={
