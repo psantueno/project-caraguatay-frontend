@@ -1,24 +1,20 @@
 import { Routes, Route } from 'react-router-dom';
+import { LogoutRouter, SuperUserRouter, PrivateRouter } from '../routers';
+import { AdminRoutes } from './routes/AdminRoutes';
+import { SuperAdminRoutes } from './routes/SuperAdminRoutes';
+import { LogoutRoutes } from './routes/LogoutRoutes';
+import { Comunicados, CulturaTurismo, Deportes, Historia, PuntoDigital, Home } from '../pages';
 import { NewsDetail } from '../components/news/NewsDetail';
-import { CreateNewsForm } from '../components/news/CreateNewsForm';
-import { Comunicados, CulturaTurismo, Deportes, Historia, PuntoDigital, UserAdmin } from '../pages';
-import { Home } from '../pages/Home';
-import { LoginPage } from '../components/auth/LoginPage';
-import { ResetPassword } from '../components/auth/ResetPassword';
-import { NewsAdmin } from '../pages/NewsAdmin';
-import { EditNewsForm } from '../components/news/EditNewsForm';
-import { DetailUser } from '../components/admin-users/DetailUser';
 
 
 export const AppRouter = () => {
 
   return (
-    <>
 
+    <>
       <Routes>
+
         <Route exact path="/" element={<Home />} ></Route>
-        <Route exact path="/login" element={<LoginPage />}></Route>
-        <Route exact path="/restablecer_contrasena" element={<ResetPassword />}></Route>
         <Route exact path="/comunicados" element={<Comunicados />} ></Route>
         <Route exact path="/comunicados/:id" element={<NewsDetail />} ></Route>
         <Route exact path="/deportes" element={<Deportes />} ></Route>
@@ -27,16 +23,33 @@ export const AppRouter = () => {
         <Route exact path="/noticias/:id" element={<NewsDetail />} ></Route>
         <Route exact path="/cultura-y-turismo/*" element={<CulturaTurismo />}></Route>
         <Route exact path="/punto-digital/*" element={<PuntoDigital />} ></Route>
-        <Route exact path="/admin/usuarios" element={<UserAdmin />} ></Route>
-        <Route exact path="/admin/usuarios/datalle-usuario" element={<DetailUser />} ></Route>
-        
-        <Route exact path="/admin/noticias" element={<NewsAdmin />} ></Route>
-        <Route exact path="/admin/noticias/crear-noticia" element={<CreateNewsForm />} ></Route>
-        <Route exact path="/admin/noticias/editar-noticia/:id" element={<EditNewsForm />} ></Route>
+
+
+        {/* Rutas exclusivas para visitantes (no logueados) */}
+        <Route exact path='/*' element={
+          <LogoutRouter >
+            <LogoutRoutes />
+          </LogoutRouter>
+        } />
+
+        {/* Rutas exclusivas para SUPERUSER ---> ROL = ADMINISTRADOR */}
+        <Route path='/super-admin/*' element={
+          <SuperUserRouter>
+            <SuperAdminRoutes />
+          </SuperUserRouter>
+        } />
+
+        {/* Rutas exclusivas para usuarios logueados ---> ROL = COLABORADOR */}
+        <Route exact path='/admin/*' element={
+          <PrivateRouter >
+            <AdminRoutes />
+          </PrivateRouter>
+        } />
 
       </Routes>
-
-
     </>
   )
 }
+
+
+// Terminar de ocultar iconos de edicion y opciones en los menu del header
