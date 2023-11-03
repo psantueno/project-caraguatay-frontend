@@ -1,22 +1,28 @@
-import { useRef, useState } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { Container, Form, Button, Alert, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
 import { LoginValidations } from "./LoginValidation";
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { Loader } from "../buttons/Loader";
+import { AuthContext } from "./context/AuthContext";
+
+
+const initialForm = {
+  email: "",
+  password: "",
+};
 
 export const LoginPage = () => {
-  const [loggedIn, setLoggedIn] = useState(false);
-
+  
+  const { login } = useContext ( AuthContext )
+  const navigate = useNavigate();
+  
   const inputs = {
     email: useRef(),
     password: useRef(),
   }
 
-  const initialForm = {
-    email: "",
-    password: "",
-  };
 
   const {
     form,
@@ -30,14 +36,16 @@ export const LoginPage = () => {
     setResponseMsg,
     handleReset,
     setLoading,
+    loading,
     showResOk,
     showResBad,
     responseMsg,
     errors,
   } = useForm(initialForm, LoginValidations, inputs);
 
+
   const handleSubmit = async (e) => {
-    console.log("paso");
+
     e.preventDefault();
     setErrors(errors);
     if (Object.keys(errors).length === 0) {
@@ -52,29 +60,46 @@ export const LoginPage = () => {
         });
 
         const res = await req.json();
-        if (res.status === 201) {
+        setResponseMsg(res);
+        console.log(res)
+
+        if (res.status === 200) {
+          const { user } = res;
+          setShowResOk(true);
+          setLoading(false);
+          login(user, true);    // se envia el user y el estado true para logged.
           setForm(initialForm);
           handleReset();
-          setLoggedIn(true);
         } else {
-          console.log(res, "linea 61");
-          setResponseMsg(res); 
           setShowResBad(true);
+          setLoading(false);
         }
-  
+
       } catch (error) {
         console.log(error);
       }
     } else {
       setShowResOk(false);
-      console.log("-------------------");
-      console.log(responseMsg);
-      console.log("-------------------");
+      alert("Revise los errores del formulario");
     }
   };
-  if (loggedIn) {
-    return <Navigate to="/formulario" />;
-  }
+
+  useEffect(() => {
+    if (showResOk) {
+      const timer = setTimeout(() => {
+        setShowResOk(false);
+        navigate('/');
+      }, 2000);
+
+      return () => clearTimeout(timer); // Limpia el temporizador.
+    }
+  }, [showResOk]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth', passive: true });
+  }, [])
+  
+
   return (
     <>
       <Container className="mt-2 mb-2 text-center">
@@ -83,18 +108,8 @@ export const LoginPage = () => {
         </h6>
 
         {/* RESPUESTA OK DEL RESPONSE */}
-        <Alert show={showResOk} variant="primary" className="mt-2">
-          <Row>
-            <Col>
-              <p> {responseMsg && responseMsg.msg ? responseMsg.msg : null} </p>
-            </Col>
-            <Col className="d-flex justify-content-end">
-              <Button
-                onClick={() => setShowResOk(false)}>
-                Cerrar
-              </Button>
-            </Col>
-          </Row>
+        <Alert show={showResOk} variant="primary" className="mt-2 p-2">
+          {responseMsg && responseMsg.msg ? responseMsg.msg : null}  <div className="spinner-border spinner-border-sm text-right" role="status"></div>
         </Alert>
         {/* RESPUESTA OK DEL RESPONSE */}
 
@@ -102,7 +117,7 @@ export const LoginPage = () => {
 
         <Alert show={showResBad} variant="danger" className="mt-2">
           <Row>
-            <Col>
+            <Col className="fs-0.5">
               <p>{responseMsg && responseMsg.errors
                 ? responseMsg.errors.map((field, index) => (
                   <li key={index}>{field.msg}</li>
@@ -132,6 +147,7 @@ export const LoginPage = () => {
               type="email"
               name="email"
               placeholder="Ingrese su dirección email."
+              autoComplete="email"
             />
             {
               errors && errors.email
@@ -152,6 +168,7 @@ export const LoginPage = () => {
               onBlur={handleBlur}
               type="password"
               placeholder="Ingrese su contraseña."
+              autoComplete="current-password"
             />
             {
               errors && errors.password
@@ -162,18 +179,16 @@ export const LoginPage = () => {
             }
           </Form.Group>
 
-          <Button type="submit" >
+          <Button className="btn-primary" type="submit" disabled={loading} >
             Ingresar
           </Button>
         </Form>
         <div className="p-2 text-center">
-          <Link
-            to="/restablecer_contrasena"
-            className="mt-4 mb-3 form-title form-link"
-          >
-            Olvidé mi contraseña.
+          <Link to="/restablecer_contrasena" className="mt-4 mb-3 link-italic form-link">
+            ¿Olvidaste tu contraseña?
           </Link>
         </div>
+        <Loader loader={loading} text={"Iniciando sesión, aguarde por favor..."} />
       </Container>
     </>
   );
