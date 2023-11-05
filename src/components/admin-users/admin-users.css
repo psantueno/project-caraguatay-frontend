@@ -39,3 +39,7 @@
     color: rgb(167, 33, 33);
     margin-top: 5px;
 }
+
+.hidden {
+    display: none;
+}

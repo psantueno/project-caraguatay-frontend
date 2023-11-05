@@ -5,6 +5,7 @@ import './admin-users.css';
 import { useForm } from '../../hooks/useForm';
 import { UserValidations } from "./UserValidation";
 import { useFetchUserRoles } from '../../hooks/useFetchUserRoles';
+import { fileUpload } from '../../helpers/fileUpload';
 
 const EditUserForm = ({ user, handleCloseEdit }) => {
     const AvatarDefault = "https://res.cloudinary.com/caraguatay/image/upload/v1691536662/avatar/user-avatar_d4x7se.png";
@@ -54,7 +55,12 @@ const EditUserForm = ({ user, handleCloseEdit }) => {
     } = useForm(initialForm, UserValidations, inputs);
 
 
+
     /* Funciones específicas de Create User form: handleAvatar */
+    const showFileNotImage = () => {
+        delete errors.avatar;
+        setMsgFileNotImage(false)
+      }
 
     const handleAvatar = (e) => {
         const avatarFile = e.target.files[0];
@@ -72,7 +78,7 @@ const EditUserForm = ({ user, handleCloseEdit }) => {
         delete errors.avatar;
 
         setFiles([avatarFile]);
-        console.log(avatarFile);
+        console.log(avatarFile, "avatarFile");
     };
 
 
@@ -87,17 +93,33 @@ const EditUserForm = ({ user, handleCloseEdit }) => {
             setLoading(true);        // activa el loader
 
             try {
+
+                let avatarUrl = form.avatar; // Keep the current avatar URL
+
+                if (files.length > 0) {
+                  const folder = "avatar";
+                  avatarUrl = await fileUpload(files[0], folder); // Update avatar URL with new image
+                } else {
+                  const folder = "avatar";
+                  avatarUrl = await fileUpload(avatarDefault, folder);
+                }
+        
+                const data = {
+                  ...form,
+                  avatar: avatarUrl // Set the new avatar URL
+                };
+
                 const req = await fetch("http://localhost:4001/api/users/update", {
                     method: "PUT",
                     body: JSON.stringify(({
                         id: user.id,
                         newData: {
-                            ...form,
+                            ...data,
                         },
                     }),),
                     headers: { 'Content-Type': 'application/json' }
                 })
-                console.log(form, "linea 93")
+                console.log(data, "linea 93")
 
                 const res = await req.json();
                 setResponseMsg(res);
@@ -260,43 +282,38 @@ const EditUserForm = ({ user, handleCloseEdit }) => {
 
                             {/* PREVIEW DE LAS URLS QUE ESTAN EN BD */}
                             {
-        
-                                <div className='images-preview'>
-                                    { user.avatar && user.avatar }
-                                </div>
-                       
-                        
+                                <img src={ user.avatar } className='avatar'/>
                             }
                             {/* PREVIEW DE LAS URLS QUE ESTAN EN BD */}
                         </Col>
                     </Row>
 
                     <Row>
-                        <p className="mt-2">Imagen seleccionada</p>
+                        <p className={files && files.length > 0 ? "mt-2" : "hidden"}  >Imagen seleccionada</p>
                         <Col sm={4}>
 
-                            {/* AVATAR PREVIEW  */}
+                            {/* AVATAR PREVIEW  ESTA PARTE ANDA 2NOV23*/}
                             {
                                 files && files.length > 0
-                                    ? <div className='images-preview'>
+                                    && <div className='images-preview'>
                                         {
                                             files.map((file, index) => {
                                                 return (
                                                     <div className='box-individual-preview' key={index}>
-                                                        <img src={URL.createObjectURL(file)} alt={file.name} className="image-individual" />
+                                                        <img src={URL.createObjectURL(file)} alt={file.name} className={files && files.length > 0 ? "avatar" : "hidden"}/>
                                                     </div>
                                                 )
                                             })
                                         }
                                     </div>
-                                    : <img src={avatarDefault} className="image-individual" />
+                                     
                             }
 
                             {/* AVATAR PREVIEW  */}
                         </Col>
                     </Row>
 
-                    {/* DETALLE DE ERRORS IMAGES */}
+                    {/* DETALLE DE ERRORS IMAGES ESTA PARTE ANDA 2NOV23*/}
 
                     <Alert show={msgFileNotImage} className="alert-file-not-image">
                         <p className="images-msg-error">
