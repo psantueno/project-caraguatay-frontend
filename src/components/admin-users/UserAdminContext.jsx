@@ -59,10 +59,10 @@ const UserAdminContextProvider = (props) => {
   } = useForm(initialForm, UserValidations, inputs);
     
 
-  const updateUser = (id, updatedUser) => {
-    setUsers(users.map((user) => user.id === id ? updatedUser : user))
-    setAlertMessage(`El usuario con id ${id} fue actualizado correctamente.`)
-  }
+  // const updateUser = (id, updatedUser) => {
+  //   setUsers(users.map((user) => user.id === id ? updatedUser : user))
+  //   setAlertMessage(`El usuario con id ${id} fue actualizado correctamente.`)
+  // }
 
  
   useEffect(() => {

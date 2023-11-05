@@ -4,16 +4,16 @@ import './admin-users.css';
 import { CreateUserForm } from './CreateUserForm';
 import { useModal } from '../../hooks/useModal';
 import { DeleteButton, DisplayButton, EditButton } from '../buttons';
-import { useForm } from "../../hooks/useForm";
+import { useForm } from "../../hooks/useForm"; // sacar cuando termino ModalTemplate
 import EditUserForm from './EditUserForm';
 import { UserAdminContext } from './UserAdminContext';
+import ModalTemplate from '../../helpers/ModalTemplate';
+import { useFetchUsers } from '../../hooks/useFetchUsers';
 
 export const UsersTable = () => {
 
-
-
-  const { show, handleShow, handleClose } = useModal()
-  const [users, setUsers] = useState([]);
+  const { show, handleShow, handleClose } = useModal(); 
+ // const [users, setUsers] = useState([]);
   const [userDB, setUserDB] = useState([]);
   const [showUserDetails, setShowUserDetails] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
@@ -23,6 +23,9 @@ export const UsersTable = () => {
   const [selectedUserForDeletion, setSelectedUserForDeletion] = useState(null);
   const [selectedUserForEdition, setSelectedUserForEdition] = useState(null);
   const handleCloseEdit = () => setShowEditUserForm(false);
+
+
+  const { users } = useFetchUsers()
 
   const handleShowConfirmDelete = (user) => {
     setSelectedUserForDeletion(user);
@@ -44,24 +47,7 @@ export const UsersTable = () => {
       responseMsg,
     } = useContext(UserAdminContext);
 
-  const fetchUsers = async () => {
-    try {
-      const response = await fetch('http://localhost:4001/api/users/list/all');
-      if (!response.ok) {
-        throw new Error('Error fetching users');
-      }
-      const data = await response.json();
-      const fetchedUsers = data.result.usuarios;
-      setUsers(fetchedUsers);
-    } catch (error) {
-      console.error('Error fetching users:', error);
-    }
-  };
-
-  useEffect(() => {
-    fetchUsers();
-  }, [selectedUserForDeletion]);  // no actualiza al eliminar
-
+  
   const handleShowUserDetails = async (user) => {
     try {
       const response = await fetch('http://localhost:4001/api/users/list', {
@@ -215,6 +201,18 @@ export const UsersTable = () => {
 
       {/* MODAL PARA DESPLEGAR FORM DE CREACIÓN DE USUARIO */}
 
+      <ModalTemplate 
+        show={show}
+        onHide={handleClose}
+        title="Crear un nuevo usuario administrador"
+        modalForm={<CreateUserForm 
+          handleClose={handleClose}
+          />}
+        buttonOne={handleClose}
+        buttonOneText="Volver al listado"    
+      />
+{/* 
+
       <Modal show={show} onHide={handleClose} className="mt-5">
         <Modal.Header closeButton>
           <Modal.Title>
@@ -231,7 +229,7 @@ export const UsersTable = () => {
             </Button>
           </Modal.Footer>
         </Modal.Body>
-      </Modal>
+      </Modal> */}
 
       {/* MODAL PARA DESPLEGAR FORM DE EDICION DE USUARIO */}
       <Modal show={showEditUserForm} onHide={handleCloseEdit} className="mt-5">
@@ -241,7 +239,7 @@ export const UsersTable = () => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <EditUserForm user={selectedUserForEdition} />
+          <EditUserForm user={selectedUserForEdition} handleCloseEdit={handleCloseEdit} />
 
           <Modal.Footer>
             <Button onClick={handleCloseEdit}>
@@ -293,7 +291,7 @@ export const UsersTable = () => {
           <p className="form-title mt-4">Rol:</p>
           <p>{userDB.role}</p>
           <p className="form-title mt-4">Imagen:</p>
-          <img src={userDB.avatar} alt="" className="avatarInDisplay" />
+          <img src={userDB.avatar} alt="" className="avatar" />
 
           <Modal.Footer>
             <Button onClick={handleCloseUserDetails} >
