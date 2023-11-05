@@ -289,24 +289,24 @@ const EditUserForm = ({ user, handleCloseEdit }) => {
                     </Row>
 
                     <Row>
-                        <p className={files && files.length > 0 ? "mt-2" : styles.hidden}  >Imagen seleccionada</p>
+                        <p className={files && files.length > 0 ? "mt-2" : "hidden"}  >Imagen seleccionada</p>
                         <Col sm={4}>
 
                             {/* AVATAR PREVIEW  ESTA PARTE ANDA 2NOV23*/}
                             {
                                 files && files.length > 0
-                                    ? <div className='images-preview'>
+                                    && <div className='images-preview'>
                                         {
                                             files.map((file, index) => {
                                                 return (
                                                     <div className='box-individual-preview' key={index}>
-                                                        <img src={URL.createObjectURL(file)} alt={file.name} className="avatar " />
+                                                        <img src={URL.createObjectURL(file)} alt={file.name} className={files && files.length > 0 ? "avatar" : "hidden"}/>
                                                     </div>
                                                 )
                                             })
                                         }
                                     </div>
-                                    : <img src={avatarDefault} className="image-individual" />
+                                     
                             }
 
                             {/* AVATAR PREVIEW  */}
