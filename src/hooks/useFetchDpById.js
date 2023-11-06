@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
-export const useFetchDpById = () => {
+export const useFetchDpById = (id) => {
 
-    const { id } = useParams();
+console.log(id,"este es ID de fetchDP");
     const [eventsDp, setEventsDp] = useState(null);
     const [idCat, setIdCat] = useState(null);
     const [loadingFetch, setLoadingFetch] = useState(true);
@@ -15,20 +15,24 @@ export const useFetchDpById = () => {
                     throw new Error('El ID del evento no está definido');
                 }
 
-                const response = await fetch(`http://localhost:4001/api/puntodigital/update/${id}`);
+                const response = await fetch("http://localhost:4001/api/punto-digital/list", {
+                    method: "POST",
+                    headers: {'Content-Type': "application/json"},
+                    body: JSON.stringify({id:id})
+                  });
+                console.log(response, 'response despues del fetch');
 
                 if (!response.ok) {
                     throw new Error('Error al obtener los detalles del Evento con este ID');
                 }
-
+                
                 const data = await response.json();
 
-                const { news, newsCategory_id } = data;
+            const dpNew = data.result.dpNew; // Accede a dpNew correctamente
 
-                setEventsDp(news);
-                setIdCat(newsCategory_id);
-                setLoadingFetch(false);
-
+                setEventsDp(dpNew);
+               
+               
             } catch (error) {
                 setError(error.message || 'Hubo un error al obtener los detalles del Evento.');
                 setLoadingFetch(false);
@@ -38,7 +42,7 @@ export const useFetchDpById = () => {
         fetchData();
     }, [id]);
 
-    return { eventsDp, loadingFetch, error, idCat, id };
+    return { eventsDp, loadingFetch, error};
 };
 
 

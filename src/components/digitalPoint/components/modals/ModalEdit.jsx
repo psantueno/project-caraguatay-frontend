@@ -2,7 +2,7 @@ import { Button, Modal } from 'react-bootstrap';
 import { useModal } from '../../../../hooks/useModal';
 import { EditDpForm } from '../forms/EditDpForm';
 
-export const ModalEdit = ({ show, handleClose, id, dpnew }) => {
+export const ModalEdit = ({ show, handleClose, id }) => {
 
     // const { show, handleShow, handleClose } = useModal()
 
@@ -19,7 +19,7 @@ export const ModalEdit = ({ show, handleClose, id, dpnew }) => {
                 </Modal.Header>
                 <Modal.Body>
 
-                    <EditDpForm id={ id  } dpnew={dpnew} />
+                    <EditDpForm id={ id }  />
 
                     <Modal.Footer>
                         <Button onClick={handleClose}>

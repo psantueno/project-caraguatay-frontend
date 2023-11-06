@@ -5,21 +5,26 @@ import { useForm } from '../../../../hooks/useForm';
 import { useContext, useRef } from 'react';
 import { useFetchDpCategories } from '../../../../hooks/useFetchDpCategories';
 import dayjs from "dayjs";
+import { useFetchDpById } from '../../../../hooks/useFetchDpById';
 
-export const EditDpForm = ({ id , dpnew}) => {
+export const EditDpForm = ( {id} ) => {
 
+console.log( id, 'este es el ID');
+
+const {eventsDp} = useFetchDpById(id)
+console.log(eventsDp, "EventDp en EDIT");
 
 
     const { dPCategories } = useFetchDpCategories()
 
     const initialForm = {
-        category: dpnew ? dpnew.category : '',
-        status: dpnew ? dpnew.status : '',
-        start: dpnew ? dpnew.start : '',
-        title: dpnew ? dpnew.title : '',
-        description: dpnew ? dpnew.description : '',
-        image: dpnew ? dpnew.image : '',
-        requeriments: dpnew ? dpnew.requirements : '',
+        category: eventsDp ? eventsDp.category : '',
+        status: eventsDp ? eventsDp.status : '',
+        start: eventsDp ? eventsDp.start : '',
+        title: eventsDp ? eventsDp.title : '',
+        description: eventsDp ? eventsDp.description : '',
+        image: eventsDp ? eventsDp.image : '',
+        requeriments: eventsDp ? eventsDp.requirements : '',
     };
 
     const inputs = {
@@ -44,6 +49,8 @@ export const EditDpForm = ({ id , dpnew}) => {
         handleKeyUp,
         handleBlur,
         handleMouseup,
+        items,
+        setItems,
         setForm,
         setErrors,
         setRequirementValue,
@@ -132,7 +139,8 @@ export const EditDpForm = ({ id , dpnew}) => {
 
 
 
-    const handleSubmit ={
+    const handleSubmit = () => {
+        console.log('handlesubmit');
         
     }
 
@@ -140,7 +148,7 @@ export const EditDpForm = ({ id , dpnew}) => {
 
         <>
 
-        // {/* 
+         {/* 
         //             {/* RESPUESTA OK DEL RESPONSE */}
         {/* 
         //             <Alert show={showResOk} variant="primary" className="mt-2">
@@ -157,7 +165,7 @@ export const EditDpForm = ({ id , dpnew}) => {
         //                 </Row>
         //             </Alert> */}
         
-        // {/*    RESPUESTA OK DEL RESPONSE */}
+         {/*    RESPUESTA OK DEL RESPONSE */}
         
                     <Container className='mb-3 mt-3'>
 
