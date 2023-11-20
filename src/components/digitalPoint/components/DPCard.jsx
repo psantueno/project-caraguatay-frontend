@@ -64,7 +64,6 @@ export const DPCard = ({ id, image, title, start, status, requirements, descript
             </div>
 
             <ModalEdit show={show} handleClose={handleClose} id={id} />
-()
             <ModalCancel show={showConfirmDelete} handleClose={handleCancelDeletion} id={id} title={title} />
 
 

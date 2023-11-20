@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 
 export const useFetchDpById = (id) => {
 
-console.log(id,"este es ID de fetchDP");
     const [eventsDp, setEventsDp] = useState(null);
     const [idCat, setIdCat] = useState(null);
     const [loadingFetch, setLoadingFetch] = useState(true);
@@ -20,7 +19,7 @@ console.log(id,"este es ID de fetchDP");
                     headers: {'Content-Type': "application/json"},
                     body: JSON.stringify({id:id})
                   });
-                console.log(response, 'response despues del fetch');
+             
 
                 if (!response.ok) {
                     throw new Error('Error al obtener los detalles del Evento con este ID');
