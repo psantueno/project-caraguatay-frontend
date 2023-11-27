@@ -27,11 +27,11 @@ const initialForm = {
 export const CreateDpForm = ({ handleClose }) => {
 
 
- 
+
 
     const { dPCategories } = useFetchDpCategories()
 
-    
+
     const inputs = {
         title: useRef(),
         description: useRef(),
@@ -139,7 +139,7 @@ export const CreateDpForm = ({ handleClose }) => {
                 return;
             }
 
-            else {                                                                   // ----> Agrega el nuevo ítem a la lista.
+            else {                                           // ----> Agrega el nuevo ítem a la lista.
                 delete errors.requirements;
                 inputs.requirements.current.className = "form-control is-valid";
                 addItem(requirementValue);
@@ -149,88 +149,71 @@ export const CreateDpForm = ({ handleClose }) => {
     };
 
 
-    // const handleFile = (e) => {
+    const handleFile = (e) => {
 
-    //     const { files } = e.target;
 
-    //     if (!files[0] && form.image != undefined) {    // ---> cuando hay una imagen cargada, pero el user abre el seleccionador y
-    //         //cancela o cierra el mismo sin elegir archivo.
-    //         setForm(prevState => {
-    //             return {
-    //                 ...prevState,
-    //                 image: undefined
-    //             }
-    //         });
-    //         inputs.image.current.className = "form-control is-invalid";
-    //         errors.image = 'La imagen de portada es requerida.'
-    //         return;
+        const imageDp = e.target.files[0];
 
-    //     } else if (!files[0] && form.image === undefined) {  // ---> cuando no hay archivo cargado. Se abre el seleccionador y cancela
-    //         //o cierra el mismo sin elegir archivo.
-    //         setErrors(prevState => {
-    //             return {
-    //                 ...prevState,
-    //                 image: 'La imagen de portada es requerida.'
-    //             }
-    //         });
-    //         inputs.image.current.className = "form-control is-invalid";
+        if (!imageDp && form.image != undefined) {    // ---> cuando hay una imagen cargada, pero el user abre el seleccionador y
+            //cancela o cierra el mismo sin elegir archivo.
+            setForm(prevState => {
+                return {
+                    ...prevState,
+                    image: undefined
+                }
+            });
+            inputs.image.current.className = "form-control is-invalid";
+            errors.image = 'La imagen de portada es requerida.'
+            return;
 
-    //     } else {  // ---> cuando existe un archivo que no es imagen.
+        } else if (!imageDp && form.image === undefined) {  // ---> cuando no hay archivo cargado. Se abre el seleccionador y cancela
+            //o cierra el mismo sin elegir archivo.
+            setErrors(prevState => {
+                return {
+                    ...prevState,
+                    image: 'La imagen de portada es requerida.'
+                }
+            });
+            inputs.image.current.className = "form-control is-invalid";
 
-    //         const fileName = files[0].name.toLowerCase();
+        } else {  // ---> cuando existe un archivo que no es imagen.
 
-    //         if (!fileName.endsWith('.jpg') && !fileName.endsWith('.jpeg') && !fileName.endsWith('.png')) {
+            const fileName = imageDp.name.toLowerCase();
 
-    //             setForm(prevState => {
-    //                 return {
-    //                     ...prevState,
-    //                     image: undefined
-    //                 }
-    //             });
-    //             errors.image = `El archivo "${fileName}" no es una imagen.`
-    //             inputs.image.current.className = "form-control is-invalid";
+            if (!fileName.endsWith('.jpg') && !fileName.endsWith('.jpeg') && !fileName.endsWith('.png')) {
 
-    //             return;
+                setForm(prevState => {
+                    return {
+                        ...prevState,
+                        image: undefined
+                    }
+                });
+                errors.image = `El archivo "${fileName}" no es una imagen.`
+                inputs.image.current.className = "form-control is-invalid";
 
-    //         } else {   // ---> cuando existe el archivo y es una imagen.
+                return;
 
-    //             const newFile = files[0];
-    //             setForm(prevState => {
-    //                 return {
-    //                     ...prevState,
-    //                     image: newFile
-    //                 }
-    //             });
-    //             setFile
-    //             inputs.image.current.className = "form-control is-valid";
-    //             delete errors.image;
-    //         }
-    //     }
-    // };
+            } else {   // ---> cuando existe el archivo y es una imagen.
+
+                const newFile = imageDp;
+                setForm(prevState => {
+                    return {
+                        ...prevState,
+                        image: newFile
+                    }
+                });
+                setFiles([imageDp])
+                inputs.image.current.className = "form-control is-valid";
+                delete errors.image;
+            }
+        }
+    };
     const showFileNotImage = () => {
         delete errors.avatar;
         setMsgFileNotImage(false)
     }
 
 
-    const handleFile = (e) => {
-        const imageDp = e.target.files[0];
-        const fileName = imageDp.name.toLowerCase();
-
-        if (!fileName.endsWith('.jpg') && !fileName.endsWith('.jpeg') && !fileName.endsWith('.png')) {
-            setMsgFileNotImage(true);
-            setErrors({
-                ...errors,
-                image: `El archivo "${fileName}" no es una imagen`
-            });
-            return;
-        }
-
-        delete errors.avatar;
-
-        setFiles([imageDp]);
-        console.log(imageDp);
-    };
 
 
 
@@ -310,30 +293,8 @@ export const CreateDpForm = ({ handleClose }) => {
     {/* END FUNCTIONS */ }
 
     return (
-
         <>
-
-// {/* 
-//             {/* RESPUESTA OK DEL RESPONSE */}
-{/* 
-//             <Alert show={showResOk} variant="primary" className="mt-2">
-//                 <Row>
-//                     <Col>
-//                         <p>La publicación se ha creado correctamente.</p>
-//                     </Col>
-//                     <Col className="d-flex justify-content-end">
-//                         <Button
-//                             onClick={() => setShowResOk(false)}>
-//                             Cerrar
-//                         </Button>
-//                     </Col>
-//                 </Row>
-//             </Alert> */}
-
-// {/*    RESPUESTA OK DEL RESPONSE */}
-
             <Container className='mb-3 mt-3'>
-
                 <Form onSubmit={handleSubmit}>
 
                     <Form.Group className="mb-3" controlId='category'>
@@ -488,6 +449,24 @@ export const CreateDpForm = ({ handleClose }) => {
                                 : null
                         }
 
+                        <Row>
+                            <p className="mt-2">Imagen seleccionada</p>
+                            <Col sm={4}>
+
+                                {/* AVATAR PREVIEW  */}
+                                {files && files.length > 0 && (
+                                    <div className='images-preview'>
+                                        {files.map((file, index) => (
+                                            <div className='box-individual-preview' key={index}>
+                                                <img src={URL.createObjectURL(file)} alt={file.name} className="preview-image-dp" />
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+                                {/* AVATAR PREVIEW  */}
+                            </Col>
+                        </Row>
+
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId='requirements'>
@@ -548,7 +527,7 @@ export const CreateDpForm = ({ handleClose }) => {
             </Container>
 
 
- 
+
 
 
         </>

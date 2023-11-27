@@ -4,15 +4,16 @@ import { DpValidations } from '../DpValidations';
 import { useForm } from '../../../../hooks/useForm';
 import { useContext, useRef, useState } from 'react';
 import { useFetchDpCategories } from '../../../../hooks/useFetchDpCategories';
-import dayjs from "dayjs";
 import { fileUpload } from '../../../../helpers/fileUpload';
+import { DeleteButton } from '../../../buttons';
 
 
 export const EditDpForm = ({ eventsDp, handleClose }) => {
-
+   
     const [editedRequirements, setEditedRequirements] = useState([eventsDp.requeriments]);
     const [msgFileNotImage, setMsgFileNotImage] = useState(false);
-    const { dPCategories } = useFetchDpCategories()
+    const { dPCategories } = useFetchDpCategories();
+    const [newRequirement, setNewRequirement] = useState('');
 
     const initialForm = {
         id: eventsDp ? eventsDp.id : '',
@@ -97,65 +98,43 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
     };
 
 
-    // Función para eliminar un requisito existente
+    // Función para eliminar un requisito existente || NO FUNCIONA 26NOV23 ||
     const deleteItem = (index) => {
         const updatedRequirements = [...editedRequirements];
         updatedRequirements.splice(index, 1);
         setEditedRequirements(updatedRequirements);
+
+        if (checkTotalCharacters(updatedRequirements) < 0) return;
+
+        delete errors.requirements;
+      //  inputs.requirements.current.className = "form-control is-valid";
     };
 
-    const handleKeyDown = (e) => {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            const trimmedValue = requirementValue.trim();
+    const handleKeyDown = (e) => {  // || NO FUNCIONA 26NOV23 ||
+      if (e.key === 'Enter') {
+        e.preventDefault();
 
-            if (trimmedValue.length >= 3) {
-                setEditedRequirements([...editedRequirements, trimmedValue]);
-                setRequirementValue('');
-            }
+        if (requirementValue.trim().length < 3) return;
+
+        const updatedRequirements = [...editedRequirements, requirementValue];
+
+        if (checkTotalCharacters(updatedRequirements) > 130) {
+            setErrors(prevState => ({
+                ...prevState,
+                requirements: 'Máximo permitido: 130 caracteres. Edite el ítem actual o elimine alguno de los ingresados.'
+            }));
+
+            inputs.requirements.current.className = "form-control is-invalid";
+        } else {
+            delete errors.requirements;
+            inputs.requirements.current.className = "form-control is-valid";
+            setEditedRequirements(updatedRequirements);
+            setRequirementValue('');
         }
+    }
     };
-
-
-
-
-    // const handleKeyDown = (e) => {
-
-    //     if (e.key === 'Enter') {
-    //         e.preventDefault();
-
-    //         if (requirementValue.trim().length < 3) return;  // Controla que el item a ingresar tenga al menos 3 caracteres.
-
-    //         if (form.requirements && !(requirementValue.trim().length <= checkTotalCharacters(form.requirements))) { // Control para saber si el ítem a ingresar no supera el max permitido(130).
-
-    //             setErrors(prevState => {
-    //                 return {
-    //                     ...prevState,
-    //                     requirements: 'Máximo permitido: 130 caracteres. Edite el ítem actual o elimine alguno de los ingresados.'
-    //                 }
-    //             });
-
-    //             inputs.requirements.current.className = "form-control is-invalid";
-
-    //             // setTimeout(() => {
-    //             //     inputs.requirements.current.className = "form-control";
-    //             //     delete errors.requirements;
-    //             // }, 5000);
-
-    //             return;
-    //         }
-
-    //         else {                                                                   // ----> Agrega el nuevo ítem a la lista.
-    //             delete errors.requirements;
-    //             inputs.requirements.current.className = "form-control is-valid";
-    //             addItem(requirementValue);
-    //             setRequirementValue('');
-    //         }
-    //     }
-    // };
-
-
-    const checkTotalCharacters = (array) => {             // ----> Fx encargada de contar los caracteres de un array y que devuelve
+    
+    const checkTotalCharacters = (array) => {         // ----> Fx encargada de contar los caracteres de un array y que devuelve
         //la cantidad de caracteres restantes para completar el max.
         let totalCharacters = 0;
 
@@ -164,8 +143,6 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
                 totalCharacters += array[i].length;
             }
         }
-
-
 
         totalCharacters = 130 - totalCharacters;
         return totalCharacters;
@@ -188,7 +165,7 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
                 if (files.length > 0) {
                     const folder = "avatar";
                     imageDpUrl = await fileUpload(files[0], folder); // Update image URL with new image
-                } 
+                }
                 // else {
                 //     const folder = "avatar";
                 //     imageDpUrl = await fileUpload(files, folder);
@@ -241,7 +218,7 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
     return (
 
         <>
-          
+
             <Container className='mb-3 mt-3'>
 
                 <h3>Editar Evento</h3>
@@ -463,74 +440,63 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
 
 
                     </Form.Group>
-
                     <Form.Group className="mb-3" controlId='requirements'>
                         <div className="requirements-card">
                             <p className="subtitles-card"><b>Requisitos cargados:</b></p>
 
+                            {eventsDp.requirements && eventsDp.requirements.split(';').map((requirement, index) => (
+                                <div key={index} className="requirements-input">
+                                    <Form.Control
+                                        type="text"
+                                        name={`requirements[${index}]`}
+                                        minLength={3}
+                                        value={requirement}
+                                        onChange={(e) => handleRequirementChange(e, index)}
+                                        onBlur={handleBlur}
+                                        
+                                    />
+                                    <DeleteButton fx={deleteItem} arg={index} size="sm" />
+                                </div>
+                            ))}
 
-                            <Form.Control as="textarea" rows={3} cols={90} size="xl"
-                                className="requirements-card-li"
+                            <Form.Label className='mt-1 form-field-name'>Ingrese los requisitos</Form.Label>
+
+                            <Form.Control
                                 type="text"
-                                name="requirements"
+                                name="newRequirement"
                                 minLength={3}
-                                ref={inputs.requirements}
-                                value={eventsDp.requirements}
-
-
-                                onChange={handleChange}
-                                // onChange={(event) => setRequirementValue(event.target.value)}
-                                // onChange={(event) => handleRequirementChange(event)}
-                                onKeyUp={handleKeyUp}
-                                onBlur={handleBlur}
+                                placeholder="Ingrese un nuevo requisito"
+                                value={newRequirement}
+                                onChange={(event) => setNewRequirement(event.target.value)}
+                                onKeyDown={handleKeyDown}
                             />
 
+                            {
+                                errors && errors.requirements
+                                    ? <Form.Control.Feedback type="invalid">
+                                        {errors.requirements}
+                                    </Form.Control.Feedback>
+                                    : null
+                            }
 
+                            {/* HELPER TEXT DE REQUIREMENTS */}
+                            {
+                                <div className='container-helpers'>
+                                    <p className='characters-counter'>({130 - checkTotalCharacters(form.requirements)}/130)</p>
+                                    <p className='helper-form'>Escriba el requisito y presione "ENTER" para insertarlo.</p>
+                                    <p className='helper-form'>El requisito debe tener al menos 3 caracteres <i className="fas fa-exclamation-circle"></i>.</p>
+                                </div>
+                            }
+                            {/* HELPER TEXT DE REQUIREMENTS */}
 
+                            {/* PREVIEW REQUIREMENTS */}
+                            <ul>
+                                {items.map((item, index) => (
+                                    <li key={index} className="items-requirements">{item} <DeleteButton fx={deleteItem} arg={index} size="sm" /></li>
+                                ))}
+                            </ul>
+                            {/* PREVIEW REQUIREMENTS */}
                         </div>
-
-                        <Form.Label className='mt-1 form-field-name'>Ingrese los requisitos</Form.Label>
-
-                        <Form.Control
-                            type="text"
-                            name="requirements"
-                            minLength={3}
-                            placeholder="Ingrese los requisitos"
-                            value={eventsDp.requeriments}
-                            ref={inputs.requirements}
-                            // onChange={handleChange}
-                            onChange={(event) => setRequirementValue(event.target.value)}
-                            // onKeyUp={handleKeyUp}
-                            // onBlur={handleBlur}
-                            onKeyDown={handleKeyDown}
-                        />
-
-                        {
-                            errors && errors.requirements
-                                ? <Form.Control.Feedback type="invalid">
-                                    {errors.requirements}
-                                </Form.Control.Feedback>
-                                : null
-                        }
-
-                        {/* HELPER TEXT DE REQUIREMENTS */}
-                        {
-                            <div className='container-helpers'>
-                                <p className='characters-counter'>({130 - checkTotalCharacters(form.requirements)}/130)</p>
-                                <p className='helper-form'>Escriba el requisito y presione "ENTER" para insertarlo.</p>
-                                <p className='helper-form'>El requisito debe tener al menos 3 caracteres <i className="fas fa-exclamation-circle"></i>.</p>
-                            </div>
-                        }
-                        {/* HELPER TEXT DE REQUIREMENTS */}
-
-                        {/* PREVIEW REQUIREMENTS */}
-                        <ul>
-                            {items.map((item, index) => (
-                                <li key={index} className="items-requirements">{item} <DeleteButton fx={deleteItem} arg={index} size="sm" /></li>
-                            ))}
-                        </ul>
-                        {/* PREVIEW REQUIREMENTS */}
-
                     </Form.Group>
 
                     <Button className='m-2' type="submit">
@@ -540,15 +506,8 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
                     <Button className='m-2' type="reset" onClick={handleReset}>
                         Borrar
                     </Button>
-
                 </Form>
-
             </Container>
-
-
-
-
-
         </>
     )
 }
