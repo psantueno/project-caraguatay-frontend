@@ -2,28 +2,31 @@ import { Button, Form, Container, Col, Row, Alert, Modal } from 'react-bootstrap
 import { DPAdminContext } from '../../context/DPAdminContext';
 import { DpValidations } from '../DpValidations';
 import { useForm } from '../../../../hooks/useForm';
-import { useContext, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { useFetchDpCategories } from '../../../../hooks/useFetchDpCategories';
 import { fileUpload } from '../../../../helpers/fileUpload';
 import { DeleteButton } from '../../../buttons';
 
 
 export const EditDpForm = ({ eventsDp, handleClose }) => {
-   
-    const [editedRequirements, setEditedRequirements] = useState([eventsDp.requeriments]);
+
+    const [editedRequirements, setEditedRequirements] = useState([]);
     const [msgFileNotImage, setMsgFileNotImage] = useState(false);
     const { dPCategories } = useFetchDpCategories();
-    const [newRequirement, setNewRequirement] = useState('');
+    const [requirementsToSend, setRequirementsToSend] = useState('');  // Cambio de nombre del estado
+    const [activeErrorInEditedReq, setActiveErrorInEditedReq] = useState(false);
+    
+
 
     const initialForm = {
         id: eventsDp ? eventsDp.id : '',
-        category: eventsDp ? eventsDp.category : '',
+        // category: eventsDp ? eventsDp.category : '',
         title: eventsDp ? eventsDp.title : '',
         description: eventsDp ? eventsDp.description : '',
         start: eventsDp ? eventsDp.start : '',
         status: eventsDp ? eventsDp.status : '',
         image: eventsDp ? eventsDp.image : '',
-        requeriments: eventsDp ? eventsDp.requirements : '',
+        requirements: '',
         dpCategory_id: eventsDp ? eventsDp.dpCategory_id : ''
     };
 
@@ -92,48 +95,98 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
 
 
     const handleRequirementChange = (event, index) => {
-        const updatedRequirements = [editedRequirements];
+        const updatedRequirements = [...editedRequirements];
         updatedRequirements[index] = event.target.value;
+        
+        // Validar que no esté vacío y tenga al menos 3 caracteres
+        if (updatedRequirements[index].trim().length === 0) {
+            setActiveErrorInEditedReq(true);
+        } else {
+            setActiveErrorInEditedReq(false);
+        }
+        
         setEditedRequirements(updatedRequirements);
+    
+        // Actualizar form.requirements
+        // const updatedForm = { ...form, requirements: editedRequirements.join(';') };
+        // setForm(updatedForm);
     };
+    
 
 
     // Función para eliminar un requisito existente || NO FUNCIONA 26NOV23 ||
-    const deleteItem = (index) => {
-        const updatedRequirements = [...editedRequirements];
-        updatedRequirements.splice(index, 1);
-        setEditedRequirements(updatedRequirements);
+    // const deleteItem = (index) => {
+    //     const updatedRequirements = [...editedRequirements];
+    //     updatedRequirements.splice(index, 1);
+    //     setEditedRequirements(updatedRequirements);
 
-        if (checkTotalCharacters(updatedRequirements) < 0) return;
+    //     if (checkTotalCharacters(updatedRequirements) < 0) return;
+
+    //     delete errors.requirements;
+    //     //  inputs.requirements.current.className = "form-control is-valid";
+    // };
+
+    const addItem = (value) => {                          // ----> Fx agregar ítem a la lista.
+
+        setItems([...items, value]);
+        setForm(prevState => {
+            return {
+                ...prevState,
+                requirements: [...items, value]
+            }
+        });
+    };
+
+    const deleteItem = (index) => {
+
+        const newItems = [...items];
+        newItems.splice(index, 1);
+        setItems(newItems);
+        setForm(prevState => {
+            return {
+                ...prevState,
+                requirements: newItems
+            }
+        });
+
+        if (form.requirements && (checkTotalCharacters(form.requirements) < 0)) return;
 
         delete errors.requirements;
-      //  inputs.requirements.current.className = "form-control is-valid";
+        inputs.requirements.current.className = "form-control is-valid";
+
     };
 
-    const handleKeyDown = (e) => {  // || NO FUNCIONA 26NOV23 ||
-      if (e.key === 'Enter') {
-        e.preventDefault();
+    const handleKeyDown = (e) => {
 
-        if (requirementValue.trim().length < 3) return;
+        if (e.key === 'Enter') {
+            e.preventDefault();
 
-        const updatedRequirements = [...editedRequirements, requirementValue];
+            if (requirementValue.trim().length < 3) return;  // Controla que el item a ingresar tenga al menos 3 caracteres.
 
-        if (checkTotalCharacters(updatedRequirements) > 130) {
-            setErrors(prevState => ({
-                ...prevState,
-                requirements: 'Máximo permitido: 130 caracteres. Edite el ítem actual o elimine alguno de los ingresados.'
-            }));
+            if (form.requirements && !(requirementValue.trim().length <= checkTotalCharacters(form.requirements))) { // Control para saber si el ítem a ingresar no supera el max permitido(130).
 
-            inputs.requirements.current.className = "form-control is-invalid";
-        } else {
-            delete errors.requirements;
-            inputs.requirements.current.className = "form-control is-valid";
-            setEditedRequirements(updatedRequirements);
-            setRequirementValue('');
+                setErrors(prevState => {
+                    return {
+                        ...prevState,
+                        requirements: 'Máximo permitido: 130 caracteres. Edite el ítem actual o elimine alguno de los ingresados.'
+                    }
+                });
+
+                inputs.requirements.current.className = "form-control is-invalid";
+
+                return;
+            }
+
+            else {                                           
+                delete errors.requirements;
+                inputs.requirements.current.className = "form-control is-valid";
+                addItem(requirementValue);
+                setRequirementValue('');
+            }
         }
-    }
     };
-    
+
+
     const checkTotalCharacters = (array) => {         // ----> Fx encargada de contar los caracteres de un array y que devuelve
         //la cantidad de caracteres restantes para completar el max.
         let totalCharacters = 0;
@@ -148,46 +201,46 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
         return totalCharacters;
     }
 
+    /*
+    QUEda funcionando la edicion y el agregado de nuevos items. Falta ver eliminar los items
+    */
     const handleSubmit = async (e) => {
-
         handleChange(e);
         e.preventDefault();
         setErrors(errors);
 
         if (Object.keys(errors).length === 0) {
-
-            setLoading(true);        // activa el loader
+            setLoading(true); // activa el loader
 
             try {
-
-                let imageDpUrl = form.image; // Keep the current image URL
+                let imageDpUrl = form.image; // Mantén la URL de la imagen actual
 
                 if (files.length > 0) {
                     const folder = "avatar";
-                    imageDpUrl = await fileUpload(files[0], folder); // Update image URL with new image
+                    imageDpUrl = await fileUpload(files[0], folder); // Actualiza la URL de la imagen con la nueva imagen
                 }
-                // else {
-                //     const folder = "avatar";
-                //     imageDpUrl = await fileUpload(files, folder);
-                // }
+
+                const requerimentsToJoin = [...editedRequirements, ...form.requirements];
+                const requerimentsToUpdate = requerimentsToJoin.join(';');
 
                 const data = {
                     ...form,
-                    image: imageDpUrl // Set the new image URL
+                    image: imageDpUrl, // Establece la nueva URL de la imagen
+                    requirements: requerimentsToUpdate, // Cambio de nombre del estado
                 };
+
+                console.log(data);
 
                 const req = await fetch("http://localhost:4001/api/punto-digital/update", {
                     method: "PUT",
                     body: JSON.stringify(data),
-                    headers: { 'Content-Type': 'application/json' }
-                })
-                console.log(data, "linea 93")
+                    headers: { 'Content-Type': 'application/json' },
+                });
 
                 const res = await req.json();
                 setResponseMsg(res);
-                console.log(responseMsg, ";;;;");
 
-                console.log("res", res)
+                console.log("res", res);
 
                 if (res.status === 200) {
                     setLoading(false);
@@ -198,22 +251,28 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
                     handleReset();
                     handleClose();
                     window.scrollTo({ top: 0, behavior: 'smooth', passive: true });
-
                 } else {
                     setLoading(false);
                     setShowResBad(true);
                     handleClose();
                     window.scrollTo({ top: 0, behavior: 'smooth', passive: true });
                 }
-            }
-            catch (error) {
-                console.log(error)
+            } catch (error) {
+                console.log(error);
             }
         } else {
             setShowResOk(false);
             alert("Revise los errores del formulario");
         }
-    }
+    };
+
+    
+
+    useEffect(() => {
+        if (eventsDp.requirements) {
+            setEditedRequirements(eventsDp.requirements.split(';'));
+        }
+    }, [eventsDp.requirements]);
 
     return (
 
@@ -444,32 +503,39 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
                         <div className="requirements-card">
                             <p className="subtitles-card"><b>Requisitos cargados:</b></p>
 
-                            {eventsDp.requirements && eventsDp.requirements.split(';').map((requirement, index) => (
+                            { activeErrorInEditedReq && <p  style={{ color: "#dc3545"}}>Los requisitos no pueden estar vacíos. Si desea eliminarlo, utilice el botón <i className="fas fa-trash-alt"></i> (borrar).</p> }
+
+                            {editedRequirements && editedRequirements.map((requirement, index) => (
                                 <div key={index} className="requirements-input">
                                     <Form.Control
                                         type="text"
                                         name={`requirements[${index}]`}
-                                        minLength={3}
+                                        // minLength={3}
                                         value={requirement}
                                         onChange={(e) => handleRequirementChange(e, index)}
                                         onBlur={handleBlur}
-                                        
+                                        required
                                     />
                                     <DeleteButton fx={deleteItem} arg={index} size="sm" />
                                 </div>
                             ))}
 
-                            <Form.Label className='mt-1 form-field-name'>Ingrese los requisitos</Form.Label>
+
+                            <Form.Label className='mt-1 form-field-name'><i className="fas fa-plus-square"></i> Agregar requisitos</Form.Label>
 
                             <Form.Control
-                                type="text"
-                                name="newRequirement"
-                                minLength={3}
-                                placeholder="Ingrese un nuevo requisito"
-                                value={newRequirement}
-                                onChange={(event) => setNewRequirement(event.target.value)}
-                                onKeyDown={handleKeyDown}
-                            />
+                            type="text"
+                            name="requirements"
+                            minLength={3}
+                            placeholder="Ingrese los requisitos"
+                            value={requirementValue}
+                            ref={inputs.requirements}
+                            // onChange={handleChange}
+                            onChange={(event) => setRequirementValue(event.target.value)}
+                            // onKeyUp={handleKeyUp}
+                            // onBlur={handleBlur}
+                            onKeyDown={handleKeyDown}
+                        />
 
                             {
                                 errors && errors.requirements
