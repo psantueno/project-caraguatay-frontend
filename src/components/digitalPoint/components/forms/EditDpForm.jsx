@@ -6,6 +6,14 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import { useFetchDpCategories } from '../../../../hooks/useFetchDpCategories';
 import { fileUpload } from '../../../../helpers/fileUpload';
 import { DeleteButton } from '../../../buttons';
+import { Loader } from '../../../buttons/Loader';
+
+/*
+
+RESTA VER EL CAMBIO DE IMAGEN DE PORTADA
+
+*/
+
 
 
 export const EditDpForm = ({ eventsDp, handleClose }) => {
@@ -15,7 +23,7 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
     const { dPCategories } = useFetchDpCategories();
     const [requirementsToSend, setRequirementsToSend] = useState('');  // Cambio de nombre del estado
     const [activeErrorInEditedReq, setActiveErrorInEditedReq] = useState(false);
-    
+
 
 
     const initialForm = {
@@ -61,6 +69,7 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
         requirementValue,
         setFiles,
         files,
+        loading,
         handleReset,
         setLoading,
         errors,
@@ -97,36 +106,41 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
     const handleRequirementChange = (event, index) => {
         const updatedRequirements = [...editedRequirements];
         updatedRequirements[index] = event.target.value;
-        
+
         // Validar que no esté vacío y tenga al menos 3 caracteres
         if (updatedRequirements[index].trim().length === 0) {
             setActiveErrorInEditedReq(true);
         } else {
             setActiveErrorInEditedReq(false);
         }
-        
+
         setEditedRequirements(updatedRequirements);
-    
+
         // Actualizar form.requirements
         // const updatedForm = { ...form, requirements: editedRequirements.join(';') };
         // setForm(updatedForm);
     };
-    
+
 
 
     // Función para eliminar un requisito existente || NO FUNCIONA 26NOV23 ||
-    // const deleteItem = (index) => {
-    //     const updatedRequirements = [...editedRequirements];
-    //     updatedRequirements.splice(index, 1);
-    //     setEditedRequirements(updatedRequirements);
+    const deleteEditReq = (index) => {
+        const updatedRequirements = [...editedRequirements];
+        updatedRequirements.splice(index, 1);
+        setEditedRequirements(updatedRequirements);
 
-    //     if (checkTotalCharacters(updatedRequirements) < 0) return;
+        if (checkTotalCharacters(updatedRequirements) < 0) return;
 
-    //     delete errors.requirements;
-    //     //  inputs.requirements.current.className = "form-control is-valid";
-    // };
+        delete errors.requirements;
+        //  inputs.requirements.current.className = "form-control is-valid";
+    };
 
-    const addItem = (value) => {                          // ----> Fx agregar ítem a la lista.
+
+    /*
+    * Agrega nuevo ítem a la lista. (no editados, sino nuevos).
+    */
+
+    const addItem = (value) => {                         
 
         setItems([...items, value]);
         setForm(prevState => {
@@ -156,14 +170,19 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
 
     };
 
+    /*
+    * Controla que el item a ingresar tenga al menos 3 caracteres.
+    * Control para saber si el ítem a ingresar no supera el max permitido de caracteres en la seccion requirements (130).
+    */
+
     const handleKeyDown = (e) => {
 
         if (e.key === 'Enter') {
             e.preventDefault();
 
-            if (requirementValue.trim().length < 3) return;  // Controla que el item a ingresar tenga al menos 3 caracteres.
+            if (requirementValue.trim().length < 3) return;
 
-            if (form.requirements && !(requirementValue.trim().length <= checkTotalCharacters(form.requirements))) { // Control para saber si el ítem a ingresar no supera el max permitido(130).
+            if (form.requirements && !(requirementValue.trim().length <= checkTotalCharacters(form.requirements))) { 
 
                 setErrors(prevState => {
                     return {
@@ -177,7 +196,7 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
                 return;
             }
 
-            else {                                           
+            else {
                 delete errors.requirements;
                 inputs.requirements.current.className = "form-control is-valid";
                 addItem(requirementValue);
@@ -187,8 +206,12 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
     };
 
 
-    const checkTotalCharacters = (array) => {         // ----> Fx encargada de contar los caracteres de un array y que devuelve
-        //la cantidad de caracteres restantes para completar el max.
+/*
+* Fx encargada de contar los caracteres de un array y que devuelve la cantidad de caracteres 
+* restantes para completar el max.
+*/
+    const checkTotalCharacters = (array) => {         
+                                                     
         let totalCharacters = 0;
 
         if (array) {
@@ -201,10 +224,9 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
         return totalCharacters;
     }
 
-    /*
-    QUEda funcionando la edicion y el agregado de nuevos items. Falta ver eliminar los items
-    */
+
     const handleSubmit = async (e) => {
+
         handleChange(e);
         e.preventDefault();
         setErrors(errors);
@@ -225,8 +247,8 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
 
                 const data = {
                     ...form,
-                    image: imageDpUrl, // Establece la nueva URL de la imagen
-                    requirements: requerimentsToUpdate, // Cambio de nombre del estado
+                    image: imageDpUrl, // Establece la nueva URL de la imagen en caso de que haya modificado la portada.
+                    requirements: requerimentsToUpdate, 
                 };
 
                 console.log(data);
@@ -247,10 +269,10 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
                     setShowResOk(true);
                     setShowResBad(false);
                     setForm(initialForm);
-                    //setFiles
                     handleReset();
                     handleClose();
                     window.scrollTo({ top: 0, behavior: 'smooth', passive: true });
+
                 } else {
                     setLoading(false);
                     setShowResBad(true);
@@ -266,7 +288,6 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
         }
     };
 
-    
 
     useEffect(() => {
         if (eventsDp.requirements) {
@@ -281,6 +302,8 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
             <Container className='mb-3 mt-3'>
 
                 <h3>Editar Evento</h3>
+
+                <Loader loader={loading} text={'Actualizando el evento...'} />
 
                 <Form onSubmit={handleSubmit}>
 
@@ -503,7 +526,7 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
                         <div className="requirements-card">
                             <p className="subtitles-card"><b>Requisitos cargados:</b></p>
 
-                            { activeErrorInEditedReq && <p  style={{ color: "#dc3545"}}>Los requisitos no pueden estar vacíos. Si desea eliminarlo, utilice el botón <i className="fas fa-trash-alt"></i> (borrar).</p> }
+                            {activeErrorInEditedReq && <p style={{ color: "#dc3545" }}>Los requisitos no pueden estar vacíos. Si desea eliminarlo, utilice el botón <i className="fas fa-trash-alt"></i> (borrar).</p>}
 
                             {editedRequirements && editedRequirements.map((requirement, index) => (
                                 <div key={index} className="requirements-input">
@@ -516,7 +539,7 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
                                         onBlur={handleBlur}
                                         required
                                     />
-                                    <DeleteButton fx={deleteItem} arg={index} size="sm" />
+                                    <DeleteButton fx={deleteEditReq} arg={index} size="sm" />
                                 </div>
                             ))}
 
@@ -524,18 +547,18 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
                             <Form.Label className='mt-1 form-field-name'><i className="fas fa-plus-square"></i> Agregar requisitos</Form.Label>
 
                             <Form.Control
-                            type="text"
-                            name="requirements"
-                            minLength={3}
-                            placeholder="Ingrese los requisitos"
-                            value={requirementValue}
-                            ref={inputs.requirements}
-                            // onChange={handleChange}
-                            onChange={(event) => setRequirementValue(event.target.value)}
-                            // onKeyUp={handleKeyUp}
-                            // onBlur={handleBlur}
-                            onKeyDown={handleKeyDown}
-                        />
+                                type="text"
+                                name="requirements"
+                                minLength={3}
+                                placeholder="Ingrese los requisitos"
+                                value={requirementValue}
+                                ref={inputs.requirements}
+                                // onChange={handleChange}
+                                onChange={(event) => setRequirementValue(event.target.value)}
+                                // onKeyUp={handleKeyUp}
+                                // onBlur={handleBlur}
+                                onKeyDown={handleKeyDown}
+                            />
 
                             {
                                 errors && errors.requirements

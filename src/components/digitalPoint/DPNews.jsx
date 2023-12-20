@@ -13,7 +13,7 @@ export const DPNews = ({ fns }) => {
       {/* ver de haer que cuando no haya nada renderice un cartel de NO HAY NADA PARA MOSTRAR     */ }
 
         {
-          fns && fns.map((fn, index) => (
+          fns && fns.map((fn, index) => (     // DOCUMENTAR ESTAS FUNCIONES
             <Row  key={index}>
               {fn}
             </Row>
