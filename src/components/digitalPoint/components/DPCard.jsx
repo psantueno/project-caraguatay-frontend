@@ -6,7 +6,7 @@ import { ModalCancel } from "./modals/ModalCancel"
 import { useState } from "react"
 
 
-export const DPCard = ({ id, image, title, start, status, requirements, description, dpnew, enabled }) => {
+export const DPCard = ({ id, image, title, start, status, requirements, description }) => {
 
 
     const { show, handleShow, handleClose } = useModal();
@@ -57,14 +57,13 @@ export const DPCard = ({ id, image, title, start, status, requirements, descript
                 </div>
 
                 <div className="btns-admin-card">
-                    <EditButton fx={handleShow} />
+                    <EditButton fx={handleShow}  />
                     <DeleteButton fx={handleShowConfirmDelete} />
                 </div>
 
             </div>
 
-            <ModalEdit show={show} handleClose={handleClose} id={id} dpnew={dpnew} />
-
+            <ModalEdit show={show} handleClose={handleClose} id={id} />
             <ModalCancel show={showConfirmDelete} handleClose={handleCancelDeletion} id={id} title={title} />
 
 

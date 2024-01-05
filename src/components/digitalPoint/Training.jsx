@@ -5,7 +5,8 @@ import { useFetchDpByCategory } from '../../hooks/useFetchDpByCategory';
 
 export const Training = () => {
 
-  const { eventsDp } = useFetchDpByCategory(2)
+  const { eventsDp } = useFetchDpByCategory(2);
+
 
   return (
     <Container>

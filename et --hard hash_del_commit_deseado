@@ -1,0 +1,123 @@
+[33m68be6dd[m[33m ([m[1;36mHEAD -> [m[1;32musersAdmin[m[33m, [m[1;31morigin/main[m[33m)[m HEAD@{0}: pull origin main: Fast-forward
+[33mc9b50ff[m HEAD@{1}: checkout: moving from main to usersAdmin
+[33mac3e7c8[m[33m ([m[1;32mmain[m[33m)[m HEAD@{2}: commit: create routes private and public
+[33m88f9186[m HEAD@{3}: commit: fix index.css
+[33mf2972ba[m HEAD@{4}: pull origin main: Fast-forward
+[33mbb0b5d2[m HEAD@{5}: checkout: moving from loginAndSession to main
+[33m1bf2579[m[33m ([m[1;32mloginAndSession[m[33m)[m HEAD@{6}: commit: se implementa localstorage para la session y un menuProfile para manejar logout y ver datos
+[33mbb0b5d2[m HEAD@{7}: checkout: moving from main to loginAndSession
+[33mbb0b5d2[m HEAD@{8}: pull origin main: Fast-forward
+[33ma647843[m HEAD@{9}: pull origin main: Fast-forward
+[33m857a3a8[m HEAD@{10}: checkout: moving from crudnews to main
+[33mb86a6c2[m[33m ([m[1;31morigin/crudnews[m[33m, [m[1;32mcrudnews[m[33m)[m HEAD@{11}: checkout: moving from main to crudnews
+[33m857a3a8[m HEAD@{12}: pull origin main: Fast-forward
+[33m68ff4cb[m HEAD@{13}: checkout: moving from crudnews to main
+[33mb86a6c2[m[33m ([m[1;31morigin/crudnews[m[33m, [m[1;32mcrudnews[m[33m)[m HEAD@{14}: commit: se finaliza crud de news
+[33mfa04e4b[m HEAD@{15}: checkout: moving from home to crudnews
+[33m4cb5c7f[m[33m ([m[1;31morigin/home[m[33m, [m[1;32mhome[m[33m)[m HEAD@{16}: checkout: moving from crudnews to home
+[33mfa04e4b[m HEAD@{17}: commit: se agrega funcion delete en news
+[33m84b772c[m HEAD@{18}: commit: Se arregla link en tarjeta newsItem
+[33m68ff4cb[m HEAD@{19}: pull origin main: Fast-forward
+[33m705cdd8[m HEAD@{20}: checkout: moving from main to crudnews
+[33m68ff4cb[m HEAD@{21}: pull origin main: Fast-forward
+[33m0cdd9f4[m HEAD@{22}: checkout: moving from crudnews to main
+[33m705cdd8[m HEAD@{23}: commit: se soluciona error en el almacenamiento de las urls en la tabla media
+[33m0cdd9f4[m HEAD@{24}: pull origin main: Fast-forward
+[33md84f63e[m HEAD@{25}: checkout: moving from main to crudnews
+[33m0cdd9f4[m HEAD@{26}: pull origin main: Fast-forward
+[33m087adad[m HEAD@{27}: checkout: moving from crudnews to main
+[33md84f63e[m HEAD@{28}: commit: se agrega la seccion administracion de noticias con un buscador por title y category
+[33m7e27d73[m HEAD@{29}: pull origin main: Fast-forward
+[33mcced160[m HEAD@{30}: commit: se crea la page adminNews y el buscador searchNews
+[33m087adad[m HEAD@{31}: checkout: moving from main to crudnews
+[33m087adad[m HEAD@{32}: commit: reorganizacion de carpeta news
+[33m245f46e[m HEAD@{33}: pull origin main: Fast-forward
+[33mfe7ddc7[m[33m ([m[1;32mcrud-news[m[33m)[m HEAD@{34}: checkout: moving from crud-news to main
+[33mfe7ddc7[m[33m ([m[1;32mcrud-news[m[33m)[m HEAD@{35}: checkout: moving from main to crud-news
+[33mfe7ddc7[m[33m ([m[1;32mcrud-news[m[33m)[m HEAD@{36}: checkout: moving from crud-news to main
+[33mfe7ddc7[m[33m ([m[1;32mcrud-news[m[33m)[m HEAD@{37}: checkout: moving from main to crud-news
+[33mfe7ddc7[m[33m ([m[1;32mcrud-news[m[33m)[m HEAD@{38}: pull origin main: Fast-forward
+[33m9522013[m HEAD@{39}: checkout: moving from form-news to main
+[33mec458cb[m[33m ([m[1;32mform-news[m[33m)[m HEAD@{40}: commit: add fetch to newsCategories
+[33mf01de56[m HEAD@{41}: commit: finish connection newsForm/create with cloudinary and API
+[33m9522013[m HEAD@{42}: checkout: moving from main to form-news
+[33m9522013[m HEAD@{43}: commit: add comment in useform hook
+[33m6bf5e97[m HEAD@{44}: commit: se escribe comentario en CreateUserForm
+[33m9f5519e[m HEAD@{45}: commit: fix packacge json
+[33m56ffa4e[m HEAD@{46}: pull origin main: Fast-forward
+[33m189a4b0[m HEAD@{47}: checkout: moving from develop to main
+[33m536511e[m[33m ([m[1;32mdevelop[m[33m)[m HEAD@{48}: pull origin develop: Fast-forward
+[33m57a96b7[m HEAD@{49}: checkout: moving from main to develop
+[33m189a4b0[m HEAD@{50}: commit: limpieza del main
+[33m80e2e8d[m HEAD@{51}: pull origin main: Fast-forward
+[33m522093d[m HEAD@{52}: checkout: moving from connnection-front-back to main
+[33m843217f[m[33m ([m[1;31morigin/connnection-front-back[m[33m, [m[1;32mconnnection-front-back[m[33m)[m HEAD@{53}: commit: actualizacion de rama
+[33ma99a089[m HEAD@{54}: commit: connection new form with API
+[33m57a96b7[m HEAD@{55}: checkout: moving from develop to connnection-front-back
+[33m57a96b7[m HEAD@{56}: checkout: moving from back to develop
+[33m969ca09[m[33m ([m[1;31morigin/back[m[33m, [m[1;32mvalidations-back[m[33m, [m[1;32mback[m[33m)[m HEAD@{57}: checkout: moving from validations-back to back
+[33m969ca09[m[33m ([m[1;31morigin/back[m[33m, [m[1;32mvalidations-back[m[33m, [m[1;32mback[m[33m)[m HEAD@{58}: checkout: moving from back to validations-back
+[33m969ca09[m[33m ([m[1;31morigin/back[m[33m, [m[1;32mvalidations-back[m[33m, [m[1;32mback[m[33m)[m HEAD@{59}: pull origin back: Fast-forward
+[33mf7321c6[m HEAD@{60}: checkout: moving from develop to back
+[33m57a96b7[m HEAD@{61}: pull origin develop: Fast-forward
+[33mf3461a4[m HEAD@{62}: checkout: moving from form-dp to develop
+[33m4ff2abf[m[33m ([m[1;31morigin/form-dp[m[33m, [m[1;32mform-dp[m[33m)[m HEAD@{63}: commit: Se finalizan las validaciones de DP Point create form and edit form
+[33md15a1b8[m HEAD@{64}: commit: Se finaliza el form create de DP
+[33mf3461a4[m HEAD@{65}: checkout: moving from usersAdmin to form-dp
+[33mc9b50ff[m HEAD@{66}: checkout: moving from form-dp to usersAdmin
+[33mf3461a4[m HEAD@{67}: checkout: moving from usersAdmin to form-dp
+[33mc9b50ff[m HEAD@{68}: checkout: moving from form-dp to usersAdmin
+[33mf3461a4[m HEAD@{69}: checkout: moving from develop to form-dp
+[33mf3461a4[m HEAD@{70}: commit: Se finaliza el css de Punto Digital
+[33ma393fcc[m[33m ([m[1;31morigin/validations[m[33m)[m HEAD@{71}: pull origin develop: Fast-forward
+[33m32e223f[m HEAD@{72}: checkout: moving from deportes-section to develop
+[33mc92786f[m[33m ([m[1;31morigin/deportes-section[m[33m, [m[1;32mdeportes-section[m[33m)[m HEAD@{73}: commit: Se crea sección deportes
+[33m32e223f[m HEAD@{74}: checkout: moving from develop to deportes-section
+[33m32e223f[m HEAD@{75}: commit: actualizado router interno cultura y turismo
+[33m23646ad[m HEAD@{76}: pull origin develop: Fast-forward
+[33m0c7ec24[m HEAD@{77}: checkout: moving from formValidations to develop
+[33mb416eb8[m[33m ([m[1;31morigin/formValidations[m[33m, [m[1;32mformValidations[m[33m)[m HEAD@{78}: commit: Se finaliza la seccion cultura y turismo
+[33m6c090e3[m HEAD@{79}: commit: Se agregan validaciones para archivos y se separan las mismas en un archivo js
+[33m0c7ec24[m HEAD@{80}: checkout: moving from form to formValidations
+[33mdb17c76[m[33m ([m[1;32mform[m[33m)[m HEAD@{81}: checkout: moving from formValidations to form
+[33m0c7ec24[m HEAD@{82}: checkout: moving from develop to formValidations
+[33m0c7ec24[m HEAD@{83}: checkout: moving from formvalidations to develop
+[33m0c7ec24[m HEAD@{84}: checkout: moving from develop to formvalidations
+[33m0c7ec24[m HEAD@{85}: commit: Se realizan ajustes del menu hamburguesa y se crean los routers de cada seccion
+[33m7f83036[m HEAD@{86}: commit (merge): Merge branch 'develop' of https://github.com/psantueno/project-caraguatay into develop
+[33m64d2a24[m HEAD@{87}: commit: Se completa el header con funcionamiento completo del boton hamburguesa
+[33m407a180[m HEAD@{88}: pull origin develop: Fast-forward
+[33m5621bae[m HEAD@{89}: checkout: moving from login to develop
+[33mf091fd2[m[33m ([m[1;32mlogin[m[33m)[m HEAD@{90}: checkout: moving from develop to login
+[33m5621bae[m HEAD@{91}: commit: Se implementa funcionalidad del button delete
+[33meaeecb9[m HEAD@{92}: pull origin develop: Fast-forward
+[33m1256777[m HEAD@{93}: checkout: moving from tramites to develop
+[33m24dcb2b[m[33m ([m[1;32mtramites[m[33m)[m HEAD@{94}: commit: implementacion de ruteo botonera de tramites
+[33m63d9e14[m HEAD@{95}: commit: add new function to formalities
+[33m778b216[m HEAD@{96}: pull origin tramites: Fast-forward
+[33m6098f81[m HEAD@{97}: checkout: moving from develop to tramites
+[33m1256777[m HEAD@{98}: commit: Se incluye files dentro del estado del form
+[33m1645290[m HEAD@{99}: pull origin develop: Fast-forward
+[33m7cd1c0c[m HEAD@{100}: checkout: moving from form to develop
+[33mdb17c76[m[33m ([m[1;32mform[m[33m)[m HEAD@{101}: commit: Se realizan validaciones del front con js
+[33m7ba179c[m HEAD@{102}: checkout: moving from culture-history-merged to form
+[33m8e405de[m[33m ([m[1;31morigin/culture-history-merged[m[33m, [m[1;32mculture-history-merged[m[33m)[m HEAD@{103}: pull origin culture-history-merged: Merge made by the 'ort' strategy.
+[33mc4d524d[m HEAD@{104}: commit: se actualiza css de cultura turismo
+[33m14e33fc[m HEAD@{105}: commit: Se finaliza la funcionalidad de las secciones historia y culturaTurismo
+[33m9a8cd4f[m HEAD@{106}: checkout: moving from section-cultura-turismo to culture-history-merged
+[33m6ea363c[m[33m ([m[1;32msection-cultura-turismo[m[33m)[m HEAD@{107}: commit (merge): Merge branch 'culture-history-merged' of https://github.com/psantueno/project-caraguatay into section-cultura-turismo
+[33mc3f2ddd[m[33m ([m[1;31morigin/section-cultura-turismo[m[33m)[m HEAD@{108}: checkout: moving from main to section-cultura-turismo
+[33m522093d[m HEAD@{109}: checkout: moving from section-cultura-turismo to main
+[33mc3f2ddd[m[33m ([m[1;31morigin/section-cultura-turismo[m[33m)[m HEAD@{110}: commit: cambios en el css
+[33m7f399ac[m HEAD@{111}: commit: Se realiza la page cultura y turismo
+[33m7cd1c0c[m HEAD@{112}: checkout: moving from develop to section-cultura-turismo
+[33m7cd1c0c[m HEAD@{113}: commit: se corrige detalle del footer
+[33m522093d[m HEAD@{114}: checkout: moving from main to develop
+[33m522093d[m HEAD@{115}: pull origin develop: Fast-forward
+[33m35f738a[m HEAD@{116}: pull origin main: Fast-forward
+[33mb6edb00[m HEAD@{117}: checkout: moving from dev-SA-footer to main
+[33m136146d[m[33m ([m[1;31morigin/dev-SA-footer[m[33m, [m[1;32mdev-SA-footer[m[33m)[m HEAD@{118}: commit: finished footer
+[33mb6edb00[m HEAD@{119}: checkout: moving from main to dev-SA-footer
+[33mb6edb00[m HEAD@{120}: pull origin main: Fast-forward
+[33m50ea9f8[m HEAD@{121}: Branch: renamed refs/heads/master to refs/heads/main
+[33m50ea9f8[m HEAD@{123}: commit (initial): first commit

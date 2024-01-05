@@ -1,11 +1,12 @@
 import { Button, Modal } from 'react-bootstrap';
 import { useModal } from '../../../../hooks/useModal';
 import { EditDpForm } from '../forms/EditDpForm';
+import { useFetchDpById } from '../../../../hooks/useFetchDpById';
 
-export const ModalEdit = ({ show, handleClose, id, dpnew }) => {
+export const ModalEdit = ({ show, handleClose, id }) => {
 
-    // const { show, handleShow, handleClose } = useModal()
-
+        const {eventsDp} = useFetchDpById(id)
+   
 
     return (
 
@@ -14,12 +15,12 @@ export const ModalEdit = ({ show, handleClose, id, dpnew }) => {
             <Modal show={show} onHide={handleClose} className="mt-5">
                 <Modal.Header closeButton>
                     <Modal.Title>
-                        <h3 className="form-title mt-4">Editar  </h3>
+                        <h3 className="form-title mt-4">Editar Evento</h3>
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
 
-                    <EditDpForm id={ id } />
+                    <EditDpForm eventsDp={eventsDp} handleClose={handleClose} />
 
                     <Modal.Footer>
                         <Button onClick={handleClose}>

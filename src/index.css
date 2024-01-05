@@ -982,9 +982,17 @@ a.link-activated:hover,
 
 /* END BUTTONS */
 
+
 /*  START FORM DIGITAL POINT */
 
-
+.preview-image-dp{
+  background-color: #ffffff;
+  padding: 5px;
+  border: 1px solid;
+  text-align: center;
+  width: 60%;
+  margin-bottom: 15px
+}
 
 .helper-form {
   color: #315C94;
