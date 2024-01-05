@@ -1,4 +1,4 @@
-import { Button, Form, Container, Col, Row, Alert, Modal } from 'react-bootstrap';
+import { Button, Form, Container, Col, Row, Alert } from 'react-bootstrap';
 import { DPAdminContext } from '../../context/DPAdminContext';
 import { DpValidations } from '../DpValidations';
 import { useForm } from '../../../../hooks/useForm';
@@ -8,12 +8,6 @@ import { fileUpload } from '../../../../helpers/fileUpload';
 import { DeleteButton } from '../../../buttons';
 import { Loader } from '../../../buttons/Loader';
 
-/*
-
-RESTA VER EL CAMBIO DE IMAGEN DE PORTADA
-
-*/
-
 
 
 export const EditDpForm = ({ eventsDp, handleClose }) => {
@@ -21,14 +15,12 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
     const [editedRequirements, setEditedRequirements] = useState([]);
     const [msgFileNotImage, setMsgFileNotImage] = useState(false);
     const { dPCategories } = useFetchDpCategories();
-    const [requirementsToSend, setRequirementsToSend] = useState('');  // Cambio de nombre del estado
     const [activeErrorInEditedReq, setActiveErrorInEditedReq] = useState(false);
 
 
 
     const initialForm = {
         id: eventsDp ? eventsDp.id : '',
-        // category: eventsDp ? eventsDp.category : '',
         title: eventsDp ? eventsDp.title : '',
         description: eventsDp ? eventsDp.description : '',
         start: eventsDp ? eventsDp.start : '',
@@ -73,7 +65,6 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
         handleReset,
         setLoading,
         errors,
-        formErrors,
     } = useForm(initialForm, DpValidations, inputs);
 
 
@@ -99,7 +90,6 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
         delete errors.avatar;
 
         setFiles([imageDp]);
-        console.log(imageDp);
     };
 
 
@@ -115,10 +105,6 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
         }
 
         setEditedRequirements(updatedRequirements);
-
-        // Actualizar form.requirements
-        // const updatedForm = { ...form, requirements: editedRequirements.join(';') };
-        // setForm(updatedForm);
     };
 
 
@@ -140,7 +126,7 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
     * Agrega nuevo ítem a la lista. (no editados, sino nuevos).
     */
 
-    const addItem = (value) => {                         
+    const addItem = (value) => {
 
         setItems([...items, value]);
         setForm(prevState => {
@@ -182,7 +168,7 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
 
             if (requirementValue.trim().length < 3) return;
 
-            if (form.requirements && !(requirementValue.trim().length <= checkTotalCharacters(form.requirements))) { 
+            if (form.requirements && !(requirementValue.trim().length <= checkTotalCharacters(form.requirements))) {
 
                 setErrors(prevState => {
                     return {
@@ -206,12 +192,12 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
     };
 
 
-/*
-* Fx encargada de contar los caracteres de un array y que devuelve la cantidad de caracteres 
-* restantes para completar el max.
-*/
-    const checkTotalCharacters = (array) => {         
-                                                     
+    /*
+    * Fx encargada de contar los caracteres de un array y que devuelve la cantidad de caracteres 
+    * restantes para completar el max.
+    */
+    const checkTotalCharacters = (array) => {
+
         let totalCharacters = 0;
 
         if (array) {
@@ -236,9 +222,13 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
 
             try {
                 let imageDpUrl = form.image; // Mantén la URL de la imagen actual
+                let oldImageUrl = null;
 
                 if (files.length > 0) {
-                    const folder = "avatar";
+
+                    oldImageUrl = form.image;
+
+                    const folder = "punto-digital";
                     imageDpUrl = await fileUpload(files[0], folder); // Actualiza la URL de la imagen con la nueva imagen
                 }
 
@@ -248,10 +238,9 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
                 const data = {
                     ...form,
                     image: imageDpUrl, // Establece la nueva URL de la imagen en caso de que haya modificado la portada.
-                    requirements: requerimentsToUpdate, 
+                    oldImageUrl: oldImageUrl,
+                    requirements: requerimentsToUpdate,
                 };
-
-                console.log(data);
 
                 const req = await fetch("http://localhost:4001/api/punto-digital/update", {
                     method: "PUT",
@@ -262,7 +251,6 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
                 const res = await req.json();
                 setResponseMsg(res);
 
-                console.log("res", res);
 
                 if (res.status === 200) {
                     setLoading(false);
@@ -280,7 +268,7 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
                     window.scrollTo({ top: 0, behavior: 'smooth', passive: true });
                 }
             } catch (error) {
-                console.log(error);
+                console.error(error);
             }
         } else {
             setShowResOk(false);
@@ -302,8 +290,6 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
             <Container className='mb-3 mt-3'>
 
                 <h3>Editar Evento</h3>
-
-                <Loader loader={loading} text={'Actualizando el evento...'} />
 
                 <Form onSubmit={handleSubmit}>
 
@@ -466,11 +452,12 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
                             accept="image/png , image/jpeg, image/jpg"
 
                         />
+
+                        {/* AVATAR PREVIEW  ESTA PARTE ANDA 2NOV23*/}
                         <Row>
                             <p className={files && files.length > 0 ? "mt-2" : "hidden"}  >Imagen seleccionada</p>
                             <Col sm={4}>
 
-                                {/* AVATAR PREVIEW  ESTA PARTE ANDA 2NOV23*/}
                                 {
                                     files && files.length > 0
                                     && <div className='images-preview'>
@@ -484,14 +471,12 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
                                             })
                                         }
                                     </div>
-
                                 }
-
-                                {/* AVATAR PREVIEW  */}
                             </Col>
                         </Row>
+                        {/* AVATAR PREVIEW  */}
 
-                        {/* DETALLE DE ERRORS IMAGES ESTA PARTE ANDA 2NOV23*/}
+                        {/* DETALLE DE ERRORS IMAGES */}
 
                         <Alert show={msgFileNotImage} className="alert-file-not-image">
                             <p className="images-msg-error">
@@ -510,15 +495,13 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
 
                         {/* DETALLE DE ERRORS IMAGES  */}
 
-                        {/* {
+                        {
                             errors && errors.image
                                 ? <Form.Control.Feedback type="invalid">
                                     {errors.image}
                                 </Form.Control.Feedback>
                                 : null
-                        } */}
-
-
+                        }
 
 
                     </Form.Group>
@@ -533,7 +516,6 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
                                     <Form.Control
                                         type="text"
                                         name={`requirements[${index}]`}
-                                        // minLength={3}
                                         value={requirement}
                                         onChange={(e) => handleRequirementChange(e, index)}
                                         onBlur={handleBlur}
@@ -553,10 +535,7 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
                                 placeholder="Ingrese los requisitos"
                                 value={requirementValue}
                                 ref={inputs.requirements}
-                                // onChange={handleChange}
                                 onChange={(event) => setRequirementValue(event.target.value)}
-                                // onKeyUp={handleKeyUp}
-                                // onBlur={handleBlur}
                                 onKeyDown={handleKeyDown}
                             />
 
@@ -588,13 +567,16 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
                         </div>
                     </Form.Group>
 
-                    <Button className='m-2' type="submit">
+                    <Button className='m-2' type="submit" disabled={loading}>
                         Confirmar
                     </Button>
 
-                    <Button className='m-2' type="reset" onClick={handleReset}>
+                    <Button className='m-2' type="reset" onClick={handleReset} disabled={loading}>
                         Borrar
                     </Button>
+
+                    <Loader loader={loading} text={'Actualizando el evento...'} />
+
                 </Form>
             </Container>
         </>
