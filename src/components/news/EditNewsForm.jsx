@@ -1,16 +1,19 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
+import { AuthContext } from '../auth/context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import { useFetchNewsCategories } from '../../hooks/useFetchNewsCategories';
+import { usefetchNewsById } from '../../hooks/useFetchNewsById';
 import { Button, Form, Container, Col, Row, Table, Alert } from 'react-bootstrap';
-import { useForm } from '../../hooks/useForm'; // Asegúrate de importar useForm
+import { useForm } from '../../hooks/useForm';
 import { NewsFormValidations } from './NewsFormValidations';
 import { DeleteButton } from '../buttons/DeleteButton';
 import { Loader } from '../buttons/Loader';
-import { useFetchNewsCategories } from '../../hooks/useFetchNewsCategories';
-import dayjs from "dayjs";
 import { uploadImages } from './helpers/uploadImages';
-import { useNavigate } from 'react-router-dom';
-import { usefetchNewsById } from '../../hooks/useFetchNewsById';
+import dayjs from "dayjs";
 
 export const EditNewsForm = () => {
+
+  const { user } = useContext(AuthContext)
 
   const navigate = useNavigate();
 
@@ -26,7 +29,7 @@ export const EditNewsForm = () => {
     mainText: news ? news.mainText : '',
     category: news ? news.newsCategory_id : 'default',
     imagesUrl: news ? news.urlArray : '',
-    user_id: news ? news.user_id : 1,
+    user_id: news ? news.user_id : '',
   };
 
 
@@ -78,7 +81,7 @@ export const EditNewsForm = () => {
 
       const data = {                                          // preparando el archivo para enviarlo al back.
         ...form,
-        user_id: 2,
+        user_id: user.id,
       }
 
       console.log(form)

@@ -109,7 +109,7 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
 
 
 
-    // Función para eliminar un requisito existente || NO FUNCIONA 26NOV23 ||
+    // Función para eliminar un requisito existente.
     const deleteEditReq = (index) => {
         const updatedRequirements = [...editedRequirements];
         updatedRequirements.splice(index, 1);
@@ -125,7 +125,6 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
     /*
     * Agrega nuevo ítem a la lista. (no editados, sino nuevos).
     */
-
     const addItem = (value) => {
 
         setItems([...items, value]);
@@ -160,7 +159,6 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
     * Controla que el item a ingresar tenga al menos 3 caracteres.
     * Control para saber si el ítem a ingresar no supera el max permitido de caracteres en la seccion requirements (130).
     */
-
     const handleKeyDown = (e) => {
 
         if (e.key === 'Enter') {
