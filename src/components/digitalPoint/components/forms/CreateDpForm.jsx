@@ -229,7 +229,7 @@ export const CreateDpForm = ({ handleClose }) => {
                 let imageDpUrl = form.image; // Keep the current avatar URL
 
                 if (files.length > 0) {
-                    const folder = "avatar";
+                    const folder = "punto-digital";
                     imageDpUrl = await fileUpload(files[0], folder); // Update avatar URL with new image
                 }
 
