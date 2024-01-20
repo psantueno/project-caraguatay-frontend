@@ -8,6 +8,18 @@ export const uploadImages = async (files) => {
     let shouldContinue = true;
 
     for (const file of files) {                  // files viene del "estado files" en linea 26.
+
+         // Check if the file size is greater than 2MB (in bytes)
+         const maxSize = 2 * 1024 * 1024; // 2MB in bytes
+         if (file.size > maxSize) {
+             errors.push({
+                 success: false,
+                 msg: `El tamaño del archivo "${file.name}" excede el límite de 2MB.`,
+             });
+             shouldContinue = false;
+             break; // Stop processing further files if one exceeds the size limit
+         }
+         
         if (!shouldContinue) break;              // Si shouldContinue es falso, detiene la iteración.                                         
                                    
         const response = await fileUpload(file, folder);

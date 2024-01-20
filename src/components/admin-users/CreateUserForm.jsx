@@ -10,11 +10,11 @@ import { Loader } from '../buttons/Loader';
 import { UserAdminContext } from './UserAdminContext';
 import { AuthContext } from "../auth/context/AuthContext";
 
-export const CreateUserForm = ({handleClose}) => {
+export const CreateUserForm = ({ handleClose }) => {
 
   // Agregar segundo ingreso de contraseña y validación de coincidencia.
   // Falta testear validación de usuario eliminado
-  
+
   const {
     initialForm,
     form,
@@ -38,34 +38,46 @@ export const CreateUserForm = ({handleClose}) => {
     setShowResBad,
   } = useContext(UserAdminContext);
 
-  const {user} = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   const [msgFileNotImage, setMsgFileNotImage] = useState(false);
 
- 
+
 
   /* Funciones específicas de Create User form: handleAvatar */
-
   const handleAvatar = (e) => {
     const avatarFile = e.target.files[0];
     const fileName = avatarFile.name.toLowerCase();
-
+    const maxSize = 2 * 1024 * 1024; // 2MB in bytes
+  
+    if (avatarFile.size > maxSize) {
+      setMsgFileNotImage(true);
+      setErrors({
+        ...errors,
+        avatar: `El tamaño del archivo "${fileName}" excede el límite de 2MB.`,
+      });
+      return;
+    }
+  
     if (!fileName.endsWith('.jpg') && !fileName.endsWith('.jpeg') && !fileName.endsWith('.png')) {
       setMsgFileNotImage(true);
       setErrors({
         ...errors,
-        avatar: `El archivo "${fileName}" no es una imagen`
+        avatar: `El archivo "${fileName}" no es una imagen o excede el límite de 2MB.`,
       });
       return;
     }
-
-    delete errors.avatar;
-
+  
+    // Reset errors when a valid file is selected
+    setMsgFileNotImage(false);
+    setErrors({
+      ...errors,
+      avatar: null,
+    });
+  
     setFiles([avatarFile]);
     console.log(avatarFile);
   };
-
-
   const showFileNotImage = () => {
     delete errors.avatar;
     setMsgFileNotImage(false)
@@ -108,13 +120,13 @@ export const CreateUserForm = ({handleClose}) => {
         setResponseMsg(res);
         console.log(responseMsg, "linea 126");
 
-        if (res.status === 201 && user.role==="Administrador") {         
+        if (res.status === 201 && user.role === "Administrador") {
           setShowResOk(true);
           setShowResBad(false);
           setForm(initialForm);
           handleReset();
           handleClose();
-        } else {     
+        } else {
           setShowResBad(true);
           console.log("-------------------");
           console.log(res);
@@ -285,7 +297,8 @@ export const CreateUserForm = ({handleClose}) => {
           <Alert show={msgFileNotImage} className="alert-file-not-image">
             <p className="images-msg-error">
               {errors.avatar}<b><i className="fas fa-exclamation-circle"></i></b><br />
-              Extensiones aceptadas: ".jpeg", ".jpg" y ".png".
+              Extensiones aceptadas: ".jpeg", ".jpg" y ".png".<br />
+              El tamaño del archivo no debe exceder los 2MB.
             </p>
             <Col className="d-flex justify-content-end">
               <Button
@@ -307,6 +320,6 @@ export const CreateUserForm = ({handleClose}) => {
 
         <Loader />
       </Form>
-    </>
-  );
+    </>
+  );
 };

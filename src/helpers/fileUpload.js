@@ -3,6 +3,13 @@
 export const fileUpload = async ( file, folder ) => {
     if ( !file ) throw new Error('No tenemos ningún archivo a subir');
 
+    // Check if the file size is greater than 2MB (in bytes)
+    const maxSize = 2 * 1024 * 1024; // 2MB in bytes
+    if (file.size > maxSize) {
+        throw new Error('El tamaño del archivo excede el límite de 2MB.');
+    }
+
+
     const cloudUrl = 'https://api.cloudinary.com/v1_1/caraguatay/image/upload';
 
     const formData = new FormData();

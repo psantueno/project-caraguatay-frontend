@@ -67,24 +67,40 @@ const EditUserForm = ({ user, handleCloseEdit }) => {
         setMsgFileNotImage(false)
       }
 
-    const handleAvatar = (e) => {
+      const handleAvatar = (e) => {
         const avatarFile = e.target.files[0];
         const fileName = avatarFile.name.toLowerCase();
-
-        if (!fileName.endsWith('.jpg') && !fileName.endsWith('.jpeg') && !fileName.endsWith('.png')) {
-            setMsgFileNotImage(true);
-            setErrors({
-                ...errors,
-                avatar: `El archivo "${fileName}" no es una imagen`
-            });
-            return;
+        const maxSize = 2 * 1024 * 1024; // 2MB in bytes
+      
+        // Check if the file size is greater than 2MB
+        if (avatarFile.size > maxSize) {
+          setMsgFileNotImage(true);
+          setErrors({
+            ...errors,
+            avatar: `El tamaño del archivo "${fileName}" excede el límite de 2MB.`,
+          });
+          return;
         }
-
-        delete errors.avatar;
-
+      
+        if (!fileName.endsWith('.jpg') && !fileName.endsWith('.jpeg') && !fileName.endsWith('.png')) {
+          setMsgFileNotImage(true);
+          setErrors({
+            ...errors,
+            avatar: `El archivo "${fileName}" no es una imagen o excede el límite de 2MB.`,
+          });
+          return;
+        }
+      
+        // Reset errors when a valid file is selected
+        setMsgFileNotImage(false);
+        setErrors({
+          ...errors,
+          avatar: null,
+        });
+      
         setFiles([avatarFile]);
         console.log(avatarFile, "avatarFile");
-    };
+      };
 
 
     const handleSubmit = async (e) => {
