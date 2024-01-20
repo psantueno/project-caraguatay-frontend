@@ -14,7 +14,7 @@ const EditUserForm = ({ user, handleCloseEdit }) => {
     const [msgFileNotImage, setMsgFileNotImage] = useState(false);
     const id = user.id;
     const { userRoles } = useFetchUserRoles();
-    console.log(userRoles)
+   
     const initialForm = {
         email: user ? user.email : '',
         name: user ? user.name : '',
@@ -100,13 +100,12 @@ const EditUserForm = ({ user, handleCloseEdit }) => {
 
                 let avatarUrl = form.avatar; // Keep the current avatar URL
 
+                // Check if a file is selected
                 if (files.length > 0) {
-                  const folder = "avatar";
-                  avatarUrl = await fileUpload(files[0], folder); // Update avatar URL with new image
-                } else {
-                  const folder = "avatar";
-                  avatarUrl = await fileUpload(avatarDefault, folder);
+                    const folder = "avatar";
+                    avatarUrl = await fileUpload(files[0], folder); // Update avatar URL with the new image
                 }
+
         
                 const data = {
                   ...form,
@@ -123,12 +122,9 @@ const EditUserForm = ({ user, handleCloseEdit }) => {
                     }),),
                     headers: { 'Content-Type': 'application/json' }
                 })
-                console.log(data, "linea 93")
 
                 const res = await req.json();
                 setResponseMsg(res);
-
-                console.log("res", res)
 
                 if (res.status === 200 && authUser.role==="Administrador") {
                     setLoading(false);
