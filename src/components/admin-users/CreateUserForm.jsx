@@ -4,9 +4,11 @@ import "./admin-users.css";
 //import { useForm } from "../../hooks/useForm";
 
 
+
 import { fileUpload } from '../../helpers/fileUpload';
 import { Loader } from '../buttons/Loader';
 import { UserAdminContext } from './UserAdminContext';
+import { AuthContext } from "../auth/context/AuthContext";
 
 export const CreateUserForm = ({handleClose}) => {
 
@@ -35,6 +37,8 @@ export const CreateUserForm = ({handleClose}) => {
     setShowResOk,
     setShowResBad,
   } = useContext(UserAdminContext);
+
+  const {user} = useContext(AuthContext);
 
   const [msgFileNotImage, setMsgFileNotImage] = useState(false);
 
@@ -104,7 +108,7 @@ export const CreateUserForm = ({handleClose}) => {
         setResponseMsg(res);
         console.log(responseMsg, "linea 126");
 
-        if (res.status === 201) {         
+        if (res.status === 201 && user.role==="Administrador") {         
           setShowResOk(true);
           setShowResBad(false);
           setForm(initialForm);
@@ -227,7 +231,8 @@ export const CreateUserForm = ({handleClose}) => {
             required
           >
             <option value="default">- Seleccione el rol -</option>
-            <option value={1} >Administrador</option>
+            <option value={1} >Administrador de usuarios</option>
+            <option value={2} >Administrador de noticias</option>
           </Form.Select>
           {
             errors && errors.role

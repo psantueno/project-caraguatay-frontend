@@ -6,6 +6,8 @@ import { useForm } from '../../hooks/useForm';
 import { UserValidations } from "./UserValidation";
 import { useFetchUserRoles } from '../../hooks/useFetchUserRoles';
 import { fileUpload } from '../../helpers/fileUpload';
+import { AuthContext } from '../auth/context/AuthContext';
+
 
 const EditUserForm = ({ user, handleCloseEdit }) => {
     const AvatarDefault = "https://res.cloudinary.com/caraguatay/image/upload/v1691536662/avatar/user-avatar_d4x7se.png";
@@ -36,6 +38,8 @@ const EditUserForm = ({ user, handleCloseEdit }) => {
         setShowResOk,
         setShowResBad,
     } = useContext(UserAdminContext);
+
+    const {user:authUser} = useContext(AuthContext);
 
     const {
         form,
@@ -126,7 +130,7 @@ const EditUserForm = ({ user, handleCloseEdit }) => {
 
                 console.log("res", res)
 
-                if (res.status === 200) {
+                if (res.status === 200 && authUser.role==="Administrador") {
                     setLoading(false);
                     setShowResOk(true);
                     setShowResBad(false);

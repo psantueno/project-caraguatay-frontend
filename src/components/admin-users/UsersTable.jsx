@@ -9,11 +9,11 @@ import EditUserForm from './EditUserForm';
 import { UserAdminContext } from './UserAdminContext';
 import ModalTemplate from '../../helpers/ModalTemplate';
 import { useFetchUsers } from '../../hooks/useFetchUsers';
+import { AuthContext } from '../auth/context/AuthContext';
 
 export const UsersTable = () => {
 
   const { show, handleShow, handleClose } = useModal(); 
- // const [users, setUsers] = useState([]);
   const [userDB, setUserDB] = useState([]);
   const [showUserDetails, setShowUserDetails] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
@@ -47,6 +47,7 @@ export const UsersTable = () => {
       responseMsg,
     } = useContext(UserAdminContext);
 
+    const {user:authUser} = useContext(AuthContext);
   
   const handleShowUserDetails = async (user) => {
     try {
@@ -63,9 +64,10 @@ export const UsersTable = () => {
       }
 
       const data = await response.json();
+      console.log('Response:', data);
 
       if (data.result.status === 200) {
-        setUserDB(data.result.userDB);
+        setUserDB(data.result.userDB[0]);
         setShowUserDetails(true);
       } else {
         console.error('User not found');
@@ -88,7 +90,7 @@ export const UsersTable = () => {
       }
       const res = await response.json(); // Parse the JSON data from the response 
 
-      if (res.status === 201) {
+      if (res.status === 201 && authUser.role==="Administrador") {
         console.log(res, "linea 103");
         setResponseMsg(res);
         console.log(responseMsg, "linea 105");
@@ -211,25 +213,6 @@ export const UsersTable = () => {
         buttonOne={handleClose}
         buttonOneText="Volver al listado"    
       />
-{/* 
-
-      <Modal show={show} onHide={handleClose} className="mt-5">
-        <Modal.Header closeButton>
-          <Modal.Title>
-            <h3 className="form-title mt-4">Crear un nuevo usuario administrador</h3>
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <CreateUserForm 
-            handleClose={handleClose}
-            />
-          <Modal.Footer>
-            <Button onClick={handleClose}>
-              Volver al listado
-            </Button>
-          </Modal.Footer>
-        </Modal.Body>
-      </Modal> */}
 
       {/* MODAL PARA DESPLEGAR FORM DE EDICION DE USUARIO */}
       <Modal show={showEditUserForm} onHide={handleCloseEdit} className="mt-5">
@@ -249,11 +232,7 @@ export const UsersTable = () => {
         </Modal.Body>
       </Modal>
 
-      {/* MODAL PARA DESPLEGAR CONFIRMACIÓN DE ELIMINACIÓN DE USUARIO 
-      
-      Ver si este modal se puede reutilizar.
-      
-      */}
+      {/* MODAL PARA DESPLEGAR CONFIRMACIÓN DE ELIMINACIÓN DE USUARIO */}
       
       <Modal show={showConfirmDelete} onHide={handleClose} className="mt-5 p-4">
         <Modal.Body>
@@ -287,7 +266,7 @@ export const UsersTable = () => {
           <p className="form-title mt-4">Nombre:</p>
           <p>{userDB.name}</p>
           <p className="form-title mt-4">Apellido:</p>
-          <p>{userDB.lastName}</p>
+          <p>{userDB.lastName} </p>
           <p className="form-title mt-4">Rol:</p>
           <p>{userDB.role}</p>
           <p className="form-title mt-4">Imagen:</p>
