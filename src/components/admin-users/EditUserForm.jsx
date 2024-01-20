@@ -11,6 +11,7 @@ import { AuthContext } from '../auth/context/AuthContext';
 
 const EditUserForm = ({ user, handleCloseEdit }) => {
     const AvatarDefault = "https://res.cloudinary.com/caraguatay/image/upload/v1691536662/avatar/user-avatar_d4x7se.png";
+  
     const [msgFileNotImage, setMsgFileNotImage] = useState(false);
     const id = user.id;
     const { userRoles } = useFetchUserRoles();
@@ -99,17 +100,19 @@ const EditUserForm = ({ user, handleCloseEdit }) => {
             try {
 
                 let avatarUrl = form.avatar; // Keep the current avatar URL
-
+                let oldImageUrl = null;
                 // Check if a file is selected
                 if (files.length > 0) {
+                    oldImageUrl = form.avatar;
                     const folder = "avatar";
-                    avatarUrl = await fileUpload(files[0], folder); // Update avatar URL with the new image
+                    avatarUrl = await fileUpload(files[0], folder); // Actualiza la URL de la imagen con la nueva imagen
                 }
 
         
                 const data = {
                   ...form,
-                  avatar: avatarUrl // Set the new avatar URL
+                  avatar: avatarUrl, // Set the new avatar URL
+                  oldImageUrl: oldImageUrl,
                 };
 
                 const req = await fetch("http://localhost:4001/api/users/update", {
