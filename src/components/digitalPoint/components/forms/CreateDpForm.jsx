@@ -4,13 +4,12 @@ import { useForm } from '../../../../hooks/useForm';
 import { DpValidations } from '../DpValidations';
 import { DeleteButton } from '../../../buttons';
 import { fileUpload } from '../../../../helpers/fileUpload'
-import { useFetchDP } from '../../../../hooks/useFetchDP';
-import { useModal } from '../../../../hooks/useModal';
+
 
 import dayjs from "dayjs";
 import { useFetchDpCategories } from '../../../../hooks/useFetchDpCategories';
-// import { useModal } from '../../../../hooks';
-// import { useFetchDpByCategory } from '../../../../hooks/useFetchDpByCategory';
+import { Loader } from '../../../buttons/Loader';
+
 
 
 const initialForm = {
@@ -223,7 +222,6 @@ export const CreateDpForm = ({ handleClose }) => {
             setLoading(true);
             console.log(loading); // activa el loader
 
-            // Algunas ideas: podría sacar el state de loading, de showResok, showresBad e incluirlos en un helper fetch para el envio del form
             try {
                 let reqToString = form.requirements
                 let imageDpUrl = form.image; // Keep the current avatar URL
@@ -509,15 +507,20 @@ export const CreateDpForm = ({ handleClose }) => {
 
                     </Form.Group>
 
-                    <Button className='m-2' type="submit">
+                    <Button className='m-2' type="submit"  disabled={loading}>
                         Confirmar
                     </Button>
 
-                    <Button className='m-2' type="reset" onClick={handleReset}>
+                    <Button className='m-2' type="reset" onClick={handleReset}  disabled={loading}>
                         Borrar
                     </Button>
 
                 </Form>
+
+                <Loader
+                    loader={loading}
+                    text={"Creando el evento, aguarde por favor..."}
+                />
 
             </Container>
 

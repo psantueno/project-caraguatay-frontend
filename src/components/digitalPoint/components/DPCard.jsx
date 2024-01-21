@@ -1,13 +1,14 @@
-import { useModal } from "../../../hooks/useModal"
-import { DeleteButton } from "../../buttons/DeleteButton"
-import { EditButton } from "../../buttons/EditButton"
-import { ModalEdit } from "./modals/ModalEdit"
-import { ModalCancel } from "./modals/ModalCancel"
-import { useState } from "react"
-
+import { useState, useContext } from "react";
+import { AuthContext } from "../../auth/context/AuthContext";
+import { useModal } from "../../../hooks/useModal";
+import { DeleteButton } from "../../buttons/DeleteButton";
+import { EditButton } from "../../buttons/EditButton";
+import { ModalEdit } from "./modals/ModalEdit";
+import { ModalCancel } from "./modals/ModalCancel";
 
 export const DPCard = ({ id, image, title, start, status, requirements, description }) => {
 
+    const { logged } = useContext(AuthContext);
 
     const { show, handleShow, handleClose } = useModal();
     const [showConfirmDelete, setShowConfirmDelete] = useState(false);
@@ -56,10 +57,13 @@ export const DPCard = ({ id, image, title, start, status, requirements, descript
 
                 </div>
 
-                <div className="btns-admin-card">
-                    <EditButton fx={handleShow}  />
-                    <DeleteButton fx={handleShowConfirmDelete} />
-                </div>
+                {
+                    logged &&
+                    <div className="btns-admin-card">
+                        <EditButton fx={handleShow} />
+                        <DeleteButton fx={handleShowConfirmDelete} />
+                    </div>
+                }
 
             </div>
 

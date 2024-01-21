@@ -1,22 +1,27 @@
+import { AuthContext } from '../../../auth/context/AuthContext';
+import { useContext } from 'react';
+import { CreateDpForm } from '../forms/CreateDpForm';
 import { Button, Modal } from 'react-bootstrap';
 import { useModal } from '../../../../hooks/useModal';
-import { CreateDpForm } from '../forms/CreateDpForm';
 
 
 export const ModalCreate = () => {
 
+    const { logged } = useContext(AuthContext);
     const { show, handleShow, handleClose } = useModal()
 
     return (
 
         <>
 
-            <div className='box-btn-DP'>
-                <Button onClick={handleShow} style={{ width: 'auto', textAlign: '' }}>
-                    <i className="fas fa-plus"></i> Crear
-                </Button>
-            </div>
-
+            {
+                logged &&
+                <div className='box-btn-DP'>
+                    <Button onClick={handleShow} style={{ width: 'auto', textAlign: '' }}>
+                        <i className="fas fa-plus"></i> Crear
+                    </Button>
+                </div>
+            }
 
             <Modal show={show} onHide={handleClose} className="mt-5">
                 <Modal.Header closeButton>
@@ -26,7 +31,7 @@ export const ModalCreate = () => {
                 </Modal.Header>
                 <Modal.Body>
 
-                    <CreateDpForm handleClose={handleClose}/>
+                    <CreateDpForm handleClose={handleClose} />
 
                     <Modal.Footer>
                         <Button onClick={handleClose}>

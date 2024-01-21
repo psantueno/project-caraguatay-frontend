@@ -1,7 +1,9 @@
-import React from 'react'
-import { Alert, Row, Col, Button } from 'react-bootstrap'
+import { Alert, Row, Col, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
-export const ShowAlerts = ({ showResOk, responseMsg, setShowResOk, showResBad , setShowResBad}) => {
+export const ShowAlerts = ({ showResOk, responseMsg, setShowResOk, showResBad, setShowResBad }) => {
+
+    const navigate = useNavigate();
 
     return (
         <>
@@ -13,7 +15,10 @@ export const ShowAlerts = ({ showResOk, responseMsg, setShowResOk, showResBad , 
                     </Col>
                     <Col className="d-flex justify-content-end">
                         <Button
-                            onClick={() => setShowResOk(false)}>
+                            onClick={() => {
+                                setShowResOk(false);
+                                navigate('/');
+                            }}>
                             Cerrar
                         </Button>
                     </Col>

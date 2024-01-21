@@ -72,7 +72,6 @@ export const NewsItem = ({
                                             src={url}
                                             className='cardImg'
                                         />
-                                        {/* {console.log(url, 'url del map')} */}
                                     </Carousel.Item>
                                 ))
                             }

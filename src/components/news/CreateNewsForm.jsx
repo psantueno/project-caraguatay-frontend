@@ -7,7 +7,7 @@ import { Loader } from '../buttons/Loader';
 import { useFetchNewsCategories } from '../../hooks/useFetchNewsCategories';
 import dayjs from "dayjs";
 import { uploadImages } from './helpers/uploadImages';
-import { useNavigate} from 'react-router-dom';
+import { ShowAlerts } from '../../helpers/ShowAlerts';
 
 
 const initialForm = {
@@ -58,8 +58,6 @@ export const CreateNewsForm = () => {
     showResBad,
     responseMsg,
   } = useForm(initialForm, NewsFormValidations, inputs)   // hook useForm que maneja el formulario.
-
-  const navigate = useNavigate();
 
 
   /* Funciones específicas de news form */
@@ -173,50 +171,10 @@ export const CreateNewsForm = () => {
   return (
 
     <>
-      {/* RESPUESTA OK DEL RESPONSE */}
 
-      <Alert show={showResOk} variant="primary" className="mt-2">
-        <Row>
-          <Col>
-            <p> {responseMsg && responseMsg.msg ? responseMsg.msg : null} </p>
-          </Col>
-          <Col className="d-flex justify-content-end">
-            <Button
-              onClick={() => {
-                setShowResOk(false);
-                navigate('/');
-              }}>
-              Cerrar
-            </Button>
-          </Col>
-        </Row>
-      </Alert>
+      {/*Muestra las RESPUESTAS OK y BAD DEL RESPONSE  */}
+      <ShowAlerts showResOk={showResOk} showResBad={showResBad} responseMsg={responseMsg} setShowResOk={setShowResOk} setShowResBad={setShowResBad} />
 
-      {/* RESPUESTA OK DEL RESPONSE */}
-
-      {/* RESPUESTA BAD DEL RESPONSE */}
-
-      <Alert show={showResBad} variant="danger" className="mt-2">
-        <Row>
-          <Col>
-            <p>{responseMsg && responseMsg.errors
-              ? responseMsg.errors.map((field, index) => (
-                <li key={index}>{field.msg}</li>
-              ))
-              : null
-            }</p>
-          </Col>
-          <Col className="d-flex justify-content-end">
-            <Button
-              variant='danger'
-              onClick={() => setShowResBad(false)}>
-              Cerrar
-            </Button>
-          </Col>
-        </Row>
-      </Alert>
-
-      {/* RESPUESTA BAD DEL RESPONSE */}
 
       <Container className='mt-4'>
         <h4><i className="far fa-newspaper"></i> Crear nueva noticia</h4>
@@ -236,7 +194,7 @@ export const CreateNewsForm = () => {
               onBlur={handleBlur}
               required
             >
-                    <option disabled value="default">-Seleccione una categoría-</option>
+              <option disabled value="default">-Seleccione una categoría-</option>
               {
                 newsCategories && newsCategories.length > 0
                   ? (newsCategories.map((category, index) => (
