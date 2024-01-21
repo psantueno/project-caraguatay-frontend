@@ -1,21 +1,19 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 import { AuthContext } from '../auth/context/AuthContext';
-import { useNavigate } from 'react-router-dom';
 import { useFetchNewsCategories } from '../../hooks/useFetchNewsCategories';
 import { usefetchNewsById } from '../../hooks/useFetchNewsById';
-import { Button, Form, Container, Col, Row, Table, Alert } from 'react-bootstrap';
+import { Button, Form, Container, Col, Table, Alert } from 'react-bootstrap';
 import { useForm } from '../../hooks/useForm';
 import { NewsFormValidations } from './NewsFormValidations';
 import { DeleteButton } from '../buttons/DeleteButton';
 import { Loader } from '../buttons/Loader';
 import { uploadImages } from './helpers/uploadImages';
 import dayjs from "dayjs";
+import { ShowAlerts } from '../../helpers/ShowAlerts';
 
 export const EditNewsForm = () => {
 
   const { user } = useContext(AuthContext)
-
-  const navigate = useNavigate();
 
   const { news, loadingFetch, id } = usefetchNewsById();
   const [msgFileNotImage, setMsgFileNotImage] = useState(false);
@@ -84,7 +82,6 @@ export const EditNewsForm = () => {
         user_id: user.id,
       }
 
-      console.log(form)
 
       if (filesNews.length > 0) {
         const imagesToString = await uploadImages(filesNews);                    // Fx que que sube las imagenes a cloud y devuelve las urls.
@@ -112,11 +109,8 @@ export const EditNewsForm = () => {
         return;
       }
 
-
-      console.log(data)
       delete errors.files;
 
-      // Algunas ideas: podría sacar el state de loading, de showResok, showresBad e incluirlos en un helper fetch para el envio del form
       try {
         const req = await fetch(`http://localhost:4001/api/noticias/update/${id}` , {
           method: "PUT",
@@ -285,12 +279,8 @@ export const EditNewsForm = () => {
               disabled
               name="originalDate"
               type="date"
-              // min={dayjs().format("YYYY-MM-DD")}
               value={news ? news.date : dayjs().format('YYYY-MM-DD')}
-              ref={inputs.date}
-              // onChange={handleChange}
-              // onKeyUp={handleKeyUp}
-              // onBlur={handleBlur}
+              ref={inputs.date} 
               required
             />
 
