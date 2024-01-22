@@ -7,8 +7,9 @@ export const UserAdminContext = createContext()
 
 
 const UserAdminContextProvider = (props) => {
-  const avatarDefault = "https://res.cloudinary.com/caraguatay/image/upload/v1691536662/avatar/user-avatar_d4x7se.png";
-  
+  const avatarDefault = "https://res.cloudinary.com/caraguatay/image/upload/v1705884354/avatar/user-avatar_d4x7se.png"
+  ;
+
   const initialForm = {
     email: "",
     name: "",
@@ -17,7 +18,7 @@ const UserAdminContextProvider = (props) => {
     role: "",
     avatar: avatarDefault,
   };
-  
+
   const formErrors = {
     email: false,
     name: false,
@@ -35,7 +36,7 @@ const UserAdminContextProvider = (props) => {
     role: useRef(),
     avatar: useRef(),
   }
-  
+
   const {
     setResponseMsg,
     setShowResOk,
@@ -45,9 +46,6 @@ const UserAdminContextProvider = (props) => {
     responseMsg,
     form,
     handleChange,
-    handleKeyUp,
-    handleBlur,
-    handleMouseup,
     setForm,
     setErrors,
     setFiles,
@@ -55,53 +53,66 @@ const UserAdminContextProvider = (props) => {
     handleReset,
     setLoading,
     errors,
- 
   } = useForm(initialForm, UserValidations, inputs);
-    
 
-  // const updateUser = (id, updatedUser) => {
-  //   setUsers(users.map((user) => user.id === id ? updatedUser : user))
-  //   setAlertMessage(`El usuario con id ${id} fue actualizado correctamente.`)
-  // }
 
- 
+  const handleBlur = (e) => {
+    if (e.target.name !== "avatar") {
+      handleChange(e);
+      setErrors(UserValidations(form, e, inputs, errors));
+    } else {
+      // Handle avatar-specific logic here if needed
+      setErrors(UserValidations(form, e, inputs, errors));
+    }
+  };
+
+  const handleKeyUp = (e) => {
+    handleChange(e);
+    setErrors(UserValidations(form, e, inputs, errors));
+  }
+  const handleMouseup = (e) => {
+    handleChange(e);
+    setErrors(UserValidations(form, e, inputs, errors));
+  }
+
+
   useEffect(() => {
-    const timeoutId = setTimeout(() => {    
+    const timeoutId = setTimeout(() => {
       setShowResOk(false);
       setShowResBad(false);
     }, 5000);
 
     return () => clearTimeout(timeoutId);
-  }, [showResBad,showResOk]);
+  }, [showResBad, showResOk]);
 
 
   return (
-    <UserAdminContext.Provider value={{ 
-        initialForm,
-        formErrors,
-        inputs,
-        setResponseMsg,
-        setShowResOk,
-        setShowResBad,
-        showResOk,
-        showResBad,
-        responseMsg,
-        form,
-        handleChange,
-        handleKeyUp,
-        handleBlur,
-        handleMouseup,
-        setForm,
-        setErrors,
-        setFiles,
-        files,
-        handleReset,
-        setLoading,
-        errors,
-        UserValidations,  
-        avatarDefault
-     
-      }}>
+    <UserAdminContext.Provider value={{
+      initialForm,
+      formErrors,
+      inputs,
+      setResponseMsg,
+      setShowResOk,
+      setShowResBad,
+      showResOk,
+      showResBad,
+      responseMsg,
+      form,
+      handleChange,
+      handleKeyUp,
+      handleBlur,
+      handleMouseup,
+      setForm,
+      setErrors,
+      setFiles,
+      files,
+      handleReset,
+      setLoading,
+      errors,
+      UserValidations,
+      avatarDefault
+
+    }}>
       {props.children}
     </UserAdminContext.Provider>
   )

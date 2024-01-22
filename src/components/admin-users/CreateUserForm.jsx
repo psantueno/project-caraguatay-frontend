@@ -1,19 +1,12 @@
-import React, { useRef, useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Form, Button, Row, Col, Alert } from "react-bootstrap";
 import "./admin-users.css";
-//import { useForm } from "../../hooks/useForm";
-
-
-
 import { fileUpload } from '../../helpers/fileUpload';
 import { Loader } from '../buttons/Loader';
 import { UserAdminContext } from './UserAdminContext';
 import { AuthContext } from "../auth/context/AuthContext";
 
 export const CreateUserForm = ({ handleClose }) => {
-
-  // Agregar segundo ingreso de contraseña y validación de coincidencia.
-  // Falta testear validación de usuario eliminado
 
   const {
     initialForm,
@@ -48,36 +41,31 @@ export const CreateUserForm = ({ handleClose }) => {
   const handleAvatar = (e) => {
     const avatarFile = e.target.files[0];
     const fileName = avatarFile.name.toLowerCase();
-    const maxSize = 2 * 1024 * 1024; // 2MB in bytes
-  
-    if (avatarFile.size > maxSize) {
-      setMsgFileNotImage(true);
-      setErrors({
-        ...errors,
-        avatar: `El tamaño del archivo "${fileName}" excede el límite de 2MB.`,
-      });
-      return;
-    }
-  
+
     if (!fileName.endsWith('.jpg') && !fileName.endsWith('.jpeg') && !fileName.endsWith('.png')) {
       setMsgFileNotImage(true);
       setErrors({
         ...errors,
-        avatar: `El archivo "${fileName}" no es una imagen o excede el límite de 2MB.`,
+        avatar: `El archivo "${fileName}" no es una imagen`
       });
       return;
     }
-  
-    // Reset errors when a valid file is selected
-    setMsgFileNotImage(false);
-    setErrors({
-      ...errors,
-      avatar: null,
-    });
-  
+
+    if (avatarFile.size > 2 * 1024 * 1024) {
+      setMsgFileNotImage(true);
+      setErrors({
+          ...errors,
+          avatar: `El archivo "${fileName}" supera el tamaño máximo permitido de 2MB`
+      });
+      return;
+  }
+
+    delete errors.avatar;
+
     setFiles([avatarFile]);
     console.log(avatarFile);
   };
+  
   const showFileNotImage = () => {
     delete errors.avatar;
     setMsgFileNotImage(false)
@@ -138,7 +126,7 @@ export const CreateUserForm = ({ handleClose }) => {
       }
     } else {
       setShowResOk(false);
-      alert("Revise los errores del formulario");
+      alert("Revise y cierre los errores del formulario");
     }
   };
 

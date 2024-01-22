@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef, useEffect } from 'react';
+import React, { useContext, useState, useRef } from 'react';
 import { UserAdminContext } from './UserAdminContext';
 import { Form, Button, Row, Col, Alert } from 'react-bootstrap';
 import './admin-users.css';
@@ -10,7 +10,7 @@ import { AuthContext } from '../auth/context/AuthContext';
 
 
 const EditUserForm = ({ user, handleCloseEdit }) => {
-    const AvatarDefault = "https://res.cloudinary.com/caraguatay/image/upload/v1691536662/avatar/user-avatar_d4x7se.png";
+    const AvatarDefault = "https://res.cloudinary.com/caraguatay/image/upload/v1705884354/avatar/user-avatar_d4x7se.png";
 
     const [msgFileNotImage, setMsgFileNotImage] = useState(false);
     const [resetAvatarError, setResetAvatarError] = useState(false);
@@ -75,76 +75,33 @@ const EditUserForm = ({ user, handleCloseEdit }) => {
         delete errors.avatar;
         setMsgFileNotImage(false)
     }
-    useEffect(() => {
-        if (resetAvatarError) {
-          console.log('After resetting errors.avatar:', errors.avatar);
-          setResetAvatarError(false); // Reset the flag
-        }
-      }, [resetAvatarError, errors.avatar]);
+
 
       const handleAvatar = (e) => {
         const avatarFile = e.target.files[0];
         const fileName = avatarFile.name.toLowerCase();
-        const maxSize = 2 * 1024 * 1024; // 2MB in bytes
-    
-        if (!fileName.endsWith('.jpg') && !fileName.endsWith('.jpeg') && !fileName.endsWith('.png') && avatarFile.size > maxSize) {
+
+        if (!fileName.endsWith('.jpg') && !fileName.endsWith('.jpeg') && !fileName.endsWith('.png')) {
             setMsgFileNotImage(true);
             setErrors({
                 ...errors,
-                avatar: `El archivo "${fileName}" no es una imagen o excede el límite de 2MB.`,
+                avatar: `El archivo "${fileName}" no es una imagen`
             });
             return;
         }
-    
-        // Reset errors when a valid file is selected
-        setErrors(prevErrors => ({
-            ...prevErrors,
-            avatar: null,
-        }));
-    
+        if (avatarFile.size > 2 * 1024 * 1024) {
+            setMsgFileNotImage(true);
+            setErrors({
+                ...errors,
+                avatar: `El archivo "${fileName}" supera el tamaño máximo permitido de 2MB`
+            });
+            return;
+        }
+        delete errors.avatar;
+
         setFiles([avatarFile]);
+        console.log(avatarFile, "avatarFile");
     };
-    
-    // Add a useEffect to log errors.avatar after resetting
-    useEffect(() => {
-        console.log('After resetting errors.avatar:', errors.avatar);
-    }, [errors.avatar]);
-    
-
-    // const handleAvatar = (e) => {
-    //     const avatarFile = e.target.files[0];
-    //     const fileName = avatarFile.name.toLowerCase();
-    //     const maxSize = 2 * 1024 * 1024; // 2MB in bytes
-
-    //     if (!fileName.endsWith('.jpg') && !fileName.endsWith('.jpeg') && !fileName.endsWith('.png') && avatarFile.size > maxSize) {
-    //         setMsgFileNotImage(true);
-    //         setErrors({
-    //             ...errors,
-    //             avatar: `El archivo "${fileName}" no es una imagen o excede el límite de 2MB.`,
-    //         });
-    //         return;
-    //     }
-
-    //     // Reset errors when a valid file is selected
-    //     console.log('Before resetting errors.avatar:', errors.avatar);
-    //     setErrors(prevErrors => ({
-    //       ...prevErrors,
-    //       avatar: null,
-    //     }));
-    //     setResetAvatarError(true); // Set the flag to trigger the useEffect  setMsgFileNotImage(false);
-    //     console.log('Before resetting errors.avatar:', errors.avatar);
-    //     setErrors(prevErrors => ({
-    //         ...prevErrors,
-    //         avatar: null,
-    //     }), () => {
-    //         // Code to execute after state is updated
-    //         console.log('After resetting errors.avatar:', errors.avatar);
-    //     });
-
-    //     setFiles([avatarFile]);
-    //     console.log(avatarFile, "avatarFile");
-    // };
-    
 
 
     const handleSubmit = async (e) => {
@@ -211,7 +168,7 @@ const EditUserForm = ({ user, handleCloseEdit }) => {
             }
         } else {
             setShowResOk(false);
-            alert("Revise los errores del formulario");
+            alert("Revise y cierre los errores del formulario");
         }
     }
 
@@ -230,7 +187,7 @@ const EditUserForm = ({ user, handleCloseEdit }) => {
                         onChange={handleChange}
                         onMouseUp={handleMouseup}
                         onBlur={handleBlur}
-                        required
+                        disabled
                     />
                     {
                         errors && errors.email
