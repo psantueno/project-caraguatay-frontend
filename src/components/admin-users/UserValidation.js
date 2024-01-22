@@ -69,5 +69,7 @@ export const UserValidations = (form, e, inputs, errors) => {
     }
   }
 
+
+
   return errors;
 }

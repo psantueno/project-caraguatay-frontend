@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef } from 'react';
+import React, { useContext, useState, useRef, useEffect } from 'react';
 import { UserAdminContext } from './UserAdminContext';
 import { Form, Button, Row, Col, Alert } from 'react-bootstrap';
 import './admin-users.css';
@@ -11,11 +11,12 @@ import { AuthContext } from '../auth/context/AuthContext';
 
 const EditUserForm = ({ user, handleCloseEdit }) => {
     const AvatarDefault = "https://res.cloudinary.com/caraguatay/image/upload/v1691536662/avatar/user-avatar_d4x7se.png";
-  
+
     const [msgFileNotImage, setMsgFileNotImage] = useState(false);
+    const [resetAvatarError, setResetAvatarError] = useState(false);
     const id = user.id;
     const { userRoles } = useFetchUserRoles();
-   
+
     const initialForm = {
         email: user ? user.email : '',
         name: user ? user.name : '',
@@ -40,14 +41,11 @@ const EditUserForm = ({ user, handleCloseEdit }) => {
         setShowResBad,
     } = useContext(UserAdminContext);
 
-    const {user:authUser} = useContext(AuthContext);
+    const { user: authUser } = useContext(AuthContext);
 
     const {
         form,
         handleChange,
-        handleKeyUp,
-        handleBlur,
-        handleMouseup,
         setForm,
         setErrors,
         setFiles,
@@ -55,52 +53,98 @@ const EditUserForm = ({ user, handleCloseEdit }) => {
         handleReset,
         setLoading,
         errors,
-        avatarDefault,
-        formErrors,
     } = useForm(initialForm, UserValidations, inputs);
 
+    const handleBlur = (e) => {
+        if (e.target.name !== "avatar") {
+          handleChange(e);
+          setErrors(UserValidations(form, e, inputs, errors));
+        } else {
+          // Handle avatar-specific logic here if needed
+          setErrors(UserValidations(form, e, inputs, errors));
+        }
+      };
 
+    const handleMouseup = (e) => {
+        handleChange(e);
+        setErrors(UserValidations(form, e, inputs, errors));
+    }
 
     /* Funciones específicas de Create User form: handleAvatar */
     const showFileNotImage = () => {
         delete errors.avatar;
         setMsgFileNotImage(false)
-      }
+    }
+    useEffect(() => {
+        if (resetAvatarError) {
+          console.log('After resetting errors.avatar:', errors.avatar);
+          setResetAvatarError(false); // Reset the flag
+        }
+      }, [resetAvatarError, errors.avatar]);
 
       const handleAvatar = (e) => {
         const avatarFile = e.target.files[0];
         const fileName = avatarFile.name.toLowerCase();
         const maxSize = 2 * 1024 * 1024; // 2MB in bytes
-      
-        // Check if the file size is greater than 2MB
-        if (avatarFile.size > maxSize) {
-          setMsgFileNotImage(true);
-          setErrors({
-            ...errors,
-            avatar: `El tamaño del archivo "${fileName}" excede el límite de 2MB.`,
-          });
-          return;
+    
+        if (!fileName.endsWith('.jpg') && !fileName.endsWith('.jpeg') && !fileName.endsWith('.png') && avatarFile.size > maxSize) {
+            setMsgFileNotImage(true);
+            setErrors({
+                ...errors,
+                avatar: `El archivo "${fileName}" no es una imagen o excede el límite de 2MB.`,
+            });
+            return;
         }
-      
-        if (!fileName.endsWith('.jpg') && !fileName.endsWith('.jpeg') && !fileName.endsWith('.png')) {
-          setMsgFileNotImage(true);
-          setErrors({
-            ...errors,
-            avatar: `El archivo "${fileName}" no es una imagen o excede el límite de 2MB.`,
-          });
-          return;
-        }
-      
+    
         // Reset errors when a valid file is selected
-        setMsgFileNotImage(false);
-        setErrors({
-          ...errors,
-          avatar: null,
-        });
-      
+        setErrors(prevErrors => ({
+            ...prevErrors,
+            avatar: null,
+        }));
+    
         setFiles([avatarFile]);
-        console.log(avatarFile, "avatarFile");
-      };
+    };
+    
+    // Add a useEffect to log errors.avatar after resetting
+    useEffect(() => {
+        console.log('After resetting errors.avatar:', errors.avatar);
+    }, [errors.avatar]);
+    
+
+    // const handleAvatar = (e) => {
+    //     const avatarFile = e.target.files[0];
+    //     const fileName = avatarFile.name.toLowerCase();
+    //     const maxSize = 2 * 1024 * 1024; // 2MB in bytes
+
+    //     if (!fileName.endsWith('.jpg') && !fileName.endsWith('.jpeg') && !fileName.endsWith('.png') && avatarFile.size > maxSize) {
+    //         setMsgFileNotImage(true);
+    //         setErrors({
+    //             ...errors,
+    //             avatar: `El archivo "${fileName}" no es una imagen o excede el límite de 2MB.`,
+    //         });
+    //         return;
+    //     }
+
+    //     // Reset errors when a valid file is selected
+    //     console.log('Before resetting errors.avatar:', errors.avatar);
+    //     setErrors(prevErrors => ({
+    //       ...prevErrors,
+    //       avatar: null,
+    //     }));
+    //     setResetAvatarError(true); // Set the flag to trigger the useEffect  setMsgFileNotImage(false);
+    //     console.log('Before resetting errors.avatar:', errors.avatar);
+    //     setErrors(prevErrors => ({
+    //         ...prevErrors,
+    //         avatar: null,
+    //     }), () => {
+    //         // Code to execute after state is updated
+    //         console.log('After resetting errors.avatar:', errors.avatar);
+    //     });
+
+    //     setFiles([avatarFile]);
+    //     console.log(avatarFile, "avatarFile");
+    // };
+    
 
 
     const handleSubmit = async (e) => {
@@ -108,14 +152,14 @@ const EditUserForm = ({ user, handleCloseEdit }) => {
         handleChange(e);
         e.preventDefault();
         setErrors(errors);
-
+        console.log('Number of errors:', Object.keys(errors).length);
         if (Object.keys(errors).length === 0) {
 
             setLoading(true);        // activa el loader
 
             try {
 
-                let avatarUrl = form.avatar; // Keep the current avatar URL
+                let avatarUrl = user.avatar; // Keep the current avatar URL
                 let oldImageUrl = null;
                 // Check if a file is selected
                 if (files.length > 0) {
@@ -124,11 +168,11 @@ const EditUserForm = ({ user, handleCloseEdit }) => {
                     avatarUrl = await fileUpload(files[0], folder); // Actualiza la URL de la imagen con la nueva imagen
                 }
 
-        
+
                 const data = {
-                  ...form,
-                  avatar: avatarUrl, // Set the new avatar URL
-                  oldImageUrl: oldImageUrl,
+                    ...form,
+                    avatar: avatarUrl, // Set the new avatar URL
+                    oldImageUrl: oldImageUrl,
                 };
 
                 const req = await fetch("http://localhost:4001/api/users/update", {
@@ -145,12 +189,12 @@ const EditUserForm = ({ user, handleCloseEdit }) => {
                 const res = await req.json();
                 setResponseMsg(res);
 
-                if (res.status === 200 && authUser.role==="Administrador") {
+                if (res.status === 200 && authUser.role === "Administrador") {
                     setLoading(false);
                     setShowResOk(true);
                     setShowResBad(false);
                     setForm(initialForm);
-                    //setFiles
+                    setFiles();
                     handleReset();
                     handleCloseEdit();
                     window.scrollTo({ top: 0, behavior: 'smooth', passive: true });
@@ -301,7 +345,7 @@ const EditUserForm = ({ user, handleCloseEdit }) => {
 
                             {/* PREVIEW DE LAS URLS QUE ESTAN EN BD */}
                             {
-                                <img src={ user.avatar } className='avatar'/>
+                                <img src={user.avatar} className='avatar' />
                             }
                             {/* PREVIEW DE LAS URLS QUE ESTAN EN BD */}
                         </Col>
@@ -314,18 +358,18 @@ const EditUserForm = ({ user, handleCloseEdit }) => {
                             {/* AVATAR PREVIEW  ESTA PARTE ANDA 2NOV23*/}
                             {
                                 files && files.length > 0
-                                    && <div className='images-preview'>
-                                        {
-                                            files.map((file, index) => {
-                                                return (
-                                                    <div className='box-individual-preview' key={index}>
-                                                        <img src={URL.createObjectURL(file)} alt={file.name} className={files && files.length > 0 ? "avatar" : "hidden"}/>
-                                                    </div>
-                                                )
-                                            })
-                                        }
-                                    </div>
-                                     
+                                && <div className='images-preview'>
+                                    {
+                                        files.map((file, index) => {
+                                            return (
+                                                <div className='box-individual-preview' key={index}>
+                                                    <img src={URL.createObjectURL(file)} alt={file.name} className={files && files.length > 0 ? "avatar" : "hidden"} />
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                </div>
+
                             }
 
                             {/* AVATAR PREVIEW  */}
