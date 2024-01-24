@@ -6,13 +6,17 @@ import { useForm } from '../../hooks/useForm';
 import { UserValidations } from "./UserValidation";
 import { useFetchUserRoles } from '../../hooks/useFetchUserRoles';
 import { fileUpload } from '../../helpers/fileUpload';
+import { AuthContext } from '../auth/context/AuthContext';
+
 
 const EditUserForm = ({ user, handleCloseEdit }) => {
-    const AvatarDefault = "https://res.cloudinary.com/caraguatay/image/upload/v1691536662/avatar/user-avatar_d4x7se.png";
+    const AvatarDefault = "https://res.cloudinary.com/caraguatay/image/upload/v1705884354/avatar/user-avatar_d4x7se.png";
+
     const [msgFileNotImage, setMsgFileNotImage] = useState(false);
+    const [resetAvatarError, setResetAvatarError] = useState(false);
     const id = user.id;
     const { userRoles } = useFetchUserRoles();
-    console.log(userRoles)
+
     const initialForm = {
         email: user ? user.email : '',
         name: user ? user.name : '',
@@ -37,12 +41,11 @@ const EditUserForm = ({ user, handleCloseEdit }) => {
         setShowResBad,
     } = useContext(UserAdminContext);
 
+    const { user: authUser } = useContext(AuthContext);
+
     const {
         form,
         handleChange,
-        handleKeyUp,
-        handleBlur,
-        handleMouseup,
         setForm,
         setErrors,
         setFiles,
@@ -50,19 +53,31 @@ const EditUserForm = ({ user, handleCloseEdit }) => {
         handleReset,
         setLoading,
         errors,
-        avatarDefault,
-        formErrors,
     } = useForm(initialForm, UserValidations, inputs);
 
+    const handleBlur = (e) => {
+        if (e.target.name !== "avatar") {
+          handleChange(e);
+          setErrors(UserValidations(form, e, inputs, errors));
+        } else {
+          // Handle avatar-specific logic here if needed
+          setErrors(UserValidations(form, e, inputs, errors));
+        }
+      };
 
+    const handleMouseup = (e) => {
+        handleChange(e);
+        setErrors(UserValidations(form, e, inputs, errors));
+    }
 
     /* Funciones específicas de Create User form: handleAvatar */
     const showFileNotImage = () => {
         delete errors.avatar;
         setMsgFileNotImage(false)
-      }
+    }
 
-    const handleAvatar = (e) => {
+
+      const handleAvatar = (e) => {
         const avatarFile = e.target.files[0];
         const fileName = avatarFile.name.toLowerCase();
 
@@ -74,7 +89,14 @@ const EditUserForm = ({ user, handleCloseEdit }) => {
             });
             return;
         }
-
+        if (avatarFile.size > 2 * 1024 * 1024) {
+            setMsgFileNotImage(true);
+            setErrors({
+                ...errors,
+                avatar: `El archivo "${fileName}" supera el tamaño máximo permitido de 2MB`
+            });
+            return;
+        }
         delete errors.avatar;
 
         setFiles([avatarFile]);
@@ -87,26 +109,27 @@ const EditUserForm = ({ user, handleCloseEdit }) => {
         handleChange(e);
         e.preventDefault();
         setErrors(errors);
-
+        console.log('Number of errors:', Object.keys(errors).length);
         if (Object.keys(errors).length === 0) {
 
             setLoading(true);        // activa el loader
 
             try {
 
-                let avatarUrl = form.avatar; // Keep the current avatar URL
-
+                let avatarUrl = user.avatar; // Keep the current avatar URL
+                let oldImageUrl = null;
+                // Check if a file is selected
                 if (files.length > 0) {
-                  const folder = "avatar";
-                  avatarUrl = await fileUpload(files[0], folder); // Update avatar URL with new image
-                } else {
-                  const folder = "avatar";
-                  avatarUrl = await fileUpload(avatarDefault, folder);
+                    oldImageUrl = form.avatar;
+                    const folder = "avatar";
+                    avatarUrl = await fileUpload(files[0], folder); // Actualiza la URL de la imagen con la nueva imagen
                 }
-        
+
+
                 const data = {
-                  ...form,
-                  avatar: avatarUrl // Set the new avatar URL
+                    ...form,
+                    avatar: avatarUrl, // Set the new avatar URL
+                    oldImageUrl: oldImageUrl,
                 };
 
                 const req = await fetch("http://localhost:4001/api/users/update", {
@@ -119,19 +142,16 @@ const EditUserForm = ({ user, handleCloseEdit }) => {
                     }),),
                     headers: { 'Content-Type': 'application/json' }
                 })
-                console.log(data, "linea 93")
 
                 const res = await req.json();
                 setResponseMsg(res);
 
-                console.log("res", res)
-
-                if (res.status === 200) {
+                if (res.status === 200 && authUser.role === "Administrador") {
                     setLoading(false);
                     setShowResOk(true);
                     setShowResBad(false);
                     setForm(initialForm);
-                    //setFiles
+                    setFiles();
                     handleReset();
                     handleCloseEdit();
                     window.scrollTo({ top: 0, behavior: 'smooth', passive: true });
@@ -148,7 +168,7 @@ const EditUserForm = ({ user, handleCloseEdit }) => {
             }
         } else {
             setShowResOk(false);
-            alert("Revise los errores del formulario");
+            alert("Revise y cierre los errores del formulario");
         }
     }
 
@@ -167,7 +187,7 @@ const EditUserForm = ({ user, handleCloseEdit }) => {
                         onChange={handleChange}
                         onMouseUp={handleMouseup}
                         onBlur={handleBlur}
-                        required
+                        disabled
                     />
                     {
                         errors && errors.email
@@ -282,7 +302,7 @@ const EditUserForm = ({ user, handleCloseEdit }) => {
 
                             {/* PREVIEW DE LAS URLS QUE ESTAN EN BD */}
                             {
-                                <img src={ user.avatar } className='avatar'/>
+                                <img src={user.avatar} className='avatar' />
                             }
                             {/* PREVIEW DE LAS URLS QUE ESTAN EN BD */}
                         </Col>
@@ -295,18 +315,18 @@ const EditUserForm = ({ user, handleCloseEdit }) => {
                             {/* AVATAR PREVIEW  ESTA PARTE ANDA 2NOV23*/}
                             {
                                 files && files.length > 0
-                                    && <div className='images-preview'>
-                                        {
-                                            files.map((file, index) => {
-                                                return (
-                                                    <div className='box-individual-preview' key={index}>
-                                                        <img src={URL.createObjectURL(file)} alt={file.name} className={files && files.length > 0 ? "avatar" : "hidden"}/>
-                                                    </div>
-                                                )
-                                            })
-                                        }
-                                    </div>
-                                     
+                                && <div className='images-preview'>
+                                    {
+                                        files.map((file, index) => {
+                                            return (
+                                                <div className='box-individual-preview' key={index}>
+                                                    <img src={URL.createObjectURL(file)} alt={file.name} className={files && files.length > 0 ? "avatar" : "hidden"} />
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                </div>
+
                             }
 
                             {/* AVATAR PREVIEW  */}
