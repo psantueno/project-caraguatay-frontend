@@ -9,6 +9,7 @@ import { fileUpload } from '../../../../helpers/fileUpload'
 import dayjs from "dayjs";
 import { useFetchDpCategories } from '../../../../hooks/useFetchDpCategories';
 import { Loader } from '../../../buttons/Loader';
+import { AuthContext } from '../../../auth/context/AuthContext';
 
 
 
@@ -65,6 +66,8 @@ export const CreateDpForm = ({ handleClose }) => {
         setResponseMsg,
         loading
     } = useForm(initialForm, DpValidations, inputs)
+
+    const { user: authUser } = useContext(AuthContext)
 
 
     {/* START SPECIFIC FUNCTIONS OF FORM */ }
@@ -253,7 +256,7 @@ export const CreateDpForm = ({ handleClose }) => {
                 setResponseMsg(res);
                 console.log(res)
 
-                if (res.status === 201) {
+                if (res.status === 201 && authUser.role === "Administrador" ) {
                     setLoading(false);
                     setShowResOk(true);
                     setShowResBad(false);
