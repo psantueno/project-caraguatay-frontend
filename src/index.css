@@ -455,9 +455,9 @@ a.link-phones:hover {
   width: 100%;
   max-width: 1200px !important;
   max-height: 580px !important;
-  height: 520px;
+  height: 300px;
   /* Establece la altura máxima */
-  object-fit: contain;
+  object-fit: cover;
   /* Ajusta la imagen dentro del contenedor sin cortarla  */
 }
 
