@@ -535,13 +535,13 @@ a.link-phones:hover {
 }
 
 .carousel-control-prev{
-  left: -17px
+  left: 0px
 }
 .carousel-control-next{
-  right: -17px
+  right: 0px
 }
 .carousel-control-next-icon, .carousel-control-prev-icon{
-  background-color: gray;
+  background-color: transparent;
 }
 
 
@@ -732,10 +732,11 @@ a.link-activated:hover,
 }
 
 .sections-card img{
-  width: 250px;
-  height: 220px;
+  width: 100%;
+  height: 300px;
   border-radius: 5px 5px 0 0;
   margin-bottom: 15px;
+  object-fit: cover;
 }
 
 .social-net-card {
