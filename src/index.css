@@ -329,6 +329,7 @@ a.link-phones:hover {
 .number-phone,
 .menu-subtitle {
   font-weight: 500;
+  padding-top: 5px;
   font-size: 13px;
   margin-bottom: 0px;
   font-family: fantasy;
@@ -342,8 +343,9 @@ a.link-phones:hover {
 
 .list-section {
   list-style: none;
-  font-size: 12px;
-  padding-left: 5px;
+  font-size: 9px;
+  padding: 5px;
+
 }
 
 .section-contact-follow {
@@ -651,7 +653,7 @@ a.link-phones:hover {
 h6.btn-square-text {
   margin: 3px;
   text-align: center;
-  font-size: 0.8em;
+  font-size: 0.6em;
   overflow-wrap: anywhere;
 }
 
@@ -1050,16 +1052,79 @@ a.link-activated:hover,
 /*Estilo para Tablets*/
 @media only screen and (min-width: 601px) and (max-width: 1024px) {
 
+/*Footer */
+  .list-section {
+    font-size: 14px;
+    margin: center;
+  }
+  .menu-subtitle{
+    font-size: 14px;
+  }
+
+.section-contact-follow {
+  justify-content: center
+  }
+  
+.title-copyright {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+}
+a.link-phones{
+  font-size: 18px;
+  flex:10%;
+}
+
+.phones {
+  
+  flex-wrap: nowrap;
+ }
+
+.number-phone, .title-phone {
+  font-size: 15px;
+}
+/*Footer*/
+
 }
 
 /*Estilo para PC*/
-@media only screen and (min-width: 1025px) and (max-width: 1440px) {
+@media only screen and (min-width: 1025px)  {
 
+/*Footer */
+.list-section {
+  font-size: 16px;
+  margin: center;
+}
+.menu-subtitle{
+  font-size: 16px;
+  padding:5px;
+}
+
+.title-copyright {
+margin: 0;
+font-size: 16px;
+font-weight: 400;
+}
+a.link-phones{
+flex:0%;
+font-size: 18px;
+}
+.section-contact-follow {
+  justify-content: space-evenly;
+  }
+
+.phones {
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+}
+.number-phone, .title-phone {
+  font-size: 15px;
+}
+/*Footer*/
 
 }
 
-/*PARA PANTALLAS MAS GRANDES*/
-@media only screen and (min-width: 1441px) {
+
   
 
 
