@@ -328,11 +328,11 @@ a.link-phones:hover {
 
 .number-phone,
 .menu-subtitle {
-  font-weight: 500;
+  font-weight: 400;
   padding-top: 5px;
   font-size: 13px;
   margin-bottom: 0px;
-  font-family: fantasy;
+  /* font-family: fantasy; */
 }
 
 .title-phone {
@@ -343,7 +343,7 @@ a.link-phones:hover {
 
 .list-section {
   list-style: none;
-  font-size: 9px;
+  font-size: 11px;
   padding: 5px;
 
 }
@@ -392,7 +392,7 @@ a.link-phones:hover {
 
 .title-copyright {
   margin: 0;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 /* END FOOTER */
@@ -1071,7 +1071,7 @@ a.link-activated:hover,
   font-weight: 400;
 }
 a.link-phones{
-  font-size: 18px;
+  font-size: 16px;
   flex:10%;
 }
 
@@ -1102,7 +1102,7 @@ a.link-phones{
 
 .title-copyright {
 margin: 0;
-font-size: 16px;
+font-size: 15px;
 font-weight: 400;
 }
 a.link-phones{
