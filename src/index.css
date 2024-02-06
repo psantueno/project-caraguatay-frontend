@@ -468,7 +468,7 @@ a.link-phones:hover {
   min-width: 260px !important;
   max-width: 1200px !important;
   min-height: 270px;
-  max-height: 500px !important;
+  /* max-height: 500px !important; */
 
 }
 
@@ -621,7 +621,7 @@ a.link-phones:hover {
   height: 80% !important;
   text-align: center;
   margin: auto;
-  margin-top: 15px;
+  /* margin-top: 15px; */
   margin-bottom: 20px;
   /* box-shadow: 5px 5px 10px 5px #859499 ;  */
 }
