@@ -259,13 +259,23 @@ a {
 
 /*START HOME*/
 
+.container, .container-lg, .container-md, .container-sm, .container-xl{
+  max-width: 1450px;
+}
+
 .banner-home {
-  margin-top: 20px;
-  margin-bottom: 25px;
+  background-color: #fff;
+  width: 90%;
+  margin: auto;
+ /* margin-bottom: 25px; */
   -webkit-user-select: none !important;
   user-select: none !important;
 }
-
+.formalities-bg{
+  background-color: #e5e5e6;
+  padding: 25px 0px 25px 0px;
+  margin-bottom: 25px;
+}
 .containers-home {
   margin-bottom: 35px;
 }
@@ -404,6 +414,8 @@ a.link-phones:hover {
   margin-top: 0px;
   margin-bottom: 30px;
   justify-content: center;
+  height: 650px !important;
+  
 }
 
 .card-lg {
@@ -570,7 +582,8 @@ a.link-phones:hover {
 
 
 .container-pages {
-  margin-top: 80px;
+  margin: 25px 0 0 0;
+  padding: 0px;
 }
 
 .text-paragraphs {
@@ -1044,13 +1057,18 @@ a.link-activated:hover,
 
 
 /* START MEDIA QUERIES */
-/*Estilo para celulares*/
-@media only screen and (max-width: 600px) {
-  
 
-}
 /*Estilo para Tablets*/
 @media only screen and (min-width: 601px) and (max-width: 1024px) {
+  /*HOME*/
+
+  .formalities-bg{
+    background-color: #e5e5e6;
+    padding: 25px 0px 25px 0px;
+    margin-bottom: 25px;
+    max-width: 1350px;
+  }
+  /*end HOME*/
 
 /*Footer */
   .list-section {
@@ -1089,6 +1107,12 @@ a.link-phones{
 
 /*Estilo para PC*/
 @media only screen and (min-width: 1025px)  {
+
+/*Start Home*/
+ 
+
+
+/* end Home*/
 
 /*Footer */
 .list-section {

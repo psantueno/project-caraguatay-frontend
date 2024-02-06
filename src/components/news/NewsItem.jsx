@@ -50,6 +50,7 @@ export const NewsItem = ({
     return (
         <>
             <Container className="container-news" >
+            <Link to={`${link}`}>
                 <Card className='cardNews' >
 
                     {
@@ -96,7 +97,7 @@ export const NewsItem = ({
                                 <>
                                     {mainText.length < 250 ? mainText :
                                         <>
-                                            {`${mainText.slice(0, 250)}...`}
+                                            {`${mainText.slice(0, 200)}...`}
                                         </>
                                     }
                                 </>
@@ -104,7 +105,7 @@ export const NewsItem = ({
 
                         </Card.Text>
                     </Card.Body>
-                    <Link to={`${link}`}><small className='text-muted cardLink' >Leer mas...</small></Link>
+                    {/* <Link to={`${link}`}><small className='text-muted cardLink' >Leer mas...</small></Link> */}
 
                     {
                         logged &&
@@ -122,6 +123,7 @@ export const NewsItem = ({
                         </Card.Footer>
                     }
                 </Card>
+                </Link>
             </Container>
 
         </>
