@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { MenuHamburguer } from './MenuHamburguer'
 import MunicipioLogo from '../../assets/caraguatay-03.png';
 import { MenuProfile } from './MenuProfile';
+import { NavMenu } from './NavMenu';
+
 
 
 
@@ -18,7 +20,7 @@ export const Header = () => {
   return (
     <>
       <div className='main-div-header'>
-        <div className='user-navbar-box'>
+        {/* <div className='user-navbar-box'>
           {
             logged
 
@@ -31,14 +33,15 @@ export const Header = () => {
               ? (<div className='user-name-navbar'>{firstName} {lastNameInitial}.</div>)
               : null
           }
-        </div>
+        </div> */}
         <div>
-          <Link to="/">
+          {/* <Link to="/">
             <img src={MunicipioLogo} className="logo-header" />
-          </Link>
+          </Link> */}
         </div>
         <div>
-          <MenuHamburguer />
+          {/* <MenuHamburguer /> */}
+          <NavMenu />
         </div>
       </div>
     </>
