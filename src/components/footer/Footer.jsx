@@ -10,7 +10,7 @@ export const Footer = () => {
     return (
         <footer>
             <div className="footer">
-                <div className="phones">
+                <div className="phones" md={2} lg={4}>
                     {
                         usefulPhones.map((element) => (
                             <PhoneCard key={element.phone} {...element} />

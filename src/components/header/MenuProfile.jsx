@@ -1,14 +1,18 @@
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useHamburguer } from './hooks/useHamburguer';
-import { AuthContext } from '../auth/context/AuthContext';
+
 import { useContext } from 'react';
+import {Nav} from 'react-bootstrap'
+
+import { AuthContext } from '../auth/context/AuthContext';
 
 
 export const MenuProfile = ({ avatar}) => {
 
+    const { open, handleClick, handleLinkClick, handleBlur } = useHamburguer({})
+    const { user, logged } = useContext(AuthContext);
+ 
     const { logout } = useContext( AuthContext )
-
-    const { open, handleClick, handleLinkClick, handleBlur } = useHamburguer({});
 
     const navigate = useNavigate();
 
@@ -32,6 +36,8 @@ export const MenuProfile = ({ avatar}) => {
                     <ul className={`container-links-userProfile ${open ? 'open' : ''}`}>
                         <li><Link to="/admin/usuarios/datalle-usuario" onClick={handleLinkClick}>MIS DATOS</Link></li>
                         <li><button className='button-logout' onClick={onLogout}>CERRAR SESIÓN <i className="fas fa-sign-out-alt"></i></button></li>
+                        {/* <li> { logged &&  <li><Link to="/admin/noticias" onClick={handleLinkClick}>ABM NOTICIAS</Link></li> }</li> 
+                        <li> { logged && user.role === 'Administrador' &&  <li><Link to="/super-admin/usuarios" onClick={handleLinkClick}>ABM USUARIOS</Link></li> } </li>                   */}
                     </ul>
                 </div>
             </div>

@@ -7,6 +7,8 @@ import { useFetchDpCategories } from '../../../../hooks/useFetchDpCategories';
 import { fileUpload } from '../../../../helpers/fileUpload';
 import { DeleteButton } from '../../../buttons';
 import { Loader } from '../../../buttons/Loader';
+import { AuthContext } from '../../../auth/context/AuthContext';
+
 
 
 
@@ -47,6 +49,10 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
         setShowResBad,
     } = useContext(DPAdminContext);
 
+    const { user: authUser } = useContext(AuthContext)
+    
+
+
     const {
         form,
         handleChange,
@@ -86,8 +92,16 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
             });
             return;
         }
+        if (imageDp.size > 2 * 1024 * 1024) {
+            setMsgFileNotImage(true);
+            setErrors({
+                ...errors,
+                image: `El archivo "${fileName}" supera el tamaño máximo permitido de 2MB`
+            });
+            return;
+        }
 
-        delete errors.avatar;
+        delete errors.image;
 
         setFiles([imageDp]);
     };
@@ -250,7 +264,7 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
                 setResponseMsg(res);
 
 
-                if (res.status === 200) {
+                if (res.status === 200 && authUser.role === "Administrador") {
                     setLoading(false);
                     setShowResOk(true);
                     setShowResBad(false);
@@ -478,8 +492,8 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
 
                         <Alert show={msgFileNotImage} className="alert-file-not-image">
                             <p className="images-msg-error">
-                                {errors.avatar}<b><i className="fas fa-exclamation-circle"></i></b><br />
-                                Extensiones aceptadas: ".jpeg", ".jpg" y ".png".
+                                {errors.image}<b><i className="fas fa-exclamation-circle"></i></b><br />
+                               
                             </p>
                             <Col className="d-flex justify-content-end">
                                 <Button

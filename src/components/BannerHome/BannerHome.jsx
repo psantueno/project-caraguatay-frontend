@@ -1,12 +1,13 @@
 import { Container, Row } from 'react-bootstrap'
-import Banner from '../../assets/images/banner-home.png';
+import Banner from '../../../src/assets/images/caraguatay-03.png';
 
 export const BannerHome = () => {
 
   return (
 
     <Container fluid>
-      <Row>
+      <Row className='banner-home'>
+       
         <img src={Banner} alt="Banner" className='banner-home' />
       </Row>
     </Container>

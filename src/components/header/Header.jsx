@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { MenuHamburguer } from './MenuHamburguer'
 import MunicipioLogo from '../../assets/caraguatay-03.png';
 import { MenuProfile } from './MenuProfile';
+import { NavMenu } from './NavMenu';
+
 
 
 
@@ -39,6 +41,7 @@ export const Header = () => {
         </div>
         <div>
           <MenuHamburguer />
+          {/* <NavMenu /> */}
         </div>
       </div>
     </>

@@ -58,7 +58,6 @@ a {
 .main-div-header {
   display: flex;
   width: 100%;
-  justify-content: space-around;
   align-items: center;
   background-color: #c1cdd6;
   border-color: #315C94;
@@ -66,6 +65,8 @@ a {
   border-width: thick;
   position: fixed;
   z-index: 10000;
+  justify-content: space-around; 
+  /* flex-direction: column; */
 }
 
 .logo-header {
@@ -249,6 +250,10 @@ a {
   display: block;
 }
 
+.navbar-collapse{
+  max-height: 1300px;
+}
+
 .nav-link-header.open {
   display: block;
 }
@@ -259,13 +264,23 @@ a {
 
 /*START HOME*/
 
+.container, .container-lg, .container-md, .container-sm, .container-xl{
+  max-width: 100%;
+}
+
 .banner-home {
-  margin-top: 20px;
-  margin-bottom: 25px;
+  background-color: #fff;
+  width: 90%;
+  margin: auto;
+ /* margin-bottom: 25px; */
   -webkit-user-select: none !important;
   user-select: none !important;
 }
-
+.formalities-bg{
+  background-color: #e5e5e6;
+  padding: 25px 0px 25px 0px;
+  margin-bottom: 25px;
+}
 .containers-home {
   margin-bottom: 35px;
 }
@@ -328,10 +343,11 @@ a.link-phones:hover {
 
 .number-phone,
 .menu-subtitle {
-  font-weight: 500;
+  font-weight: 400;
+  padding-top: 5px;
   font-size: 13px;
   margin-bottom: 0px;
-  font-family: fantasy;
+  /* font-family: fantasy; */
 }
 
 .title-phone {
@@ -342,8 +358,9 @@ a.link-phones:hover {
 
 .list-section {
   list-style: none;
-  font-size: 12px;
-  padding-left: 5px;
+  font-size: 11px;
+  padding: 5px;
+
 }
 
 .section-contact-follow {
@@ -390,7 +407,7 @@ a.link-phones:hover {
 
 .title-copyright {
   margin: 0;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 /* END FOOTER */
@@ -402,6 +419,8 @@ a.link-phones:hover {
   margin-top: 0px;
   margin-bottom: 30px;
   justify-content: center;
+  height: 650px !important;
+  
 }
 
 .card-lg {
@@ -455,9 +474,9 @@ a.link-phones:hover {
   width: 100%;
   max-width: 1200px !important;
   max-height: 580px !important;
-  height: 520px;
+  height: 300px;
   /* Establece la altura máxima */
-  object-fit: contain;
+  object-fit: cover;
   /* Ajusta la imagen dentro del contenedor sin cortarla  */
 }
 
@@ -466,7 +485,7 @@ a.link-phones:hover {
   min-width: 260px !important;
   max-width: 1200px !important;
   min-height: 270px;
-  max-height: 500px !important;
+  /* max-height: 500px !important; */
 
 }
 
@@ -535,13 +554,13 @@ a.link-phones:hover {
 }
 
 .carousel-control-prev{
-  left: -17px
+  left: 0px
 }
 .carousel-control-next{
-  right: -17px
+  right: 0px
 }
 .carousel-control-next-icon, .carousel-control-prev-icon{
-  background-color: gray;
+  background-color: transparent;
 }
 
 
@@ -568,7 +587,8 @@ a.link-phones:hover {
 
 
 .container-pages {
-  margin-top: 80px;
+  margin: 90px 0 0 12px;
+  padding: 0px;
 }
 
 .text-paragraphs {
@@ -615,11 +635,11 @@ a.link-phones:hover {
     
 .text-indent img {
   /* width: 290px !important; */
-  max-width: 100%;
+  max-width: 390px;
   height: 80% !important;
   text-align: center;
   margin: auto;
-  margin-top: 15px;
+  /* margin-top: 15px; */
   margin-bottom: 20px;
   /* box-shadow: 5px 5px 10px 5px #859499 ;  */
 }
@@ -651,7 +671,7 @@ a.link-phones:hover {
 h6.btn-square-text {
   margin: 3px;
   text-align: center;
-  font-size: 0.8em;
+  font-size: 0.6em;
   overflow-wrap: anywhere;
 }
 
@@ -732,10 +752,11 @@ a.link-activated:hover,
 }
 
 .sections-card img{
-  width: 250px;
-  height: 220px;
+  width: 100%;
+  height: 300px;
   border-radius: 5px 5px 0 0;
   margin-bottom: 15px;
+  object-fit: cover;
 }
 
 .social-net-card {
@@ -1041,6 +1062,103 @@ a.link-activated:hover,
 
 
 /* START MEDIA QUERIES */
+
+/*Estilo para Tablets*/
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+  /*HOME*/
+
+  .formalities-bg{
+    background-color: #e5e5e6;
+    padding: 25px 0px 25px 0px;
+    margin-bottom: 25px;
+    max-width: 1550px;
+  }
+  /*end HOME*/
+
+/*Footer */
+  .list-section {
+    font-size: 14px;
+    margin: center;
+  }
+  .menu-subtitle{
+    font-size: 14px;
+  }
+
+.section-contact-follow {
+  justify-content: center
+  }
+  
+.title-copyright {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+}
+a.link-phones{
+  font-size: 16px;
+  flex:10%;
+}
+
+.phones {
+  
+  flex-wrap: nowrap;
+ }
+
+.number-phone, .title-phone {
+  font-size: 15px;
+}
+/*Footer*/
+
+}
+
+/*Estilo para PC*/
+@media only screen and (min-width: 1025px)  {
+
+/*Start Home*/
+ 
+
+
+/* end Home*/
+
+/*Footer */
+.list-section {
+  font-size: 16px;
+  margin: center;
+}
+.menu-subtitle{
+  font-size: 16px;
+  padding:5px;
+}
+
+.title-copyright {
+margin: 0;
+font-size: 15px;
+font-weight: 400;
+}
+a.link-phones{
+flex:0%;
+font-size: 18px;
+}
+.section-contact-follow {
+  justify-content: space-evenly;
+  }
+
+.phones {
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+}
+.number-phone, .title-phone {
+  font-size: 15px;
+}
+/*Footer*/
+
+}
+
+
+  
+
+
+
+
 /* @media screen and (min-width:568px) {}
 
 
@@ -1085,7 +1203,7 @@ h6.btn-square-text {
 
 
 /* START MEDIA QUERIES */
-/* @media screen and (min-width:300px) and (max-width:576px){ */
+
 
 /* .btn-toolbar{
     width: 87%;
