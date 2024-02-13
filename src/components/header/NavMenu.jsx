@@ -80,7 +80,10 @@ export const NavMenu = () => {
                         
                     </Nav>
                 </Navbar.Collapse>
-                {/* <div className='user-navbar-box'>
+                {/* <Navbar.Collapse>
+                <Nav>
+
+                <div className='user-navbar-box'>
                     {
                         logged
 
@@ -95,7 +98,10 @@ export const NavMenu = () => {
                             </div>)
                             : null
                     }
-                </div> */}
+                </div>
+                </Nav>
+                </Navbar.Collapse> */}
+
             </Navbar>
         </Container>
     );

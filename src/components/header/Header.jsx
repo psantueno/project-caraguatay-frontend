@@ -20,7 +20,7 @@ export const Header = () => {
   return (
     <>
       <div className='main-div-header'>
-        {/* <div className='user-navbar-box'>
+        <div className='user-navbar-box'>
           {
             logged
 
@@ -33,15 +33,15 @@ export const Header = () => {
               ? (<div className='user-name-navbar'>{firstName} {lastNameInitial}.</div>)
               : null
           }
-        </div> */}
-        <div>
-          {/* <Link to="/">
-            <img src={MunicipioLogo} className="logo-header" />
-          </Link> */}
         </div>
         <div>
-          {/* <MenuHamburguer /> */}
-          <NavMenu />
+          <Link to="/">
+            <img src={MunicipioLogo} className="logo-header" />
+          </Link>
+        </div>
+        <div>
+          <MenuHamburguer />
+          {/* <NavMenu /> */}
         </div>
       </div>
     </>

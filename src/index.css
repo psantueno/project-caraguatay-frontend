@@ -58,7 +58,6 @@ a {
 .main-div-header {
   display: flex;
   width: 100%;
-  /* justify-content: space-around; */ */
   align-items: center;
   background-color: #c1cdd6;
   border-color: #315C94;
@@ -66,7 +65,8 @@ a {
   border-width: thick;
   position: fixed;
   z-index: 10000;
-  flex-direction: column;
+  justify-content: space-around; 
+  /* flex-direction: column; */
 }
 
 .logo-header {
