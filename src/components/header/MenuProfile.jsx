@@ -28,7 +28,7 @@ export const MenuProfile = ({ avatar}) => {
             <div className="navbar-hamburguer" onBlur={handleBlur}>
                 <button className={`navbar-hamburguer-user-toggler ${open ? 'open' : ''}`} onClick={handleClick}>
                     <div className="d-flex align-items-center" onClick={handleClick}>
-                        <i className="fas fa-caret-down" style={{ marginRight: '4px', color: "#315C94" }}></i>
+                        {/* <i className="fas fa-caret-down" style={{ marginRight: '4px', color: "#315C94" }}></i> */}
                         <img src={avatar} alt="" className="avatar-in-navbar" />
                     </div>
                 </button>

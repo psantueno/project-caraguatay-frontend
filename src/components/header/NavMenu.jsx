@@ -38,7 +38,7 @@ export const NavMenu = () => {
 
     return (
         <Container fluid>
-            <Navbar expand="lg" className="main-div-header">
+            <Navbar expand="lg" className="">
 
             
 
@@ -52,7 +52,7 @@ export const NavMenu = () => {
                 <Navbar.Collapse id="navbarScroll">
                     <Nav
                         className="me-auto my-2 my-lg-0"
-                        style={{ maxHeight: '100px' }}
+                        style={{ maxHeight: '1300px' }}
                         navbarScroll
                     >
                        
