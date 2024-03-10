@@ -65,8 +65,8 @@ a {
   border-width: thick;
   position: fixed;
   z-index: 10000;
-  justify-content: space-around; 
-  /* flex-direction: column; */
+  /* justify-content: space-around;  */
+  flex-direction: column;
 }
 
 .logo-header {
@@ -412,7 +412,7 @@ a.link-phones:hover {
 
 /* END FOOTER */
 
-/* START NEWS */
+/*********************** START NEWS *******************************************************************/
 
 .container-news {
   display: flex;
@@ -579,6 +579,10 @@ a.link-phones:hover {
   justify-content: center;
 }
 
+.cardImg-detail{
+  margin:auto
+}
+
 
 /* END NEWS */
 
@@ -587,8 +591,9 @@ a.link-phones:hover {
 
 
 .container-pages {
-  margin: 90px 0 0 12px;
+  /* margin: 90px 0 0 0px; */
   padding: 0px;
+  margin-top: 110px;
 }
 
 .text-paragraphs {

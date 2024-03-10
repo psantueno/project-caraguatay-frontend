@@ -61,6 +61,7 @@ export const NavMenu = () => {
                         <Link to="/deportes" className="nav-link">Deportes</Link>
                         <Nav.Link href="/historia">Historia</Nav.Link>
                         <Nav.Link href="/punto-digital">Punto Digital</Nav.Link>
+                        
                         {/* {logged && <li><Nav.Link to="/admin/noticias" onClick={handleLinkClick}>Abm Noticias</Nav.Link></li>}
                         {logged && user.role === 'Administrador' && <li><Nav.Link to="/super-admin/usuarios" onClick={handleLinkClick}>Abm Usuarios</Nav.Link></li>} */}
 

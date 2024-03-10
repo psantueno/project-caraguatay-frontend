@@ -24,12 +24,12 @@ export const NewsDetail = () => {
             return category.toLowerCase();
         }
     }
-    
+
     useEffect(() => {
         // Desplázate hacia arriba cuando el componente se monta
         window.scrollTo(0, 0);
     }, [news]);
-    
+
     if (loadingFetch) {
         return <Loader text={'cargando la noticia'} loader={loadingFetch} />;  // importar el loader componente
     }
@@ -41,10 +41,10 @@ export const NewsDetail = () => {
 
         <>
             <Row >
-                <Col xs={12} lg={9}>
+                <Col xs={12} lg={9} className='cardImg-detail'>
                     <Card className='card-lg' >
                         <Card.Header data-ride="carousel " className='carousel-slide cardImg-detail lg={12} '   >
-{/*                             
+                            {/*                             
                             {
                                 news.urlArray.length === null &&
                                 <Card.Img
@@ -103,17 +103,17 @@ export const NewsDetail = () => {
                             </Link>
                         </Card.Footer>
                     </Card>
-                </Col>
-                <Col xs={12} md={6} lg={3} className='d-block' >
-                    <h4> <strong> Mas noticias.. </strong></h4>
-                </Col>
+                    <Row xs={12} md={6} lg={3} className='d-block cardImg-detail' >
+                        <h4> <strong> Mas noticias.. </strong></h4>
 
-                {/* <MoreNews id={`"${idCat}"`} /> */}
-                <MoreNews 
-                    fechId= {Number(idCat) }
-                    fech={useFetchNewsByCategory}
-                    newsId={news.id}
+                    </Row>
+                    {/* <MoreNews id={`"${idCat}"`} /> */}
+                    <MoreNews
+                        fechId={Number(idCat)}
+                        fech={useFetchNewsByCategory}
+                        newsId={news.id}
                     />
+                </Col>
             </Row >
         </>
     )
