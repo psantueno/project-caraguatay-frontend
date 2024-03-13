@@ -1,15 +1,13 @@
-import { useRef } from 'react';
+import { useContext, useRef } from 'react';
 import { Button, Form, Container, Col, Row, Alert, Modal } from 'react-bootstrap';
 import { useForm } from '../../../../hooks/useForm';
 import { DpValidations } from '../DpValidations';
 import { DeleteButton } from '../../../buttons';
 import { fileUpload } from '../../../../helpers/fileUpload'
-
-
-import dayjs from "dayjs";
 import { useFetchDpCategories } from '../../../../hooks/useFetchDpCategories';
 import { Loader } from '../../../buttons/Loader';
 import { AuthContext } from '../../../auth/context/AuthContext';
+import dayjs from "dayjs";
 
 
 
@@ -27,9 +25,8 @@ const initialForm = {
 export const CreateDpForm = ({ handleClose }) => {
 
 
-
-
-    const { dPCategories } = useFetchDpCategories()
+    const { dPCategories } = useFetchDpCategories();
+    const { user: authUser } = useContext(AuthContext)
 
 
     const inputs = {
@@ -67,7 +64,6 @@ export const CreateDpForm = ({ handleClose }) => {
         loading
     } = useForm(initialForm, DpValidations, inputs)
 
-    const { user: authUser } = useContext(AuthContext)
 
 
     {/* START SPECIFIC FUNCTIONS OF FORM */ }
@@ -226,6 +222,7 @@ export const CreateDpForm = ({ handleClose }) => {
             console.log(loading); // activa el loader
 
             try {
+
                 let reqToString = form.requirements
                 let imageDpUrl = form.image; // Keep the current avatar URL
 
@@ -242,10 +239,12 @@ export const CreateDpForm = ({ handleClose }) => {
                     ...form,
                     image: imageDpUrl,
                     requirements: reqToString,
-                    user_id: 2,
+                    user_id: authUser.id,
+                    user_role: authUser.role,
                     dpCategory_id: form.category,
 
                 };
+
                 const req = await fetch('http://localhost:4001/api/punto-digital/create', {
                     method: "POST",
                     body: JSON.stringify(data),
@@ -256,7 +255,7 @@ export const CreateDpForm = ({ handleClose }) => {
                 setResponseMsg(res);
                 console.log(res)
 
-                if (res.status === 201 && authUser.role === "Administrador" ) {
+                if (res.status === 201) {
                     setLoading(false);
                     setShowResOk(true);
                     setShowResBad(false);
@@ -266,8 +265,7 @@ export const CreateDpForm = ({ handleClose }) => {
                     setFiles([]);
                     handleReset();
                     handleClose();
-
-                    window.scrollTo({ top: 100, behavior: 'smooth', passive: true });
+                    window.location.reload(); // Recarga la página
 
                 } else {
                     setLoading(false);
@@ -510,11 +508,11 @@ export const CreateDpForm = ({ handleClose }) => {
 
                     </Form.Group>
 
-                    <Button className='m-2' type="submit"  disabled={loading}>
+                    <Button className='m-2' type="submit" disabled={loading}>
                         Confirmar
                     </Button>
 
-                    <Button className='m-2' type="reset" onClick={handleReset}  disabled={loading}>
+                    <Button className='m-2' type="reset" onClick={handleReset} disabled={loading}>
                         Borrar
                     </Button>
 

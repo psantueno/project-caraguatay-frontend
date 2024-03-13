@@ -103,10 +103,9 @@ export const CreateUserForm = ({ handleClose }) => {
           body: JSON.stringify(data),
           headers: { 'Content-Type': 'application/json' }
         });
+
         const res = await req.json();
-        console.log(res, "linea 124");
         setResponseMsg(res);
-        console.log(responseMsg, "linea 126");
 
         if (res.status === 201 && user.role === "Administrador") {
           setShowResOk(true);
