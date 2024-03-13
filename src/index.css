@@ -65,7 +65,7 @@ a {
   border-width: thick;
   position: fixed;
   z-index: 10000;
-  justify-content: space-around; 
+  justify-content: space-around;
   /* flex-direction: column; */
 }
 
@@ -109,7 +109,7 @@ a {
   position: relative;
 }
 
-.navbar-hamburguer-user-toggler{
+.navbar-hamburguer-user-toggler {
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -250,7 +250,7 @@ a {
   display: block;
 }
 
-.navbar-collapse{
+.navbar-collapse {
   max-height: 1300px;
 }
 
@@ -264,7 +264,11 @@ a {
 
 /*START HOME*/
 
-.container, .container-lg, .container-md, .container-sm, .container-xl{
+.container,
+.container-lg,
+.container-md,
+.container-sm,
+.container-xl {
   max-width: 100%;
 }
 
@@ -272,15 +276,17 @@ a {
   background-color: #fff;
   width: 90%;
   margin: auto;
- /* margin-bottom: 25px; */
+  /* margin-bottom: 25px; */
   -webkit-user-select: none !important;
   user-select: none !important;
 }
-.formalities-bg{
+
+.formalities-bg {
   background-color: #e5e5e6;
   padding: 25px 0px 25px 0px;
   margin-bottom: 25px;
 }
+
 .containers-home {
   margin-bottom: 35px;
 }
@@ -420,7 +426,7 @@ a.link-phones:hover {
   margin-bottom: 30px;
   justify-content: center;
   height: 650px !important;
-  
+
 }
 
 .card-lg {
@@ -545,21 +551,24 @@ a.link-phones:hover {
 }
 
 .carousel-inner {
-  padding-left:1px;
-  padding-right:1px;
+  padding-left: 1px;
+  padding-right: 1px;
   position: relative;
   width: 100%;
   overflow: hidden;
   /* max-height: 520px; */
 }
 
-.carousel-control-prev{
+.carousel-control-prev {
   left: 0px
 }
-.carousel-control-next{
+
+.carousel-control-next {
   right: 0px
 }
-.carousel-control-next-icon, .carousel-control-prev-icon{
+
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
   background-color: transparent;
 }
 
@@ -587,7 +596,7 @@ a.link-phones:hover {
 
 
 .container-pages {
-  margin: 90px 0 0 12px;
+  margin: 90px 0 0 0px;
   padding: 0px;
 }
 
@@ -629,10 +638,10 @@ a.link-phones:hover {
 }
 
 .text-indent h3 {
-     text-shadow: 5px 5px 10px 5px red ;  
-} 
+  text-shadow: 5px 5px 10px 5px red;
+}
 
-    
+
 .text-indent img {
   /* width: 290px !important; */
   max-width: 390px;
@@ -744,14 +753,14 @@ a.link-activated:hover,
 /* START CULTURA Y TURISMO - CAMPING */
 .sections-card {
   width: 300px;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   border-radius: 5px;
   /* 5px rounded corners */
   margin-bottom: 35px;
 }
 
-.sections-card img{
+.sections-card img {
   width: 100%;
   height: 300px;
   border-radius: 5px 5px 0 0;
@@ -932,7 +941,7 @@ a.link-activated:hover,
 /* END NEWS FORM */
 
 /* START DIGITAL POINT */
-.dpCard-image{
+.dpCard-image {
   text-align: center;
 }
 
@@ -971,6 +980,7 @@ a.link-activated:hover,
   display: table-footer-group;
 
 }
+
 .requirements-card-li {
   font-size: 12px !important;
   text-align: left;
@@ -1006,7 +1016,7 @@ a.link-activated:hover,
 
 /*  START FORM DIGITAL POINT */
 
-.preview-image-dp{
+.preview-image-dp {
   background-color: #ffffff;
   padding: 5px;
   border: 1px solid;
@@ -1056,10 +1066,30 @@ a.link-activated:hover,
 .custom-alert {
   background-color: #c1cdd6;
   color: #315C94;
-
 }
 
 
+/* START 404 NOT FOUND */
+
+.container-not-found {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.title-not-found {
+  font-family: fantasy;
+  color: darkorange;
+}
+
+.error-404 {
+  width: 80%;
+  height: 80%;
+}
+
+/* END 404 NOT FOUND */
 
 /* START MEDIA QUERIES */
 
@@ -1067,94 +1097,133 @@ a.link-activated:hover,
 @media only screen and (min-width: 601px) and (max-width: 1024px) {
   /*HOME*/
 
-  .formalities-bg{
+  .formalities-bg {
     background-color: #e5e5e6;
     padding: 25px 0px 25px 0px;
     margin-bottom: 25px;
     max-width: 1550px;
   }
+
   /*end HOME*/
 
-/*Footer */
+  /*Footer */
   .list-section {
     font-size: 14px;
     margin: center;
   }
-  .menu-subtitle{
+
+  .menu-subtitle {
     font-size: 14px;
   }
 
-.section-contact-follow {
-  justify-content: center
+  .section-contact-follow {
+    justify-content: center
   }
-  
-.title-copyright {
-  margin: 0;
-  font-size: 14px;
-  font-weight: 400;
-}
-a.link-phones{
-  font-size: 16px;
-  flex:10%;
+
+  .title-copyright {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  a.link-phones {
+    font-size: 16px;
+    flex: 10%;
+  }
+
+  .phones {
+
+    flex-wrap: nowrap;
+  }
+
+  .number-phone,
+  .title-phone {
+    font-size: 15px;
+  }
+
+  /*Footer*/
+
+  /* START 404 NOT FOUND */
+
+.error-404 {
+  width: 80%;
+  height: 80%;
 }
 
-.phones {
-  
-  flex-wrap: nowrap;
- }
-
-.number-phone, .title-phone {
-  font-size: 15px;
+.title-not-found {
+  font-size: 1.5em;
 }
-/*Footer*/
+
+/* END 404 NOT FOUND */
 
 }
+
 
 /*Estilo para PC*/
-@media only screen and (min-width: 1025px)  {
+@media only screen and (min-width: 1025px) {
 
-/*Start Home*/
- 
+  /*Start Home*/
 
 
-/* end Home*/
 
-/*Footer */
-.list-section {
-  font-size: 16px;
-  margin: center;
-}
-.menu-subtitle{
-  font-size: 16px;
-  padding:5px;
-}
+  /* end Home*/
 
-.title-copyright {
-margin: 0;
-font-size: 15px;
-font-weight: 400;
-}
-a.link-phones{
-flex:0%;
-font-size: 18px;
-}
-.section-contact-follow {
-  justify-content: space-evenly;
+  /*Footer */
+  .list-section {
+    font-size: 16px;
+    margin: center;
   }
 
-.phones {
-  flex-wrap: nowrap;
-  justify-content: space-evenly;
+  .menu-subtitle {
+    font-size: 16px;
+    padding: 5px;
+  }
+
+  .title-copyright {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 400;
+  }
+
+  a.link-phones {
+    flex: 0%;
+    font-size: 18px;
+  }
+
+  .section-contact-follow {
+    justify-content: space-evenly;
+  }
+
+  .phones {
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+  }
+
+  .number-phone,
+  .title-phone {
+    font-size: 15px;
+  }
+
+  /*Footer*/
+
+   /* START 404 NOT FOUND */
+
+.error-404 {
+  width: 45%;
+  height: 45%;
 }
-.number-phone, .title-phone {
-  font-size: 15px;
+
+.title-not-found {
+  font-size: 3em;
 }
-/*Footer*/
+
+/* END 404 NOT FOUND */
+
 
 }
 
 
-  
+
 
 
 
