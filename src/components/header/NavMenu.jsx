@@ -38,7 +38,7 @@ export const NavMenu = () => {
 
     return (
         <Container fluid>
-            <Navbar expand="lg" className="">
+            <Navbar expand="lg" className="nav-css">
 
             
 
@@ -49,10 +49,10 @@ export const NavMenu = () => {
               
 
                 <Navbar.Toggle aria-controls="navbarScroll" />
-                <Navbar.Collapse id="navbarScroll">
+                <Navbar.Collapse id="navbarScroll" className="navbarScroll-css" style={{ alignItems:"baseline", justifyContent:"space-around", fontSize:"20px"}}>
                     <Nav
-                        className="me-auto my-2 my-lg-0"
-                        style={{ maxHeight: '1300px' }}
+                        className=" my-2 my-lg-0"
+                        style={{ maxHeight: '1300px',alignItems:"baseline"}}
                         navbarScroll
                     >
                        
@@ -61,6 +61,7 @@ export const NavMenu = () => {
                         <Link to="/deportes" className="nav-link">Deportes</Link>
                         <Nav.Link href="/historia">Historia</Nav.Link>
                         <Nav.Link href="/punto-digital">Punto Digital</Nav.Link>
+                        
                         {/* {logged && <li><Nav.Link to="/admin/noticias" onClick={handleLinkClick}>Abm Noticias</Nav.Link></li>}
                         {logged && user.role === 'Administrador' && <li><Nav.Link to="/super-admin/usuarios" onClick={handleLinkClick}>Abm Usuarios</Nav.Link></li>} */}
 

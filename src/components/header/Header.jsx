@@ -21,7 +21,7 @@ export const Header = () => {
     <>
       <div className='main-div-header'>
         <div className='user-navbar-box'>
-          {
+          {/* {
             logged
 
               ? <MenuProfile avatar={user.avatar} />
@@ -32,16 +32,16 @@ export const Header = () => {
 
               ? (<div className='user-name-navbar'>{firstName} {lastNameInitial}.</div>)
               : null
-          }
+          } */}
         </div>
         <div>
-          <Link to="/">
+          {/* <Link to="/">
             <img src={MunicipioLogo} className="logo-header" />
-          </Link>
+          </Link> */}
         </div>
         <div>
-          <MenuHamburguer />
-          {/* <NavMenu /> */}
+          {/* <MenuHamburguer /> */}
+          <NavMenu />
         </div>
       </div>
     </>

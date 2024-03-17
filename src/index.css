@@ -65,13 +65,14 @@ a {
   border-width: thick;
   position: fixed;
   z-index: 10000;
-  justify-content: space-around;
-  /* flex-direction: column; */
+  /* justify-content: space-around;  */
+  flex-direction: column;
+
 }
 
 .logo-header {
-  width: 140px;
-  height: 75px;
+  width: 200px;
+  height: 100px;
 }
 
 .main-div-header i.fa-user {
@@ -257,12 +258,20 @@ a {
 .nav-link-header.open {
   display: block;
 }
+.nav-css{
+  width: 300px;
+}
 
+.navbarScroll-css {
+  align-items:"baseline";
+  justify-content:"space-around";
+  font-size:"25px";
+}
 /* btn-hamburguer */
 
-/* END HEADER */
+/*************************************** END HEADER************************************************** */
 
-/*START HOME*/
+/***************************************START HOME******************************************************/
 
 .container,
 .container-lg,
@@ -416,9 +425,9 @@ a.link-phones:hover {
   font-weight: 400;
 }
 
-/* END FOOTER */
+/************************ END FOOTER *******************************************************************/
 
-/* START NEWS */
+/*********************** START NEWS *******************************************************************/
 
 .container-news {
   display: flex;
@@ -588,6 +597,10 @@ a.link-phones:hover {
   justify-content: center;
 }
 
+.cardImg-detail{
+  margin:auto
+}
+
 
 /* END NEWS */
 
@@ -596,8 +609,9 @@ a.link-phones:hover {
 
 
 .container-pages {
-  margin: 90px 0 0 0px;
+ /* margin: 90px 0 0 0px; */
   padding: 0px;
+  margin-top: 110px;
 }
 
 .text-paragraphs {
@@ -1094,7 +1108,15 @@ a.link-activated:hover,
 /* START MEDIA QUERIES */
 
 /*Estilo para Tablets*/
-@media only screen and (min-width: 601px) and (max-width: 1024px) {
+@media only screen and (min-width: 601px) and (max-width: 991px) {
+  /**HEADER*****/
+
+  .nav-css{
+    width: 600px;
+  }
+
+
+
   /*HOME*/
 
   .formalities-bg {
@@ -1160,7 +1182,18 @@ a.link-activated:hover,
 
 
 /*Estilo para PC*/
-@media only screen and (min-width: 1025px) {
+
+@media only screen and (min-width: 992px) and (max-width: 1200px)  {
+
+  /***********************************************HEADER********************************************/
+  .navbar-expand-lg{
+    width: 992px;
+    align-items: baseline;
+    justify-content: space-around;
+  }
+
+
+
 
   /*Start Home*/
 
@@ -1222,7 +1255,57 @@ a.link-activated:hover,
 
 }
 
+@media only screen and (min-width:1201px)   {
 
+  /***********************************************HEADER********************************************/
+  .navbar-expand-lg{
+    width: 1200px;
+    align-items: baseline;
+  }
+
+
+
+/*Start Home*/
+ 
+
+
+/* end Home*/
+
+/*Footer */
+.list-section {
+  font-size: 16px;
+  margin: center;
+}
+.menu-subtitle{
+  font-size: 16px;
+  padding:5px;
+}
+
+.title-copyright {
+margin: 0;
+font-size: 15px;
+font-weight: 400;
+}
+a.link-phones{
+flex:0%;
+font-size: 18px;
+}
+.section-contact-follow {
+  justify-content: space-evenly;
+  }
+
+.phones {
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+}
+.number-phone, .title-phone {
+  font-size: 15px;
+}
+/*Footer*/
+
+
+}
+  
 
 
 
