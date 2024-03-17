@@ -271,7 +271,7 @@ export const EditDpForm = ({ eventsDp, handleClose }) => {
                     setForm(initialForm);
                     handleReset();
                     handleClose();
-                    window.scrollTo({ top: 0, behavior: 'smooth', passive: true });
+                    window.location.reload(); // Recarga la página
 
                 } else {
                     setLoading(false);

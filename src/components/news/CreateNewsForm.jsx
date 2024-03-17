@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { Button, Form, Container, Col, Row, Table, Alert } from 'react-bootstrap';
 import { useForm } from '../../hooks/useForm';
 import { NewsFormValidations } from './NewsFormValidations';
@@ -8,6 +8,7 @@ import { useFetchNewsCategories } from '../../hooks/useFetchNewsCategories';
 import dayjs from "dayjs";
 import { uploadImages } from './helpers/uploadImages';
 import { ShowAlerts } from '../../helpers/ShowAlerts';
+import { AuthContext } from '../auth/context/AuthContext';
 
 
 const initialForm = {
@@ -23,6 +24,8 @@ const initialForm = {
 export const CreateNewsForm = () => {
 
   const [msgFileNotImage, setMsgFileNotImage] = useState(false);
+
+  const { user } = useContext( AuthContext );
 
   const inputs = {
     title: useRef(),
@@ -118,7 +121,7 @@ export const CreateNewsForm = () => {
       const data = {                                          // preparando el archivo para enviarlo al back.
         ...form,
         imagesUrl: formattedImg,
-        user_id: 2,
+        user_id: user.id,
       }
       // Algunas ideas: podría sacar el state de loading, de showResok, showresBad e incluirlos en un helper fetch para el envio del form
       try {

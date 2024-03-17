@@ -30,13 +30,12 @@ export const ModalCancel = ({ show, handleClose, id, title }) => {
                 throw new Error('Error deleting event');
             }
             const res = await response.json(); // Parse the JSON data from the response 
-            console.log(res, "linea 33");
             if (res.status === 200) {
                 setResponseMsg(res);
-                console.log(res, "linea 123");
                 setShowResOk(true);
                 setShowResBad(false);
                 handleClose();
+                window.location.reload(); // Recarga la página
 
             } else {
                 setShowResBad(true);
