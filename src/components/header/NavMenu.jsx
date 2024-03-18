@@ -49,7 +49,7 @@ export const NavMenu = () => {
               
 
                 <Navbar.Toggle aria-controls="navbarScroll" />
-                <Navbar.Collapse id="navbarScroll" className="navbarScroll-css" style={{ alignItems:"baseline", justifyContent:"space-around", fontSize:"20px"}}>
+                <Navbar.Collapse id="navbarScroll" className="navbarScroll-css" style={{ alignItems:"baseline", justifyContent:"space-around", fontSize:"18px"}}>
                     <Nav
                         className=" my-2 my-lg-0"
                         style={{ maxHeight: '1300px',alignItems:"baseline"}}
@@ -65,7 +65,7 @@ export const NavMenu = () => {
                         {/* {logged && <li><Nav.Link to="/admin/noticias" onClick={handleLinkClick}>Abm Noticias</Nav.Link></li>}
                         {logged && user.role === 'Administrador' && <li><Nav.Link to="/super-admin/usuarios" onClick={handleLinkClick}>Abm Usuarios</Nav.Link></li>} */}
 
-                        <NavDropdown id="collapsible-nav-dropdown" className='user-navbar-box' title={dropdownUser}>
+                        <NavDropdown id="collapsible-nav-dropdown" className='user-navbar-box user-navbar-box-flecha ' title={dropdownUser}>
                             <NavDropdown.Item href={detalleUser}>Mis Datos</NavDropdown.Item>
                             <NavDropdown.Item >
                             <button className='button-logout' onClick={onLogout}>Cerrar Sesión <i className="fas fa-sign-out-alt"></i></button>
