@@ -11,7 +11,7 @@ export const DigitalPointRouter = () => {
         <Routes>
             <Route path="novedades" element={<Novedades />} />
             <Route path="capacitaciones" element={<Capacitaciones />} />
-            <Route path="escuela-robotica" element={<EscuelaRobotica />} />
+            <Route path="robotica" element={<EscuelaRobotica />} />
             <Route path="talleres" element={<Talleres />} />
             <Route path="/:id" element={<NewsDetail />} />
             /* Ruta a la que dirige por defecto cuando clickeamos en PUNTO DIGITAL */

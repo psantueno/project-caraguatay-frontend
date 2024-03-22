@@ -17,6 +17,6 @@ export const DigitalPointBtns = [
     {
         title: "Escuela de Robótica",
         icon: <i className="fas fa-robot"></i>,
-        url: "/punto-digital/escuela-robotica"
+        url: "/punto-digital/robotica"
     }
 ]

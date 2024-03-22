@@ -19,7 +19,7 @@ export const PuntoDigital = () => {
 
       <Container>
 
-        <img src={bannerPD} alt='' style={{ width: '100%', marginBottom: '40px', marginTop: '30px' }} />
+        <img src={bannerPD} alt='' className='banner-punto-digital' />
 
         <ButtonSquareList buttons={DigitalPointBtns} />
 
