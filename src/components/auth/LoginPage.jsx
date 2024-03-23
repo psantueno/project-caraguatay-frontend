@@ -102,7 +102,7 @@ export const LoginPage = () => {
 
   return (
     <>
-      <Container className="mt-2 mb-2 text-center">
+      <Container className="mt-2 mb-2 text-center form-login-page ">
         <h6 className="mt-4 mb-3 form-title">
           Acceso exclusivo para administradores/as del sitio
         </h6>
@@ -136,7 +136,7 @@ export const LoginPage = () => {
         </Alert>
         {/* RESPUESTA BAD DEL RESPONSE */}
 
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} >
           <Form.Group className="mb-3">
             <Form.Control
               value={form.email}

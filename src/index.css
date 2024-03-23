@@ -81,26 +81,27 @@ a {
   text-shadow: 2px 2px 4px rgba(49, 92, 148, 0.4)
 }
 
-.user-navbar-box {
+.user-navbar-box  {
   display: flex;
   flex-direction: row;
   align-items: center;
   font-weight: bold;
+  text-align: center;
 }
 
 .user-name-navbar {
-  font-size: 0.85em;
-  margin: 0px 0px 0px 4px;
+  font-size: 0.55em;
+  margin: 0px 0px -10px 0px;
 }
 
 .avatar-in-navbar {
-  width: 46px;
-  height: 46px;
+  width: 40px;
+  height: 40px;
   font-size: 1.5em;
   color: #315c94;
   border-color: #315c94;
   border-style: solid;
-  box-shadow: 0px 0px 4px rgba(49, 92, 148, 0.4);
+  /* box-shadow: 0px 0px 4px rgba(49, 92, 148, 0.4); */
   border-radius: 50%;
 }
 
@@ -284,10 +285,12 @@ a {
 .banner-home {
   background-color: #fff;
   width: 90%;
+  height:650px;
   margin: auto;
   /* margin-bottom: 25px; */
   -webkit-user-select: none !important;
   user-select: none !important;
+  object-fit: contain;
 }
 
 .formalities-bg {
@@ -447,6 +450,7 @@ a.link-phones:hover {
 
 .cardNews {
   width: 290px !important;
+  height: 580px;
   margin: 0 !important;
   padding: 0 !important;
   box-shadow: 0px 10px 5px rgb(136, 136, 136, 0.4);
@@ -760,6 +764,7 @@ a.link-activated:hover,
 }
 
 .btn-toolbar {
+  font-size: 20px;
   justify-content: center !important;
   cursor: pointer;
 }
@@ -779,7 +784,7 @@ a.link-activated:hover,
   height: 300px;
   border-radius: 5px 5px 0 0;
   margin-bottom: 15px;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .social-net-card {
@@ -1028,7 +1033,15 @@ a.link-activated:hover,
 /* END BUTTONS */
 
 
-/*  START FORM DIGITAL POINT */
+/*****************************************************  START FORM DIGITAL POINT **********************/
+
+.banner-punto-digital {
+  width: 100%;
+  margin-bottom: 40px;
+  /* margin-top: 30px; */
+  height: 450px;
+  object-fit: scale-down;
+}
 
 .preview-image-dp {
   background-color: #ffffff;
@@ -1065,6 +1078,20 @@ a.link-activated:hover,
 
 /*  END FORM DIGITAL POINT */
 
+/*************************************start LOGIN PAGE********************************************/
+
+
+.form-login-page{
+  padding-top: 35px;
+  width: 320px;
+
+
+}
+
+
+/***********************************END LOGIN PAGE *********************************************/
+
+
 
 /* START Generals Buttons */
 
@@ -1083,7 +1110,7 @@ a.link-activated:hover,
 }
 
 
-/* START 404 NOT FOUND */
+/********************************************************************* START 404 NOT FOUND */
 
 .container-not-found {
   display: flex;
@@ -1103,9 +1130,9 @@ a.link-activated:hover,
   height: 80%;
 }
 
-/* END 404 NOT FOUND */
+/*********************************************************************** END 404 NOT FOUND */
 
-/* START MEDIA QUERIES */
+/*********************************************************************** START MEDIA QUERIES */
 
 /*Estilo para Tablets*/
 @media only screen and (min-width: 601px) and (max-width: 991px) {
@@ -1117,7 +1144,7 @@ a.link-activated:hover,
 
 
 
-  /*HOME*/
+  /*************HOME*/
 
   .formalities-bg {
     background-color: #e5e5e6;
@@ -1128,7 +1155,7 @@ a.link-activated:hover,
 
   /*end HOME*/
 
-  /*Footer */
+  /***************Footer */
   .list-section {
     font-size: 14px;
     margin: center;
@@ -1165,7 +1192,7 @@ a.link-activated:hover,
 
   /*Footer*/
 
-  /* START 404 NOT FOUND */
+  /***************************************************************************** START 404 NOT FOUND */
 
 .error-404 {
   width: 80%;
@@ -1194,14 +1221,20 @@ a.link-activated:hover,
 
 
 
-
   /*Start Home*/
+  .row-cols-lg-3> * {
+    flex:0 0 0 auto; 
+  }
 
+  .navbar-expand-lg .navbar-nav .nav-link {
+    padding-right: 15px !important;
+    padding-left: 15px !important;
+  }
 
 
   /* end Home*/
 
-  /*Footer */
+  /*******************************************************************************************Footer */
   .list-section {
     font-size: 16px;
     margin: center;
@@ -1239,7 +1272,7 @@ a.link-activated:hover,
 
   /*Footer*/
 
-   /* START 404 NOT FOUND */
+   /************************************************************************* START 404 NOT FOUND */
 
 .error-404 {
   width: 45%;
@@ -1261,17 +1294,23 @@ a.link-activated:hover,
   .navbar-expand-lg{
     width: 1200px;
     align-items: baseline;
+    padding-left: 15px;
+    padding-right: 15px;
   }
 
 
 
-/*Start Home*/
+/***************************************************************************************Start Home*/
  
-
+.banner-home {
+  background-color: #fff;
+  width: 89%;
+  height:80%;
+}
 
 /* end Home*/
 
-/*Footer */
+/***************************************************************************************Footer */
 .list-section {
   font-size: 16px;
   margin: center;
@@ -1302,6 +1341,22 @@ font-size: 18px;
   font-size: 15px;
 }
 /*Footer*/
+
+ /************************************************************************* START 404 NOT FOUND */
+
+ .error-404 {
+  width: 40%;
+  height: 35%;
+  object-fit: cover;
+}
+
+.title-not-found {
+  font-size: 4em;
+}
+
+
+/* END 404 NOT FOUND */
+
 
 
 }

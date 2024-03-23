@@ -154,7 +154,7 @@ export const NewsItemContainer = ({ ft, idCat, route }) => {
          
          <Container>
 
-            <Row  sm={1} md={2} lg={3}>
+            <Row  sm={1} md={2} lg={3} xl={4} xxl={5}>
 
                 {
                     news.map((news, i) => (

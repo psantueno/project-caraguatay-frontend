@@ -19,9 +19,12 @@ export const PuntoDigital = () => {
 
       <Container>
 
-        <img src={bannerPD} alt='' style={{ width: '100%', marginBottom: '40px', marginTop: '30px' }} />
+        <img src={bannerPD} alt='' className='banner-punto-digital' />
 
-        <ButtonSquareList buttons={DigitalPointBtns} />
+        <Row  className='formalities-bg' >
+
+          <ButtonSquareList buttons={DigitalPointBtns} />
+        </Row>
 
         <Row className='text-indent'>
           <ModalCreate />   {/* MODAL PARA DESPLEGAR FORM DE CREACIÓN DE TALLER / CAPACITACIÓN */}
@@ -31,14 +34,14 @@ export const PuntoDigital = () => {
           <DigitalPointRouter />
         </DPAdminContextProvider>
 
-        {/*  esto renderiza las ultimas noticias***/}
+        {/*  esto renderiza las ultimas noticias***
 
-        <Row className='text-indent'>
+         <Row className='text-indent'>
           <NewsItemContainer
             ft={useFetchNewsByCategory}
             idCat="4"
             route={'punto-digital'} />
-        </Row >
+  </Row >*/ }
       </Container>
 
     </>
