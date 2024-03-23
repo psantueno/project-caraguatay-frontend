@@ -290,6 +290,7 @@ a {
   /* margin-bottom: 25px; */
   -webkit-user-select: none !important;
   user-select: none !important;
+  object-fit: contain;
 }
 
 .formalities-bg {
@@ -763,6 +764,7 @@ a.link-activated:hover,
 }
 
 .btn-toolbar {
+  font-size: 20px;
   justify-content: center !important;
   cursor: pointer;
 }

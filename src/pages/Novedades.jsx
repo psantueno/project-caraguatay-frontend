@@ -18,8 +18,8 @@ export const Novedades = () => {
         <p> Consulte a continuación las novedades sobre Talleres, Capacitaciones y eventos de la escuela de robótica disponibles.</p>
       </Row>
 
-      <Row>
-        <Col>
+      <Row >
+        <Col >
           <DPCarousel title={"CAPACITACIONES"} idCat={2} />
         </Col>
         <Col>
@@ -32,7 +32,7 @@ export const Novedades = () => {
       </Row>
 
      
-     
+{/*      
       <Row style={{ marginTop: '100px' }}>
 
         <Col>
@@ -45,7 +45,7 @@ export const Novedades = () => {
       <Row style={{ marginTop: '100px' }}>
         <DPCarousel title={"Escuela de Robótica"} idCat={3} />
 
-      </Row>
+      </Row> */}
     </>
   )
 }
