@@ -20,7 +20,7 @@ export const Header = () => {
   return (
     <>
       <div className='main-div-header'>
-        <div className='user-navbar-box'>
+        <div className=''>
           {/* {
             logged
 

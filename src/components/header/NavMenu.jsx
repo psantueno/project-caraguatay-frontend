@@ -1,4 +1,4 @@
-import { Button, Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { Button, Container, Nav, Navbar, NavDropdown , Col} from 'react-bootstrap';
 import { useContext } from 'react';
 import { AuthContext } from '../auth/context/AuthContext';
 import Form from 'react-bootstrap/Form';
@@ -9,19 +9,16 @@ import { Link } from 'react-router-dom';
 import { useHamburguer } from './hooks/useHamburguer';
 
 export const NavMenu = () => {
-    const { user, logged , logout} = useContext(AuthContext);
+    const { user, logged , logout, login} = useContext(AuthContext);
     const { open, handleClick, handleLinkClick, handleBlur } = useHamburguer({})
     
 
-    const firstName = user ? user.name.split(' ')[0] : '';         // Selecciona solo el primer nombre.
-    const lastNameInitial = user ? user.lastName.charAt(0) : '';  // Abrevia el apellido a la inicial seguido de un punto.
    
     const dropdownUser = logged ? (
         <>
         <div>
-
-            <MenuProfile avatar={user.avatar} />
-            <div className='user-name-navbar'>{firstName} {lastNameInitial}</div>
+            <MenuProfile avatar={user.avatar}  firstName={user.name}/>
+    
         </div>
         </>
     ) : (
@@ -29,9 +26,13 @@ export const NavMenu = () => {
     );
 
     const onLogout = () => {
-        console.log("entranding");
         logout();
-        navigate('/login')
+       
+    }
+
+    const onLogin =() => {
+        login();
+
     }
 
     const detalleUser= "/admin/usuarios/datalle-usuario"
@@ -49,38 +50,60 @@ export const NavMenu = () => {
               
 
                 <Navbar.Toggle aria-controls="navbarScroll" />
-                <Navbar.Collapse id="navbarScroll" className="navbarScroll-css" style={{ alignItems:"baseline", justifyContent:"space-around", fontSize:"18px"}}>
+                   
+                <Navbar.Collapse id="navbarScroll" className="navbarScroll-css" >
+                        <Col>
+                        <Nav>
+                        <Nav.Item className='user-navbar-box user-navbar-box-flecha '> {dropdownUser}</Nav.Item>
+
+                        <Nav.Link href={detalleUser}  style={logged && user.role === 'administrador' ? {display:"Block"}: {display:"none"}}> 
+                            Mis Datos
+
+                        </Nav.Link>
+                        <Nav.Link href={logged && user.role === 'administrador' ? "/super-admin/usuarios" : "/login"} 
+                                style={logged && user.role === 'administrador' ? {display:"Block"}: {display:"none"}}>
+                            Admin Usuarios </Nav.Link>
+
+                        <Nav.Link href={logged && (user.role === 'administrador' || user.role === 'colaborador') ? "/admin/noticias" : "/login"}
+                                style={logged && user.role === 'administrador' ? {display:"Block"}: {display:"none"}}>
+                            Admin Noticias
+                        
+                        </Nav.Link>         
+                        <Nav.Link>
+                        {logged && (user.role === 'administrador' || user.role === 'colaborador') 
+                            
+                            &&  
+                                
+                            <button className='button-logout' onClick={logged && (user.role === 'administrador' || user.role === 'colaborador') ? onLogout: onLogin}>Cerrar Sesión  <i className="fas fa-sign-out-alt"></i> </button>
+                                                                         
+                            }    
+                        </Nav.Link>                       
+                    </Nav>
+
+                        </Col>
+                        <Col>
                     <Nav
                         className=" my-2 my-lg-0"
-                        style={{ maxHeight: '1300px',alignItems:"baseline"}}
+                        style={{ maxHeight: '1300px',alignItems:"end", display:'flex', flexDirection:'Column', textAlignLast: "end"  }}
                         navbarScroll
-                    >
+                        >
                        
+                        <Col>
                         <Nav.Link href="/comunicados">Comunicados</Nav.Link>
                         <Nav.Link href="/cultura-y-turismo">Cultura y Turismo</Nav.Link>
                         <Link to="/deportes" className="nav-link">Deportes</Link>
                         <Nav.Link href="/historia">Historia</Nav.Link>
                         <Nav.Link href="/punto-digital">Punto Digital</Nav.Link>
                         
-                        {/* {logged && <li><Nav.Link to="/admin/noticias" onClick={handleLinkClick}>Abm Noticias</Nav.Link></li>}
-                        {logged && user.role === 'Administrador' && <li><Nav.Link to="/super-admin/usuarios" onClick={handleLinkClick}>Abm Usuarios</Nav.Link></li>} */}
+                       
+                        </Col>
 
-                        <NavDropdown id="collapsible-nav-dropdown" className='user-navbar-box user-navbar-box-flecha ' title={dropdownUser}>
-                            <NavDropdown.Item href={detalleUser}>Mis Datos</NavDropdown.Item>
-                            <NavDropdown.Item >
-                            <button className='button-logout' onClick={onLogout}>Cerrar Sesión <i className="fas fa-sign-out-alt"></i></button>
-                            </NavDropdown.Item>
-                            <NavDropdown.Item href={logged && user.role === 'Administrador' ? "/super-admin/usuarios" : "/login"}>
-                                Admin Usuarios
-
-                            </NavDropdown.Item>
-                            <NavDropdown.Item href={logged && (user.role === 'Administrador' || user.role === 'colaborador') ? "/admin/noticias" : "/login"}>
-                                Admin Noticias
-                            </NavDropdown.Item>
-                        </NavDropdown>
+                       
                         
                     </Nav>
+                        </Col>
                 </Navbar.Collapse>
+                       
                 {/* <Navbar.Collapse>
                 <Nav>
 
