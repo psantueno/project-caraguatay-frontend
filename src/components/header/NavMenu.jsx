@@ -1,4 +1,4 @@
-import { Button, Container, Nav, Navbar, NavDropdown , Col} from 'react-bootstrap';
+import { Button, Container, Nav, Navbar, NavDropdown , Col, Row} from 'react-bootstrap';
 import { useContext } from 'react';
 import { AuthContext } from '../auth/context/AuthContext';
 import Form from 'react-bootstrap/Form';
@@ -81,14 +81,17 @@ export const NavMenu = () => {
                     </Nav>
 
                         </Col>
+
                         <Col>
                     <Nav
-                        className=" my-2 my-lg-0"
-                        style={{ maxHeight: '1300px',alignItems:"end", display:'flex', flexDirection:'Column', textAlignLast: "end"  }}
+                        className=" my-2 my-lg-0 navbar-header-xxl"
+                       
+                        // style={{ maxHeight: '1300px',alignItems:"end", display:'flex', flexDirection:'Column', textAlignLast: "end"  }}
                         navbarScroll
                         >
+                          
                        
-                        <Col>
+                        {/* <Col> */}
                         <Nav.Link href="/comunicados">Comunicados</Nav.Link>
                         <Nav.Link href="/cultura-y-turismo">Cultura y Turismo</Nav.Link>
                         <Link to="/deportes" className="nav-link">Deportes</Link>
@@ -96,9 +99,10 @@ export const NavMenu = () => {
                         <Nav.Link href="/punto-digital">Punto Digital</Nav.Link>
                         
                        
-                        </Col>
+                        {/* </Col> */}
 
                        
+                        
                         
                     </Nav>
                         </Col>
@@ -131,3 +135,4 @@ export const NavMenu = () => {
     );
 }
 
+// 

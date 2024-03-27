@@ -274,6 +274,16 @@ a {
   font-size:"25px";
 
 }
+
+.navbar-header-xxl{
+ max-height: 1300px;
+ align-items:end;
+ display:flex;
+ flex-direction:Column;
+ text-align-last: end;
+
+
+}
 /* btn-hamburguer */
 
 /*************************************** END HEADER************************************************** */
@@ -1136,12 +1146,13 @@ a.link-activated:hover,
   height: 80%;
 }
 
-/*********************************************************************** END 404 NOT FOUND */
+/*********************************************************************** END 404 NOT FOUND ************************************************************/
 
-/*********************************************************************** START MEDIA QUERIES */
+/*********************************************************************** START MEDIA QUERIES ***********************************************************/
 
 /*Estilo para Tablets*/
 @media only screen and (min-width: 601px) and (max-width: 991px) {
+
   /**HEADER*****/
 
   .nav-css{
@@ -1219,13 +1230,35 @@ a.link-activated:hover,
 @media only screen and (min-width: 992px) and (max-width: 1200px)  {
 
   /***********************************************HEADER********************************************/
-  .navbar-expand-lg{
-    width: 992px;
+ .navbar-expand-lg .navbar-collapse .nav-css{
+    width: 892px;
+    display: flex !important;
     align-items: baseline;
-    justify-content: space-around;
+    justify-content: flex-start;
+    margin-left: 110px;
+    flex-direction: row-reverse;
+
   }
 
+  .navbar-expand-lg {
+   justify-content: space-evenly;
+   
+  }
+  .navbar-collapse{
+    flex-direction: row-reverse;
+  }
 
+  .navbar-header-xxl{
+    width: 900px;
+    display:flex;
+    justify-content: space-evenly;
+    flex-direction:row;
+    align-items: end;
+  }
+
+ 
+    
+ /***********************************************END HEADER**************************************/
 
   /*Start Home*/
   .row-cols-lg-3> * {
@@ -1297,13 +1330,25 @@ a.link-activated:hover,
 @media only screen and (min-width:1201px)   {
 
   /***********************************************HEADER********************************************/
-  .navbar-expand-lg{
-    width: 1200px;
-    align-items: baseline;
-    padding-left: 15px;
-    padding-right: 15px;
+  .navbar-expand-lg {
+   
+    justify-content: space-evenly;
+   
+
   }
 
+  .navbar-collapse{
+    flex-direction: row-reverse;
+  }
+
+  .navbar-header-xxl{
+    width: 900px;
+    display:flex;
+    justify-content: space-evenly;
+    flex-direction:row;
+    align-items: start;
+  }
+ 
 
 
 /***************************************************************************************Start Home*/
