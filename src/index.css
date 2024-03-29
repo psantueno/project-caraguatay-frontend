@@ -265,7 +265,7 @@ a {
   display: block;
 }
 .nav-css{
-  width: 300px;
+  /* width: 300px; */
 }
 
 .navbarScroll-css {
@@ -1231,7 +1231,7 @@ a.link-activated:hover,
 
   /***********************************************HEADER********************************************/
  .navbar-expand-lg .navbar-collapse .nav-css{
-    width: 892px;
+    /* width: 892px; */
     display: flex !important;
     align-items: baseline;
     justify-content: flex-start;
@@ -1249,9 +1249,9 @@ a.link-activated:hover,
   }
 
   .navbar-header-xxl{
-    width: 900px;
+    width: 700px;
     display:flex;
-    justify-content: space-evenly;
+    justify-content:center;
     flex-direction:row;
     align-items: end;
   }
@@ -1332,7 +1332,7 @@ a.link-activated:hover,
   /***********************************************HEADER********************************************/
   .navbar-expand-lg {
    
-    justify-content: space-evenly;
+    /* justify-content: space-evenly; */
    
 
   }
