@@ -1,5 +1,6 @@
 * {
   font-family: 'Inter', sans-serif;
+  /* margin: auto; */
 }
 
 a {
@@ -53,7 +54,15 @@ a {
   color: #315C94;
 }
 
-/* START HEADER */
+/************************* START HEADER *******************************************/
+
+.esconde-en-movil {
+  display: none;
+}
+
+.esconde-en-desktop {
+  display: block;
+}
 
 .main-div-header {
   display: flex;
@@ -284,6 +293,10 @@ a {
 
 
 }
+
+a.navbar-header {
+  color: #000;
+}
 /* btn-hamburguer */
 
 /*************************************** END HEADER************************************************** */
@@ -301,7 +314,7 @@ a {
 .banner-home {
   background-color: #fff;
   width: 90%;
-  height:650px;
+  /* height:650px; */
   margin: auto;
   /* margin-bottom: 25px; */
   -webkit-user-select: none !important;
@@ -337,6 +350,8 @@ a {
   flex-wrap: wrap;
   margin-top: 5px;
   margin-bottom: 8px;
+  max-width: 2000px;
+  margin:auto;
 }
 
 .phone-card {
@@ -1227,9 +1242,17 @@ a.link-activated:hover,
 
 /*Estilo para PC*/
 
-@media only screen and (min-width: 992px) and (max-width: 1200px)  {
+@media only screen and (min-width: 992px) and (max-width: 5200px)  {
 
   /***********************************************HEADER********************************************/
+  .esconde-en-movil {
+    display: block;
+  }
+
+  .esconde-en-desktop {
+    display: none;
+  }
+
  .navbar-expand-lg .navbar-collapse .nav-css{
     /* width: 892px; */
     display: flex !important;
@@ -1255,6 +1278,11 @@ a.link-activated:hover,
     flex-direction:row;
     align-items: end;
   }
+
+  .dropdown-menu[data-bs-popper] {
+    top: 100%;
+    left: -87px !important;
+    margin-top: var(--bs-dropdown-spacer);
 
  
     
@@ -1302,6 +1330,8 @@ a.link-activated:hover,
   .phones {
     flex-wrap: nowrap;
     justify-content: space-evenly;
+    max-width: 2000px;
+    margin: auto;
   }
 
   .number-phone,
@@ -1326,23 +1356,24 @@ a.link-activated:hover,
 
 
 }
-
-@media only screen and (min-width:1201px)   {
+/*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+/*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+/* @media only screen and (min-width:3201px)   { */
+/*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+/*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
   /***********************************************HEADER********************************************/
-  .navbar-expand-lg {
+
+  /* .navbar-expand-lg {
    
-    /* justify-content: space-evenly; */
-   
+    justify-content: space-evenly;
 
-  }
+  } */
 
-  .navbar-collapse{
-    flex-direction: row-reverse;
-  }
+ 
 
-  .navbar-header-xxl{
-    width: 900px;
+  .navbar-header-xxl{    
+    width: 700px;
     display:flex;
     justify-content: space-evenly;
     flex-direction:row;
@@ -1356,7 +1387,7 @@ a.link-activated:hover,
 .banner-home {
   background-color: #fff;
   width: 89%;
-  height:80%;
+  /* height:80%; */
 }
 
 /* end Home*/
@@ -1376,6 +1407,7 @@ margin: 0;
 font-size: 15px;
 font-weight: 400;
 }
+
 a.link-phones{
 flex:0%;
 font-size: 18px;
@@ -1384,10 +1416,6 @@ font-size: 18px;
   justify-content: space-evenly;
   }
 
-.phones {
-  flex-wrap: nowrap;
-  justify-content: space-evenly;
-}
 .number-phone, .title-phone {
   font-size: 15px;
 }
@@ -1416,71 +1444,4 @@ font-size: 18px;
 
 
 
-
-/* @media screen and (min-width:568px) {}
-
-
-
-@media screen and (min-width:768px) {} */
-
-
-/* @media screen and (min-width: 760px) {
-  .cards-wrapper {
-    display: inline-block;
-    width: calc(100%/2);
-    align-items: center;
-    justify-content: center;
-
-  }
-
-  .carousel.inner {
-    overflow: scroll;
-
-  }
-
-  .carousel.slide {
-    text-align: center;
-  }
-}
-
-.btn-square-icon{
-    width:100%;
-    font-size: 22px;
-    text-align: center;
-    align-self: auto;
-   
-}
-
-h6.btn-square-text {
-    margin: auto;
-    text-align: center;
-    font-size: 14px;
-    text-decoration: none !important;
-}
-
-
-
-/* START MEDIA QUERIES */
-
-
-/* .btn-toolbar{
-    width: 87%;
-  
-    
-  } */
-
-/* .btn-square {
-    height: min-content!important;
-    width: 50px;
-
-    } */
-/* h6.btn-square-text{
-    font-size: 10px !important;
-        
-    }
-
-  /* .body-culturayturismo {
-    padding-right: 5px;
-    max-width: 576px;
-  
-    } */
+/* } */

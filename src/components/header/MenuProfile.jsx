@@ -28,7 +28,7 @@ export const MenuProfile = ({ avatar, name }) => {
 
     return (
         
-        <Row>
+        <Col>
             <Col className="d-flex align-items-center" onClick={handleClick}>
                 <div className="navbar-hamburguer" onBlur={handleBlur}>
                     <button className={`navbar-hamburguer-user-toggler ${open ? 'open' : ''}`} onClick={handleClick}>
@@ -39,7 +39,7 @@ export const MenuProfile = ({ avatar, name }) => {
         <Col className='user-name-navbar'>
         {firstName} 
     </Col>
-        </Row>
+        </Col>
 
     )
 }
